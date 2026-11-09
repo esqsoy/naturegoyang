@@ -28,3 +28,14 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 - 결정을 하면 PRINCIPLES에 "왜"와 날짜, 영신의 말을 남긴다. 한 일은 WORK_LOG에, 지금 상태는 HANDOFF에, 올린 것은 DEPLOYMENT에 적는다.
 - 저장소 파일에 모델 이름을 쓰지 않는다.
 - 다른 고양 저장소는 읽기만 한다. 고칠 거리를 찾으면 '어느 저장소·어느 파일·무엇을·왜'로 정리해 영신에게 넘긴다.
+- Artifact 저장소의 설명·카드(`lessons/`, `cards/`)를 직접 고칠 때는 먼저 비공개 폴더 `artifact-backup/<날짜>/`에 원본을 받아 두고, 읽던 쪽 앞은 건드리지 않는다(진도 `pos`가 쪽 순서다).
+
+## 작업 환경 (26.11.09부터 맥미니)
+
+- 저장소: 맥미니 iCloud Drive `10 언어/고양/naturegoyang/`(빨라고양 옆). 처음 저장소는 Windows PC에서 만들었다.
+- 교과서: iCloud Drive `30 과학/`(영신 소장 PDF). **읽기만 한다.** 대조 원칙·책 목록·도구는 [sources/README](sources/README.md).
+- 비공개 폴더: `10 언어/고양/비공개/과학고양/`(git 밖). 뽑은 목차·글자·쪽 그림, Artifact 백업. 안내는 그 폴더 README.
+- 맥미니에는 node가 없다. PDF는 macOS 내장 PDFKit(`osascript -l JavaScript tools/pdf-index.js`)으로, 나머지 검사는 `python3 -I`로 한다.
+- 큰 PDF(100MB 넘는 것)는 통째로 읽지 않는다. 쪽별 글자를 뽑아 grep으로 찾고, 그림이 필요한 쪽만 줄여 그린다(`pdf-index.js png <pdf> <쪽> <out.jpg> 1200`).
+- iCloud에만 있는 파일(`ls -lO`에 `dataless`)은 샌드박스를 끄고 `brctl download <경로>`로 내려받는다. 안 내려오면 `killall bird`로 iCloud 데몬을 다시 띄운다(26.11.09에 이것으로 풀렸다, 비공개 폴더 README).
+- 스캔본(글자 층 없음)은 `pdf-index.js ocr`로 읽는다(macOS Vision, 쪽당 약 4초). 두 단 편집은 줄이 섞일 수 있다.

@@ -31,3 +31,21 @@
 - 영신: 이제 기존 틀을 참고해도 된다. 저장소 esqsoy/naturegoyang을 쓰기로 했다.
 - 시리즈 저장소(보카고양·탄고고양·빨라고양·발음고양·법학고양)를 읽기만 했다. 가져올 후보와 본 어긋남은 HANDOFF에 정리했다.
 - 이 PC에 Git for Windows를 설치하고(영신 승인), 이 저장소를 만들었다: README, AGENTS, PRINCIPLES, HANDOFF, WORK_LOG, DEPLOYMENT, CURRICULUM, 앱 원본.
+
+### 맥미니로 옮김·교과서 대조 시작 (저녁)
+
+- 영신: "맥미니 기반으로 해야 내가 로컬에 저장해둔 과학교과서 폴더를 활용할 수 있거든", "해당 깃헙 레포를 연결해주면", 큰 PDF는 "리사이징해서 보면 돼", "필요한 권한 다 신청하고 할 수 있는거 다 해버려".
+- 저장소를 맥미니 iCloud `10 언어/고양/naturegoyang/`에 받았다(빨라고양 옆, 커밋 이름은 빨라고양과 같은 noreply). 올라가 있는 Artifact 5판과 `app/naturegoyang.html`이 같은지 비교했다(감싸는 틀만 다름).
+- 교과서 폴더 `30 과학/`은 대부분 iCloud에만 있었다. `brctl download`가 10분 넘게 안 먹었고, iCloud 데몬 로그에 같은 동기화 실패가 2초마다 되풀이됐다. `killall bird`로 데몬을 다시 띄우니 11권이 내려왔다. 지구과학 마더텅 2권과 Pilbara 안내서도 받았다. 마더텅 나머지 6권은 디스크 여유(14GB) 때문에 안 받았다.
+- 도구(이 저장소, 원문 없음):
+  - `tools/pdf-index.js`: macOS 내장 PDFKit으로 목차·쪽별 글자·줄인 쪽 그림, Vision으로 스캔본 OCR. 쪽 번호가 글자로 붙는 PDFKit 버그(0+1="01")를 숫자로 바꿔 고쳤다.
+  - `tools/kphys-outline.py`: PDF 목차가 없는 『대학기초물리학』 a~d의 목차를 본문 절 제목("2.6"+장식 기호)으로 만든다. 28장 146절.
+  - `tools/unit-sources.py`: 단원 → 책·절·PDF 쪽, `--text`로 그 쪽 글자 모으기, `--check`로 대응표 검사. 절 번호 꼴 "1.5", "Chapter 10:", "Ch 39:", "1-1"(Halliday), "제2장"을 읽는다. 목차 끝에 몰린 읽을거리 상자 때문에 절 끝이 잘못 잡히던 것을 고쳤다.
+- 비공개 폴더 `10 언어/고양/비공개/과학고양/`에 14권 목차·글자를 뽑았다(Brown, CRC, 『대학기초물리학』, Halliday, Serway, McMurry, Campbell, Sadava, Particle Hunters, 이광조, 완자, Pilbara). 마더텅 지구과학 Ⅰ·Ⅱ는 스캔본이라 OCR을 돌렸다.
+- Campbell 파일은 장 짜임이 미국판과 달랐다(7장 Cell Structure and Function 등). 본문 첫 쪽의 핵심 개념 문장으로 Campbell임을 확인하고, 장 번호는 이 파일을 따랐다.
+- `sources/unit-map.json` 첫 판: 80단원에 대조 절. 비어 있는 4단원(f-ratio, f-stats, f-linalg, e-plate)과 지구·우주가 약한 것은 `sources/README` '빈 곳'.
+- 1번 측정과 단위 대조(실제 검증): Artifact 저장소의 설명 `f-measure--v3`, 카드 `cards/f-measure` 24장을 Brown 1.5~1.7, 『대학기초물리학』 2.1~2.3과 맞춰 봤다.
+  - 틀린 사실은 없었다. SI 7 기본 단위, 접두어 여섯, 2019 정의 상수 값(c, h), 차원 분석, 유효숫자 규칙, 불확도 합성식, 예제 셋의 답을 확인했다. 2019 SI 개정은 이 교과서들에 없어(CRC 85판은 2004년) 따로 대조하지 못했다.
+  - 고침 3(설명만, 카드는 그대로): ① 유효숫자 세기에 '소수점 없이 0으로 끝나는 수(1300)'를 더함(Brown 1.6에 있음). ② 연결 문장의 "[[c-matter]]에서는 … 몰 개념이 쓰이고" → 밀도 단위로 물질 구별(몰은 33번 c-mole). ③ "은하(Gm 이상)" → 약 10²¹ m. 영신은 2쪽까지 읽었고 고친 곳은 3절 뒤라 읽던 자리는 그대로다. 원본은 비공개 폴더 `artifact-backup/2026-11-09/`.
+  - 남긴 것: 정확도를 '주로 계통 오차'로 설명한 것은 한정어가 있어 두었다. 1번 설명에 아직 안 배운 개념(뉴턴·줄·가속도·단진자·토크·지수함수·버킹엄 π)이 많은 것은 '순서 통제' 결정 대기(HANDOFF 열린 질문 2·3).
+- 문서: PRINCIPLES 5-1(교과서 대조 원칙), AGENTS 작업 환경, HANDOFF, DEPLOYMENT(저장소 내용 고침 표), README, `sources/README`. 비공개 폴더 README.

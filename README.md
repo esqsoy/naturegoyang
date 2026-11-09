@@ -12,6 +12,10 @@
 
 - 앱 원본: [app/naturegoyang.html](app/naturegoyang.html) (Artifact 페이지 형식이라 `<!doctype>`·`<html>` 없이 시작한다)
 
+## 교과서 대조
+
+설명·카드·문제는 영신의 교과서(맥미니 iCloud `30 과학/`)와 맞춰 본다. 원문은 저장소에 넣지 않고, 단원 → 교과서 절 대응표와 도구만 둔다: [sources/](sources/README.md), [tools/](tools/).
+
 ## 문서
 
 [AGENTS](AGENTS.md) → [PRINCIPLES](PRINCIPLES.md)(결정과 이유) → [HANDOFF](HANDOFF.md)(지금 상태·대기 중인 일) → [WORK_LOG](WORK_LOG.md)(경위) → [DEPLOYMENT](DEPLOYMENT.md)(실제 공개된 것)
