@@ -30,7 +30,13 @@ STOP = ('Chapter Summary', 'Learning Outcomes', 'Key Equations', 'Exercises', 'S
 STOP_UP = tuple(s.upper() for s in STOP)
 
 
+APP_RE = re.compile(r'^Appendix\s+([A-Z])\b')  # "Appendix A: ..." → "A" (부록 전체)
+
+
 def sec_of(title):
+    a = APP_RE.match(title)
+    if a:
+        return a.group(1)
     m = SEC_RE.match(title + ' ')
     return m.group(1).replace('-', '.') if m else None
 
