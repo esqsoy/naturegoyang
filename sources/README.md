@@ -13,12 +13,12 @@
 
 | 줄임 | 책 | 쓰는 영역 | 상태 (26.11.09) |
 |---|---|---|---|
-| brown15 | Brown·LeMay·Bursten·Murphy·Woodward·Stoltzfus, *Chemistry: The Central Science*, 15판 Global SI, Pearson 2022 | 화학 전반, 측정·단위, 대기·물 | 목차·글자 뽑음 |
+| brown15 | Brown·LeMay·Bursten·Murphy·Woodward·Stoltzfus, *Chemistry: The Central Science*, 15판 Global SI, Pearson 2022 | 화학 둘째 대조, 측정·단위, 대기·물 | 목차·글자 뽑음 |
 | crc85 | Lide 엮음, *CRC Handbook of Chemistry and Physics*, 85판, CRC Press 2004 | 상수·물성값 확인 (2019 SI 개정 전 판) | 목차·글자 뽑음 |
 | kphys | 윤진희·차동우, 『대학기초물리학』, 테크미디어 2014 (PDF a~d 넷) | 물리 28장, 한국어 용어 | 글자 뽑음, 목차는 본문 절 제목으로 만듦 |
 | halliday11 | Halliday·Resnick·Walker, *Fundamentals of Physics*, 11판, Wiley 2018 | 물리 전반 (절 번호 "1-1"은 "1.1"로 적는다) | 목차·글자 뽑음 |
 | serway | Serway·Jewett, *Physics for Scientists and Engineers with Modern Physics*, Cengage | 물리, 현대물리(39~46장) | 목차·글자 뽑음 |
-| mcmurry | Robinson·McMurry·Fay, *Chemistry*, Global Edition, Pearson 2020 | 화학 (Brown 다음 둘째 대조) | 목차·글자 뽑음 |
+| mcmurry | Robinson·McMurry·Fay, *Chemistry*, 8판 Global Edition, Pearson 2020 | **화학 첫째 대조 책**(영신이 번역본 종이책으로 읽는다). 절 단위로 적어 번역본에서 같은 절을 찾는다. 부록 A는 수학 | 목차·글자 뽑음 |
 | campbell12 | *Campbell Biology*, 12판 Global, Pearson | 생명과학 전반. **이 파일은 장 짜임이 미국판과 다르다**(7장 Cell Structure and Function, 8장 Cell Membranes, 12장 Mitosis 등). 장 번호는 이 파일을 따른다 | 목차(장 단위)·글자 뽑음 |
 | sadava | Sadava 외, *Life: The Science of Biology*, W. H. Freeman 2016 | 생명과학 (절 단위) | 목차·글자 뽑음 |
 | particle | Ne'eman·Kirsh, *The Particle Hunters* | 표준 모형 역사 | 글자 뽑음 (PDF 목차 없음, 대응표에는 아직 안 넣음) |
@@ -28,7 +28,7 @@
 | maderteong (나머지 6권) | 마더텅 2024 수능기출 물리학·화학·생명과학 Ⅰ·Ⅱ 문제편 | 1~3단계 문제 눈높이 | 받지 않음 (디스크 여유 14GB, 필요할 때) |
 | pilbara | *Discovery Trails to Early Earth* (서오스트레일리아 동필바라 안내서) | 초기 지구·암석·초기 생명 증거('Knowing' 1~3장) | 목차·글자 뽑음 |
 
-serway·mcmurry·sadava는 판 번호를 아직 판권 쪽에서 확인하지 않아 줄임 이름에 판을 붙이지 않았다.
+serway·sadava는 판 번호를 아직 판권 쪽에서 확인하지 않아 줄임 이름에 판을 붙이지 않았다. mcmurry는 8판(판권 쪽 확인), 줄임 이름은 그대로 둔다.
 
 **빈 곳:**
 - 지구과학·천문 대학 교재가 없다. 지구·우주 13단원은 마더텅 지구과학 Ⅰ·Ⅱ(고등 범위, 문제집이라 설명이 짧다), Brown 18장, Halliday 13·43·44장, 생명과학 책의 지구 역사·기후 장, Pilbara 안내서로 덮는다. 4단계(은하·우주론, 외계 행성)는 대학 천문 교재가 있으면 좋다.

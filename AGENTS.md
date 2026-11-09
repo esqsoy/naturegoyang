@@ -21,6 +21,10 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 
 ## 일하는 법
 
+- **설명·카드는 미리 만들어 검수한다(PRINCIPLES 5, 26.11.09).** 원본은 `content/<단원 id>/`(lesson.md, cards.json, check.md), 형식은 [content/README](content/README.md). 순서: 초안 → 교과서 대조(`tools/unit-sources.py <id> --text`) → `python3 -I tools/content-check.py <id>` 오류 0 → `--upload <id> --out <폴더>`로 만든 JSON을 ArtifactData `batch`로 `lessons/<id>--v3`, `cards/<id>`에 올림(덮어쓸 때는 받은 판을 `if_version`으로) → 검수 페이지 다시 올림(`tools/review-page.py`) → DEPLOYMENT에 판 번호.
+  - 영신이 그 단원에 닿기 전에 올린다. 앱은 저장소에 설명·카드가 없을 때만 그 자리에서 만든다.
+  - 카드 id는 기록 열쇠다. 올린 카드의 id·뜻은 바꾸지 않고, 새 카드는 끝 번호 뒤에, 뺄 카드는 `"x": true`.
+  - 영신의 검수 댓글은 검수 페이지 Artifact에 달린다. 고친 것은 check.md와 WORK_LOG에 적는다.
 - 앱 원본은 `app/naturegoyang.html` 한 파일이다. 단원 데이터(`N(...)` 줄), 생성 지시(프롬프트), 화면이 모두 들어 있다.
 - 고친 뒤에는 claude.ai Artifact에 **같은 주소**로 다시 올린다(DEPLOYMENT). 새 주소로 올리면 영신의 기록이 이어지지 않는다.
 - 기록 열쇠: 단원 id(`f-measure` 등)와 카드 id(`c01`…)가 기록의 열쇠다. 단원 id를 바꾸지 않는다. 화면 번호는 열 때 계산하므로 단원을 더해도 기록은 그대로다.

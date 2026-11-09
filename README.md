@@ -8,7 +8,7 @@
 
 ## 어디서 돌아가나
 
-지금은 claude.ai Artifact(영신 계정, 비공개)에서 돌아간다. 설명·카드·문제를 Claude가 그 자리에서 만들고, 기록은 Artifact 저장소에 둔다. 그래서 GitHub Pages 공개판은 아직 없다. 자세한 것은 [DEPLOYMENT](DEPLOYMENT.md).
+지금은 claude.ai Artifact(영신 계정, 비공개)에서 돌아간다. 설명·카드는 [content/](content/README.md)에 미리 만들어 교과서와 대조·검수한 뒤 Artifact 저장소에 올리고(26.11.09부터), 문제는 Claude가 그 자리에서 만든다. 기록은 Artifact 저장소에 둔다. 그래서 GitHub Pages 공개판은 아직 없다. 자세한 것은 [DEPLOYMENT](DEPLOYMENT.md).
 
 - 앱 원본: [app/naturegoyang.html](app/naturegoyang.html) (Artifact 페이지 형식이라 `<!doctype>`·`<html>` 없이 시작한다)
 
