@@ -23,7 +23,7 @@
 | sadava | Sadava 외, *Life: The Science of Biology*, W. H. Freeman 2016 | 생명과학 (절 단위) | 목차·글자 뽑음 |
 | particle | Ne'eman·Kirsh, *The Particle Hunters* | 표준 모형 역사 | 글자 뽑음 (PDF 목차 없음, 대응표에는 아직 안 넣음) |
 | leekj | 이광조, 『초중고물리 30일 완성』 | 1단계 물리 눈높이 | 글자 뽑음 (36쪽, 그림 위주) |
-| wanja-chem1 | 『완자 고등 화학Ⅰ』 | 고등 화학 용어·범위 | 글자 뽑음 (PDF 목차 없음, 대응표에는 아직 안 넣음) |
+| wanja-chem1 | 『완자 고등 화학Ⅰ』 | 고등 화학 용어·범위. 절 번호는 대단원.중단원.소단원(예: 4.1.2 물의 자동 이온화) | 글자 뽑음, 목차는 차례 쪽으로 만듦 |
 | maderteong-earth1·2 | 마더텅 2024 수능기출 지구과학 Ⅰ·Ⅱ 문제편 | 지구·우주 고등 범위, 문제 눈높이. 스캔본이라 글자는 OCR(`pdf-index.js ocr`) | OCR 중 |
 | maderteong (나머지 6권) | 마더텅 2024 수능기출 물리학·화학·생명과학 Ⅰ·Ⅱ 문제편 | 1~3단계 문제 눈높이 | 받지 않음 (디스크 여유 14GB, 필요할 때) |
 | pilbara | *Discovery Trails to Early Earth* (서오스트레일리아 동필바라 안내서) | 초기 지구·암석·초기 생명 증거('Knowing' 1~3장) | 목차·글자 뽑음 |

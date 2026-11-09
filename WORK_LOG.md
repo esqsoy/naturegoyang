@@ -43,7 +43,7 @@
   - `tools/unit-sources.py`: 단원 → 책·절·PDF 쪽, `--text`로 그 쪽 글자 모으기, `--check`로 대응표 검사. 절 번호 꼴 "1.5", "Chapter 10:", "Ch 39:", "1-1"(Halliday), "제2장"을 읽는다. 목차 끝에 몰린 읽을거리 상자 때문에 절 끝이 잘못 잡히던 것을 고쳤다.
 - 비공개 폴더 `10 언어/고양/비공개/과학고양/`에 14권 목차·글자를 뽑았다(Brown, CRC, 『대학기초물리학』, Halliday, Serway, McMurry, Campbell, Sadava, Particle Hunters, 이광조, 완자, Pilbara). 마더텅 지구과학 Ⅰ·Ⅱ는 스캔본이라 OCR을 돌렸다.
 - Campbell 파일은 장 짜임이 미국판과 달랐다(7장 Cell Structure and Function 등). 본문 첫 쪽의 핵심 개념 문장으로 Campbell임을 확인하고, 장 번호는 이 파일을 따랐다.
-- `sources/unit-map.json` 첫 판: 80단원에 대조 절. 비어 있는 4단원(f-ratio, f-stats, f-linalg, e-plate)과 지구·우주가 약한 것은 `sources/README` '빈 곳'.
+- `sources/unit-map.json` 첫 판: 80단원에 대조 절. 『완자 고등 화학Ⅰ』은 차례 쪽(PDF 쪽 = 찍힌 쪽 − 2)으로 목차를 만들어 화학 11단원에 한국어 대조로 넣었다. 비어 있는 4단원(f-ratio, f-stats, f-linalg, e-plate)과 지구·우주가 약한 것은 `sources/README` '빈 곳'.
 - 1번 측정과 단위 대조(실제 검증): Artifact 저장소의 설명 `f-measure--v3`, 카드 `cards/f-measure` 24장을 Brown 1.5~1.7, 『대학기초물리학』 2.1~2.3과 맞춰 봤다.
   - 틀린 사실은 없었다. SI 7 기본 단위, 접두어 여섯, 2019 정의 상수 값(c, h), 차원 분석, 유효숫자 규칙, 불확도 합성식, 예제 셋의 답을 확인했다. 2019 SI 개정은 이 교과서들에 없어(CRC 85판은 2004년) 따로 대조하지 못했다.
   - 고침 3(설명만, 카드는 그대로): ① 유효숫자 세기에 '소수점 없이 0으로 끝나는 수(1300)'를 더함(Brown 1.6에 있음). ② 연결 문장의 "[[c-matter]]에서는 … 몰 개념이 쓰이고" → 밀도 단위로 물질 구별(몰은 33번 c-mole). ③ "은하(Gm 이상)" → 약 10²¹ m. 영신은 2쪽까지 읽었고 고친 곳은 3절 뒤라 읽던 자리는 그대로다. 원본은 비공개 폴더 `artifact-backup/2026-11-09/`.
