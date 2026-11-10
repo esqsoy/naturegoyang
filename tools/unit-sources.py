@@ -50,7 +50,14 @@ def load_outline(private, book):
     for e in entries:
         e['sec'] = sec_of(e['title'])
         e.setdefault('file', book)
-    return {'pages': d.get('pages'), 'entries': entries}
+    # 파일마다 마지막 쪽(여러 PDF로 나뉜 책의 마지막 장 끝을 정하려고). 글자 파일에서 센다.
+    last = {}
+    for f in {e['file'] for e in entries}:
+        tp = os.path.join(private, 'text', f + '.txt')
+        if os.path.exists(tp):
+            nums = re.findall(r'\f=== p\.(\d+) ', open(tp, encoding='utf-8').read())
+            last[f] = max(int(n) for n in nums) if nums else None
+    return {'pages': d.get('pages'), 'entries': entries, 'last': last}
 
 
 def span(outline, sec):
@@ -72,7 +79,9 @@ def span(outline, sec):
             if (s and s.count('.') <= depth) or f['level'] < e['level'] or (not s and f['title'].upper().startswith(STOP_UP)):
                 end = f['page'] - 1
                 break
-        return {'title': e['title'], 'start': start, 'end': end or start, 'file': e['file']}
+        if end is None:  # 같은 파일 안에 다음 항목이 없으면 그 파일 끝까지
+            end = outline.get('last', {}).get(e['file']) or outline.get('pages') or start
+        return {'title': e['title'], 'start': start, 'end': end, 'file': e['file']}
     return None
 
 
