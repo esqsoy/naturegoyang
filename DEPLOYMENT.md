@@ -6,7 +6,7 @@
   - 화면 제목: 자연과학 주기율표
   - 쓰는 기능: Claude 호출(설명·카드·문제 생성), Artifact 저장소(기록, 만들어 둔 설명·카드), 보는 사람 id
   - 원본: `app/naturegoyang.html`
-- **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원. 2판(26.11.10): 2번 직관 문장 고침. 3판: 2번 직관 비유 뺌. 4판: 6~10번 더함. 5판: 11~15번. 6판: 16~20번. 7판: 21~25번. 8판: 26~30번. 9판: 31~35번. 10판: 36~40번.
+- **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원. 2판(26.11.10): 2번 직관 문장 고침. 3판: 2번 직관 비유 뺌. 4판: 6~10번 더함. 5판: 11~15번. 6판: 16~20번. 7판: 21~25번. 8판: 26~30번. 9판: 31~35번. 10판: 36~40번. 11판: 41~45번.
 - GitHub Pages: 없음. 지금 앱은 claude.ai 안에서만 Claude 호출과 저장소를 쓸 수 있다(README '어디서 돌아가나').
 
 ## 판 (모두 2026-11-09, 같은 주소에 덮어씀)
@@ -39,3 +39,4 @@
 | 2026-11-10 | `lessons/`·`cards/` p-electric, p-circuit, p-magnet, p-light, c-periodic | 새로 1 | 26~30번. 검수 페이지 8판(30단원). |
 | 2026-11-10 | `lessons/`·`cards/` c-bond, c-shape, c-mole, c-gas, c-solution | 새로 1 | 31~35번. 검수 페이지 9판(35단원). |
 | 2026-11-10 | `lessons/`·`cards/` c-acid, c-redox, b-molecule, b-membrane, b-enzyme | 새로 1 | 36~40번. 검수 페이지 10판(40단원). |
+| 2026-11-10 | `lessons/`·`cards/` b-respiration, b-photo, b-division, b-mendel, b-dna | 새로 1 | 41~45번. 검수 페이지 11판(45단원). |
