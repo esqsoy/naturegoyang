@@ -17,7 +17,7 @@
   "p-wave": {"kphys": ["12.3", "12.4", "12.5"], "halliday11": ["16", "17"]},
   "p-momentum": {"kphys": ["8"], "halliday11": ["9"]},
   "p-gravity": {"kphys": ["6.3", "6.4", "9.2", "9.3"], "halliday11": ["4.5", "6.3", "13"]},
-  "p-rotation": {"kphys": ["9.1", "10"], "halliday11": ["10", "11", "12"]},
+  "p-rotation": {"kphys": ["9.1", "9.2", "10"], "halliday11": ["10", "11", "12"]},
   "p-fluid": {"kphys": ["11"], "halliday11": ["14"]},
   "p-heat": {"mcmurry": ["9.7", "11.4"], "brown15": ["5.5", "11.4"], "kphys": ["13"], "halliday11": ["18"]},
   "p-electric": {"kphys": ["15", "16"], "halliday11": ["21", "22", "23", "24"]},
