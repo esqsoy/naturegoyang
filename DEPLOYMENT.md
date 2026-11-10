@@ -6,7 +6,7 @@
   - 화면 제목: 자연과학 주기율표
   - 쓰는 기능: Claude 호출(설명·카드·문제 생성), Artifact 저장소(기록, 만들어 둔 설명·카드), 보는 사람 id
   - 원본: `app/naturegoyang.html`
-- **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원.
+- **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원. 2판(26.11.10): 2번 직관 문장 고침.
 - GitHub Pages: 없음. 지금 앱은 claude.ai 안에서만 Claude 호출과 저장소를 쓸 수 있다(README '어디서 돌아가나').
 
 ## 판 (모두 2026-11-09, 같은 주소에 덮어씀)
@@ -30,3 +30,4 @@
 | 2026-11-09 | `cards/f-measure` | 1 → 2 | 용어 카드 c25~c36 더함(c01~c24 그대로). |
 | 2026-11-09 | `lessons/f-method--v3`, `f-ratio--v3`, `f-trig--v3`, `f-vector--v3` | 새로 1 | 미리 만든 설명(content/). |
 | 2026-11-09 | `cards/f-method`, `f-ratio`, `f-trig`, `f-vector` | 새로 1 | 미리 만든 카드(용어 카드 포함). |
+| 2026-11-10 | `lessons/f-method--v3` | 1 → 2 | 영신 검수 댓글: 1절 직관의 '자백' 비유를 풀어 씀. 검수 페이지 2판. |
