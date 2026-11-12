@@ -303,6 +303,28 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .md table{border-collapse:collapse; font:14px/1.55 var(--font-ui); min-width:60%}
 .md th,.md td{border-bottom:1px solid var(--line); padding:8px 12px 8px 0; text-align:left; vertical-align:top}
 .md th{font-weight:700; border-bottom-color:var(--ink-3)}
+/* emphasis grammar (PRINCIPLES 2-2-1): bold = a term being defined; its gloss is quiet; formulas boxed; 오해 → 사실 */
+.md .term{font-weight:700; background:linear-gradient(transparent 58%, color-mix(in srgb,var(--dc,var(--ink)) 24%,transparent) 0); padding:0 .06em; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.md .gloss{font:400 .74em/1 var(--font-ui); color:var(--ink-3); margin-left:.1em; white-space:normal}
+.md .math-block{background:var(--surface-2); border-radius:8px; padding:.55em .9em}
+.md li.mis{list-style:none; margin:.7em 0 1em -1.3em; display:grid; gap:5px}
+.md .mis-x{color:var(--ink-3)}
+.md .mis-o{color:var(--ink)}
+.md .mis-k{display:inline-block; font:600 11px/1 var(--font-ui); padding:4px 6px; border-radius:4px; margin-right:8px; vertical-align:2px}
+.md .mis-x .mis-k{background:color-mix(in srgb,var(--bad) 14%,transparent); color:var(--bad)}
+.md .mis-o .mis-k{background:color-mix(in srgb,var(--good) 16%,transparent); color:var(--good)}
+.md.sum ul{list-style:none; padding:0}
+.md.sum li{padding:10px 14px; margin:.55em 0; border-left:3px solid var(--dc,var(--ink)); background:var(--surface-2); border-radius:0 8px 8px 0}
+.preview{margin-top:1.4em; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2)}
+.preview .eyebrow{margin:0 0 6px}
+@media (min-width:981px){ .preview .pv-obj{display:none} } /* the side column already shows the objectives */
+.preview ol{margin:0 0 14px; padding-left:1.3em; font:15px/1.6 var(--font-ui)}
+.term-chips{display:flex; flex-wrap:wrap; gap:6px; margin:0}
+.tchip{font:600 13.5px/1.2 var(--font-ui); padding:6px 10px; border-radius:99px; background:var(--surface); border:1px solid var(--line)}
+.recap{margin:18px 0 6px; padding:14px 16px; border-radius:10px; border:1px solid color-mix(in srgb,var(--dc,var(--ink)) 35%,var(--line)); background:color-mix(in srgb,var(--dc,var(--ink)) 5%,var(--surface)); font-size:16px; line-height:1.75}
+.recap .eyebrow{margin:0 0 6px}
+.recap .recap-d{margin:0; padding-left:1.1em}
+.recap .recap-d li{margin:.3em 0}
 .md .layer{margin:0 0 1.3em; padding:2px 0 2px 16px; border-left:3px solid var(--line)}
 .md .layer > :last-child{margin-bottom:0}
 .md .layer.l-int{border-left-color:color-mix(in srgb,var(--dc,var(--ink)) 35%,var(--surface))}
@@ -914,6 +936,8 @@ function inl(s){
      .replace(/\\\((.+?)\\\)/g,(m,a)=>put(tex(a,false)))
      .replace(/\$([^\s$](?:[^$\n]*?[^\s$])?)\$/g,(m,a)=>put(tex(a,false)));
   s=esc(s)
+    // a defined term "**가속도**(加速度, acceleration)": marked term, quiet gloss (PRINCIPLES 2-2-1)
+    .replace(/\*\*([^*]+?)\*\*\s?\(([^()]{0,80}[A-Za-z㐀-鿿][^()]{0,80})\)/g,'<strong class="term">$1</strong><span class="gloss">($2)</span>')
     .replace(/\*\*([^*]+?)\*\*/g,'<strong>$1</strong>')
     .replace(/(^|[^*\w])\*([^*\s][^*\n]*?)\*(?![*\w])/g,'$1<em>$2</em>')
     .replace(/`([^`]+)`/g,'<code>$1</code>')
@@ -941,7 +965,10 @@ function md(src){
   const L=String(src??'').replace(/\r/g,'').split('\n'); const out=[];
   let para=[], list=null, quote=[], table=[], layer=false;
   const fp=()=>{ if(para.length){ out.push(`<p>${inl(para.join(' '))}</p>`); para=[]; } };
-  const fl=()=>{ if(list){ out.push(list.t==='ol'?`<ol start="${list.start}">`:'<ul>'); out.push(list.items.map(x=>`<li>${inl(x)}</li>`).join('')); out.push(`</${list.t}>`); list=null; } };
+  // "- **오해:** … → **사실:** …" becomes a two-line item with the fact in front of the eye
+  const li=x=>{ const m=x.match(/^\*\*오해\s*:?\s*\*\*\s*:?\s*([\s\S]*?)\s*(?:→|->)\s*\*\*사실\s*:?\s*\*\*\s*:?\s*([\s\S]*)$/);
+    return m?`<li class="mis"><span class="mis-x"><span class="mis-k">오해</span>${inl(m[1])}</span><span class="mis-o"><span class="mis-k">사실</span>${inl(m[2])}</span></li>`:`<li>${inl(x)}</li>`; };
+  const fl=()=>{ if(list){ out.push(list.t==='ol'?`<ol start="${list.start}">`:'<ul>'); out.push(list.items.map(li).join('')); out.push(`</${list.t}>`); list=null; } };
   const fq=()=>{ if(quote.length){ out.push(`<blockquote>${md(quote.join('\n'))}</blockquote>`); quote=[]; } };
   const ft=()=>{ if(table.length){ out.push(tableHTML(table)); table=[]; } };
   const flush=()=>{ fp(); fl(); fq(); ft(); };
@@ -1453,6 +1480,29 @@ function chunkLesson(src){
   }
   return res;
 }
+/* repetition (PRINCIPLES 2-2-1): preview the terms at the start, the definitions again after each check */
+const TERM_RE=/\*\*([^*]+?)\*\*\s?\(([^()]{0,80}[A-Za-z㐀-鿿][^()]{0,80})\)/;
+function lessonTerms(src){
+  const seen=new Set(), out=[];
+  for(const m of String(src||'').matchAll(new RegExp(TERM_RE.source,'g'))){ const t=m[1].trim(); if(t&&!seen.has(t)){ seen.add(t); out.push(t); } }
+  return out;
+}
+function sentences(text){ // prose only: no headings, display math or tables; split after a full stop that is not a decimal point
+  const prose=String(text||'').split('\n').filter(l=>!/^\s*(#|\$\$|\\\[|\||\*\*[QA]\.)/.test(l)).join(' ').replace(/\s+/g,' ').trim();
+  const out=[]; prose.replace(/.+?(?:[^\d\s]\.(?=\s)|$)/g,s=>{ if(s.trim()) out.push(s.trim()); return s; });
+  return out;
+}
+function recapHTML(chunks, grp){
+  const bodies=chunks.filter(x=>x.grp===grp&&x.type==='text').map(x=>x.body);
+  const defs=[...new Set(bodies.flatMap(sentences).filter(s=>TERM_RE.test(s)))].slice(0,8);
+  const eqs=[...new Set(bodies.flatMap(b=>b.split('\n').map(l=>l.trim()).filter(l=>/^\$\$[\s\S]+\$\$$/.test(l))))].slice(0,3);
+  if(!defs.length&&!eqs.length) return '';
+  return `<div class="md recap"><p class="eyebrow">이 목표에서 외울 것</p>${defs.length?`<ul class="recap-d">${defs.map(s=>`<li>${inl(s)}</li>`).join('')}</ul>`:''}${eqs.map(e=>`<div class="math-block">${tex(e.slice(2,-2),true)}</div>`).join('')}</div>`;
+}
+function previewHTML(n, src){
+  const terms=lessonTerms(src);
+  return `<div class="preview"><div class="pv-obj"><p class="eyebrow">이 단원의 학습 목표</p><ol>${n.obj.map(o=>`<li>${esc(o)}</li>`).join('')}</ol></div>${terms.length?`<p class="eyebrow">이번에 만날 용어 ${terms.length}개</p><p class="term-chips">${terms.map(t=>`<span class="tchip">${inl(t)}</span>`).join('')}</p>`:''}</div>`;
+}
 function ensureReader(sv){
   if(!sv.reader){ const r=rec(sv.id)||{}, free=!!(r.rd||r.lv||known(sv.id)), p=free?0:(r.pos||0); sv.reader={i:p, max:p, free, shown:{}, passed:{}, revealed:false, typed:'', whole:false}; }
   return sv.reader;
@@ -1478,8 +1528,8 @@ function readerHTML(sv){
     body=`<div class="rd-check"><p class="eyebrow">점검${c.sub?` · ${esc(c.sub)}`:''}</p><div class="cb-q md">${md(c.q)}</div>${
       !R.revealed&&!done
       ?`<form id="chk-form" class="reveal-form"><label class="sr" for="chk-typed">떠올린 답</label><input id="chk-typed" autocomplete="off" placeholder="떠올린 답을 적어 봐 (안 적어도 돼)" value="${esc(R.typed)}"><div><button type="submit" class="btn">답 보기</button></div></form>`
-      :`<div class="cb-a md">${md(c.a)}</div>${R.typed&&!done?`<p class="cb-typed">내가 적은 답: ${esc(R.typed)}</p>`:''}${done?'<p class="hint">이미 통과한 점검이야.</p>':'<div class="row"><button type="button" class="btn primary" data-act="rd-ok">맞혔어</button><button type="button" class="btn" data-act="rd-again">틀렸어 · 이 부분 다시 읽기</button></div>'}`}</div>`;
-  } else body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}<div class="md">${md(c.body)}</div>`;
+      :`<div class="cb-a md">${md(c.a)}</div>${R.typed&&!done?`<p class="cb-typed">내가 적은 답: ${esc(R.typed)}</p>`:''}${recapHTML(chunks,c.grp)}${done?'<p class="hint">이미 통과한 점검이야.</p>':'<div class="row"><button type="button" class="btn primary" data-act="rd-ok">맞혔어</button><button type="button" class="btn" data-act="rd-again">틀렸어 · 이 부분 다시 읽기</button></div>'}`}</div>`;
+  } else body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}<div class="md${c.sec==='요약'?' sum':''}">${md(c.body)}</div>${R.i===0&&NODE[sv.id]?previewHTML(NODE[sv.id],L.md):''}`;
   const label=!complete?'쓰는 중…':last?'암기로 →':'다음 →';
   const fill=wait>0&&!matchMedia('(prefers-reduced-motion: reduce)').matches?`<span class="rd-fill" style="animation-duration:${dw}s;animation-delay:-${el.toFixed(2)}s"></span>`:'';
   const r=rec(sv.id)||{};
