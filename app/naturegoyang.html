@@ -1,4 +1,4 @@
-<title>자연과학 주기율표</title>
+<title>과학고양</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -381,6 +381,12 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .g2{border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
 .cb-foot{margin-top:auto; padding-top:16px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
 .reveal-form{display:grid; gap:10px}
+.copy-form{display:grid; gap:10px; margin-top:18px; padding:14px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb,var(--bad) 40%,var(--line)); background:var(--surface)}
+.copy-form.ok{border-color:var(--good)}
+.copy-lead{margin:0; font-size:13.5px; color:var(--ink-2)}
+.copy-key{margin:0; font:600 17px/1.6 var(--font-ui); color:var(--ink); word-break:keep-all; overflow-wrap:anywhere}
+.copy-form input{font-size:16px}
+.copy-form .row{margin:0}
 .clist{margin-top:22px}
 .clist summary{font-size:14px}
 .clist ol{list-style:none; padding:0; margin:12px 0 0; display:grid; gap:0}
@@ -469,7 +475,7 @@ summary{cursor:pointer; font-weight:600; font-size:14px; color:var(--ink-2)}
 </style>
 
 <header class="topbar"><div class="topbar-in">
-  <button type="button" class="brand" data-act="nav" data-view="today"><span class="brand-tile" aria-hidden="true"><i id="brand-n"></i>Ns</span><span>자연과학 주기율표</span></button>
+  <button type="button" class="brand" data-act="nav" data-view="today"><span class="brand-tile" aria-hidden="true"><i id="brand-n"></i>Ns</span><span>과학고양</span></button>
   <nav class="tabs" id="nav" aria-label="주요 화면"></nav>
 </div></header>
 <div id="banner"></div>
@@ -567,17 +573,17 @@ N('b-molecule','Bm','B',2,'생체 분자','생체 분자','생명은 어떤 분�
 N('b-membrane','Mb','B',2,'세포막과 물질 수송','세포막','세포는 무엇을 들이고 무엇을 막을까?',['b-molecule','c-solution'],['SF','EQ'],['인지질 이중층과 유동 모자이크 모형을 설명한다','확산·삼투·촉진 확산·능동 수송을 비교한다','세포 안팎으로 큰 물질이 드나드는 방식(내포·외포 작용)을 설명한다']);
 N('b-enzyme','Ez','B',2,'효소와 대사','효소','체온에서 어떻게 그 많은 반응이 일어날까?',['b-molecule'],['SF','EN'],['효소가 활성화 에너지를 낮추는 원리를 설명한다','기질 특이성과 활성 부위를 설명한다','온도·pH·저해제가 효소 활성에 미치는 영향을 분석한다']);
 N('b-respiration','Rs','B',2,'세포 호흡','세포 호흡','음식 속 에너지는 어떻게 ATP가 될까?',['b-enzyme','c-redox'],['EN','CY'],['ATP가 에너지 화폐인 이유를 설명한다','해당 과정·TCA 회로·전자 전달계의 흐름과 장소를 정리한다','유산소 호흡과 발효를 비교한다']);
-N('b-photo','Ph','B',2,'광합성','광합성','식물은 빛을 어떻게 당으로 바꿀까?',['b-respiration','p-light'],['EN','CY'],['명반응과 캘빈 회로의 흐름을 정리한다','엽록소의 흡수 스펙트럼을 해석한다','광합성과 세포 호흡을 물질·에너지 순환으로 연결한다']);
+N('b-photo','Ph','B',2,'광합성','광합성','식물은 빛을 어떻게 당으로 바꿀까?',['b-respiration','p-light'],['EN','CY'],['명반응과 캘빈 회로의 흐름을 정리한다','엽록소의 흡수 스펙트럼을 해석한다','광합성과 세포 호흡을 물질의 순환과 에너지의 흐름으로 연결한다']);
 N('b-division','Dv','B',2,'세포 분열','세포 분열','하나의 세포는 어떻게 정확히 둘이 될까?',['b-cell'],['EV'],['세포 주기와 체세포 분열 단계를 정리한다','감수 분열과 유전적 다양성(교차, 독립 분리)을 설명한다','세포 주기 조절의 이상과 암을 연결한다']);
 N('b-mendel','Gn','B',2,'유전의 원리','유전','형질은 어떻게 다음 세대로 전해질까?',['b-division','f-stats'],['EV'],['우열·분리·독립의 법칙을 적용한다','퍼넷 사각형과 확률로 자손의 비율을 계산한다','가계도와 반성 유전, 복대립 유전을 분석한다']);
 N('b-dna','Dn','B',2,'DNA와 유전자 발현','DNA','유전 정보는 어떻게 단백질이 될까?',['b-molecule','b-mendel'],['EV','SF'],['DNA 이중 나선 구조와 복제를 설명한다','전사·번역과 유전 암호를 다룬다','돌연변이가 단백질에 미치는 영향을 분석한다']);
-N('b-body','Hm','B',2,'항상성과 인체','항상성','몸은 어떻게 안쪽 환경을 일정하게 유지할까?',['b-membrane'],['EQ','CY'],['음성 되먹임으로 체온·혈당 조절을 설명한다','호르몬 조절과 신경 조절을 비교한다','소화·순환·호흡·배설계의 협력을 정리한다']);
+N('b-body','Hm','B',2,'항상성과 인체','항상성','몸은 어떻게 안쪽 환경을 일정하게 유지할까?',['b-membrane'],['EQ','CY'],['음성 피드백으로 체온·혈당 조절을 설명한다','호르몬 조절과 신경 조절을 비교한다','소화·순환·호흡·배설계의 협력을 정리한다']);
 N('b-ecology','Ey','B',2,'생태계','생태계','생태계에서 에너지와 물질은 어떻게 흐를까?',['b-photo'],['CY','EN','EQ'],['먹이 그물과 생태 피라미드(약 10% 전달)를 해석한다','탄소·질소 순환을 정리한다','개체군 성장(지수·로지스틱)과 군집의 상호작용을 설명한다']);
 N('b-evolution','Ev','B',3,'진화와 자연선택','진화','이토록 다양한 생물은 어떻게 생겨났을까?',['b-mendel','b-dna'],['EV'],['변이·선택·유전으로 자연선택을 설명한다','화석·상동 기관·분자 자료로 진화의 증거를 평가한다','유전적 부동과 종 분화를 설명하고 흔한 오해를 바로잡는다']);
 N('b-nerve','Nv','B',3,'신경과 근육','신경','생각과 움직임은 어떻게 전기 신호가 될까?',['b-body','p-electric'],['SF','EN'],['휴지 전위와 활동 전위를 이온의 이동으로 설명한다','시냅스 전달과 신경 전달 물질을 설명한다','근육 수축(활주설)을 설명한다']);
-N('b-immune','Im','B',3,'면역','면역','몸은 어떻게 "나"와 "남"을 구별할까?',['b-body','b-dna'],['SF','EQ'],['선천 면역과 후천 면역을 비교한다','항원-항체 반응과 B·T 림프구의 역할을 설명한다','백신과 집단 면역의 원리를 설명한다']);
+N('b-immune','Im','B',3,'면역','면역','몸은 어떻게 "나"와 "남"을 구별할까?',['b-body','b-dna'],['SF','EQ'],['비특이적 방어 작용과 특이적 방어 작용을 비교한다','항원-항체 반응과 B·T 림프구의 역할을 설명한다','백신과 집단 면역의 원리를 설명한다']);
 N('b-regulation','Rg','B',3,'유전자 조절과 발생','유전자 조절','같은 DNA를 가진 세포가 어떻게 서로 다른 세포가 될까?',['b-dna'],['EV','SF'],['오페론과 진핵생물의 유전자 발현 조절을 설명한다','세포 분화와 발생, 줄기세포를 설명한다','후성유전을 개괄한다']);
-N('b-micro','Mi','B',3,'미생물과 바이러스','미생물','눈에 보이지 않는 생물은 지구와 우리 몸에서 무슨 일을 할까?',['b-dna','b-cell'],['EV','CY'],['세균·고균·원생생물·균류의 구조와 생활 방식을 비교한다','바이러스의 구조와 증식(용균·용원 주기, 레트로바이러스)을 설명한다','병원체, 항생제 내성, 미생물의 생태적 역할을 설명한다']);
+N('b-micro','Mi','B',3,'미생물과 바이러스','미생물','눈에 보이지 않는 생물은 지구와 우리 몸에서 무슨 일을 할까?',['b-dna','b-cell'],['EV','CY'],['세균·고세균·원생생물·균류의 구조와 생활 방식을 비교한다','바이러스의 구조와 증식(용균·용원 주기, 레트로바이러스)을 설명한다','병원체, 항생제 내성, 미생물의 생태적 역할을 설명한다']);
 N('b-biotech','Bt','B',4,'생명 공학','생명 공학','유전자를 읽고 고쳐 쓸 수 있다면 무엇이 가능할까?',['b-regulation','b-evolution'],['EV'],['PCR·전기 영동·제한 효소·염기 서열 분석을 설명한다','재조합 DNA와 CRISPR 유전자 편집을 설명한다','생명 공학의 활용과 윤리적 쟁점을 평가한다']);
 N('b-origin','Og','B',4,'생명의 기원과 계통','생명의 기원','최초의 생명은 어떻게 시작되었고, 모든 생물은 어떻게 이어져 있을까?',['b-evolution','e-history'],['EV'],['화학 진화와 RNA 세계 가설을 설명한다','계통수를 읽고 공통 조상을 해석한다','세포 내 공생설로 진핵세포의 기원을 설명한다']);
 N('b-brain','Br','B',4,'뇌와 인지','뇌과학','신경세포의 신호가 어떻게 기억과 생각이 될까?',['b-nerve','b-regulation'],['SF','EQ'],['뇌의 주요 구조와 기능을 정리한다','시냅스 가소성(장기 강화)으로 학습과 기억을 설명한다','뇌 연구 방법(fMRI, EEG, 광유전학)과 그 한계를 평가한다']);
@@ -591,7 +597,7 @@ N('e-history','Hi','E',2,'지질 시대와 지구의 역사','지질 시대','46
 N('e-atmos','Am','E',2,'대기와 날씨','대기·날씨','바람은 왜 불고, 구름은 어떻게 생길까?',['e-sphere','c-gas'],['EN','CY'],['대기의 층 구조와 기압을 설명한다','단열 팽창과 이슬점으로 구름과 강수를 설명한다','기압 차와 전향력으로 바람, 기단과 전선을 설명한다']);
 N('e-ocean','Oc','E',2,'해양','해양','바다는 지구의 열을 어떻게 옮길까?',['e-sphere','p-heat'],['CY','EN'],['해수의 층 구조와 염분을 설명한다','표층 해류와 심층 순환(열염 순환)을 설명한다','해양과 대기의 상호작용(엘니뇨)을 설명한다']);
 N('e-solar','Ss','E',2,'태양계','태양계','태양계는 어떻게 만들어졌고, 행성들은 왜 서로 다를까?',['e-sky','p-gravity'],['FO','SC'],['지구형 행성과 목성형 행성을 비교한다','성운설로 태양계의 형성을 설명한다','케플러 법칙으로 행성의 운동을 해석한다']);
-N('e-climate','Cl','E',3,'기후와 기후 변화','기후','지구의 평균 온도는 무엇이 결정할까?',['e-atmos','e-ocean','p-light'],['EQ','CY','EN'],['복사 평형과 온실 효과를 설명한다','기후 되먹임(얼음-알베도 등)을 분석한다','기후 변화의 증거와 탄소 순환의 교란을 평가한다']);
+N('e-climate','Cl','E',3,'기후와 기후 변화','기후','지구의 평균 온도는 무엇이 결정할까?',['e-atmos','e-ocean','p-light'],['EQ','CY','EN'],['복사 평형과 온실 효과를 설명한다','기후 피드백(얼음-알베도 등)을 분석한다','기후 변화의 증거와 탄소 순환의 교란을 평가한다']);
 N('e-star','Sr','E',3,'별의 일생','별','별은 어떻게 태어나서 빛나고 죽을까?',['e-solar','p-light'],['EN','MA'],['연주 시차·겉보기 등급·흑체 복사로 별의 거리·밝기·온도를 구한다','H-R도로 별을 분류한다','질량에 따른 별의 진화와 원소 합성을 설명한다']);
 N('e-galaxy','Gx','E',4,'은하와 우주론','우주론','우주는 어떻게 시작되었고, 어디로 가고 있을까?',['e-star','p-gr','p-nuclear'],['SC','EN'],['은하의 종류와 우리은하의 구조를 정리한다','허블-르메트르 법칙으로 우주 팽창을 해석한다','빅뱅의 증거와 암흑 물질·암흑 에너지를 설명한다']);
 N('e-life','Xp','E',4,'외계 행성과 생명','외계 생명','우주에 또 다른 생명이 있을까?',['e-star','b-origin'],['EV','SC'],['외계 행성 탐사 방법(시선 속도법, 식 현상)을 설명한다','생명 가능 지대를 정의하고 조건을 따진다','생명의 흔적을 찾는 과학적 기준을 평가한다']);
@@ -633,7 +639,67 @@ const SOLID_DAYS=21;
 const withTimeout=(p,ms)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej({code:'timeout'}),ms))]);
 const NOSAMPLE='이 화면에서는 Claude에 연결할 수 없어서 설명·카드·문제를 만들 수 없어. claude.ai에 로그인한 상태로 이 페이지를 열어 줘.';
 const STATE_LABEL={locked:'잠김', ready:'학습 가능', learning:'학습 중', mastered:'숙달', solid:'단단함', shaky:'흔들림'};
-const KINDS=['정의','기호','법칙','상수','분류','사실'];
+const KINDS=['정의','기호','법칙','상수','분류','사실','용어'];
+/* copy-typing (따라쓰기): plain keys and a forgiving-but-exact comparison */
+const GREEK={alpha:'α',beta:'β',gamma:'γ',delta:'δ',epsilon:'ε',varepsilon:'ε',zeta:'ζ',eta:'η',theta:'θ',vartheta:'θ',kappa:'κ',lambda:'λ',mu:'μ',nu:'ν',xi:'ξ',pi:'π',rho:'ρ',sigma:'σ',tau:'τ',phi:'φ',varphi:'φ',chi:'χ',psi:'ψ',omega:'ω',Gamma:'Γ',Delta:'Δ',Theta:'Θ',Lambda:'Λ',Xi:'Ξ',Pi:'Π',Sigma:'Σ',Phi:'Φ',Psi:'Ψ',Omega:'Ω'};
+const TEXSYM={times:'×',cdot:'·',pm:'±',mp:'∓',le:'≤',leq:'≤',ge:'≥',geq:'≥',ne:'≠',neq:'≠',approx:'≈',sim:'~',propto:'∝',infty:'∞',to:'→',rightarrow:'→',Rightarrow:'⇒',leftarrow:'←',leftrightarrow:'↔',rightleftharpoons:'⇌',circ:'°',degree:'°',partial:'∂',nabla:'∇',sum:'Σ',prod:'Π',int:'∫',oint:'∮',hbar:'ħ',ell:'ℓ',angle:'∠',perp:'⊥',parallel:'∥',cdots:'…',ldots:'…',dots:'…',prime:"'",quad:' ',qquad:' ',left:'',right:'',displaystyle:'',limits:'',rm:'',bf:'',it:'',sf:'',tt:'',cal:'',vec:''};
+const GREEK_NAME={}; for(const [k,v] of Object.entries(GREEK)) if(!GREEK_NAME[v]) GREEK_NAME[v]=k.replace(/^var/,'');
+function texPlain(t){
+  t=t.replace(/\\([A-Za-z]+)/g,(m,w)=>GREEK[w]??TEXSYM[w]??m); // symbols first, before unwrapping glues letters onto them (\circ\text{C})
+  for(let i=0,prev='';i<8&&prev!==t;i++){ // innermost braces first, so nested fractions and scripts unwrap
+    prev=t;
+    t=t.replace(/\\(?:mathrm|text|textrm|mathbf|mathit|mathsf|operatorname|vec|boldsymbol|bar|hat|tilde|dot|ddot|overline|underline)\s*\{([^{}]*)\}/g,'$1')
+      .replace(/\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g,(m,a,b)=>[a,b].map(x=>/^[^\s+\-−=/]+$/.test(x)?x:`(${x})`).join('/'))
+      .replace(/\\sqrt\s*\{([^{}]*)\}/g,'√($1)')
+      .replace(/([_^])\{([^{}]*)\}/g,'$1$2');
+  }
+  return t.replace(/\\([A-Za-z]+)/g,(m,w)=>GREEK[w]??TEXSYM[w]??w)
+    .replace(/\\[,;:! ]/g,' ').replace(/\\\\/g,' ').replace(/\\([%#&])/g,'$1').replace(/[{}]/g,'').replace(/([_^])\s+/g,'$1');
+}
+function deTex(s){
+  return String(s||'')
+    .replace(/\$\$?([^$]+)\$\$?/g,(m,t)=>texPlain(t))
+    .replace(/\[\[([a-z]-[a-z]+)(?:\|([^\]]+))?\]\]/g,(m,id,l)=>l||NODE[id]?.t||id)
+    .replace(/\*\*|__|`/g,'').replace(/\s+/g,' ').trim();
+}
+// a key the model wrote: plain it, and drop it (so the fallback is used) if it came out too long to copy
+const cleanKey=s=>{ const k=deTex(String(s||'')); return k.length<=150?k:''; };
+// symbols that are hard to type count the same as their keyboard spelling
+const SYM_ASCII=[[/[→⟶⇒]/g,'->'],[/[⇌↔⇔]/g,'<->'],[/≤/g,'<='],[/≥/g,'>='],[/≈/g,'~='],[/≠/g,'!='],[/±/g,'+-'],[/√/g,'sqrt'],[/∞/g,'inf'],[/ħ/g,'hbar']];
+function typeKey(s){
+  let x=String(s||'').normalize('NFKC');
+  for(const [re,to] of SYM_ASCII) x=x.replace(re,to);
+  return x.replace(/[Ͱ-Ͽ]/g,c=>GREEK_NAME[c]||c)
+    .replace(/[−–—]/g,'-').replace(/[×*]/g,'x')
+    .replace(/\.(?!\d)/g,'')
+    .replace(/[\s,;:!?'"“”‘’()[\]{}「」『』《》〈〉_^°·⋅ㆍᆞ・•‧…]/g,'');
+}
+const sameKey=(a,b)=>{ const x=typeKey(a); return !!x&&x===typeKey(b); };
+// first sentence: up to a full stop that is not a decimal point and is followed by a space
+function firstSentence(s){ const m=s.match(/^.+?[^\d\s]\.(?=\s)/); return m?m[0]:s; }
+function answerKey(a){
+  let k=deTex(a)
+    .replace(/\s*\([^)]*[㐀-鿿豈-﫿][^)]*\)/g,'')   // (加速度, acceleration)
+    .replace(/\s*\((?=[^)]*(?:[a-z]{4,}|[A-Za-z]\s[A-Za-z]))[A-Za-z][A-Za-z\s'-]*\)/g,'') // English gloss (net force), (inertia); unit symbols like (mol), (SI) stay
+    .replace(/[㐀-鿿豈-﫿]+/g,'')                    // bare hanja: a 용어 card's back "加速度 · acceleration" → acceleration
+    .replace(/^[\s·,]+|[\s·,]+$/g,'');
+  if(k.length>100) k=firstSentence(k);
+  return k.trim();
+}
+const cardKey=c=>(c.t&&c.t.trim())||answerKey(c.a);
+// the card's key, the key derived from the answer, or the whole answer all count
+const cardKeyOk=(v,c)=>(!!c.t&&sameKey(v,c.t))||sameKey(v,answerKey(c.a))||sameKey(v,deTex(c.a));
+function itemKey(it){
+  if(it.key) return it.key;
+  if(it.type==='mcq') return deTex(it.choices[it.answer]);
+  if(it.type==='num') return `${fmtNum(it.answer)} ${it.unit}`.trim();
+  const k=deTex(it.model||it.rubric?.[0]||''); return k.length>100?firstSentence(k):k;
+}
+// a key that normalizes to nothing could never be matched, so such an item asks for no copy
+const needCopy=(it,r)=>!!(r?.done&&!r.void&&r.score<1&&!r.copied&&typeKey(itemKey(it)));
+function copyForm(id, inputId, key, lead, attrs=''){
+  return `<form class="copy-form" id="${id}" data-key="${esc(key)}" ${attrs}><p class="copy-lead">${lead}</p><p class="copy-key">${esc(key)}</p><label class="sr" for="${inputId}">따라 쓰기</label><input id="${inputId}" class="copy-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="여기에 그대로 써"><div class="row"><button type="submit" class="btn primary">확인 <kbd>Enter</kbd></button></div></form>`;
+}
 let toastT;
 function toast(m){ const el=$('#toast'); el.textContent=m; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>{el.hidden=true;},4200); }
 function sampleErr(e){
@@ -785,19 +851,21 @@ function normalize(){
   for(const [id,r] of Object.entries(S.progress.nodes)){ if(!NODE[id]||r.s==='credited') delete S.progress.nodes[id]; }
 }
 const LESSONS={}, CARDS={};
-const lessonCached=id=>LESSONS[`${id}--v3`]||LESSONS[`${id}--v2`]||null;
+const LESSON_VERS=['v3','v2']; // v3 is also where the pre-made, reviewed lessons are uploaded (content/)
+const STORED=new Set(); // 'lessons/<id>' and 'cards/<id>' that came from the store: reviewed content, never regenerated from the app
+const lessonCached=id=>{ for(const v of LESSON_VERS){ const m=LESSONS[`${id}--${v}`]; if(m) return m; } return null; };
 async function getLesson(id){
   if(lessonCached(id)) return lessonCached(id);
-  if(ENV.db){ for(const v of ['v3','v2']){ try{ const s=await withTimeout(ENV.db.doc(`lessons/${id}--${v}`).get(),8000); const d=s.exists?s.data():null; if(d&&typeof d.md==='string'&&d.md.length>200){ LESSONS[`${id}--${v}`]=d.md; return d.md; } }catch(e){} } }
+  if(ENV.db){ for(const v of LESSON_VERS){ try{ const s=await withTimeout(ENV.db.doc(`lessons/${id}--${v}`).get(),8000); const d=s.exists?s.data():null; if(d&&typeof d.md==='string'&&d.md.length>200){ LESSONS[`${id}--${v}`]=d.md; STORED.add(`lessons/${id}`); return d.md; } }catch(e){} } }
   return null;
 }
 async function putLesson(id, md){
-  const key=`${id}--v3`; LESSONS[key]=md;
+  const key=`${id}--${LESSON_VERS[0]}`; LESSONS[key]=md;
   if(ENV.db){ try{ await ENV.db.doc('lessons/'+key).set({md, node:id, at:Date.now()}); }catch(e){} }
 }
 async function getCards(u){
   if(CARDS[u]) return CARDS[u];
-  if(ENV.db){ try{ const s=await withTimeout(ENV.db.doc('cards/'+u).get(),8000); const d=s.exists?s.data():null; if(d&&Array.isArray(d.items)&&d.items.length){ CARDS[u]=JSON.parse(JSON.stringify(d.items)); return CARDS[u]; } }catch(e){} }
+  if(ENV.db){ try{ const s=await withTimeout(ENV.db.doc('cards/'+u).get(),8000); const d=s.exists?s.data():null; if(d&&Array.isArray(d.items)&&d.items.length){ CARDS[u]=JSON.parse(JSON.stringify(d.items)); STORED.add(`cards/${u}`); return CARDS[u]; } }catch(e){} }
   return null;
 }
 async function putCards(u){
@@ -907,6 +975,8 @@ function related(n){
   set.delete(n.id);
   return [...set].map(id=>NODE[id]).sort(byNo);
 }
+// how a copy-typing key (card t, question key) must be written; shared by the cards, quiz, review and keys prompts
+const KEY_RULE='반드시 그대로 외워야 할 부분을 평문 한 줄로 쓴다. 정의라면 정의 문장 전체이고, 사실이 요구하는 한정어와 성립 조건을 빼지 않는다. 100자를 넘으면 뜻과 한정어를 지키며 더 짧게 다듬는다. LaTeX·마크다운과 괄호 속 한자·영어는 빼고, 키보드로 칠 수 있게 쓴다: 위첨자 ^, 아래첨자 _, 곱하기 × 또는 x, 화살표 ->, 이하·이상 <=·>=, 근삿값 ~=, 제곱근 sqrt. 그리스 문자는 그대로 써도 된다.';
 function lessonPrompt(id){
   const n=NODE[id];
   return `너는 자연과학을 "마스터" 수준으로 가르치는 교사다. 학습자는 이해에서 멈추지 않고, 정의·용어·기호·법칙을 정확히 외워 자유롭게 쓰는 것을 목표로 바닥부터 한 단계씩 올라가고 있다. 아래 단원의 설명을 한국어 마크다운, 교과서 문체(해라체: "~이다", "~한다")로 써라.
@@ -928,15 +998,25 @@ ${n.ideas.map(k=>`- ${IDEAS[k].name}: ${IDEAS[k].line}`).join('\n')}
   #### 엄밀 — 정확한 진술. 전제와 적용 범위, 성립하지 않는 경우, 짧은 유도나 근거, 더 정확한 이론에서 어떻게 고쳐지는지.
 - 두 층 이상이 사실상 같은 내용이면 반복하지 말고 합쳐서 "#### 직관·통상", "#### 통상·엄밀", "#### 직관·통상·엄밀"처럼 하나의 제목으로 쓴다. 억지로 층을 나누지 않는다.
 
+뒤 단원의 개념
+- 정확하게 말하려면 학습자가 아직 배우지 않은 뒤 단원의 개념이 필요할 때가 있다. 그 개념을 피하려고 사실을 단순화해 틀리게 말하지 않는다. 뒤 개념을 그대로 쓰되 지금 이해에 필요한 만큼만 한두 문장으로 풀어 주고, 그 개념을 제대로 다루는 단원을 [[id]]로 가리킨다.
+- 근사나 단순화한 모형을 쓸 때는 어디까지 맞는지, 더 정확한 이론에서 어떻게 고쳐지는지 밝히고 그 단원을 [[id]]로 가리킨다.
+- 본문에서 가리킬 수 있는 단원 id: ${NODES.slice().sort(byNo).filter(m=>m.id!==id).map(m=>`${m.id}=${m.t}`).join(', ')}
+
+용어와 정의
+- 용어는 처음 나올 때 **한글**(漢字, English) 꼴로 쓴다. 예: **가속도**(加速度, acceleration), **알짜힘**(net force). 한자어가 아니면 한자를 빼고, 한자는 정확한 표준 자형으로 쓴다.
+- 정의는 짧아도 철저하게 쓴다. 정의 문장 하나만 떼어 읽어도 무엇을 가리키는지, 어떤 조건에서 성립하는지 완결되어야 한다. 그대로 외울 수 있게 한 문장으로 쓰고, 앞뒤 문맥에 기대지 않는다.
+- 한정어를 지킨다. "주로", "대개", "일반적으로", "~일 수 있다", "이상 기체에서", "온도가 일정할 때"처럼 사실이 요구하는 한정어와 조건은 빼지 않는다. 한정어를 빼서 단정하면 틀린 문장이다.
+
 형식 규칙
 - 큰 제목은 이 순서 그대로: ## 핵심 질문, ## 원리, ## 예제, ## 흔한 오개념, ## 연결, ## 요약
 - "핵심 질문": 이 질문이 왜 중요한지 2~3문장. 답은 뒤에서 한다.
 - "원리": 학습 목표마다 ### 소제목을 두고, 그 아래에 층 제목(####)을 쓴다.
-- 정의는 처음 나올 때 **굵게** 쓰고 영어 용어를 괄호로 덧붙인다. 정의 문장은 그대로 외울 수 있게 한 문장으로 정확히 쓴다.
+- 정의하는 용어는 **굵게** 쓴다.
 - 기호를 처음 쓸 때 뜻과 SI 단위를 밝힌다. 수식은 LaTeX로, 문장 안은 $...$, 따로 보일 때는 한 줄에 $$...$$.
 - "예제": 실제 수치를 넣은 단계별 풀이 1~2개. 정성적인 단원이면 구체적인 상황 분석.
 - "흔한 오개념": 2~3개를 "- **오해:** … → **사실:** …" 형식으로.
-- "연결": 다른 단원을 가리킬 때는 [[id]] 표기를 쓴다. 쓸 수 있는 id는 아래 목록뿐이다.
+- "연결": 다른 단원을 가리킬 때는 [[id]] 표기를 쓴다. '연결'에서는 아래 목록의 단원을 쓴다(본문에서 뒤 개념을 가리킬 때는 위 전체 목록을 쓴다).
 ${related(n).map(m=>`  ${m.id} = ${m.t}`).join('\n')}
 - "요약": 반드시 외워야 할 핵심 4~6개를 글머리표로.
 - 각 학습 목표의 마지막에는 점검 블록을 둔다. 방금 읽은 내용의 핵심(정의나 핵심 관계)을 떠올리게 하는 짧은 질문 하나와 정답을 정확히 이 형식으로 쓴다:
@@ -957,10 +1037,13 @@ ${lesson?`[학습자가 읽은 설명]\n${lesson.slice(0,7000)}\n`:''}
 - kind는 다음 중 하나: "정의"(용어의 정확한 정의), "기호"(기호·단위의 뜻), "법칙"(법칙·공식과 성립 조건), "상수"(상수·대표 값과 단위), "분류"(종류·구분·순서 목록), "사실"(꼭 알아야 할 사실·명칭·수치).
 - 이 단계에서 외워야 할 것만, 그러나 빠짐없이. 보통 12~25장.
 - q(앞면)는 정확한 인출을 요구하는 질문이다. 예: "알짜힘의 정의는?", "기호 μ_k의 뜻과 단위는?", "뉴턴 제2법칙을 식으로 쓰고, 성립 조건을 말하라."
-- a(뒷면)는 외울 수 있게 짧고 정확하게. 정의는 한 문장, 영어 용어를 괄호로. 수식은 $...$ LaTeX.
+- a(뒷면)는 외울 수 있게 짧고 정확하게. 수식은 $...$ LaTeX.
+- 용어 카드와 정의 카드의 a에는 용어를 한글(漢字, English) 꼴로 쓴다. 예: 가속도(加速度, acceleration). 한자어가 아니면 한자를 뺀다.
+- 정의는 짧아도 철저하게: 정의 문장 하나만으로 무엇을 가리키는지, 어떤 조건에서 성립하는지 완결되어야 한다. "주로", "대개", "~일 수 있다", "온도가 일정할 때" 같은 한정어와 조건은 사실이 그러하면 절대 빼지 않는다.
+- t는 이 카드를 틀렸을 때 학습자가 손으로 따라 써서 외울 핵심 답이다. ${KEY_RULE} 예: "물체에 작용하는 모든 힘의 벡터 합", "F_net = ma", "6.022×10^23 /mol".
 - hint에는 헷갈리기 쉬운 점이나 외우는 요령을 한 줄로 쓴다. 없으면 빈 문자열.
 - 한국 교과서 표준 용어를 쓰고, 설명에 나온 용어와 표기를 그대로 맞춘다.
-JSON 배열 하나로만 답하라: [{"kind":"정의","q":"앞면","a":"뒷면","hint":""}]`;
+JSON 배열 하나로만 답하라: [{"kind":"정의","q":"앞면","a":"뒷면","t":"따라 쓸 핵심","hint":""}]`;
 }
 function quizPrompt(sv){
   const n=NODE[sv.id], missed=rec(sv.id)?.miss||[], cards=liveItems(sv.id);
@@ -980,12 +1063,14 @@ ${sv.mode==='test'?'[상황] 학습자는 설명을 읽지 않고 이 단원을 
 - 8번: 자기 말로 정확히 설명하는 서술형("short"). 채점 요소에 정의의 핵심 요소를 넣는다.
 - 보기는 4개, 정답 위치는 고르게 섞는다. 모든 학습 목표가 최소 두 번 나오게 하고, 각 문제의 obj에 목표 번호를 적는다.
 - 내기 전에 문제와 정답이 과학적으로 정확한지, 정답이 하나뿐인지 스스로 검토한다.
+- 정답 보기와 모범 답안의 정의는 그것만으로 완결되게 쓰고, 사실이 요구하는 한정어("주로", "대개", "~일 수 있다", 성립 조건)를 빼지 않는다. 한정어 하나의 차이로 오답 보기를 만들 수 있다.
+- key는 학습자가 이 문제를 틀렸을 때 손으로 따라 써서 외울 핵심 한 줄이다. 정답의 요점이나 꼭 외울 정의·관계를 쓴다. ${KEY_RULE}
 - 한국어로 쓰고 수식은 $...$ LaTeX로 쓴다.
 
 JSON 배열 하나로만 답하라. 원소 형식:
-{"type":"mcq","obj":0,"level":"정확성","q":"문제","choices":["보기","보기","보기","보기"],"answer":2,"why":"정답 근거와 오답이 틀린 이유"}
-{"type":"num","obj":1,"level":"계산","q":"문제(답의 단위를 밝힐 것)","answer":12.5,"tol":0.02,"unit":"m/s","why":"풀이 과정"}
-{"type":"short","obj":2,"level":"설명","q":"문제","rubric":["채점 요소","채점 요소","채점 요소"],"model":"모범 답안"}
+{"type":"mcq","obj":0,"level":"정확성","q":"문제","choices":["보기","보기","보기","보기"],"answer":2,"why":"정답 근거와 오답이 틀린 이유","key":"따라 쓸 핵심"}
+{"type":"num","obj":1,"level":"계산","q":"문제(답의 단위를 밝힐 것)","answer":12.5,"tol":0.02,"unit":"m/s","why":"풀이 과정","key":"따라 쓸 핵심(쓴 식이나 관계)"}
+{"type":"short","obj":2,"level":"설명","q":"문제","rubric":["채점 요소","채점 요소","채점 요소"],"model":"모범 답안","key":"따라 쓸 핵심"}
 answer는 choices의 0부터 시작하는 번호, tol은 허용 상대 오차다. level은 정확성·적용·분석·계산·설명 중 하나다.`;
 }
 function gradePrompt(n, it, ans){
@@ -1009,13 +1094,15 @@ function reviewPrompt(ids){
 [단원 목록]
 ${ids.map(id=>{ const n=NODE[id]; return `- ${id} | ${n.t} | ${n.obj.join(' / ')}`; }).join('\n')}
 
+정답 보기의 정의는 그것만으로 완결되게 쓰고, 사실이 요구하는 한정어와 성립 조건을 빼지 않는다. key는 학습자가 틀렸을 때 손으로 따라 써서 외울 핵심 한 줄이다. ${KEY_RULE}
+
 JSON 배열 하나로만, 목록 순서대로 답하라. 원소 형식:
-{"id":"단원 id","type":"mcq","q":"문제","choices":["보기","보기","보기","보기"],"answer":1,"why":"해설"}
-계산이 자연스러운 단원은 {"id":"단원 id","type":"num","q":"문제","answer":3.2,"tol":0.02,"unit":"단위","why":"풀이"}로 써도 된다. answer는 0부터 시작하는 번호다.`;
+{"id":"단원 id","type":"mcq","q":"문제","choices":["보기","보기","보기","보기"],"answer":1,"why":"해설","key":"따라 쓸 핵심"}
+계산이 자연스러운 단원은 {"id":"단원 id","type":"num","q":"문제","answer":3.2,"tol":0.02,"unit":"단위","why":"풀이","key":"따라 쓸 핵심"}로 써도 된다. answer는 0부터 시작하는 번호다.`;
 }
 function chatRules(n, lesson){
   return `너는 자연과학 단원 "${n.t}"을 가르치는 튜터다. 학습자는 아래 설명을 읽는 중이며 질문을 보낸다.
-규칙: 학습자에게 반말(해체)로, 8문장 이내로 답한다. 질문에 맞는 층(직관·통상·엄밀)으로 답하고, 필요하면 짧은 예나 수식($...$ LaTeX)을 쓴다. 정의를 물으면 외울 수 있는 정확한 한 문장을 먼저 준다. 질문이 단원 밖이면 짧게 답하고 이 단원과의 관계를 짚는다. 학습자가 틀린 생각을 말하면 분명히 바로잡는다.
+규칙: 학습자에게 반말(해체)로, 8문장 이내로 답한다. 질문에 맞는 층(직관·통상·엄밀)으로 답하고, 필요하면 짧은 예나 수식($...$ LaTeX)을 쓴다. 정의를 물으면 외울 수 있는 정확한 한 문장을 먼저 주고, 사실이 요구하는 한정어와 성립 조건을 빼지 않는다. 새 용어는 한글(漢字, English) 꼴로 밝힌다. 정확하게 답하려면 뒤 단원의 개념이 필요할 때는 피하지 말고 지금 필요한 만큼 풀어서 쓴다. 질문이 단원 밖이면 짧게 답하고 이 단원과의 관계를 짚는다. 학습자가 틀린 생각을 말하면 분명히 바로잡는다.
 [핵심 질문] ${n.q}
 [학습 목표] ${n.obj.join(' / ')}
 [학습자가 읽는 설명]
@@ -1035,13 +1122,13 @@ ${ns.map(n=>`- ${n.id} = ${n.t} (${DOM[n.d].name}): ${n.q}`).join('\n')}
 function normItem(x, nobj){
   if(!x||typeof x.q!=='string'||!x.q.trim()) return null;
   const obj=Number.isInteger(+x.obj)&&+x.obj>=0&&+x.obj<nobj? +x.obj : 0;
-  const level=String(x.level||'');
-  if(x.type==='mcq'&&Array.isArray(x.choices)&&x.choices.length>=2&&Number.isInteger(+x.answer)&&+x.answer>=0&&+x.answer<x.choices.length)
-    return {type:'mcq', obj, level, q:x.q, choices:x.choices.slice(0,6).map(String), answer:+x.answer, why:String(x.why||'')};
-  if(x.type==='num'&&x.answer!==''&&isFinite(+x.answer))
-    return {type:'num', obj, level, q:x.q, answer:+x.answer, tol:Math.min(0.2,Math.max(0.005,+x.tol||0.02)), unit:String(x.unit||''), why:String(x.why||'')};
+  const level=String(x.level||''), key=cleanKey(x.key);
+  if(x.type==='mcq'&&Array.isArray(x.choices)&&x.choices.length>=2&&x.choices.length<=6&&Number.isInteger(+x.answer)&&+x.answer>=0&&+x.answer<x.choices.length)
+    return {type:'mcq', obj, level, q:x.q, choices:x.choices.map(String), answer:+x.answer, why:String(x.why||''), key};
+  if(x.type==='num'&&x.answer!==''&&x.answer!=null&&isFinite(+x.answer))
+    return {type:'num', obj, level, q:x.q, answer:+x.answer, tol:Math.min(0.2,Math.max(0.005,+x.tol||0.02)), unit:String(x.unit||''), why:String(x.why||''), key};
   if(x.type==='short')
-    return {type:'short', obj, level, q:x.q, rubric:Array.isArray(x.rubric)?x.rubric.map(String):[], model:String(x.model||'')};
+    return {type:'short', obj, level, q:x.q, rubric:Array.isArray(x.rubric)?x.rubric.map(String):[], model:String(x.model||''), key};
   return null;
 }
 const asArray=a=>Array.isArray(a)?a:(a?.items||a?.questions||a?.cards||[]);
@@ -1095,14 +1182,14 @@ function onboardView(){
   const sample=[NODE['f-measure'],NODE['p-force'],NODE['c-bond'],NODE['b-dna'],NODE['p-qm']];
   return `<section class="onboard">
   <div>
-    <p class="eyebrow">자연과학 주기율표 · ${TOTAL}개 단원 · 4단계</p>
+    <p class="eyebrow">과학고양 · ${TOTAL}개 단원 · 4단계</p>
     <h1>자연과학을 바닥부터 마스터하자</h1>
     <p class="lede">물리·화학·생명과학·지구과학과 이를 받치는 수학·탐구 도구를 ${TOTAL}개 단원으로 나누고 선수 관계로 이었어. 한 단계의 단원을 모두 100점으로 통과해야 다음 단계가 열리고, 꼭대기는 양자역학·일반 상대론·표준 모형·뇌과학 같은 지금의 과학이야.</p>
     <div class="mini-row" aria-hidden="true">${sample.map(n=>`<div class="tile s-mastered" style="--dc:var(${DOM[n.d].c}); --tw:58px; --th:64px; cursor:default"><span class="t-no">${n.no}</span><span class="t-sym">${n.sym}</span><span class="t-name">${esc(n.s)}</span></div>`).join('')}</div>
     <ol class="loop">
       <li><b>설명</b><span>단원마다 핵심 질문 하나에 답해. 원리는 직관·통상·엄밀 세 층으로 같이 설명하고, 같은 말이면 하나로 합쳐.</span></li>
-      <li><b>암기</b><span>정의·기호·단위·법칙·상수를 카드로 외워. 모든 카드를 한 번씩 확실히 떠올려야 다음으로 넘어가.</span></li>
-      <li><b>확인</b><span>8문제를 모두 맞혀야 숙달이야. 하나라도 틀리면 새 문제 8개로 다시 풀어. 문제가 잘못됐다 싶으면 채점에서 뺄 수 있어.</span></li>
+      <li><b>암기</b><span>정의·기호·단위·법칙·상수를 카드로 외워. 모든 카드를 한 번씩 확실히 떠올려야 다음으로 넘어가. 틀린 카드는 따라 쓰고, 다시 나오면 보지 않고 써.</span></li>
+      <li><b>확인</b><span>8문제를 모두 맞혀야 숙달이야. 틀린 문제는 핵심을 따라 써야 넘어가고, 하나라도 틀리면 새 문제 8개로 다시 풀어. 문제가 잘못됐다 싶으면 채점에서 뺄 수 있어.</span></li>
       <li><b>복습</b><span>카드와 응용 문제가 간격을 넓혀 가며 다시 나와. 모든 카드 간격이 3주를 넘으면 그 단원은 단단함이 돼.</span></li>
     </ol>
   </div>
@@ -1388,7 +1475,7 @@ function readerHTML(sv){
   const fill=wait>0&&!matchMedia('(prefers-reduced-motion: reduce)').matches?`<span class="rd-fill" style="animation-duration:${dw}s;animation-delay:-${el.toFixed(2)}s"></span>`:'';
   const r=rec(sv.id)||{};
   return `<div class="reader" id="reader">
-    <div class="rd-top"><span class="eyebrow" style="margin:0">${R.toc?'목차':esc(c.sec||'설명')}</span><span class="rd-tools"><button type="button" class="linkbtn" data-act="rd-toc">${R.toc?'목차 닫기':'목차'}</button>${(R.free||r.rd)?'<button type="button" class="linkbtn" data-act="rd-whole">전체 보기</button>':''}${L.state==='done'&&ENV.sample?'<button type="button" class="linkbtn" data-act="regen">다시 쓰기</button>':''}<span class="mono rd-count">${R.i+1} / ${N}${streaming?'+':''}</span></span></div>
+    <div class="rd-top"><span class="eyebrow" style="margin:0">${R.toc?'목차':esc(c.sec||'설명')}</span><span class="rd-tools"><button type="button" class="linkbtn" data-act="rd-toc">${R.toc?'목차 닫기':'목차'}</button>${(R.free||r.rd)?'<button type="button" class="linkbtn" data-act="rd-whole">전체 보기</button>':''}${L.state==='done'&&ENV.sample&&!STORED.has(`lessons/${sv.id}`)?'<button type="button" class="linkbtn" data-act="regen">다시 쓰기</button>':''}<span class="mono rd-count">${R.i+1} / ${N}${streaming?'+':''}</span></span></div>
     <div class="rd-bar" role="group" aria-label="장 이동">${segs}</div>
     <div class="rd-body">${R.toc?tocHTML(chunks,R):body}</div>
   </div>
@@ -1487,12 +1574,13 @@ function cardList(u){
     if(UI.cedit?.u===u&&UI.cedit?.id===c.id&&UI.cedit?.list) return `<li><span class="cl-k">${esc(c.k)}</span><div class="cl-e">${cardEditForm(u,c)}</div></li>`;
     const v=m[c.id];
     return `<li><span class="cl-k">${esc(c.k)}</span><div class="cl-q">${inl(c.q)}</div><span class="cl-s">${v?`간격 ${v[0]}일`:'아직'}</span><div class="cl-a">${inl(c.a)}</div><div class="cl-a"><button type="button" class="linkbtn" data-act="card-edit" data-u="${u}" data-c="${c.id}" data-list="1">고치기</button></div></li>`;
-  }).join('')}</ol>${!cardEntries(u).length&&ENV.sample?'<div class="row"><button type="button" class="btn sm" data-act="regen-cards">카드 전체 다시 만들기</button></div>':''}</details>`;
+  }).join('')}</ol>${!cardEntries(u).length&&ENV.sample&&!STORED.has(`cards/${u}`)?'<div class="row"><button type="button" class="btn sm" data-act="regen-cards">카드 전체 다시 만들기</button></div>':''}</details>`;
 }
 function cardEditForm(u,c){
   return `<form class="cedit" id="card-edit-form" data-u="${u}" data-c="${c.id}">
     <label for="ce-q">앞면</label><textarea id="ce-q" name="q" rows="2">${esc(c.q)}</textarea>
     <label for="ce-a">뒷면</label><textarea id="ce-a" name="a" rows="3">${esc(c.a)}</textarea>
+    <label for="ce-t">따라 쓸 핵심 <span class="muted">(틀렸을 때 손으로 쓰는 답, 비우면 뒷면에서 뽑아)</span></label><input id="ce-t" name="t" maxlength="150" value="${esc(c.t||'')}" placeholder="${esc(answerKey(c.a))}">
     <label for="ce-h">힌트</label><input id="ce-h" name="h" value="${esc(c.h||'')}">
     <div class="row" style="margin-top:4px"><button type="submit" class="btn primary sm">저장</button><button type="button" class="btn sm" data-act="card-edit-cancel">취소</button><button type="button" class="btn ghost sm" data-act="card-drop" data-u="${u}" data-c="${c.id}">이 카드 빼기</button></div>
     <p class="hint">수식은 $...$로 써. 고쳐도 외운 기록은 그대로 남아.</p></form>`;
@@ -1504,15 +1592,26 @@ function cardBox(cs){
   if(UI.cedit&&!UI.cedit.list&&UI.cedit.u===it.u&&UI.cedit.id===it.id) return `<div class="cardbox">${cardEditForm(it.u,c)}</div>`;
   const meta=`<div class="cb-meta"><span class="pill">${esc(c.k)}</span>${cs.mode==='review'?chip(n):''}<span class="mono cb-count">${cs.mode==='review'?`${cs.done} / ${cs.total}`:`남은 카드 ${cs.queue.length}`}</span></div>`;
   const front=`<div class="cb-q md" style="--dc:var(${DOM[n.d].c})">${md(c.q)}</div>`;
-  const body=!cs.revealed
-    ? `<form class="reveal-form" id="reveal-form"><label class="sr" for="card-typed">떠올린 답</label><input id="card-typed" autocomplete="off" placeholder="떠올린 답을 적어 봐 (안 적어도 돼)" value="${esc(cs.typed||'')}"><div><button type="submit" class="btn primary">답 보기 <kbd>Enter</kbd></button></div></form>`
-    : `<div class="cb-a md">${md(c.a)}</div>${c.h?`<p class="cb-h">${inl(c.h)}</p>`:''}${cs.typed?`<p class="cb-typed">내가 적은 답: ${esc(cs.typed)}</p>`:''}
+  const ans=`<div class="cb-a md">${md(c.a)}</div>${c.h?`<p class="cb-h">${inl(c.h)}</p>`:''}`;
+  let body, note='', canEdit=true;
+  if(cs.copy){
+    body=`${ans}${cs.copy.typed?`<p class="cb-typed">${cs.copy.recall?'기억해서 쓴 답':'내가 적은 답'}: ${esc(cs.copy.typed)}</p>`:''}${copyForm('card-copy-form','card-copy',cardKey(c),cs.copy.recall?'기억과 달랐어. 보고 그대로 따라 써.':'보고 그대로 따라 써. 맞게 써야 넘어가.')}`;
+    note='따라 쓴 카드는 조금 뒤에 다시 나와. 그때는 보지 않고 써야 해.';
+  } else if(cs.recall?.[it.u+'/'+it.id]){
+    canEdit=false; // the edit form shows the answer
+    body=`<form class="reveal-form" id="card-recall-form"><label class="label" for="card-recall">아까 틀린 카드야. 보지 않고 써 봐</label><input id="card-recall" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="기억나는 대로 써"><div class="row" style="margin:0"><button type="submit" class="btn primary">확인 <kbd>Enter</kbd></button><button type="button" class="btn" data-act="card-giveup">모르겠어</button></div></form>`;
+  } else if(!cs.revealed){
+    body=`<form class="reveal-form" id="reveal-form"><label class="sr" for="card-typed">떠올린 답</label><input id="card-typed" autocomplete="off" placeholder="떠올린 답을 적어 봐 (안 적어도 돼)" value="${esc(cs.typed||'')}"><div><button type="submit" class="btn primary">답 보기 <kbd>Enter</kbd></button></div></form>`;
+  } else {
+    body=`${ans}${cs.typed?`<p class="cb-typed">내가 적은 답: ${esc(cs.typed)}</p>`:''}
        <div class="grades"><button type="button" class="btn g1" data-act="cg" data-g="1">몰랐어 <kbd>1</kbd></button><button type="button" class="btn g2" data-act="cg" data-g="2">헷갈렸어 <kbd>2</kbd></button><button type="button" class="btn primary" data-act="cg" data-g="3">알았어 <kbd>3</kbd></button></div>`;
-  return `<div class="cardbox">${meta}${front}${body}<div class="cb-foot"><button type="button" class="linkbtn" data-act="card-edit" data-u="${it.u}" data-c="${it.id}">이 카드 고치기</button>${cs.revealed?'<span class="hint" style="margin:0">몰랐거나 헷갈린 카드는 조금 뒤에 다시 나와.</span>':''}</div></div>`;
+    note='몰랐거나 헷갈렸으면 따라 쓰고, 조금 뒤에 보지 않고 다시 써.';
+  }
+  return `<div class="cardbox">${meta}${front}${body}<div class="cb-foot">${canEdit?`<button type="button" class="linkbtn" data-act="card-edit" data-u="${it.u}" data-c="${it.id}">이 카드 고치기</button>`:"<span></span>"}${note?`<span class="hint" style="margin:0">${note}</span>`:''}</div></div>`;
 }
 function cardsView(){
   const cs=UI.cs;
-  const head=`<div class="study-top"><button type="button" class="btn ghost sm" data-act="back">← ${backLabel()}</button></div><header class="pagehead"><div><p class="eyebrow">간격 반복 · 암기 카드</p><h1>카드 복습</h1><p class="lede">먼저 떠올리고, 답을 보고, 솔직하게 채점해. 몰랐던 카드는 이번 복습 안에서 다시 나오고, 다음 간격은 짧아져.</p></div></header>`;
+  const head=`<div class="study-top"><button type="button" class="btn ghost sm" data-act="back">← ${backLabel()}</button></div><header class="pagehead"><div><p class="eyebrow">간격 반복 · 암기 카드</p><h1>카드 복습</h1><p class="lede">먼저 떠올리고, 답을 보고, 솔직하게 채점해. 몰랐거나 헷갈린 카드는 그 자리에서 따라 쓰고, 조금 뒤에 다시 나오면 보지 않고 써야 해. 다음 간격도 짧아져.</p></div></header>`;
   if(!cs||cs.state==='loading') return head+`<div class="cards-wrap">${busy('카드를 불러오는 중')}</div>`;
   if(!cs.queue.length){
     const c=cs.counts;
@@ -1536,7 +1635,7 @@ function quizStep(sv,n){
   const dots=`<ol class="qdots" aria-hidden="true">${q.items.map((x,i)=>{ const rr=q.res[i]; return `<li class="${rr?.void?'void':rr?.done?(rr.score>=0.7?'good':rr.score>0?'mid':'bad'):i===q.i?'cur':''}"></li>`; }).join('')}</ol>`;
   const meta=`<div class="qmeta"><span class="mono">문제 ${q.i+1} / ${q.items.length}</span><span class="pill">${esc(it.level||TYPE_LABEL[it.type])}</span><span>목표 ${it.obj+1}</span><span class="muted">모두 맞혀야 통과</span></div>`;
   const failed=q.res.some(x=>x?.done&&!x.void&&x.score<1);
-  const failNote=failed&&r?.done&&q.i<q.items.length-1?'<div class="note bad" style="margin:14px 0 0">이번 회차는 이미 100점이 안 돼. 남은 문제는 연습으로 풀어도 되고, 지금 새 문제로 다시 도전해도 돼. <button type="button" class="btn sm" data-act="retry-quiz">새 문제로 다시</button></div>':'';
+  const failNote=failed&&r?.done&&!needCopy(it,r)&&q.i<q.items.length-1?'<div class="note bad" style="margin:14px 0 0">이번 회차는 이미 100점이 안 돼. 남은 문제는 연습으로 풀어도 되고, 지금 새 문제로 다시 도전해도 돼. <button type="button" class="btn sm" data-act="retry-quiz">새 문제로 다시</button></div>':'';
   return `<div class="quiz-wrap"><div class="qcard" style="--dc:var(${DOM[n.d].c})">${dots}${meta}<div class="qstem md">${md(it.q)}</div>${answerArea(it,r,'q')}${feedback(it,r,'q',q.i===q.items.length-1)}${failNote}</div></div>`;
 }
 function submitRow(ns, enabled, isForm){
@@ -1558,7 +1657,9 @@ function answerArea(it, r, ns){
 function feedback(it, r, ns, last, extra=''){
   if(!r?.done) return '';
   const voidBtn=ns==='q'?(r.void?'<span class="pill">채점에서 뺐어</span>':'<button type="button" class="linkbtn" data-act="q-void">이 문제가 잘못됐어 · 채점에서 빼기</button>'):'<span></span>';
-  const next=`<div class="row">${voidBtn}<button type="button" class="btn primary" data-act="${ns}-next">${last?'결과 보기':'다음 문제 →'}</button></div>`;
+  const next=needCopy(it,r)
+    ? `${copyForm('copy-form',`${ns}-copy`,itemKey(it),'틀린 문제는 핵심을 그대로 따라 써야 넘어가.',`data-ns="${ns}"`)}${ns==='q'?`<div class="row">${voidBtn}</div>`:''}`
+    : `<div class="row">${voidBtn}<button type="button" class="btn primary" data-act="${ns}-next">${last?'결과 보기':'다음 문제 →'}</button></div>`;
   if(it.type==='short'){
     const g=r.grade||{}, hit=g.hit||[];
     return `<div class="fb"><div class="fb-h"><span class="pill ${r.score>=1?'good':'bad'}">${r.score>=1?'통과':'보완 필요'}</span><span>${esc(g.feedback||'')}</span></div>
@@ -1655,7 +1756,8 @@ function render(){
   renderDrawer();
   if(UI.view==='map') requestAnimationFrame(drawLinks);
 }
-function focusCard(){ requestAnimationFrame(()=>{ const t=$('#card-typed'); if(t) t.focus({preventScroll:true}); }); }
+function focusCard(){ requestAnimationFrame(()=>{ const t=$('#card-copy')||$('#card-recall')||$('#card-typed'); if(t) t.focus({preventScroll:true}); }); }
+function focusCopy(){ requestAnimationFrame(()=>{ const t=$('.copy-in'); if(t) t.focus({preventScroll:true}); }); }
 function go(v){
   if(!ROUTES.includes(v)) v='today';
   UI.view=v; UI.resetAsk=false; UI.cedit=null;
@@ -1716,7 +1818,7 @@ async function loadCards(sv, bg, force){
       const lesson=sv.lesson?.md||lessonCached(id)||await getLesson(id)||'';
       const arr=asArray(await ENV.sample.json(cardsPrompt(id,lesson),{signal:ctl.signal, cache:false}));
       const items=arr.filter(x=>x&&typeof x.q==='string'&&typeof x.a==='string'&&x.q.trim()&&x.a.trim()).slice(0,30)
-        .map((x,i)=>({id:'c'+String(i+1).padStart(2,'0'), k:KINDS.includes(x.kind)?x.kind:'사실', q:x.q.trim(), a:x.a.trim(), h:String(x.hint||'').trim()}));
+        .map((x,i)=>({id:'c'+String(i+1).padStart(2,'0'), k:KINDS.includes(x.kind)?x.kind:'사실', q:x.q.trim(), a:x.a.trim(), ...(cleanKey(x.t)?{t:cleanKey(x.t)}:{}), h:String(x.hint||'').trim()}));
       if(items.length<5) throw {code:'invalid_json'};
       CARDS[id]=items; putCards(id); C.state='ready';
     }catch(e){ C.state='error'; C.err=sampleErr(e); }
@@ -1724,10 +1826,12 @@ async function loadCards(sv, bg, force){
   if(C.state==='ready'){ checkCardsDone(id); if(rec(id)?.cd) prefetchQuiz(sv); }
   if(UI.study===sv&&sv.step==='cards'){ render(); focusCard(); }
 }
+// Cards without a key (t) — the pre-made, reviewed ones in content/ — use a key taken from the answer (answerKey).
+// The app does not ask the model for keys: that would write unreviewed text into the reviewed cards/<id> docs.
 function startLearnSession(u){
   if(UI.cs&&UI.cs.mode==='learn'&&UI.cs.unit===u&&UI.cs.queue.length) return;
   const m=S.cards.u[u]||{};
-  UI.cs={mode:'learn', unit:u, queue:liveItems(u).filter(c=>!m[c.id]).map(c=>({u,id:c.id})), revealed:false, typed:'', tried:{}};
+  UI.cs={mode:'learn', unit:u, queue:liveItems(u).filter(c=>!m[c.id]).map(c=>({u,id:c.id})), revealed:false, typed:'', tried:{}, recall:{}, copy:null};
 }
 function checkCardsDone(u){
   const items=liveItems(u); if(!items.length) return false;
@@ -1751,25 +1855,53 @@ async function genQuiz(sv, bg){
   if(UI.study===sv&&sv.step==='quiz'&&sv.quiz===Q) render();
 }
 function gradeCard(g){
-  const cs=UI.cs; if(!cs||!cs.revealed||!cs.queue.length) return;
+  const cs=UI.cs; if(!cs||!cs.revealed||cs.copy||!cs.queue.length) return;
   const it=cs.queue[0], key=it.u+'/'+it.id, m=cst(it.u);
-  const cur=cs.queue.shift();
   if(cs.mode==='learn'){
-    if(g===3){ const first=!cs.tried[key]; m[it.id]=[first?2:1,2.5,dnum()+(first?2:1),1,0]; }
-    else { cs.tried[key]=true; cs.queue.splice(Math.min(g===1?3:5,cs.queue.length),0,cur); }
+    if(g===3){ cs.queue.shift(); const first=!cs.tried[key]; m[it.id]=[first?2:1,2.5,dnum()+(first?2:1),1,0]; }
+    else cs.tried[key]=true;
     bump('k');
-    if(!cs.queue.length&&checkCardsDone(it.u)&&UI.study) prefetchQuiz(UI.study);
   } else {
     if(!(key in cs.graded)){ cs.graded[key]=g; cs.counts[g]++; cs.done++; applyCardReview(m,it.id,g); bump('k'); }
-    if(g===1) cs.queue.splice(Math.min(4,cs.queue.length),0,cur);
+    if(g===3) cs.queue.shift();
   }
+  if(g!==3){
+    const c=cardOf(it.u,it.id);
+    if(c&&typeKey(cardKey(c))) cs.copy={g, typed:cs.typed};
+    else { const cur=cs.queue.shift(); cs.queue.splice(Math.min(g===1?3:5,cs.queue.length),0,cur); } // nothing typeable to copy: just bring it back later
+  }
+  afterCard(cs,it.u);
+}
+function afterCard(cs,u){
   cs.revealed=false; cs.typed='';
+  if(cs.mode==='learn'&&!cs.queue.length&&checkCardsDone(u)&&UI.study) prefetchQuiz(UI.study);
   save('cards'); save('stats');
   render(); focusCard();
 }
+// a missed card: copy it once with the answer in view, then it comes back and must be written from memory
+function cardCopy(val){
+  const cs=UI.cs; if(!cs?.copy||!cs.queue.length) return;
+  const it=cs.queue[0], c=cardOf(it.u,it.id); if(!c) return;
+  if(!cardKeyOk(val,c)){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+  const cur=cs.queue.shift(), g=cs.copy.g;
+  (cs.recall ||= {})[cur.u+'/'+cur.id]=true;
+  cs.queue.splice(Math.min(g===1?3:5,cs.queue.length),0,cur);
+  cs.copy=null; afterCard(cs,cur.u);
+}
+function cardRecall(val, giveUp){
+  const cs=UI.cs; if(!cs||cs.copy||!cs.queue.length) return;
+  const it=cs.queue[0], key=it.u+'/'+it.id, c=cardOf(it.u,it.id); if(!c||!cs.recall?.[key]) return;
+  if(!giveUp&&!val.trim()){ toast('기억나는 만큼 써 봐. 모르면 \'모르겠어\'를 눌러.'); return; }
+  if(!giveUp&&cardKeyOk(val,c)){
+    delete cs.recall[key]; cs.queue.shift();
+    if(cs.mode==='learn'){ cst(it.u)[it.id]=[1,2.5,dnum()+1,1,0]; bump('k'); }
+    toast('맞았어.'); afterCard(cs,it.u); return;
+  }
+  cs.copy={g:1, typed:giveUp?'':val, recall:true}; render(); focusCard();
+}
 async function startCardReview(){
   UI.sel=null; enter('cards');
-  const cs=UI.cs={mode:'review', state:'loading', queue:[], revealed:false, typed:'', graded:{}, done:0, total:0, counts:{1:0,2:0,3:0}};
+  const cs=UI.cs={mode:'review', state:'loading', queue:[], revealed:false, typed:'', recall:{}, copy:null, graded:{}, done:0, total:0, counts:{1:0,2:0,3:0}};
   render(); window.scrollTo(0,0);
   await READY;
   const due=dueCards(), units=[...new Set(due.map(d=>d.u))];
@@ -1779,6 +1911,7 @@ async function startCardReview(){
   const qs=Object.values(by), out=[];
   while(qs.some(q=>q.length)) qs.forEach(q=>{ if(q.length) out.push(q.shift()); });
   cs.queue=out.slice(0,80); cs.total=cs.queue.length; cs.state='ready';
+
   if(UI.cs===cs){ render(); focusCard(); }
 }
 function finishQuiz(){
@@ -1809,7 +1942,7 @@ async function gradeShort(sv, text){
     if(!pass) logMistake(sv.id,it.q,text,it.model,[r.grade.feedback,wrong].filter(Boolean).join('\n\n'));
   }catch(e){ r.err=sampleErr(e); }
   r.grading=false;
-  if(UI.study===sv) render();
+  if(UI.study===sv){ render(); if(r.done&&r.score<1) focusCopy(); }
 }
 function interleave(ids){
   const by={}; ids.forEach(id=>{ (by[NODE[id].d] ||= []).push(id); });
@@ -1852,7 +1985,7 @@ function reviewAnswer(correct, sure, val){
     const c=it.type==='mcq'?`${MARKS[it.answer]} ${it.choices[it.answer]}`:`${fmtNum(it.answer)} ${it.unit}`;
     logMistake(it.id,it.q,a,c,it.why);
   }
-  save('progress'); save('stats'); render();
+  save('progress'); save('stats'); render(); if(!correct) focusCopy();
 }
 async function sendChat(text){
   const sv=UI.study; text=text.trim(); if(!sv||sv.chatBusy||!text) return;
@@ -1894,7 +2027,7 @@ function dropCard(u, cid){
   const c=items.find(x=>x.id===cid); if(!c) return;
   if(liveItems(u).length<=3){ toast('카드는 최소 3장은 남겨야 해.'); return; }
   c.x=true; delete cst(u)[cid]; putCards(u); save('cards');
-  if(UI.cs) UI.cs.queue=UI.cs.queue.filter(q=>!(q.u===u&&q.id===cid));
+  if(UI.cs){ const h=UI.cs.queue[0]; if(h&&h.u===u&&h.id===cid){ UI.cs.copy=null; UI.cs.revealed=false; UI.cs.typed=''; } if(UI.cs.recall) delete UI.cs.recall[u+'/'+cid]; UI.cs.queue=UI.cs.queue.filter(q=>!(q.u===u&&q.id===cid)); }
   UI.cedit=null; checkCardsDone(u); render(); toast('카드를 뺐어.');
 }
 
@@ -1940,15 +2073,16 @@ document.addEventListener('click',e=>{
     case 'q-submit': { const q=sv.quiz, it=q.items[q.i], r=(q.res[q.i] ||= {}); if(r.pick==null) break;
       r.choice=r.pick; r.score=r.choice===it.answer?1:0; r.done=true;
       if(!r.score) logMistake(sv.id,it.q,`${MARKS[r.choice]} ${it.choices[r.choice]}`,`${MARKS[it.answer]} ${it.choices[it.answer]}`,it.why);
-      render(); break; }
+      render(); if(!r.score) focusCopy(); break; }
     case 'q-void': { const q=sv.quiz, r=q.res[q.i]; if(!r) break; r.void=true; const qt=String(q.items[q.i].q).slice(0,500); S.mistakes.items=S.mistakes.items.filter(m=>!(m.n===sv.id&&m.q===qt)); save('mistakes'); render(); toast('이 문제는 채점에서 뺐어.'); break; }
-    case 'q-next': { const q=sv.quiz; if(q.i>=q.items.length-1) finishQuiz(); else { q.i++; render(); } break; }
+    case 'q-next': { const q=sv.quiz; if(needCopy(q.items[q.i],q.res[q.i])){ toast('먼저 핵심을 따라 써.'); focusCopy(); break; } if(q.i>=q.items.length-1) finishQuiz(); else { q.i++; render(); } break; }
     case 'review': startReview(); break;
     case 'review-one': startReview([id]); break;
     case 'retry-review': genReview(rv); break;
     case 'rv-pick': (rv.res[rv.i] ||= {}).pick=+el.dataset.i; render(); break;
     case 'rv-submit': { const it=rv.items[rv.i], r=rv.res[rv.i]; if(r?.pick==null) break; reviewAnswer(r.pick===it.answer, el.dataset.sure==='1'); break; }
-    case 'rv-next': if(rv.i>=rv.items.length-1){ rv.state='done'; } else rv.i++; render(); window.scrollTo(0,0); break;
+    case 'rv-next': if(needCopy(rv.items[rv.i],rv.res[rv.i])){ toast('먼저 핵심을 따라 써.'); focusCopy(); break; } if(rv.i>=rv.items.length-1){ rv.state='done'; } else rv.i++; render(); window.scrollTo(0,0); break;
+    case 'card-giveup': cardRecall('',true); break;
     case 'idea': runIdea(el.dataset.k); break;
     case 'mis-del': S.mistakes.items=S.mistakes.items.filter(m=>m.id!==el.dataset.k); save('mistakes'); render(); break;
     case 'reset-ask': UI.resetAsk=true; render(); break;
@@ -1967,11 +2101,20 @@ document.addEventListener('submit',e=>{
   if(f.id==='chat-form'){ const t=$('#chat-input'); const v=t.value; t.value=''; sendChat(v); return; }
   if(f.id==='chk-form'){ const R=UI.study?.reader; if(R){ R.typed=$('#chk-typed')?.value.trim()||''; R.revealed=true; paintLesson(); } return; }
   if(f.id==='reveal-form'){ if(UI.cs){ UI.cs.typed=$('#card-typed')?.value.trim()||''; UI.cs.revealed=true; render(); } return; }
+  if(f.id==='card-copy-form'){ cardCopy($('#card-copy')?.value||''); return; }
+  if(f.id==='card-recall-form'){ cardRecall($('#card-recall')?.value||'',false); return; }
+  if(f.id==='copy-form'){
+    const ns=f.dataset.ns, box=ns==='q'?UI.study?.quiz:UI.review; if(!box?.items) return;
+    const it=box.items[box.i], r=box.res[box.i]; if(!needCopy(it,r)) return;
+    if(!sameKey(f.querySelector('.copy-in')?.value||'',itemKey(it))){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+    r.copied=true; render(); requestAnimationFrame(()=>$(`[data-act="${ns}-next"]`)?.focus({preventScroll:true}));
+    return;
+  }
   if(f.id==='card-edit-form'){
     const u=f.dataset.u, c=(CARDS[u]||[]).find(x=>x.id===f.dataset.c); if(!c) return;
     const q=f.elements.q.value.trim(), a=f.elements.a.value.trim();
     if(!q||!a){ toast('앞면과 뒷면은 비울 수 없어.'); return; }
-    c.q=q; c.a=a; c.h=f.elements.h.value.trim(); putCards(u); UI.cedit=null; render(); focusCard(); toast('카드를 고쳤어.');
+    c.q=q; c.a=a; c.t=deTex(f.elements.t.value).slice(0,150); c.h=f.elements.h.value.trim(); putCards(u); UI.cedit=null; render(); focusCard(); toast('카드를 고쳤어.');
     return;
   }
   if(f.classList.contains('ans-form')){
@@ -1983,7 +2126,7 @@ document.addEventListener('submit',e=>{
       const sv=UI.study, q=sv.quiz, it=q.items[q.i], r=(q.res[q.i] ||= {});
       r.val=raw; r.score=Math.abs(v-it.answer)<=Math.max(Math.abs(it.answer)*it.tol,1e-12)?1:0; r.done=true;
       if(!r.score) logMistake(sv.id,it.q,`${raw} ${it.unit}`,`${fmtNum(it.answer)} ${it.unit}`,it.why);
-      render();
+      render(); if(!r.score) focusCopy();
     } else {
       const it=UI.review.items[UI.review.i];
       reviewAnswer(Math.abs(v-it.answer)<=Math.max(Math.abs(it.answer)*it.tol,1e-12), e.submitter?.value==='1', raw);
@@ -2006,10 +2149,13 @@ document.addEventListener('keydown',e=>{
   }
   const cardOn=UI.cs&&UI.cs.queue?.length&&!UI.cedit&&((UI.view==='cards')||(UI.view==='study'&&UI.study?.step==='cards'));
   if(!cardOn||e.metaKey||e.ctrlKey||e.altKey) return;
-  if(!UI.cs.revealed){ if(!inField&&(e.key===' '||e.key==='Enter')){ e.preventDefault(); $('#reveal-form')?.requestSubmit(); } return; }
+  if(!UI.cs.revealed){ if(!inField&&e.target.tagName!=='BUTTON'&&$('#reveal-form')&&(e.key===' '||e.key==='Enter')){ e.preventDefault(); $('#reveal-form').requestSubmit(); } return; }
   if(!inField&&['1','2','3'].includes(e.key)){ e.preventDefault(); gradeCard(+e.key); }
 });
-document.addEventListener('input',e=>{ if(e.target.id==='chk-typed'&&UI.study?.reader) UI.study.reader.typed=e.target.value; });
+document.addEventListener('input',e=>{
+  if(e.target.id==='chk-typed'&&UI.study?.reader) UI.study.reader.typed=e.target.value;
+  if(e.target.classList?.contains('copy-in')){ const f=e.target.form; if(f) f.classList.toggle('ok',sameKey(e.target.value,f.dataset.key)); }
+});
 window.addEventListener('hashchange',()=>{ const h=location.hash.slice(1); if(ROUTES.includes(h)&&h!==UI.view){ UI.view=h; render(); } });
 let rsT; window.addEventListener('resize',()=>{ clearTimeout(rsT); rsT=setTimeout(()=>{ if(UI.view==='map') drawLinks(); },120); });
 setInterval(()=>{ document.querySelectorAll('[data-t0]').forEach(el=>{ const o=el.querySelector('.el'); if(o) o.textContent=Math.max(0,Math.round((Date.now()-(+el.dataset.t0))/1000))+'초'; }); },1000);
