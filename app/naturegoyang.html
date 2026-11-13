@@ -406,6 +406,39 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .reveal-form{display:grid; gap:10px}
 .copy-form{display:grid; gap:10px; margin-top:18px; padding:14px 16px; border-radius:10px; border:1.5px solid color-mix(in srgb,var(--bad) 40%,var(--line)); background:var(--surface)}
 .copy-form.ok{border-color:var(--good)}
+/* textbook problems (교재) */
+.bk-bar{display:grid; gap:6px; margin:0 0 14px}
+.bk-bar-h{display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 12px; font-size:14px}
+.bk-title{font:700 20px/1.3 var(--font-ui); margin:6px 0 4px}
+.bk-field{display:grid; gap:6px; margin:16px 0 0}
+.bk-field textarea,.bk-field input:not([type]),.bk-field input[type="text"]{width:100%; font:15px/1.6 var(--font-ui); padding:9px 11px; border:1.5px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink)}
+.bk-field textarea:disabled{opacity:.75}
+.bk-photos{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.bk-ph{position:relative; display:inline-block}
+.bk-ph img{display:block; max-height:120px; max-width:220px; border-radius:6px; border:1px solid var(--line)}
+.bk-x{position:absolute; top:4px; right:4px; width:26px; height:26px; border-radius:99px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer; font:600 15px/1 var(--font-ui)}
+.bk-txt summary{cursor:pointer; color:var(--ink-2); font-size:14px; margin:4px 0}
+.bk-mode{border:0; padding:0; margin:16px 0 0; display:flex; flex-wrap:wrap; gap:6px 18px; font-size:14.5px}
+.bk-mode legend{padding:0; margin-bottom:6px}
+.bk-mode label{display:inline-flex; gap:6px; align-items:center; cursor:pointer}
+.bk-read,.bk-verdict,.bk-hints{margin-top:16px}
+.bk-verdict.good{background:color-mix(in srgb,var(--good) 10%,var(--surface)); color:var(--ink)}
+.bk-verdict.bad{background:color-mix(in srgb,var(--bad) 9%,var(--surface)); color:var(--ink)}
+.bk-verdict.warn{background:color-mix(in srgb,var(--warn) 11%,var(--surface)); color:var(--ink)}
+.bk-verdict details{margin:8px 0}
+.bk-hints{padding:12px 14px; border-radius:8px; border:1px dashed var(--line); display:grid; gap:8px; font-size:14.5px}
+.bk-hints input{width:100%; font:14px/1.5 var(--font-ui); padding:8px 10px; border:1.5px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink)}
+.bk-btns{margin-top:18px}
+.bk-calc{margin-top:14px; display:grid; gap:8px}
+.bk-calc .step-h{flex-wrap:wrap; gap:4px 12px}
+.bk-calc h3{white-space:nowrap; margin:0}
+.calc-log{list-style:none; margin:0; padding:0; display:grid; gap:4px; max-height:220px; overflow:auto; font-size:14px}
+.calc-log li{display:flex; flex-wrap:wrap; gap:4px 10px; justify-content:space-between; border-bottom:1px solid var(--line-2); padding:4px 0}
+.calc-log li.bad b{color:var(--bad); font-weight:500}
+.calc-log code{font-family:var(--font-mono)}
+.calc-form{display:flex; gap:8px}
+.calc-form input{flex:1; min-width:0; font:15px/1.5 var(--font-mono); padding:8px 10px; border:1.5px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink)}
+.bk-end{display:grid; gap:8px}
 .copy-lead{margin:0; font-size:13.5px; color:var(--ink-2)}
 .copy-key{margin:0; font:600 17px/1.6 var(--font-ui); color:var(--ink); word-break:keep-all; overflow-wrap:anywhere}
 .copy-form input{font-size:16px}
@@ -840,14 +873,16 @@ function lineUnit(){
 function nextAction(){
   const c=dueCards().length; if(c) return {kind:'cards', count:c};
   const u=dueList().length; if(u) return {kind:'review', count:u};
+  const b=bookDueAll(); if(b.length) return {kind:'book', count:b.length, u:b[0].u};
   const l=lineUnit(); return l?{kind:'unit', unit:l.n, how:l.how}:{kind:'done'};
 }
-const phaseName=id=>{ const r=rec(id)||{}; return r.cd?'확인':(r.rd||r.lv)?'암기':'설명'; };
-function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
+const phaseName=id=>{ const r=rec(id)||{}; return r.qp&&!bookDone(id)?'교재':r.cd?'확인':(r.rd||r.lv)?'암기':'설명'; };
+function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='book'?`다시 풀 교재 문제 ${a.count}개`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
 function runNext(){
   const a=nextAction();
   if(a.kind==='cards') startCardReview();
   else if(a.kind==='review') startReview();
+  else if(a.kind==='book') openStudy(a.u,'learn','book');
   else if(a.kind==='unit') openStudy(a.unit.id,'learn');
   else { go('today'); toast(`${TOTAL}개 단원을 모두 숙달했어.`); }
 }
@@ -865,12 +900,12 @@ function applyCheck(id, score, missed){
   const lockedBefore=new Set(NODES.filter(n=>st(n.id)==='locked').map(n=>n.id));
   const r=ensure(id); r.at=(r.at||0)+1; r.sc=score; r.ls=Date.now();
   const wasKnown=known(id), passed=score>=PASS-1e-9;
-  if(passed){ r.s='mastered'; r.rp=Math.max(1,r.rp||0); r.iv=Math.max(3,r.iv||0); r.ez=r.ez||2.5; r.nx=dayStart()+r.iv*DAY; r.ma=r.ma||Date.now(); r.miss=[]; }
+  // a unit with textbook problems is mastered only when they are all solved alone too (PRINCIPLES 2-5)
+  if(passed){ r.qp=1; r.miss=[]; if(wasKnown||bookDone(id)) grantMastery(id); else r.s='learning'; }
   else { if(known(id)){ r.s='shaky'; r.nx=dayStart()+DAY; } else r.s='learning'; r.miss=missed; }
-  if(passed&&!wasKnown) bump('n');
   const unlocked=NODES.filter(n=>lockedBefore.has(n.id)&&st(n.id)==='ready').map(n=>n.id);
   save('progress'); save('stats');
-  return {passed, unlocked};
+  return {passed, mastered:known(id), unlocked};
 }
 function onReview(id, correct, sure){
   const r=ensure(id); r.ls=Date.now();
@@ -894,7 +929,7 @@ function logMistake(nid, q, a, c, why){
 }
 
 /* ============ persistence ============ */
-const DOCS=['profile','progress','cards','stats','mistakes'];
+const DOCS=['profile','progress','cards','stats','mistakes','book1','book2','book3','book4']; // bookN: textbook problem records by tier
 const W={busy:{}, again:{}};
 const docRef=name=>ENV.db.doc(`data/users/${ENV.uid}/${name}`);
 async function save(name){
@@ -913,6 +948,7 @@ function normalize(){
   if(!S.cards||typeof S.cards.u!=='object') S.cards={u:{}};
   if(!S.stats||typeof S.stats.days!=='object') S.stats={days:{}};
   if(!S.mistakes||!Array.isArray(S.mistakes.items)) S.mistakes={items:[]};
+  for(const t of [1,2,3,4]){ const d=S['book'+t]; if(!d||typeof d.u!=='object') S['book'+t]={u:{}}; }
   for(const [id,r] of Object.entries(S.progress.nodes)){ if(!NODE[id]||r.s==='credited') delete S.progress.nodes[id]; }
 }
 const LESSONS={}, CARDS={};
@@ -1292,9 +1328,10 @@ function todayView(){
   let nt, sub;
   if(a.kind==='cards'){ nt=`카드 복습 ${a.count}장`; sub='기억이 흐려지기 전에 복습부터 끝내.'; }
   else if(a.kind==='review'){ nt=`응용 복습 ${a.count}개`; sub='숙달한 단원을 다른 각도에서 다시 확인해.'; }
+  else if(a.kind==='book'){ nt=`다시 풀 교재 문제 ${a.count}개`; sub='틀렸거나 도움을 받은 문제야. 이번엔 도움 없이, 풀이까지 내서 풀어.'; }
   else if(a.kind==='unit'){ const n=a.unit; nt=`${n.no}번 · ${n.t}`; sub=a.how==='repair'?'응용 복습에서 흔들린 단원이야. 확인 문제를 다시 100점으로 통과해야 해.':a.how==='resume'?`${phaseName(n.id)} 단계부터 이어서 해.`:n.q; }
   else { nt='모든 단원 숙달'; sub='남은 건 복습뿐이야.'; }
-  const after=(a.kind==='cards'||a.kind==='review')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
+  const after=(a.kind==='cards'||a.kind==='review'||a.kind==='book')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
   const curNo=L?L.n.no:TOTAL, start=Math.max(0,Math.min(curNo-3,TOTAL-9));
   const hero=`<article class="card hero">
     <div class="step-h"><h2>이어하기</h2><span class="pill ${newDone>=daily?'good':''}">오늘 숙달 ${newDone}/${daily}</span></div>
@@ -1427,17 +1464,17 @@ const backLabel=()=>({today:'오늘', map:'주기율표', ideas:'큰 개념', no
 function stepsFor(sv){
   const r=rec(sv.id)||{};
   const read=sv.mode==='test'||!!(r.rd||r.lv)||known(sv.id);
-  const all=[['lesson','설명',true],['cards','암기',read],['quiz','확인',!!r.cd],['result','결과',false]];
+  const all=[['lesson','설명',true],['cards','암기',read],['quiz','확인',!!r.cd],...(hasBook(sv.id)?[['book','교재',!!r.cd]]:[]),['result','결과',false]];
   return all.filter(([k])=>k!=='lesson'||sv.mode==='learn');
 }
 function studyView(){
   const sv=UI.study, n=NODE[sv.id], r=rec(sv.id)||{};
   const steps=stepsFor(sv), ci=steps.findIndex(x=>x[0]===sv.step);
-  const doneOf=k=>k==='lesson'?(sv.lesson?.state==='done'):k==='cards'?!!r.cd:k==='quiz'?!!sv.result:false;
+  const doneOf=k=>k==='lesson'?(sv.lesson?.state==='done'):k==='cards'?!!r.cd:k==='quiz'?!!(sv.result||r.qp):k==='book'?bookDone(sv.id):false;
   const head=`<div class="study-top"><button type="button" class="btn ghost sm" data-act="back">← ${backLabel()}</button></div>
   <header class="study-head">${bigTile(n)}<div><p class="eyebrow">${DOM[n.d].name} · ${TIERS[n.tier].label} · ${n.no}번${sv.mode==='test'?' · 설명 없이 통과 도전':''}</p><h1>${esc(n.t)}</h1><p class="study-q">${esc(n.q)}</p>
   <ol class="stepper">${steps.map(([k,l,ok],i)=>`<li class="${i===ci?'on':doneOf(k)?'done':''}"><button type="button" data-act="step" data-step="${k}"${ok?'':' disabled'}><b>${i+1}</b>${l}</button></li>`).join('')}</ol></div></header>`;
-  const body=sv.step==='lesson'?lessonStep(sv,n):sv.step==='cards'?cardsStep(sv,n):sv.step==='quiz'?quizStep(sv,n):resultStep(sv,n);
+  const body=sv.step==='lesson'?lessonStep(sv,n):sv.step==='cards'?cardsStep(sv,n):sv.step==='quiz'?quizStep(sv,n):sv.step==='book'?bookStep(sv,n):resultStep(sv,n);
   return head+body;
 }
 function lessonStep(sv,n){
@@ -1781,6 +1818,8 @@ function resultStep(sv,n){
   if(!R) return '';
   if(R.inconclusive) return `<div class="res card"><p class="eyebrow">판정 보류</p><h2>채점에서 뺀 문제가 많아서 판정을 못 했어</h2><p class="muted">새 문제로 다시 풀자. 기록은 바뀌지 않았어.</p><div class="row"><button type="button" class="btn primary" data-act="retry-quiz">새 문제로 다시</button></div></div>`;
   const pct=Math.round(R.score*100);
+  if(R.passed&&!R.mastered){ const c=bookStats(n.id);
+    return `<div class="res card"><p class="eyebrow">확인 통과</p><p class="res-score">${pct}<small>점</small></p><h2>교재 문제가 남았어</h2><p class="muted">교재 문제 ${c.total}개 가운데 ${c.solo}개를 혼자 풀었어. 모두 혼자 풀면 「${esc(n.t)}」 단원이 숙달돼.</p><div class="row"><button type="button" class="btn primary" data-act="step" data-step="book">교재 문제로 →</button><button type="button" class="btn" data-act="nav" data-view="today">오늘로</button></div></div>`; }
   const head=R.passed
     ? `<p class="eyebrow">숙달</p><p class="res-score">${pct}<small>점</small></p><h2>「${esc(n.t)}」 단원을 숙달했어</h2><p class="muted">카드는 내일부터, 응용 복습은 ${fmtRel(rec(n.id).nx)}부터 나와. 카드 간격이 모두 3주를 넘으면 단단함이 돼.</p>`
     : `<p class="eyebrow">아직</p><p class="res-score">${pct}<small>점</small></p><h2>100점이 아니라서 아직 숙달이 아니야</h2><p class="muted">틀린 문제의 목표를 확인해. 다시 도전하면 그 목표를 더 많이 묻는 새 문제 8개가 나와. 다음 단원은 이 단원을 100점으로 통과해야 열려.</p>`;
@@ -1873,11 +1912,11 @@ function enter(view){ if(ROUTES.includes(UI.view)) UI.prev=UI.view; UI.view=view
 
 /* ============ actions ============ */
 let READY;
-async function openStudy(id, mode){
+async function openStudy(id, mode, want){
   if(st(id)==='locked'){ toast('아직 잠긴 단원이야. 아래 단계와 선수 단원을 먼저 100점으로 통과해야 해.'); return; }
   UI.sel=null; enter('study');
   const r0=rec(id)||{};
-  const step=mode==='test'?'cards':r0.s==='shaky'?'quiz':known(id)?'lesson':r0.cd?'quiz':(r0.rd||r0.lv)?'cards':'lesson';
+  const step=want||(mode==='test'?'cards':r0.s==='shaky'?'quiz':known(id)?'lesson':r0.qp&&!bookDone(id)?'book':r0.cd?'quiz':(r0.rd||r0.lv)?'cards':'lesson');
   const sv=UI.study={id, mode, step, lesson:{md:'',state:'idle'}, cards:null, quiz:null, result:null, chat:[], chatBusy:false};
   if(!known(id)&&rec(id)?.s!=='learning'){ ensure(id).s='learning'; save('progress'); }
   render(); window.scrollTo(0,0);
@@ -2119,7 +2158,7 @@ async function runIdea(k){
   if(UI.idea===I) paintIdea();
 }
 function goStep(sv, step){
-  if(step==='quiz'&&!rec(sv.id)?.cd){ toast('암기를 먼저 끝내야 해.'); return; }
+  if((step==='quiz'||step==='book')&&!rec(sv.id)?.cd){ toast('암기를 먼저 끝내야 해.'); return; }
   if(step==='cards'&&sv.mode!=='test'&&!(rec(sv.id)?.rd||rec(sv.id)?.lv||known(sv.id))){ toast('설명을 끝까지 넘겨 읽어야 암기로 갈 수 있어.'); return; }
   sv.step=step; UI.cedit=null;
   if(step==='lesson'&&!sv.lesson.md&&!['writing','streaming','loading'].includes(sv.lesson.state)) loadLesson(sv,false);
@@ -2127,6 +2166,334 @@ function goStep(sv, step){
   if(step==='quiz'&&(!sv.quiz||sv.quiz.state==='error')) genQuiz(sv,false);
   render(); window.scrollTo(0,0); if(step==='cards') focusCard();
 }
+/* ============ textbook problems: 교재 단계 첫 판 (PRINCIPLES 2-5, design/textbook-aids.md 15절) ============ */
+// Only book, section and exercise numbers live in the app (sources/problems-thomas13.json). The problem photo, Claude's
+// reading and solution, hints and book answers stay on screen and are dropped when the problem closes (13절).
+const BOOKS={thomas13:{t:'토마스', name:"Thomas' Calculus 13판 SI Units", odd:true}};
+const PROBS={"f-algebra":[["thomas13","A.1",30]],"f-ratio":[["thomas13","A.3",52]],"f-func":[["thomas13","1.1",72],["thomas13","1.2",80],["thomas13","1.4",42]],"f-trig":[["thomas13","1.3",72,[69,72]],["thomas13","1P",68],["thomas13","1A",18],["thomas13","1R",16]],"f-vector":[["thomas13","12.1",66],["thomas13","12.2",56],["thomas13","12.3",50]],"f-induct":[["thomas13","A.2",12]],"f-limit":[["thomas13","2.1",22],["thomas13","2.2",88,[83,88]],["thomas13","2.3",66,[61,66]],["thomas13","2.4",52],["thomas13","2.5",76],["thomas13","2.6",110],["thomas13","A.4",6],["thomas13","2P",48],["thomas13","2A",34],["thomas13","2R",21]],"f-deriv":[["thomas13","3.1",52,[49,52]],["thomas13","3.2",68,[63,68]],["thomas13","3.3",66],["thomas13","3.4",36],["thomas13","3.5",70]],"f-chain":[["thomas13","3.6",96,[95,96]],["thomas13","3.7",60,[53,60]],["thomas13","3.8",46],["thomas13","3.9",60,[57,60]],["thomas13","3P",124],["thomas13","3A",28],["thomas13","3R",25]],"f-curve":[["thomas13","4.1",86,[81,86]],["thomas13","4.2",72],["thomas13","4.3",70],["thomas13","4.4",118,[113,118]]],"f-optim":[["thomas13","4.5",68],["thomas13","4.6",28],["thomas13","4.7",110,[107,110]],["thomas13","4P",82],["thomas13","4A",30],["thomas13","4R",22]],"f-rate":[["thomas13","5.1",26,[23,26]],["thomas13","5.2",46],["thomas13","5.3",98,[89,98]],["thomas13","5.4",84,[75,84]],["thomas13","5.5",62],["thomas13","5.6",94,[91,94]],["thomas13","5P",82],["thomas13","5A",30],["thomas13","5R",16]],"f-intapp":[["thomas13","6.1",60],["thomas13","6.2",44],["thomas13","6.3",40,[35,40]],["thomas13","6.4",32],["thomas13","6.5",48],["thomas13","6.6",44],["thomas13","6P",42],["thomas13","6A",18],["thomas13","6R",10]],"f-space":[["thomas13","12.4",50],["thomas13","12.5",74],["thomas13","12.6",58,[53,58]],["thomas13","12P",76],["thomas13","12A",25],["thomas13","12R",17]],"f-expo":[["thomas13","7.1",70,[61,70]],["thomas13","7.2",88],["thomas13","7.3",144],["thomas13","7.4",50]],"f-hyper":[["thomas13","7.5",90],["thomas13","7.6",134],["thomas13","7.7",86],["thomas13","7.8",26],["thomas13","7P",136],["thomas13","7A",20],["thomas13","7R",25]],"f-techn":[["thomas13","8.1",50],["thomas13","8.2",78],["thomas13","8.3",74],["thomas13","8.4",58],["thomas13","8.5",60]],"f-improp":[["thomas13","8.6",67,[65,67]],["thomas13","8.7",40],["thomas13","8.8",86,[81,86]],["thomas13","8.9",56],["thomas13","8P",116],["thomas13","8A",52],["thomas13","8R",21]],"f-ode":[["thomas13","9.1",42,[23,42]],["thomas13","9.2",32],["thomas13","9.3",16],["thomas13","9.4",20],["thomas13","9.5",14],["thomas13","9P",36],["thomas13","9A",10],["thomas13","9R",10]],"f-polar":[["thomas13","11.1",48],["thomas13","11.2",52,[49,52]],["thomas13","11.3",68],["thomas13","11.4",36],["thomas13","11.5",32]],"f-conic":[["thomas13","11.6",81],["thomas13","11.7",76],["thomas13","11P",88],["thomas13","11A",30],["thomas13","11R",19]],"f-vfunc":[["thomas13","13.1",40,[35,40]],["thomas13","13.2",44],["thomas13","13.3",22],["thomas13","13.4",36,[29,36]],["thomas13","13.5",30,[27,30]],["thomas13","13.6",16],["thomas13","13P",32],["thomas13","13A",9],["thomas13","13R",13]],"f-series":[["thomas13","10.1",148,[137,148]],["thomas13","10.2",96],["thomas13","10.3",62],["thomas13","10.4",72,[71,72]],["thomas13","10.5",66],["thomas13","10.6",70]],"f-complex":[["thomas13","A.7",30]],"f-taylor":[["thomas13","10.7",60],["thomas13","10.8",46],["thomas13","10.9",58,[53,58]],["thomas13","10.10",74],["thomas13","10P",92],["thomas13","10A",34],["thomas13","10R",31]],"f-odetwo":[["thomas13","17.1",66],["thomas13","17.2",60],["thomas13","17.3",26],["thomas13","17.4",30],["thomas13","17.5",18]],"f-partial":[["thomas13","14.1",80,[69,80]],["thomas13","14.2",80],["thomas13","14.3",92],["thomas13","14.4",52],["thomas13","14.5",40],["thomas13","14.6",58]],"f-lagr":[["thomas13","14.7",74,[69,74]],["thomas13","14.8",54,[49,54]],["thomas13","14.9",12],["thomas13","14.10",12],["thomas13","14P",102],["thomas13","14A",24],["thomas13","14R",26]],"f-multint":[["thomas13","15.1",36],["thomas13","15.2",94,[85,94]],["thomas13","15.3",30],["thomas13","15.4",52,[49,52]]],"f-triple":[["thomas13","15.5",52,[49,52]],["thomas13","15.6",38],["thomas13","15.7",86],["thomas13","15.8",28],["thomas13","15P",54],["thomas13","15A",28],["thomas13","15R",11]],"f-lineint":[["thomas13","16.1",46,[43,46]],["thomas13","16.2",60,[55,60]],["thomas13","16.3",38],["thomas13","16.4",46,[43,46]]],"f-vcalc":[["thomas13","16.5",56],["thomas13","16.6",48],["thomas13","16.7",28],["thomas13","16.8",32],["thomas13","16P",60],["thomas13","16A",21],["thomas13","16R",18]]};
+const BK_LABEL={solo:'혼자 풂', self:'스스로 고침', help:'도움 받아 풂', wrong:'틀림', hold:'판정 보류', void:'문제 제외'};
+const secName=s=>{ const m=String(s).match(/^(\d+)([PAR])$/); return m?`${m[1]}장 ${({P:'연습 문제',A:'추가·심화',R:'복습 질문'})[m[2]]}`:`${s}절`; };
+const probName=p=>`${BOOKS[p.b]?.t||p.b} ${secName(p.sec)} ${p.i}번`;
+const hasBook=u=>!!PROBS[u];
+function probList(u){
+  const out=[];
+  for(const [b,sec,n,ce] of (PROBS[u]||[])) for(let i=1;i<=n;i++){ if(ce&&i>=ce[0]&&i<=ce[1]) continue; out.push({b,sec,i,k:`${b}|${sec}|${i}`}); }
+  return out;
+}
+const probOf=k=>{ const [b,sec,i]=k.split('|'); return {b,sec,i:+i,k}; };
+const bookDoc=u=>'book'+NODE[u].tier;
+const bget=u=>S[bookDoc(u)]?.u?.[u]||{};
+const bset=u=>{ const d=(S[bookDoc(u)] ||= {u:{}}); d.u ||= {}; return (d.u[u] ||= {}); };
+const pdone=e=>!!e&&(e.s==='solo'||e.s==='void');
+function bookStats(u){
+  const m=bget(u), t=dnum(), c={total:0, solo:0, due:0, wait:0, hold:0, fresh:0};
+  for(const p of probList(u)){ c.total++; const e=m[p.k]; if(!e) c.fresh++; else if(pdone(e)) c.solo++; else if(e.s==='hold') c.hold++; else if((e.d||0)<=t) c.due++; else c.wait++; }
+  return c;
+}
+const bookDone=u=>{ if(!hasBook(u)) return true; const c=bookStats(u); return c.solo===c.total; };
+function bookDueAll(){
+  const t=dnum(), out=[];
+  for(const n of ORDER){ if(!hasBook(n.id)) continue; for(const [k,e] of Object.entries(bget(n.id))) if(e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=t) out.push({u:n.id,k}); }
+  return out;
+}
+function grantMastery(id){
+  const r=ensure(id), was=known(id);
+  r.s='mastered'; r.rp=Math.max(1,r.rp||0); r.iv=Math.max(3,r.iv||0); r.ez=r.ez||2.5; r.nx=dayStart()+r.iv*DAY; r.ma=r.ma||Date.now(); r.miss=[];
+  if(!was) bump('n');
+}
+// mastery = 확인 100점(qp) + 카드 + 교재 문제 전부 '혼자 풂': the last solo problem can be what completes it
+function checkBookMastery(u){
+  if(!rec(u)?.qp||known(u)||!bookDone(u)) return;
+  const before=new Set(NODES.filter(n=>st(n.id)==='locked').map(n=>n.id));
+  grantMastery(u); save('progress'); save('stats');
+  const unl=NODES.filter(n=>before.has(n.id)&&st(n.id)==='ready').length;
+  toast(`「${NODE[u].t}」 단원을 숙달했어.${unl?` 새로 열린 단원 ${unl}개.`:''}`);
+}
+
+/* calculator: math.js, loaded the first time it opens; arithmetic only (no solver, no symbolic derivative) */
+let MATHJS=null;
+function loadMath(){
+  if(MATHJS) return MATHJS;
+  MATHJS=new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.9.1/math.min.js';
+    s.onload=()=>{ try{
+      const m=window.math.create(window.math.all), ev=m.evaluate;
+      m.import({integ(f,a,b,n){ n=Math.max(2,Math.round(n||1000)); if(n%2) n++; const h=(b-a)/n; let s=f(a)+f(b); for(let i=1;i<n;i++) s+=(i%2?4:2)*f(a+i*h); return s*h/3; }});
+      const shut={}; for(const f of ['import','createUnit','evaluate','parse','compile','simplify','simplifyConstant','simplifyCore','rationalize','derivative','polynomialRoot','lsolve','lusolve','usolve','lsolveAll','usolveAll','resolve','symbolicEqual']) shut[f]=function(){ throw new Error(`${f}는 계산기에서 쓰지 않아`); };
+      m.import(shut,{override:true}); res({m,ev});
+    }catch(e){ MATHJS=null; rej(e); } };
+    s.onerror=()=>{ MATHJS=null; s.remove(); rej(new Error('load')); };
+    document.head.appendChild(s);
+  });
+  return MATHJS;
+}
+async function calcRun(expr){
+  const C=UI.calc; expr=String(expr||'').trim(); if(!C||!expr) return;
+  try{
+    const {m,ev}=await loadMath();
+    const v=ev(expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-').replace(/√/g,'sqrt').replace(/π/g,'pi'), C.scope);
+    if(typeof v!=='function') C.scope.ans=v;
+    C.lines.push({i:expr, o:typeof v==='function'?'함수를 정했어':m.format(v,{precision:12})});
+  }catch(e){ C.lines.push({i:expr, o:'오류: '+String(e?.message||e).slice(0,120), bad:1}); }
+  if(C.lines.length>30) C.lines.shift();
+  render(); requestAnimationFrame(()=>$('#bk-calc-in')?.focus({preventScroll:true}));
+}
+const calcLog=()=>UI.calc?.lines?.length?`[계산 기록]\n${UI.calc.lines.slice(-10).map(l=>`${l.i} = ${l.o}`).join('\n')}\n`:'';
+function calcHTML(){
+  const C=UI.calc; if(!C?.open) return '';
+  return `<section class="card bk-calc" aria-label="계산기"><div class="step-h"><h3>계산기</h3><span class="muted" style="font-size:12.5px">숫자 계산만: + − * / ^, sqrt(), abs(), sin() cos() tan()(라디안, 도는 30 deg), log(x) 자연로그, log10(), pi, e, ans, f(x)=x^2 뒤에 integ(f, 0, 1)</span></div>
+    <ol class="calc-log">${C.lines.map(l=>`<li class="${l.bad?'bad':''}"><code>${esc(l.i)}</code><b>= ${esc(l.o)}</b></li>`).join('')}</ol>
+    <form id="bk-calc-form" class="calc-form"><label class="sr" for="bk-calc-in">계산식</label><input id="bk-calc-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="예: (2.5e3*4)/7" value="${esc(C.draft||'')}"><button type="submit" class="btn sm">=</button></form>${C.loading?'<p class="hint">계산기를 싣는 중…</p>':''}</section>`;
+}
+
+/* answers: same text (keeping brackets, which decide open or closed intervals) or the same number */
+const ansNorm=s=>deTex(String(s||'')).normalize('NFKC').replace(/[−–—]/g,'-').replace(/\s+/g,'').replace(/∞|무한대|infinity|inf/gi,'∞').replace(/≤|=</g,'<=').replace(/≥|=>/g,'>=').toLowerCase();
+const strictNum=s=>{ const t=String(s).trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/,/g,'').replace(/[×x*]10\^?\(?(-?\d+)\)?/i,'e$1'); return /^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(t)?parseFloat(t):NaN; };
+function bkSame(a,b){ const x=ansNorm(a), y=ansNorm(b); if(x&&x===y) return true; const p=strictNum(a), q=strictNum(b); return !isNaN(p)&&!isNaN(q)&&Math.abs(p-q)<=Math.max(Math.abs(q)*0.005,1e-12); }
+
+/* a bundle of five: today's re-solves first (at most two), then new problems in book order */
+function bkBundle(u){
+  const m=bget(u), t=dnum(), L=probList(u);
+  const due=L.filter(p=>{ const e=m[p.k]; return e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=t; }), fresh=L.filter(p=>!m[p.k]);
+  const q=due.slice(0,2); for(const p of fresh){ if(q.length>=5) break; q.push(p); } for(const p of due.slice(2)){ if(q.length>=5) break; q.push(p); }
+  return q.map(p=>p.k);
+}
+const bkStart=u=>({u, q:bkBundle(u), i:0, out:{}, Ps:{}, P:null});
+function bkCur(B){
+  const k=B.q[B.i]; if(!k) return null;
+  if(!B.Ps[k]){ const e=bget(B.u)[k], p=probOf(k);
+    B.Ps[k]={k, p, base:e?{...e}:null, redo:!!e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=dnum(), imgs:[], wimgs:[], text:'', ans:'', work:'',
+      mode:BOOKS[p.b]?.odd&&p.i%2&&!/R$/.test(p.sec)?'book':'claude', tries:0, hints:0, phase:'edit'}; }
+  return (B.P=B.Ps[k]);
+}
+const canBook=P=>!!BOOKS[P.p.b]?.odd&&P.p.i%2===1&&!/R$/.test(P.p.sec);
+function bkProbeImages(){
+  ENV.imgOK=null;
+  if(!ENV.sample?.limits){ ENV.imgOK=false; return; }
+  ENV.sample.limits().then(l=>{ ENV.imgOK=!!l?.images; },()=>{ ENV.imgOK=false; }).finally(()=>{ if(UI.study?.step==='book') render(); });
+}
+async function shrinkImage(file){
+  try{
+    const bm=await createImageBitmap(file), k=Math.min(1,1600/Math.max(bm.width,bm.height));
+    if(k>=1&&file.size<1.5e6) return file;
+    const c=document.createElement('canvas'); c.width=Math.round(bm.width*k); c.height=Math.round(bm.height*k);
+    c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
+    return await new Promise(r=>c.toBlob(b=>r(b||file),'image/jpeg',0.88));
+  }catch(e){ return file; }
+}
+async function bkAddImages(work, files){
+  const P=UI.study?.bk?.P; if(!P) return;
+  const L=work?P.wimgs:P.imgs;
+  for(const f of [...files||[]].slice(0,3-L.length)){ if(!/^image\//.test(f.type)) continue; const blob=await shrinkImage(f); L.push({blob, url:URL.createObjectURL(blob)}); }
+  render();
+}
+
+/* prompts: the photo is read in this call only; nothing from the book is stored */
+function bkHead(u,P){ const n=NODE[u]; return `[교재] ${BOOKS[P.p.b]?.name||P.p.b} — ${secName(P.p.sec)} ${P.p.i}번\n[단원] ${n.t} (학습 목표: ${n.obj.join(' / ')})`; }
+const bkText=P=>P.text.trim()?`[문제 글(학습자가 옮겨 적음)]\n${P.text.trim()}\n`:'';
+function solvePrompt(u,P){
+  return `너는 대학 교재 연습문제를 푸는 채점 조교다. ${P.imgs.length?'붙인 사진':'아래 [문제 글]'}의 연습문제 하나를 직접 풀어라. 학습자의 답은 아직 보지 않는다.
+${bkHead(u,P)}
+${bkText(P)}
+규칙:
+- 사진에 문제가 여럿이면 ${P.p.i}번만 푼다. 그 번호가 보이지 않거나 글씨가 흐려 확실히 읽을 수 없으면 read에 그렇게 쓰고 confidence를 0.3 이하로 한다.
+- 문제가 요구하는 꼴(구간, 부등식, 정확한 값, 단위, 유효숫자)로 최종 답을 쓴다. 계산은 단계마다 검산한다.
+- 문제 문장을 길게 옮기지 말고, 읽은 내용을 우리말로 짧게 줄여 쓴다.
+JSON 하나만: {"read":"읽은 문제를 우리말로 한두 문장(수식은 $...$)","answer":"최종 답","steps":["풀이 단계(수식은 $...$)"],"key":"이 문제의 핵심 원리 한 줄. 답 수치가 아니라 원리. 키보드로 칠 수 있는 평문 80자 안","confidence":0에서 1 사이 수}`;
+}
+function prereqList(u){ const s=new Set(); for(const p of NODE[u].pre){ s.add(p); for(const q of NODE[p].pre) s.add(q); } return [...s]; }
+function judgePrompt(u,P,reason){
+  const pre=prereqList(u);
+  return `학습자의 답이 맞는지 판정하라. 앞서 네가 푼 풀이도 틀렸을 수 있다. 문제를 다시 읽고 두 답을 견주어 어느 쪽이 맞는지 따져라.
+${bkHead(u,P)}
+${bkText(P)}[네가 읽은 문제] ${P.solve.read}
+[네 풀이] ${P.solve.steps.join(' / ')}
+[네 답] ${P.solve.answer}
+[학습자 답] ${P.ans.trim()}
+${P.work.trim()?`[학습자 풀이]\n${P.work.trim()}\n`:''}${P.wimgs.length?'[학습자 풀이 사진] 문제 사진 뒤에 붙였다.\n':''}${calcLog()}${reason?`[학습자의 이의] ${reason}\n`:''}
+판정 규칙:
+- 값·집합·식이 같으면(약분, 표기, 구간과 부등식 표기 차이, 같은 값의 다른 꼴) 맞음이다. 끝점 포함 여부, 빠지거나 더해진 해, 요구한 단위·유효숫자가 다르면 틀림이다.
+- 답만 맞고 풀이가 엉뚱하면(우연히 맞음) 틀림이다. 풀이가 없으면 답으로만 본다.
+- 확신이 0.8보다 낮거나, 문제를 확실히 읽지 못했거나, 두 풀이가 갈리는데 어느 쪽이 맞는지 가르지 못하면 hold다.
+- why: 맞음이면 짧게 확인한다. 틀림이면 어디가 어긋났는지만 쓰고 정답이나 고친 풀이는 쓰지 않는다(학습자가 스스로 고친다).
+- gap: 틀린 까닭이 아래 선수 단원의 학습 목표에 있으면 그 단원 id와 목표 번호(0~2)를 고르고, 아니면 null이다. 목록 밖은 고르지 않는다.
+[선수 단원]
+${pre.length?pre.map(id=>`- ${id} | ${NODE[id].t} | ${NODE[id].obj.map((o,i)=>`${i}: ${o}`).join(' / ')}`).join('\n'):'(없음. gap은 null)'}
+JSON 하나만: {"verdict":"correct 또는 wrong 또는 hold","why":"한두 문장","gap":null 또는 {"unit":"단원 id","objective":0,"why":"한 문장"},"confidence":0에서 1 사이 수}`;
+}
+function equivPrompt(u,P,bookAns){
+  return `학습자의 답과 책 뒤의 답이 같은 답인지만 가려라. 어느 쪽이 맞는지 다시 풀지 말고, 책 답을 기준으로 같은지 본다.
+${bkHead(u,P)}
+${bkText(P)}[학습자 답] ${P.ans.trim()}
+[책 답] ${bookAns}
+같음: 값·집합·식이 같다(표기, 약분, 순서, 구간과 부등식 표기 차이). 다름: 값이 다르거나, 끝점 포함 여부가 다르거나, 해가 빠지거나 더 있다. 문제를 봐도 판단이 서지 않으면 unsure.
+JSON 하나만: {"same":"yes 또는 no 또는 unsure","why":"한 문장. 다르면 어디가 다른지만 쓴다"}`;
+}
+function hintPrompt(u,P){
+  return `학습자가 아래 연습문제에서 막혔다. 단계 힌트를 만들어라. 화면이 한 단계씩만 보여 준다.
+${bkHead(u,P)}
+${bkText(P)}${P.ans.trim()?`[학습자가 낸 답] ${P.ans.trim()}\n`:''}${P.work.trim()?`[학습자 풀이] ${P.work.trim()}\n`:''}
+JSON 하나만: {"concept":"1단계: 어느 개념·법칙의 문제인지 이름만. 식과 답은 쓰지 않는다","plan":"2단계: 풀이 계획 또는 첫 단계 한두 문장","steps":["3단계: 전체 풀이를 단계마다 왜 그렇게 하는지와 함께(수식은 $...$)"],"answer":"최종 답","key":"핵심 원리 한 줄(답 수치가 아님, 평문 80자 안)"}`;
+}
+
+/* flow: 사진 → 내 답·풀이 → (책 답 맞춰 보기 | Claude 독립 풀이 → 읽은 문제 확인 → 견주기·재판정) → 기록 */
+const bkBusy=P=>['solving','judging','checking'].includes(P.phase)||P.hinting;
+async function bkSubmit(){
+  const sv=UI.study, B=sv?.bk, P=B&&bkCur(B); if(!P||bkBusy(P)||P.phase!=='edit') return;
+  if(!P.imgs.length&&!P.text.trim()){ toast('문제 사진을 올리거나 문제를 글로 적어 줘.'); return; }
+  if(!P.ans.trim()){ toast('답을 적어 줘.'); $('#bk-ans')?.focus(); return; }
+  if(P.redo&&!P.work.trim()&&!P.wimgs.length){ toast('다시 풀기는 풀이도 같이 내야 해. 풀이를 적거나 찍어 줘.'); $('#bk-work')?.focus(); return; }
+  P.tries++; P.err=''; P.verdict=null;
+  if(P.mode==='book'&&canBook(P)){ P.phase='bookans'; render(); requestAnimationFrame(()=>$('#bk-bookans')?.focus()); return; }
+  if(!ENV.sample){ P.tries--; P.err=NOSAMPLE; render(); return; }
+  if(P.solve&&P.readOk) return bkJudge(P);
+  await bkSolve(P);
+}
+async function bkSolve(P){
+  const ctl=new AbortController(); P.ctl=ctl; P.phase='solving'; P.t0=Date.now(); render();
+  try{
+    const x=await ENV.sample.json(solvePrompt(UI.study.id,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+    if(!x||typeof x.answer!=='string'||!x.answer.trim()) throw {code:'invalid_json'};
+    P.solve={read:String(x.read||''), answer:String(x.answer), steps:Array.isArray(x.steps)?x.steps.map(String).slice(0,14):[], key:cleanKey(x.key), conf:+x.confidence||0};
+    P.phase='confirm';
+  }catch(e){ P.phase='edit'; P.err=sampleErr(e); P.solve=null; P.tries=Math.max(0,P.tries-1); }
+  if(UI.study?.bk?.P===P) render();
+}
+async function bkJudge(P, reason){
+  const u=UI.study.id;
+  // two answers found apart that agree need no second call, unless the first solver was unsure
+  if(!reason&&P.solve.conf>=0.8&&bkSame(P.ans,P.solve.answer)) return bkOutcome(P,'correct','네 답이 Claude가 따로 푼 답과 같아.');
+  const ctl=new AbortController(); P.ctl=ctl; P.phase='judging'; P.t0=Date.now(); render();
+  try{
+    const x=await ENV.sample.json(judgePrompt(u,P,reason),{images:[...P.imgs,...P.wimgs].map(i=>i.blob), signal:ctl.signal, cache:false});
+    let v=['correct','wrong','hold'].includes(x?.verdict)?x.verdict:'hold';
+    if(v!=='hold'&&(+x.confidence||0)<0.8) v='hold';
+    if(reason&&v==='wrong') v='hold';                       // 이의 뒤에도 갈리면 보류(12절 ⑥)
+    const g=x?.gap, gap=g&&prereqList(u).includes(g.unit)?{unit:g.unit, o:Math.max(0,Math.min(2,Math.round(+g.objective||0))), why:String(g.why||'')}:null;
+    bkOutcome(P,v,String(x?.why||''),gap);
+  }catch(e){ P.phase=P.verdict?'done':'edit'; P.err=sampleErr(e); if(!P.verdict) P.tries=Math.max(0,P.tries-1); render(); }
+}
+async function bkBookCompare(bookAns){
+  const sv=UI.study, P=sv?.bk?.P; bookAns=String(bookAns||'').trim(); if(!P||P.phase!=='bookans') return;
+  if(!bookAns){ toast('책 답을 적어 줘.'); return; }
+  if(bkSame(P.ans,bookAns)) return bkOutcome(P,'correct','책 답과 같아.');
+  if(!ENV.sample) return bkOutcome(P,'wrong','책 답과 달라.');
+  // a different spelling of the same answer? Claude only decides whether the two are the same
+  const ctl=new AbortController(); P.ctl=ctl; P.phase='checking'; P.t0=Date.now(); render();
+  try{
+    const x=await ENV.sample.json(equivPrompt(sv.id,P,bookAns),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+    const v=x?.same==='yes'?'correct':x?.same==='no'?'wrong':'hold';
+    bkOutcome(P,v,String(x?.why||'')||(v==='wrong'?'책 답과 달라.':''));
+  }catch(e){ P.phase='bookans'; P.err=sampleErr(e); render(); }
+}
+// the one-line rule: only a first submission without help counts at once; anything else comes back a day later
+function bkOutcome(P, v, why, gap){
+  const sv=UI.study, u=sv.id, m=bset(u), e={...(m[P.k]||{})};
+  e.n=(e.n||0)+1; e.t=Date.now(); if(P.hints) e.h=Math.max(e.h||0,P.hints);
+  if(v==='correct') e.s=P.hints?'help':(P.tries===1&&(!P.base||P.redo))?'solo':'self';
+  else e.s=v==='hold'?'hold':'wrong';
+  if(e.s==='solo'||e.s==='hold') delete e.d; else e.d=dnum()+1;
+  m[P.k]=e; save(bookDoc(u)); bump('q');
+  const key=P.solve?.key||P.hint?.key||'';
+  P.phase='done'; P.appeal=false; P.verdict={v, s:e.s, why, gap}; P.copyKey=(e.s==='self'||e.s==='help')&&typeKey(key)?key:''; P.copied=!P.copyKey;
+  sv.bk.out[P.k]=e.s;
+  if(gap) bkGap(u,P.k,gap);
+  if(e.s==='solo') checkBookMastery(u);
+  render(); if(P.copyKey) focusCopy();
+}
+// 빠진 계단: the same objective of a prerequisite named on two different problems marks that unit shaky (이어하기 takes it first)
+function bkGap(u,k,g){
+  const r=ensure(u); r.gp=(r.gp||[]).filter(x=>x.k!==k); r.gp.push({u:g.unit, o:g.o, k, t:Date.now()}); if(r.gp.length>40) r.gp.shift();
+  const hits=new Set(r.gp.filter(x=>x.u===g.unit&&x.o===g.o).map(x=>x.k));
+  if(hits.size>=2&&known(g.unit)&&rec(g.unit).s!=='shaky'){ const q=ensure(g.unit); q.s='shaky'; q.nx=dayStart(); toast(`${NODE[g.unit].no}번 ${NODE[g.unit].t}을 흔들림으로 표시했어. 이어하기가 먼저 데려가.`); }
+  save('progress');
+}
+function bkHelpMark(P){ const u=UI.study.id, m=bset(u), e={...(m[P.k]||{})}; if(e.s==='solo') return; e.s='help'; e.h=Math.max(e.h||0,P.hints); e.t=Date.now(); e.d=dnum()+1; m[P.k]=e; save(bookDoc(u)); }
+async function bkHint(){
+  const sv=UI.study, P=sv?.bk?.P; if(!P||bkBusy(P)) return;
+  if(!P.hint){
+    if(!P.tries&&P.work.trim().length<5){ toast('먼저 한 번 내 보거나, 풀이를 한 줄이라도 적어 줘.'); $('#bk-work')?.focus(); return; }
+    if(!P.imgs.length&&!P.text.trim()){ toast('문제 사진이나 문제 글이 있어야 힌트를 만들 수 있어.'); return; }
+    if(!P.hintAsk){ P.hintAsk=true; render(); return; }
+    if(!ENV.sample){ toast(NOSAMPLE); return; }
+    const ctl=new AbortController(); P.ctl=ctl; P.hinting=true; P.t0=Date.now(); render();
+    try{
+      const x=await ENV.sample.json(hintPrompt(sv.id,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+      if(!x||!x.concept) throw {code:'invalid_json'};
+      P.hint={concept:String(x.concept), plan:String(x.plan||''), steps:Array.isArray(x.steps)?x.steps.map(String).slice(0,14):[], answer:String(x.answer||''), key:cleanKey(x.key)};
+      P.hints=1; P.hintAt=Date.now(); bkHelpMark(P);
+    }catch(e){ P.err=sampleErr(e); }
+    P.hinting=false; render(); return;
+  }
+  if(P.hints>=3) return;
+  if(Date.now()-(P.hintAt||0)<20000){ toast('지금 힌트로 먼저 해 보고, 조금 뒤에 다음 단계를 열어.'); return; }
+  if((P.hintLine||'').trim().length<5){ toast('지금까지 한 것을 한 줄 적어야 다음 힌트가 열려.'); $('#bk-hl')?.focus(); return; }
+  P.hints++; P.hintAt=Date.now(); P.hintLine=''; bkHelpMark(P); render();
+}
+function bkNext(){
+  const B=UI.study?.bk, P=B?.P; if(!P||bkBusy(P)) return;
+  if(P.phase!=='done'){ toast('채점하거나 미루기를 눌러. 건너뛰기는 없어.'); return; }
+  if(!P.copied){ toast('먼저 핵심을 따라 써.'); focusCopy(); return; }
+  [...P.imgs,...P.wimgs].forEach(x=>URL.revokeObjectURL(x.url)); delete B.Ps[P.k];
+  B.i++; B.P=null; render(); window.scrollTo(0,0);
+}
+function bkLater(){ const B=UI.study?.bk; if(!B?.P||B.P.phase!=='edit'||bkBusy(B.P)||B.q.length-B.i<2) return; const k=B.q.splice(B.i,1)[0]; B.q.push(k); B.P=null; render(); }
+
+function bookStep(sv,n){
+  const u=sv.id, r=rec(u)||{};
+  if(!r.cd) return `<div class="quiz-wrap"><div class="note">암기를 먼저 끝내야 교재 문제를 풀 수 있어.</div><div class="row"><button type="button" class="btn primary" data-act="step" data-step="cards">암기로 가기</button></div></div>`;
+  if(ENV.imgOK===undefined) bkProbeImages();
+  const B=sv.bk||(sv.bk=bkStart(u)), c=bookStats(u), pct=x=>`${c.total?Math.round(x/c.total*1000)/10:0}%`;
+  const extra=[c.due?`오늘 다시 풀 것 ${c.due}`:'', c.wait?`내일 이후 다시 ${c.wait}`:'', c.hold?`판정 보류 ${c.hold}`:''].filter(Boolean).join(' · ');
+  const bar=`<div class="bk-bar"><div class="bk-bar-h"><span>교재 문제 <b class="mono">${c.solo} / ${c.total}</b> 혼자 풂</span><span class="muted">${extra}</span></div><span class="dbar"><i class="s" style="width:${pct(c.solo)}"></i><i class="l" style="width:${pct(c.due+c.wait+c.hold)}"></i></span></div>`;
+  const rule=`<p class="hint">도움 없이 첫 제출에 맞힌 문제만 바로 세. 틀렸다 고친 것과 힌트를 본 것은 하루 뒤 도움 없이, 풀이까지 내서 다시 풀어야 해. ${r.qp?'확인 문제는 통과했어.':'확인 문제(100점)도 통과해야 숙달이야.'}</p>`;
+  const k=B.q[B.i];
+  if(!k){
+    const all=c.solo===c.total, more=!all&&bkBundle(u).length;
+    const msg=B.q.length?`<p class="eyebrow">묶음 끝</p><h2>${B.q.length}문제를 마쳤어</h2><p class="muted">이번 묶음에서 혼자 푼 문제 ${Object.values(B.out).filter(s=>s==='solo').length}개.</p>`
+      :all?`<h2>교재 문제를 모두 혼자 풀었어</h2>`:`<h2>지금 풀 문제가 없어</h2><p class="muted">${c.wait?`다시 풀 ${c.wait}문제는 내일 이후에 열려. `:''}${c.hold?`판정 보류 ${c.hold}문제가 남아 있어.`:''}</p>`;
+    return `<div class="quiz-wrap">${bar}<div class="card bk-end">${msg}<div class="row">${more?'<button type="button" class="btn primary" data-act="bk-more">한 묶음 더</button>':''}${all&&!r.qp?'<button type="button" class="btn primary" data-act="step" data-step="quiz">확인 문제로</button>':''}<button type="button" class="btn" data-act="nav" data-view="today">오늘로</button></div></div>${rule}</div>`;
+  }
+  const P=bkCur(B), e=bget(u)[k], imgOK=ENV.imgOK!==false, busyNow=bkBusy(P), locked=P.phase!=='edit';
+  const dots=`<ol class="qdots" aria-hidden="true">${B.q.map((x,i)=>{ const s=B.out[x]; return `<li class="${s==='solo'?'good':s==='self'||s==='help'?'mid':s==='wrong'?'bad':s==='hold'?'void':i===B.i?'cur':''}"></li>`; }).join('')}</ol>`;
+  const head=`${dots}<div class="qmeta"><span class="mono">묶음 ${B.i+1} / ${B.q.length}</span><span class="pill${P.redo?' warn':''}">${P.redo?'다시 풀기':'새 문제'}</span>${e?`<span class="muted">기록: ${BK_LABEL[e.s]||''}</span>`:''}</div><h2 class="bk-title">${esc(probName(P.p))}</h2>`;
+  const thumbs=(L,w)=>L.map((x,i)=>`<span class="bk-ph"><img src="${x.url}" alt="${w?'풀이':'문제'} 사진 ${i+1}"><button type="button" class="bk-x" data-act="bk-img-del" data-w="${w}" data-i="${i}" aria-label="사진 빼기"${locked?' disabled':''}>×</button></span>`).join('');
+  const prob=`<div class="bk-field"><p class="label">1. 문제</p><p class="muted">책에서 이 문제를 펴고 이 문제만 나오게 찍어 올려. 문제 글은 저장하지 않고 이 화면에서만 써.${imgOK?'':' 이 화면에서는 사진을 보낼 수 없어서 문제를 글로 적어야 해.'}</p>
+    ${imgOK?`<div class="bk-photos">${thumbs(P.imgs,0)}${!locked&&P.imgs.length<3?'<label class="btn sm">사진 올리기<input type="file" id="bk-img" accept="image/*" capture="environment" hidden></label>':''}</div>`:''}
+    <details class="bk-txt"${P.text||!imgOK?' open':''}><summary>문제를 글로 적기${imgOK?' (사진 대신)':''}</summary><textarea id="bk-text" rows="3" placeholder="문제를 옮겨 적어(x^2, sqrt( ), <= 처럼)"${locked?' disabled':''}>${esc(P.text)}</textarea></details></div>`;
+  const ans=`<div class="bk-field"><label class="label" for="bk-ans">2. 내 답</label><textarea id="bk-ans" rows="2" placeholder="최종 답 (예: (-3, 5], x < -1 또는 x > 2, 12.5 m/s)"${locked?' disabled':''}>${esc(P.ans)}</textarea></div>`;
+  const work=`<div class="bk-field"><label class="label" for="bk-work">3. 풀이 ${P.redo?'<b>(다시 풀기에서는 꼭 내야 해)</b>':'(내면 판정이 더 정확해)'}</label><textarea id="bk-work" rows="4" placeholder="풀이를 줄마다 적거나 손으로 쓴 풀이를 찍어 올려"${locked?' disabled':''}>${esc(P.work)}</textarea>
+    ${imgOK?`<div class="bk-photos">${thumbs(P.wimgs,1)}${!locked&&P.wimgs.length<3?'<label class="btn sm ghost">풀이 사진<input type="file" id="bk-wimg" accept="image/*" capture="environment" hidden></label>':''}</div>`:''}</div>`;
+  const mode=canBook(P)?`<fieldset class="bk-mode"${locked?' disabled':''}><legend class="label">4. 채점</legend><label><input type="radio" name="bk-mode" value="book"${P.mode==='book'?' checked':''}> 책 뒤 답과 맞춰 보기(홀수 번)</label><label><input type="radio" name="bk-mode" value="claude"${P.mode==='claude'?' checked':''}> Claude에게 판정</label></fieldset>`
+    :`<p class="hint">4. 채점: Claude가 네 답을 보지 않고 먼저 직접 푼 뒤 견준다. 둘이 다르면 다시 따져 맞음·틀림·보류를 정한다.</p>`;
+  let stage='';
+  if(P.phase==='solving') stage=busy('Claude가 문제를 읽고 직접 푸는 중',P.t0,'bk-stop','네 답은 보지 않고 먼저 푼 뒤 견줘. 1분쯤 걸릴 수 있어.');
+  else if(P.phase==='judging') stage=busy('판정하는 중',P.t0,'bk-stop','두 풀이를 다시 따져 보는 중이야.');
+  else if(P.phase==='checking') stage=busy('책 답과 같은 답인지 보는 중',P.t0,'bk-stop');
+  else if(P.phase==='confirm') stage=`<div class="note bk-read"><p class="label">Claude가 읽은 문제</p><div class="md">${md(P.solve.read)}</div>${P.solve.conf<0.5?'<p class="bad">Claude가 문제를 확실히 읽지 못했대. 사진을 다시 찍는 게 좋아.</p>':''}<p>맞게 읽었어? 맞아야 채점해.</p><div class="row"><button type="button" class="btn primary" data-act="bk-read-ok">맞아, 채점해</button><button type="button" class="btn" data-act="bk-read-no">아니야, 다시 올릴게</button></div></div>`;
+  else if(P.phase==='bookans') stage=`<form id="bk-book-form" class="note bk-field"><p class="muted">네 답은 잠갔어: <b>${esc(P.ans)}</b></p><label class="label" for="bk-bookans">책 뒤의 답을 그대로 적어</label><input id="bk-bookans" autocomplete="off" spellcheck="false"><div class="row"><button type="submit" class="btn primary">견주기</button><button type="button" class="btn ghost" data-act="bk-to-claude">책 답이 없어 → Claude에게</button></div></form>`;
+  else if(P.phase==='done'){
+    const V=P.verdict, cls=V.v==='correct'?'good':V.v==='wrong'?'bad':'warn';
+    const what={solo:'혼자 풂으로 셌어.', self:'맞혔지만 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', help:'도움을 받았으니 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', wrong:'고쳐서 다시 낼 수 있어. 고쳐 맞히면 스스로 고침이고 내일 다시 풀어. 넘어가면 내일 다시 나와.', hold:'보류는 숙달을 막아. 사진을 또렷이 다시 찍어 재판정하거나, 책 답과 맞춰 보거나, 작업 세션에서 확인해.'}[V.s]||'';
+    stage=`<div class="note bk-verdict ${cls}"><p class="eyebrow">${V.v==='correct'?'맞음':V.v==='wrong'?'틀림':'판정 보류'} · ${BK_LABEL[V.s]}</p>${V.why?`<p>${inl(V.why)}</p>`:''}<p class="muted">${what}</p>
+      ${V.gap?`<p>빠진 계단일 수 있어: ${chip(NODE[V.gap.unit])} 목표 ${V.gap.o+1}. ${esc(V.gap.why)} <button type="button" class="btn sm" data-act="learn" data-id="${V.gap.unit}">거기로 가기</button></p>`:''}
+      ${V.v==='correct'&&P.solve?.steps?.length?`<details><summary>Claude의 풀이 보기</summary><ol class="md">${P.solve.steps.map(s=>`<li>${inl(s)}</li>`).join('')}</ol></details>`:''}
+      ${P.copyKey&&!P.copied?copyForm('bk-copy-form','bk-copy',P.copyKey,'핵심 한 줄을 그대로 따라 써. 내일은 보지 않고 풀어야 해.'):''}
+      ${P.appeal?`<form id="bk-appeal-form" class="bk-field"><label class="label" for="bk-why">왜 판정이 틀렸다고 생각해?</label><textarea id="bk-why" rows="2"></textarea><div class="row"><button type="submit" class="btn">다시 판정</button></div></form>`:''}
+      <div class="row">${V.v==='wrong'?'<button type="button" class="btn primary" data-act="bk-again">고쳐서 다시 내기</button>':''}${V.v!=='correct'?'<button type="button" class="btn ghost" data-act="bk-appeal">판정이 틀린 것 같아</button>':''}</div></div>`;
+  }
+  let hintH='';
+  if(P.hinting) hintH=busy('힌트를 만드는 중',P.t0,'bk-stop');
+  else if(P.hintAsk&&!P.hint) hintH=`<div class="note">힌트를 보면 이 문제는 맞혀도 '도움 받아 풂'이야. 내일 도움 없이 다시 풀어야 해.<div class="row"><button type="button" class="btn sm primary" data-act="bk-hint">그래도 힌트 보기</button><button type="button" class="btn sm ghost" data-act="bk-hint-no">혼자 더 해 볼게</button></div></div>`;
+  else if(P.hint){ const H=P.hint;
+    hintH=`<div class="bk-hints"><p><b>힌트 1 · 개념</b> ${inl(H.concept)}</p>${P.hints>=2?`<p><b>힌트 2 · 첫 단계</b> ${inl(H.plan)}</p>`:''}${P.hints>=3?`<div><b>힌트 3 · 전체 풀이</b><ol class="md">${H.steps.map(s=>`<li>${inl(s)}</li>`).join('')}</ol><p>답: ${inl(H.answer)}</p></div>`:''}
+      ${P.hints<3?`<label class="label" for="bk-hl">다음 힌트를 열려면 지금까지 한 것을 한 줄 적어</label><input id="bk-hl" autocomplete="off" value="${esc(P.hintLine||'')}">`:''}</div>`; }
+  const err=P.err?`<div class="note bad">${esc(P.err)}</div>`:'';
+  const btns=`<div class="row bk-btns"><button type="button" class="btn primary" data-act="${P.phase==='done'?'bk-next':'bk-go'}"${busyNow||['confirm','bookans'].includes(P.phase)||(P.phase==='done'&&!P.copied)?' disabled':''}>${P.phase==='done'?'다음 문제 →':'채점'}</button><button type="button" class="btn" data-act="bk-hint"${busyNow||P.hints>=3||(P.phase==='done'&&P.verdict?.v!=='wrong')?' disabled':''}>힌트 ${P.hints}/3</button><button type="button" class="btn ghost" data-act="bk-calc" aria-pressed="${!!UI.calc?.open}">계산기</button><button type="button" class="btn ghost" data-act="bk-later"${P.phase==='edit'&&!busyNow&&B.q.length-B.i>1?'':' disabled'}>미루기</button></div>`;
+  return `<div class="quiz-wrap">${bar}<div class="qcard bk" style="--dc:var(${DOM[n.d].c})">${head}${prob}${ans}${work}${mode}${err}${stage}${hintH}${btns}</div>${calcHTML()}${rule}</div>`;
+}
+
 function dropCard(u, cid){
   const items=CARDS[u]; if(!items) return;
   const c=items.find(x=>x.id===cid); if(!c) return;
@@ -2181,6 +2548,22 @@ document.addEventListener('click',e=>{
       render(); if(!r.score) focusCopy(); break; }
     case 'q-void': { const q=sv.quiz, r=q.res[q.i]; if(!r) break; r.void=true; const qt=String(q.items[q.i].q).slice(0,500); S.mistakes.items=S.mistakes.items.filter(m=>!(m.n===sv.id&&m.q===qt)); save('mistakes'); render(); toast('이 문제는 채점에서 뺐어.'); break; }
     case 'q-next': { const q=sv.quiz; if(needCopy(q.items[q.i],q.res[q.i])){ toast('먼저 핵심을 따라 써.'); focusCopy(); break; } if(q.i>=q.items.length-1) finishQuiz(); else { q.i++; render(); } break; }
+    case 'bk-go': bkSubmit(); break;
+    case 'bk-read-ok': { const P=sv?.bk?.P; if(P?.solve&&P.phase==='confirm'){ P.readOk=true; bkJudge(P); } break; }
+    case 'bk-read-no': { const P=sv?.bk?.P; if(P&&P.phase==='confirm'){ P.solve=null; P.readOk=false; P.phase='edit'; P.tries=Math.max(0,P.tries-1); P.err='이 문제만 크게 다시 찍거나, 문제를 글로 적어 줘.'; render(); } break; }
+    case 'bk-to-claude': { const P=sv?.bk?.P; if(P&&P.phase==='bookans'){ P.mode='claude'; P.phase='edit'; P.tries=Math.max(0,P.tries-1); bkSubmit(); } break; }
+    case 'bk-again': { const P=sv?.bk?.P; if(P?.phase==='done'&&P.verdict?.v==='wrong'){ P.phase='edit'; P.verdict=null; P.appeal=false; render(); requestAnimationFrame(()=>$('#bk-ans')?.focus()); } break; }
+    case 'bk-appeal': { const P=sv?.bk?.P; if(P?.phase==='done'){ P.appeal=!P.appeal; render(); if(P.appeal) requestAnimationFrame(()=>$('#bk-why')?.focus()); } break; }
+    case 'bk-next': bkNext(); break;
+    case 'bk-more': if(sv){ sv.bk=bkStart(sv.id); render(); window.scrollTo(0,0); } break;
+    case 'bk-later': bkLater(); break;
+    case 'bk-hint': bkHint(); break;
+    case 'bk-hint-no': { const P=sv?.bk?.P; if(P){ P.hintAsk=false; render(); } break; }
+    case 'bk-stop': sv?.bk?.P?.ctl?.abort(); break;
+    case 'bk-img-del': { const P=sv?.bk?.P; if(P&&P.phase==='edit'){ const L=el.dataset.w==='1'?P.wimgs:P.imgs, x=L.splice(+el.dataset.i,1)[0]; if(x) URL.revokeObjectURL(x.url); render(); } break; }
+    case 'bk-calc': { const C=(UI.calc ||= {open:false, lines:[], scope:{}, draft:''}); C.open=!C.open;
+      if(C.open&&!C.ready){ C.loading=true; loadMath().then(()=>{ C.ready=true; C.loading=false; render(); requestAnimationFrame(()=>$('#bk-calc-in')?.focus()); },()=>{ C.loading=false; C.open=false; toast('계산기를 불러오지 못했어. 연결을 확인해 줘.'); render(); }); }
+      render(); break; }
     case 'review': startReview(); break;
     case 'review-one': startReview([id]); break;
     case 'retry-review': genReview(rv); break;
@@ -2192,7 +2575,7 @@ document.addEventListener('click',e=>{
     case 'mis-del': S.mistakes.items=S.mistakes.items.filter(m=>m.id!==el.dataset.k); save('mistakes'); render(); break;
     case 'reset-ask': UI.resetAsk=true; render(); break;
     case 'reset-no': UI.resetAsk=false; render(); break;
-    case 'reset-do': S.profile=null; S.progress={nodes:{}}; S.cards={u:{}}; S.stats={days:{}}; S.mistakes={items:[]}; DOCS.forEach(save); UI.resetAsk=false; UI.cs=null; go('today'); toast('학습 기록을 모두 지웠어.'); break;
+    case 'reset-do': S.profile=null; S.progress={nodes:{}}; S.cards={u:{}}; S.stats={days:{}}; S.mistakes={items:[]}; for(const t of [1,2,3,4]) S['book'+t]={u:{}}; DOCS.forEach(save); UI.resetAsk=false; UI.cs=null; go('today'); toast('학습 기록을 모두 지웠어.'); break;
   }
 });
 document.addEventListener('submit',e=>{
@@ -2214,6 +2597,18 @@ document.addEventListener('submit',e=>{
     if(!sameKey(f.querySelector('.copy-in')?.value||'',itemKey(it))){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
     r.copied=true; render(); requestAnimationFrame(()=>$(`[data-act="${ns}-next"]`)?.focus({preventScroll:true}));
     return;
+  }
+  if(f.id==='bk-book-form'){ bkBookCompare($('#bk-bookans')?.value||''); return; }
+  if(f.id==='bk-calc-form'){ const v=$('#bk-calc-in')?.value||''; if(UI.calc) UI.calc.draft=''; calcRun(v); return; }
+  if(f.id==='bk-copy-form'){
+    const P=UI.study?.bk?.P; if(!P) return;
+    if(!sameKey(f.querySelector('.copy-in')?.value||'',f.dataset.key)){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+    P.copied=true; render(); requestAnimationFrame(()=>$('[data-act="bk-next"]')?.focus({preventScroll:true})); return;
+  }
+  if(f.id==='bk-appeal-form'){
+    const P=UI.study?.bk?.P, why=$('#bk-why')?.value.trim()||''; if(!P) return;
+    if(!why){ toast('이유를 한 줄 적어 줘.'); return; }
+    P.appeal=false; if(P.solve) bkJudge(P, why); else bkOutcome(P,'hold',`이의: ${why}`); return;
   }
   if(f.id==='card-edit-form'){
     const u=f.dataset.u, c=(CARDS[u]||[]).find(x=>x.id===f.dataset.c); if(!c) return;
@@ -2239,7 +2634,10 @@ document.addEventListener('submit',e=>{
   }
 });
 document.addEventListener('change',e=>{
-  const t=e.target; if(!S.profile||t.type!=='radio') return;
+  const t=e.target;
+  if(t.type==='file'&&(t.id==='bk-img'||t.id==='bk-wimg')){ bkAddImages(t.id==='bk-wimg', t.files); t.value=''; return; }
+  if(t.name==='bk-mode'){ const P=UI.study?.bk?.P; if(P) P.mode=t.value; return; }
+  if(!S.profile||t.type!=='radio') return;
   if(t.name==='pf-focus'){ S.profile.focus=t.value; save('profile'); }
   else if(t.name==='pf-daily'){ S.profile.daily=+t.value; save('profile'); }
 });
@@ -2259,6 +2657,8 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('input',e=>{
   if(e.target.id==='chk-typed'&&UI.study?.reader) UI.study.reader.typed=e.target.value;
+  { const P=UI.study?.bk?.P, f={'bk-ans':'ans','bk-work':'work','bk-text':'text','bk-hl':'hintLine'}[e.target.id]; if(P&&f) P[f]=e.target.value; }
+  if(e.target.id==='bk-calc-in'&&UI.calc) UI.calc.draft=e.target.value;
   if(e.target.classList?.contains('copy-in')){ const f=e.target.form; if(f) f.classList.toggle('ok',sameKey(e.target.value,f.dataset.key)); }
 });
 window.addEventListener('hashchange',()=>{ const h=location.hash.slice(1); if(ROUTES.includes(h)&&h!==UI.view){ UI.view=h; render(); } });
