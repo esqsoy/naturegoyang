@@ -12,7 +12,7 @@
 
 #### 통상
 
-약산 HA가 물에서 이온과 분자 사이에 이루는 **이온화 평형**(ion化平衡, ionization equilibrium)의 평형 상수가 **산의 이온화 상수**(酸의ion化常數, acid ionization constant) $K_a$ = [H₃O⁺][A⁻]/[HA], 약염기 B의 것이 **염기의 이온화 상수**(鹽基의ion化常數, base ionization constant) $K_b$ = [BH⁺][OH⁻]/[B]다. $K_a$가 클수록(p$K_a$ = −log $K_a$가 작을수록) 강한 산이다. 녹인 전해질 중 이온화한 몰수 비율이 **이온화도**(ion化度, degree of ionization) $\alpha$다. 농도 $C$인 약산은 $\alpha\ll1$이면 $K_a\approx C\alpha^2$이라 $\alpha\approx\sqrt{K_a/C}$, [H₃O⁺] ≈ $\sqrt{CK_a}$다. 아세트산($K_a$ 1.8×10⁻⁵, p$K_a$ 4.74) 0.10 M은 [H₃O⁺] 1.3×10⁻³ M, pH 2.87, $\alpha$ 1.3 %(35번), NH₃($K_b$ 1.8×10⁻⁵) 0.10 M은 pH 11.13이다.
+약산 HA가 물에서 이온과 분자 사이에 이루는 **이온화 평형**(ion化平衡, ionization equilibrium)의 평형 상수가 **산의 이온화 상수**(酸의ion化常數, acid ionization constant) $K_a$ = [H₃O⁺][A⁻]/[HA], 약염기 B의 것이 **염기의 이온화 상수**(鹽基의ion化常數, base ionization constant) $K_b$ = [BH⁺][OH⁻]/[B]다. $K_a$가 클수록(p$K_a$ = −log $K_a$가 작을수록) 강한 산이다. 녹인 전해질 중 이온화한 몰수 비율이 **이온화도**(ion化度, degree of ionization) $\alpha$다. 농도 $C$인 약산은 $\alpha\ll1$이면 $K_a\approx C\alpha^2$이라 $\alpha\approx\sqrt{K_a/C}$, [H₃O⁺] ≈ $\sqrt{CK_a}$다. 아세트산($K_a$ 1.8×10⁻⁵, p$K_a$ 4.74) 0.10 M은 [H₃O⁺] 1.3×10⁻³ M, pH 2.87, $\alpha$ 1.3 %([[c-solution|#]]), NH₃($K_b$ 1.8×10⁻⁵) 0.10 M은 pH 11.13이다.
 
 #### 엄밀
 
@@ -30,7 +30,7 @@ $K_a$와 짝염기 반응 $\mathrm{A^-+H_2O\rightleftharpoons HA+OH^-}$의 $K_b$
 
 #### 통상
 
-아세트산에 CH₃COONa를 더 넣으면 평형이 역반응 쪽으로 이동해 이온화가 억눌린다. 평형에 이미 있는 이온을 더해 생기는 이 효과가 **공통 이온 효과**(共通ion效果, common-ion effect)로, 르샤틀리에 원리(61번)의 한 경우다. 산·염기를 조금 넣어도 pH가 거의 변하지 않는 용액이 **완충 용액**(緩衝溶液, buffer solution), 그 작용이 **완충 작용**(緩衝作用, buffer action)이다. 약산과 짝염기(CH₃COOH–CH₃COONa)나 약염기와 짝산(NH₃–NH₄Cl)을 섞어 만든다. $K_a$ 식을 [H₃O⁺]로 풀어 −log를 취하면 **헨더슨-하셀바흐 식**(Henderson–Hasselbalch式, Henderson–Hasselbalch equation)이다.
+아세트산에 CH₃COONa를 더 넣으면 평형이 역반응 쪽으로 이동해 이온화가 억눌린다. 평형에 이미 있는 이온을 더해 생기는 이 효과가 **공통 이온 효과**(共通ion效果, common-ion effect)로, 르샤틀리에 원리([[c-equilibrium|#]])의 한 경우다. 산·염기를 조금 넣어도 pH가 거의 변하지 않는 용액이 **완충 용액**(緩衝溶液, buffer solution), 그 작용이 **완충 작용**(緩衝作用, buffer action)이다. 약산과 짝염기(CH₃COOH–CH₃COONa)나 약염기와 짝산(NH₃–NH₄Cl)을 섞어 만든다. $K_a$ 식을 [H₃O⁺]로 풀어 −log를 취하면 **헨더슨-하셀바흐 식**(Henderson–Hasselbalch式, Henderson–Hasselbalch equation)이다.
 
 $$\mathrm{pH}=\mathrm{p}K_a+\log\frac{[\mathrm{A^-}]}{[\mathrm{HA}]}$$
 
@@ -38,7 +38,7 @@ $$\mathrm{pH}=\mathrm{p}K_a+\log\frac{[\mathrm{A^-}]}{[\mathrm{HA}]}$$
 
 #### 엄밀
 
-이 식은 넣은 농도를 평형 농도로 쓴 어림이라 두 성분이 [H₃O⁺]·[OH⁻]보다 훨씬 진할 때 맞는다. 묽혀도 pH는 그대로지만 완충 능력은 준다. 약산을 강염기로 적정하는 도중은 완충 용액이고, HA의 절반이 중화된 **반중화점**(半中和點, half-equivalence point)은 [A⁻] = [HA]라 pH = p$K_a$이고 곡선이 가장 완만하다. 0.10 M 아세트산이면 2.87 → 4.74 → 약 8.7(36번)로 오르니 곡선에서 p$K_a$를 읽는다.
+이 식은 넣은 농도를 평형 농도로 쓴 어림이라 두 성분이 [H₃O⁺]·[OH⁻]보다 훨씬 진할 때 맞는다. 묽혀도 pH는 그대로지만 완충 능력은 준다. 약산을 강염기로 적정하는 도중은 완충 용액이고, HA의 절반이 중화된 **반중화점**(半中和點, half-equivalence point)은 [A⁻] = [HA]라 pH = p$K_a$이고 곡선이 가장 완만하다. 0.10 M 아세트산이면 2.87 → 4.74 → 약 8.7([[c-acid|#]])로 오르니 곡선에서 p$K_a$를 읽는다.
 
 #### 점검
 **Q.** p$K_a$ 4.74인 아세트산계로 pH 5.04 완충 용액을 만들려면 [CH₃COO⁻]/[CH₃COOH]는?
@@ -48,15 +48,15 @@ $$\mathrm{pH}=\mathrm{p}K_a+\log\frac{[\mathrm{A^-}]}{[\mathrm{HA}]}$$
 
 #### 직관
 
-젖산 같은 산의 H⁺는 혈장의 HCO₃⁻가 받아 H₂CO₃가 되고, 이것이 CO₂와 물로 나뉘어 CO₂가 폐로 나간다. 산을 기체로 바꿔 버리는 완충계다. 세포 호흡(41번)의 CO₂는 거꾸로 H₂CO₃를 늘린다. 폐는 숨으로 CO₂를, 콩팥은 HCO₃⁻와 H⁺의 배설로 두 성분을 따로 맞춘다(46번 음성 피드백).
+젖산 같은 산의 H⁺는 혈장의 HCO₃⁻가 받아 H₂CO₃가 되고, 이것이 CO₂와 물로 나뉘어 CO₂가 폐로 나간다. 산을 기체로 바꿔 버리는 완충계다. 세포 호흡([[b-respiration|#]])의 CO₂는 거꾸로 H₂CO₃를 늘린다. 폐는 숨으로 CO₂를, 콩팥은 HCO₃⁻와 H⁺의 배설로 두 성분을 따로 맞춘다([[b-body|#]] 음성 피드백).
 
 #### 통상
 
-혈액의 주된 완충계는 탄산–탄산수소 이온($\mathrm{CO_2+H_2O\rightleftharpoons H_2CO_3\rightleftharpoons H^++HCO_3^-}$)이다. H₂CO₃처럼 H⁺를 둘 이상 내는 **다가산**(多價酸, polyprotic acid)은 한 단계씩 이온화하며 $K_{a1}>K_{a2}$다. 혈장은 p$K_a$ 6.1, [HCO₃⁻]/[H₂CO₃] = 20이라 pH = 6.1 + log 20 = 7.4다. 7.35 아래가 **산증**(酸症, acidosis), 7.45 위가 **알칼리증**(alkali症, alkalosis)이다. 세포 안은 인산계 H₂PO₄⁻/HPO₄²⁻(p$K_a$ 7.21)와 단백질(40번)이 완충한다. 바다는 탄산염 완충계로, 녹아든 CO₂를 CO₃²⁻가 받지만($\mathrm{CO_2+CO_3^{2-}+H_2O\rightarrow2HCO_3^-}$) 표층 pH는 8.2에서 8.1이 됐다(69번).
+혈액의 주된 완충계는 탄산–탄산수소 이온($\mathrm{CO_2+H_2O\rightleftharpoons H_2CO_3\rightleftharpoons H^++HCO_3^-}$)이다. H₂CO₃처럼 H⁺를 둘 이상 내는 **다가산**(多價酸, polyprotic acid)은 한 단계씩 이온화하며 $K_{a1}>K_{a2}$다. 혈장은 p$K_a$ 6.1, [HCO₃⁻]/[H₂CO₃] = 20이라 pH = 6.1 + log 20 = 7.4다. 7.35 아래가 **산증**(酸症, acidosis), 7.45 위가 **알칼리증**(alkali症, alkalosis)이다. 세포 안은 인산계 H₂PO₄⁻/HPO₄²⁻(p$K_a$ 7.21)와 단백질([[b-enzyme|#]])이 완충한다. 바다는 탄산염 완충계로, 녹아든 CO₂를 CO₃²⁻가 받지만($\mathrm{CO_2+CO_3^{2-}+H_2O\rightarrow2HCO_3^-}$) 표층 pH는 8.2에서 8.1이 됐다([[e-climate|#]]).
 
 #### 엄밀
 
-6.1은 녹은 CO₂를 모두 H₂CO₃로 센 37 °C 혈장의 겉보기 값이다(25 °C 묽은 용액은 6.37). 7.4는 p$K_a$ ± 1 밖이라 닫힌 용기라면 완충이 약하고 염기에 더 약하지만, 혈액은 폐가 CO₂ 분압을 지키는 열린 계라 훨씬 세다. 바다에서 CO₃²⁻가 줄면 CaCO₃의 용해 평형(61번)에서 이온 농도의 곱 $Q$가 **용해도곱**(溶解度곱, solubility product) $K_{sp}=[\mathrm{Ca^{2+}}][\mathrm{CO_3^{2-}}]$보다 작아져 껍데기와 산호 골격을 만들기 어렵고 녹기 쉽다.
+6.1은 녹은 CO₂를 모두 H₂CO₃로 센 37 °C 혈장의 겉보기 값이다(25 °C 묽은 용액은 6.37). 7.4는 p$K_a$ ± 1 밖이라 닫힌 용기라면 완충이 약하고 염기에 더 약하지만, 혈액은 폐가 CO₂ 분압을 지키는 열린 계라 훨씬 세다. 바다에서 CO₃²⁻가 줄면 CaCO₃의 용해 평형([[c-equilibrium|#]])에서 이온 농도의 곱 $Q$가 **용해도곱**(溶解度곱, solubility product) $K_{sp}=[\mathrm{Ca^{2+}}][\mathrm{CO_3^{2-}}]$보다 작아져 껍데기와 산호 골격을 만들기 어렵고 녹기 쉽다.
 
 #### 점검
 **Q.** 숨을 몹시 빠르게 쉬어 CO₂를 많이 내쉬면 pH는?
@@ -85,7 +85,7 @@ $$\mathrm{pH}=\mathrm{p}K_a+\log\frac{[\mathrm{A^-}]}{[\mathrm{HA}]}$$
 
 ## 연결
 
-[[c-equilibrium]]의 $K$·르샤틀리에 원리, [[c-acid]]의 pH, [[f-sci]]의 로그가 재료다. 혈액 조절은 [[b-body]], 해양 산성화는 69번, pH 측정기 유리 전극(pH 1당 약 59 mV)은 62번 네른스트 식을 쓴다.
+[[c-equilibrium]]의 $K$·르샤틀리에 원리, [[c-acid]]의 pH, [[f-sci]]의 로그가 재료다. 혈액 조절은 [[b-body]], 해양 산성화는 [[e-climate|#]], pH 측정기 유리 전극(pH 1당 약 59 mV)은 [[c-electro|#]] 네른스트 식을 쓴다.
 
 ## 요약
 

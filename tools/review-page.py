@@ -33,14 +33,17 @@ def esc(s):
 def inline(s, by, num):
     """굵게, [[id]], $수식$을 HTML로. 수식은 data-tex로 두고 브라우저에서 KaTeX로 그린다."""
     out, i = [], 0
-    for m in re.finditer(r'\$([^$\n]+)\$|\[\[([a-z]+-[a-z]+)\]\]', s):
+    for m in re.finditer(r'\$([^$\n]+)\$|\[\[([a-z]+-[a-z]+)(?:\|([^\]]*))?\]\]', s):
         out.append(_bold(esc(s[i:m.start()])))
         if m.group(1) is not None:
             out.append(f'<span class="tex" data-tex="{esc(m.group(1))}">{esc(m.group(1))}</span>')
         else:
-            x = m.group(2)
+            x, lab = m.group(2), m.group(3)
             t = by[x]['t'] if x in by else x
-            out.append(f'<span class="xref">{num.get(x, "?")} {esc(t)}</span>')
+            if lab == '#':  # [[id|#]]: 앱처럼 지금 번호만 (26.11.14)
+                out.append(f'<span class="xref" title="{esc(t)}">{num.get(x, "?")}번</span>')
+            else:
+                out.append(f'<span class="xref">{num.get(x, "?")} {esc(lab or t)}</span>')
         i = m.end()
     out.append(_bold(esc(s[i:])))
     return ''.join(out)
@@ -71,7 +74,7 @@ def md_to_html(md, by, num, target_prefix):
     def flush_tbl():
         if tbl:
             rows = [r for r in tbl if not re.match(r'^\|\s*:?-{2,}', r)]
-            cells = [[c.strip() for c in r.strip().strip('|').split('|')] for r in rows]
+            cells = [[c.strip().replace('\x03', '|') for c in re.sub(r'\[\[([a-z]+-[a-z]+)\|', '[[\\1\x03', r.strip().strip('|')).split('|')] for r in rows]
             h = ''.join(f'<th>{inline(c, by, num)}</th>' for c in cells[0])
             b = ''.join('<tr>' + ''.join(f'<td>{inline(c, by, num)}</td>' for c in r) + '</tr>' for r in cells[1:])
             out.append(f'<div class="tbl"><table><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table></div>')

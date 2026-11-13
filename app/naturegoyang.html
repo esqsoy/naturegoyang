@@ -339,6 +339,7 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .xref{--dc:var(--ink); display:inline-flex; align-items:center; gap:5px; padding:0 7px 0 2px; margin:0 1px; border:1px solid var(--line); border-radius:5px; background:var(--surface); font:600 .82em/1.7 var(--font-ui); color:var(--ink); cursor:pointer; vertical-align:baseline}
 .xref span{font:700 .85em/1 var(--font-ui); color:var(--on-fill); background:var(--dc); border-radius:3px; padding:2px 4px}
 .xref:hover{border-color:var(--dc)}
+.xref.xnum{padding:0 5px; border-color:color-mix(in srgb,var(--dc) 45%,var(--line)); font-variant-numeric:tabular-nums}
 
 /* one-screen reader */
 .reader{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px 24px 0; display:flex; flex-direction:column; min-height:min(66vh,600px)}
@@ -681,7 +682,7 @@ function texPlain(t){
 function deTex(s){
   return String(s||'')
     .replace(/\$\$?([^$]+)\$\$?/g,(m,t)=>texPlain(t))
-    .replace(/\[\[([a-z]-[a-z]+)(?:\|([^\]]+))?\]\]/g,(m,id,l)=>l||NODE[id]?.t||id)
+    .replace(/\[\[([a-z]-[a-z]+)(?:\|([^\]]+))?\]\]/g,(m,id,l)=>l==='#'?(NODE[id]?`${NODE[id].no}번`:id):l||NODE[id]?.t||id)
     .replace(/\*\*|__|`/g,'').replace(/\s+/g,' ').trim();
 }
 // a key the model wrote: plain it, and drop it (so the fallback is used) if it came out too long to copy
@@ -942,14 +943,17 @@ function inl(s){
     .replace(/(^|[^*\w])\*([^*\s][^*\n]*?)\*(?![*\w])/g,'$1<em>$2</em>')
     .replace(/`([^`]+)`/g,'<code>$1</code>')
     .replace(/\[\[([a-z]-[a-z]+)(?:\|([^\]]+))?\]\]/g,(m,id,label)=>{
-      const n=NODE[id]; if(!n) return label||id;
+      const n=NODE[id]; if(!n) return label&&label!=='#'?label:id;
+      // [[id|#]]: the unit's number as the app counts it now, so references survive map changes (26.11.14)
+      if(label==='#') return `<button type="button" class="xref xnum" data-act="sel" data-id="${id}" title="${esc(n.t)}" style="--dc:var(${DOM[n.d].c})">${n.no}번</button>`;
       return `<button type="button" class="xref" data-act="sel" data-id="${id}" style="--dc:var(${DOM[n.d].c})"><span>${n.sym}</span>${label||esc(n.t)}</button>`;
     });
   return s.replace(/\u0001(\d+)\u0002/g,(m,i)=>keep[+i]);
 }
 function tableHTML(rows){
   const isSep=r=>/^[\s|:\-]+$/.test(r)&&r.includes('-');
-  const cells=r=>r.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());
+  // the "|" inside [[id|#]] or [[id|이름]] is not a cell border
+  const cells=r=>r.trim().replace(/^\|/,'').replace(/\|$/,'').replace(/\[\[([a-z]-[a-z]+)\|/g,'[[$1\u0003').split('|').map(c=>c.trim().replace(/\u0003/g,'|'));
   const rs=rows.filter(r=>!isSep(r)).map(cells); if(!rs.length) return '';
   const [h,...b]=rs;
   return `<div class="tbl"><table><thead><tr>${h.map(c=>`<th>${inl(c)}</th>`).join('')}</tr></thead><tbody>${b.map(r=>`<tr>${r.map(c=>`<td>${inl(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;

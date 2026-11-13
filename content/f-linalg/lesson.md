@@ -8,7 +8,7 @@
 
 #### 직관
 
-단위원을 일정하게 도는 점의 가로 위치가 진동 $\cos(\omega t+\varphi)$이고($\omega=2\pi/T$, 4번), 점의 자리를 나타내는 각 $\omega t+\varphi$가 **위상**(位相, phase)이다. 가로·세로 위치를 수 하나로 묶으면 두 진동의 합은 화살표의 합, 위상을 옮기는 일은 화살표 돌리기가 된다. −1을 곱하면 반 바퀴 돌므로, 돌리기를 곱셈으로 하려면 제곱해서 −1인 90° 돌리기 $i$가 필요하다. 다만 재는 것은 가로 위치뿐이다.
+단위원을 일정하게 도는 점의 가로 위치가 진동 $\cos(\omega t+\varphi)$이고($\omega=2\pi/T$, [[f-trig|#]]), 점의 자리를 나타내는 각 $\omega t+\varphi$가 **위상**(位相, phase)이다. 가로·세로 위치를 수 하나로 묶으면 두 진동의 합은 화살표의 합, 위상을 옮기는 일은 화살표 돌리기가 된다. −1을 곱하면 반 바퀴 돌므로, 돌리기를 곱셈으로 하려면 제곱해서 −1인 90° 돌리기 $i$가 필요하다. 다만 재는 것은 가로 위치뿐이다.
 
 #### 통상
 
@@ -18,7 +18,7 @@ $z$를 점 $(a,b)$로 나타낸 평면이 **복소평면**(複素平面, complex
 
 #### 엄밀
 
-$w=\rho(\cos\varphi+i\sin\varphi)$이면 $zw=\rho(\cos\varphi\,z+\sin\varphi\,iz)$다. $iz=-b+ai$는 $z$를 90° 돌린 점이라 괄호 안은 φ 돌린 $z$를 두 수직 방향으로 분해한 꼴(5번)이고, $zw$는 $z$를 φ 돌려 ρ배 한 점이다. $n$번 곱하면 **드무아브르의 정리**(de Moivre의定理, de Moivre's theorem) $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$다. 허수 지수는 지수법칙과 $(e^{kx})'=ke^{kx}$(53번)가 성립하도록 정하며, 곱하면 각이 더해지고 작은 θ(rad)에서 $\sin\theta\approx\theta$라 $1+i\theta$에 가까운 $\cos\theta+i\sin\theta$가 이를 채운다.
+$w=\rho(\cos\varphi+i\sin\varphi)$이면 $zw=\rho(\cos\varphi\,z+\sin\varphi\,iz)$다. $iz=-b+ai$는 $z$를 90° 돌린 점이라 괄호 안은 φ 돌린 $z$를 두 수직 방향으로 분해한 꼴([[f-vector|#]])이고, $zw$는 $z$를 φ 돌려 ρ배 한 점이다. $n$번 곱하면 **드무아브르의 정리**(de Moivre의定理, de Moivre's theorem) $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$다. 허수 지수는 지수법칙과 $(e^{kx})'=ke^{kx}$([[f-rate|#]])가 성립하도록 정하며, 곱하면 각이 더해지고 작은 θ(rad)에서 $\sin\theta\approx\theta$라 $1+i\theta$에 가까운 $\cos\theta+i\sin\theta$가 이를 채운다.
 
 #### 점검
 **Q.** $(1+i)(1+\sqrt3\,i)$의 절댓값과 편각은?
@@ -28,7 +28,7 @@ $w=\rho(\cos\varphi+i\sin\varphi)$이면 $zw=\rho(\cos\varphi\,z+\sin\varphi\,iz
 
 #### 직관
 
-연립방정식 $ax+by=p$, $cx+dy=q$에서 미지수를 떼면 계수의 표가 남는다. 이 표는 점 $(x,y)$를 $(p,q)$로 옮기는 규칙이고, 방정식 풀기는 처음 점을 거꾸로 찾는 일이다. 행렬의 곱 $AB$는 '$B$로 옮긴 뒤 $A$로 옮기기'라서, 5번의 책 돌리기처럼 순서가 결과를 바꿀 수 있다.
+연립방정식 $ax+by=p$, $cx+dy=q$에서 미지수를 떼면 계수의 표가 남는다. 이 표는 점 $(x,y)$를 $(p,q)$로 옮기는 규칙이고, 방정식 풀기는 처음 점을 거꾸로 찾는 일이다. 행렬의 곱 $AB$는 '$B$로 옮긴 뒤 $A$로 옮기기'라서, [[f-vector|#]]의 책 돌리기처럼 순서가 결과를 바꿀 수 있다.
 
 #### 통상
 
@@ -60,7 +60,7 @@ $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$는 $(1,0)$을 $(2,1)$로 보내듯 대�
 
 #### 엄밀
 
-θ 회전 행렬 $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$를 곱하는 것은 $x+iy$에 $e^{i\theta}$를 곱하는 것과 같다. 그 고윳값은 $e^{\pm i\theta}$라 θ가 0, π가 아니면 실수 고유벡터가 없다. $a_{ij}=a_{ji}$인 실수 행렬은 고윳값이 실수이고 다른 고윳값의 고유벡터끼리 수직이다. 72번 양자역학에서 측정값은 이를 복소수로 넓힌 행렬의 고윳값이다.
+θ 회전 행렬 $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$를 곱하는 것은 $x+iy$에 $e^{i\theta}$를 곱하는 것과 같다. 그 고윳값은 $e^{\pm i\theta}$라 θ가 0, π가 아니면 실수 고유벡터가 없다. $a_{ij}=a_{ji}$인 실수 행렬은 고윳값이 실수이고 다른 고윳값의 고유벡터끼리 수직이다. [[p-qm|#]] 양자역학에서 측정값은 이를 복소수로 넓힌 행렬의 고윳값이다.
 
 #### 점검
 **Q.** $\begin{pmatrix}4&1\\2&3\end{pmatrix}$의 고윳값은?
@@ -82,7 +82,7 @@ $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$는 $(1,0)$을 $(2,1)$로 보내듯 대�
 
 ## 연결
 
-[[f-trig]]의 단위원과 [[f-vector]]의 성분 분해가 극형식의 바탕이다. 56번 진동과 공명은 진동을 $e^{i\omega t}$로 다루고, [[p-relativity]]의 로런츠 변환은 행렬이며, [[p-qm]]은 상태를 복소수로, 측정값을 고윳값으로 적는다.
+[[f-trig]]의 단위원과 [[f-vector]]의 성분 분해가 극형식의 바탕이다. [[p-osc|#]] 진동과 공명은 진동을 $e^{i\omega t}$로 다루고, [[p-relativity]]의 로런츠 변환은 행렬이며, [[p-qm]]은 상태를 복소수로, 측정값을 고윳값으로 적는다.
 
 ## 요약
 

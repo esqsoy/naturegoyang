@@ -14,7 +14,7 @@
 
 **강체**(剛體, rigid body)는 어느 두 점 사이의 거리도 변하지 않는다고 보는 물체다. 고정된 **회전축**(回轉軸, axis of rotation) 둘레로 도는 강체는 모든 점이 같은 각만큼 돈다.
 
-물체에 그은 선이 기준 방향과 이루는 각이 **각위치**(角位置, angular position) $\theta$, 그 변화량이 **각변위**(角變位, angular displacement) $\Delta\theta$다(rad, 시계 반대 방향이 $+$). 각속도 $\omega$(22번)가 변하는 빠르기가 **각가속도**(角加速度, angular acceleration) $\alpha=\Delta\omega/\Delta t$(rad/s²)다. 축에서 $r$ 떨어진 점의 속력은 $v=r\omega$, 접선 방향 가속도는 $a_t=r\alpha$다(각은 rad).
+물체에 그은 선이 기준 방향과 이루는 각이 **각위치**(角位置, angular position) $\theta$, 그 변화량이 **각변위**(角變位, angular displacement) $\Delta\theta$다(rad, 시계 반대 방향이 $+$). 각속도 $\omega$([[p-gravity|#]])가 변하는 빠르기가 **각가속도**(角加速度, angular acceleration) $\alpha=\Delta\omega/\Delta t$(rad/s²)다. 축에서 $r$ 떨어진 점의 속력은 $v=r\omega$, 접선 방향 가속도는 $a_t=r\alpha$다(각은 rad).
 
 **돌림힘**(torque, 토크)의 크기는 $\tau=rF\sin\phi$(N·m)다. $r$은 축에서 작용점까지의 거리, $\phi$는 $\vec r$와 $\vec F$ 사이 각이다. **관성 모멘트**(慣性moment, moment of inertia)는 $I=\sum mr^2$(kg·m², $r$은 축까지의 거리)로, 축의 위치와 질량 분포에 따라 다르다. 돌림힘의 합인 **알짜 돌림힘**(net torque)이 각가속도를 정한다.
 
@@ -24,7 +24,7 @@ $$\tau_{\rm net}=I\alpha$$
 
 축에서 $r$ 떨어진 질량 $m$ 하나에 접선 방향 힘 $F$가 작용하면 $F=ma_t=mr\alpha$이므로 $rF=mr^2\alpha$다. 조각마다 더하면 안쪽 힘의 돌림힘은 작용 반작용 쌍끼리 지워져 $\tau_{\rm net}=I\alpha$가 남는다. $r\sin\phi$는 축에서 작용선(힘을 따라 그은 직선)까지의 거리라서, 작용선이 축을 지나면 돌림힘은 0이다.
 
-길이 $L$, 질량 $M$인 가는 막대의 $I$는 막대에 수직인 축이 가운데를 지나면 $\frac1{12}ML^2$, 끝을 지나면 $\frac13ML^2$이고, 고른 원판은 중심축에서 $\frac12MR^2$이다(적분은 53번). 방향까지 담으면 돌림힘은 **벡터곱**(vector product) $\vec\tau=\vec r\times\vec F$이고, 오른손 네 손가락을 $\vec r$에서 $\vec F$ 쪽으로 감을 때 엄지가 가리키는 축 방향이다(오른손 규칙).
+길이 $L$, 질량 $M$인 가는 막대의 $I$는 막대에 수직인 축이 가운데를 지나면 $\frac1{12}ML^2$, 끝을 지나면 $\frac13ML^2$이고, 고른 원판은 중심축에서 $\frac12MR^2$이다(적분은 [[f-rate|#]]). 방향까지 담으면 돌림힘은 **벡터곱**(vector product) $\vec\tau=\vec r\times\vec F$이고, 오른손 네 손가락을 $\vec r$에서 $\vec F$ 쪽으로 감을 때 엄지가 가리키는 축 방향이다(오른손 규칙).
 
 #### 점검
 **Q.** 관성 모멘트 0.125 kg·m², 반지름 0.25 m인 원판의 가장자리를 접선 방향으로 10 N으로 당기면 각가속도는?
@@ -38,7 +38,7 @@ $$\tau_{\rm net}=I\alpha$$
 
 #### 통상
 
-조각마다의 운동 에너지 $\frac12m(r\omega)^2$을 더한 **회전 운동 에너지**(回轉運動energy, rotational kinetic energy)는 $E_k=\frac12I\omega^2$이다. 운동량 $p=mv$(21번)에 대응하는 **각운동량**(角運動量, angular momentum)은 $L=I\omega$(kg·m²/s)다. 바깥에서 받는 알짜 돌림힘이 0이면 각운동량이 일정하다는 것이 **각운동량 보존 법칙**(角運動量保存法則, law of conservation of angular momentum)이다.
+조각마다의 운동 에너지 $\frac12m(r\omega)^2$을 더한 **회전 운동 에너지**(回轉運動energy, rotational kinetic energy)는 $E_k=\frac12I\omega^2$이다. 운동량 $p=mv$([[p-momentum|#]])에 대응하는 **각운동량**(角運動量, angular momentum)은 $L=I\omega$(kg·m²/s)다. 바깥에서 받는 알짜 돌림힘이 0이면 각운동량이 일정하다는 것이 **각운동량 보존 법칙**(角運動量保存法則, law of conservation of angular momentum)이다.
 
 $$I_1\omega_1=I_2\omega_2$$
 
@@ -64,7 +64,7 @@ $I$가 절반이 되면 $\omega$는 2배이고, $E_k=\frac{L^2}{2I}$이므로 �
 
 $$\sum\vec F=0,\qquad \sum\tau=0$$
 
-첫째는 7번의 힘의 평형, 둘째는 시계 반대 방향과 시계 방향 돌림힘의 합이 같다는 돌림힘의 평형이다. 물체 각 부분이 받는 중력의 합력이 작용한다고 보는 점이 **무게 중심**(무게中心, center of gravity)이며, 고른 막대에서는 한가운데다. 받침점 둘레로 도는 막대가 **지레**(lever)다. 두 힘이 막대에 수직이고 받침점에서 거리가 $d_1$, $d_2$이면 $F_1d_1=F_2d_2$일 때 평형이다(막대 무게 무시).
+첫째는 [[p-force|#]]의 힘의 평형, 둘째는 시계 반대 방향과 시계 방향 돌림힘의 합이 같다는 돌림힘의 평형이다. 물체 각 부분이 받는 중력의 합력이 작용한다고 보는 점이 **무게 중심**(무게中心, center of gravity)이며, 고른 막대에서는 한가운데다. 받침점 둘레로 도는 막대가 **지레**(lever)다. 두 힘이 막대에 수직이고 받침점에서 거리가 $d_1$, $d_2$이면 $F_1d_1=F_2d_2$일 때 평형이다(막대 무게 무시).
 
 #### 엄밀
 

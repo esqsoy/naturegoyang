@@ -24,6 +24,18 @@ CONTENT = os.path.join(REPO, 'content')
 SECTIONS = ['핵심 질문', '원리', '예제', '흔한 오개념', '연결', '요약']
 LAYERS = {'직관', '통상', '엄밀', '직관·통상', '통상·엄밀', '직관·엄밀', '직관·통상·엄밀'}
 KINDS = ['정의', '기호', '법칙', '상수', '분류', '사실', '용어']
+LINK = re.compile(r'\[\[([a-z]+-[a-z]+)(?:\|[^\]]*)?\]\]')
+# 단원 번호처럼 보이는 "45번", "35·36번" (횟수·염색체·원자 번호 같은 것도 걸리므로 경고로만)
+NUMREF = re.compile(r'(?<![\d.])\d{1,3}(?:[·~]\d{1,3})*번(?!째)')
+ids_all = set()
+titles = {}
+
+
+def shown(s):
+    """화면에 보이는 글: [[id|#]]는 "45번", [[id|이름]]은 이름, [[id]]는 단원 제목."""
+    s = re.sub(r'\[\[([a-z]+-[a-z]+)\|#\]\]', '00번', s)
+    s = re.sub(r'\[\[([a-z]+-[a-z]+)\|([^\]]*)\]\]', r'\2', s)
+    return re.sub(r'\[\[([a-z]+-[a-z]+)\]\]', lambda m: titles.get(m.group(1), m.group(1)), s)
 
 
 def load_nodes():
@@ -33,6 +45,8 @@ def load_nodes():
         a = ast.literal_eval('(' + m.group(1) + ')')
         nodes.append(dict(id=a[0], sym=a[1], d=a[2], tier=a[3], t=a[4], s=a[5], q=a[6], pre=a[7], ideas=a[8], obj=a[9]))
     by = {n['id']: n for n in nodes}
+    ids_all.update(by)
+    titles.update({k: v['t'] for k, v in by.items()})
     unlocks = {n['id']: [m['id'] for m in nodes if n['id'] in m['pre']] for n in nodes}
     # 번호: CURRICULUM.md 표(앱이 열 때 계산한 것을 뽑아 둔 것)
     num = {}
@@ -66,6 +80,7 @@ def related(nid, nodes, by, unlocks):
 
 
 def plain_len(s):
+    s = shown(s)
     s = re.sub(r'\$\$[\s\S]*?\$\$', '수식수식수식', s)
     s = re.sub(r'\$[^$\n]+\$', '수식', s)
     s = re.sub(r'[#*>|`\-:]', '', s)
@@ -78,7 +93,7 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     names = [t for _, t in h2]
     if names != SECTIONS:
         errs.append(f'큰 제목 순서가 다르다: {names}')
-    total = len(md)
+    total = len(shown(md))
     info.append(f'설명 {total}자')
     if not 3000 <= total <= 5000:
         warns.append(f'분량 {total}자 (3000~5000)')
@@ -116,10 +131,20 @@ def check_lesson(md, n, rel, num, errs, warns, info):
             pl = plain_len('\n'.join(blk[pos + 1:end]))
             if pl > 600:
                 warns.append(f'"{title}" {t} 층 {pl}자 (600 안쪽)')
-    # 연결 [[id]]
-    for x in re.findall(r'\[\[([a-z]+-[a-z]+)\]\]', md):
+    # [[id]], [[id|#]], [[id|이름]]: '연결'에서는 related()만, 본문에서는 있는 단원이면 된다(26.11.14, 순서 통제 없음)
+    c0 = next((i for i, t in h2 if t == '연결'), len(lines))
+    c1 = next((i for i, t in h2 if t == '요약'), len(lines))
+    link_part = '\n'.join(lines[c0:c1])
+    for x in re.findall(r'\[\[([a-z]+-[a-z]+)\]\]', link_part):
         if x not in rel:
-            errs.append(f'[[{x}]]는 이 단원에서 쓸 수 없는 id다')
+            errs.append(f'연결의 [[{x}]]는 이 단원에서 쓸 수 없는 id다')
+    for x in LINK.findall(md):
+        if x not in ids_all:
+            errs.append(f'[[{x}]]는 앱에 없는 단원 id다')
+    # 번호로 단원을 가리키면 지도가 바뀔 때 틀린다. [[id|#]]로 쓴다(앱이 지금 번호를 보인다)
+    for i, l in enumerate(lines, 1):
+        for m in NUMREF.finditer(l):
+            warns.append(f'{i}줄: "{m.group(0)}" — 단원이면 [[id|#]]로')
     # 수식 짝
     for i, l in enumerate(lines, 1):
         t = l.replace('\\$', '')
@@ -129,13 +154,6 @@ def check_lesson(md, n, rel, num, errs, warns, info):
             continue
         if t.count('$') % 2:
             errs.append(f'{i}줄: $ 짝이 안 맞는다')
-    # 순서 통제: 뒤 번호 단원 id를 본문(연결 밖)에서 [[ ]]로 부르지 않는다
-    me = num.get(n['id'], 0)
-    c0 = next((i for i, t in h2 if t == '연결'), len(lines))
-    pre_link = '\n'.join(lines[:c0])
-    for x in re.findall(r'\[\[([a-z]+-[a-z]+)\]\]', pre_link):
-        if num.get(x, 0) > me:
-            warns.append(f'연결 밖에서 뒤 단원 [[{x}]](번호 {num.get(x)})을 부른다')
     # 굵은 용어
     terms = re.findall(r'\*\*([^*]+?)\*\*\(([^)]*)\)', md)
     return terms
@@ -161,6 +179,12 @@ def check_cards(cards, terms, errs, warns, info):
         for f in ('q', 'a', 'h'):
             if isinstance(c.get(f), str) and c[f].replace('\\$', '').count('$') % 2:
                 errs.append(f'{cid}: {f}의 $ 짝이 안 맞는다')
+            if isinstance(c.get(f), str):
+                for x in LINK.findall(c[f]):
+                    if x not in ids_all:
+                        errs.append(f'{cid}: [[{x}]]는 앱에 없는 단원 id다')
+                for m in NUMREF.finditer(c[f]):
+                    warns.append(f'{cid}: {f}의 "{m.group(0)}" — 단원이면 [[id|#]]로')
         if c.get('k') == '용어' and not re.search(r'[A-Za-z]', c.get('a', '')):
             warns.append(f'{cid}: 용어 카드 뒷면에 영어가 없다')
     live = [c for c in cards if not c.get('x')]
