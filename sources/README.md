@@ -27,6 +27,13 @@
 | maderteong-earth1·2 | 마더텅 2024 수능기출 지구과학 Ⅰ·Ⅱ 문제편 | 지구·우주 고등 범위, 문제 눈높이. 스캔본이라 글자는 OCR(`pdf-index.js ocr`). 절 번호는 대단원(Ⅰ→1).중단원.소단원 | OCR 글자, 목차는 차례 쪽으로 만듦 |
 | maderteong (나머지 6권) | 마더텅 2024 수능기출 물리학·화학·생명과학 Ⅰ·Ⅱ 문제편 | 1~3단계 문제 눈높이 | 물리학Ⅰ·생명과학 Ⅰ·Ⅱ는 단원 초안 쓸 때 받음(필요한 쪽만 OCR), 나머지는 iCloud에만 |
 | pilbara | *Discovery Trails to Early Earth* (서오스트레일리아 동필바라 안내서) | 초기 지구·암석·초기 생명 증거('Knowing' 1~3장) | 목차·글자 뽑음 |
+| thomas13 | *Thomas' Calculus*, 13판 SI Units, Global, Pearson 2016 (표준판, 17장은 PDF 끝) | **수학 첫째 책, 문제 원천**(PRINCIPLES 2-5). iCloud `20 수학/` | 26.11.14 Windows PC에서 글자 뽑음. 절별 문제 번호 [problems-thomas13.json](problems-thomas13.json) |
+| epp5 | Epp, *Discrete Mathematics with Applications*, 5판 Metric, Cengage 2019 | 논리·증명·집합·함수·귀납법·경우의 수·확률 문제 원천(1.1~1.3, 2.1~2.3, 3, 4.1~4.8, 5.1~5.4, 6.1~6.3, 7.1~7.3, 9장). 답은 부록 B(파란 번호만) | 26.11.14 글자 뽑음, 절별 문제 수 셈(design/map-126) |
+| lang3 | Lang, *Linear Algebra*, 3판, Springer UTM (2004 인쇄) | 선형대수 문제 원천(I~VIII장). 답 없음, 소거법 없음 | 26.11.14 OCR 글자 |
+| chartrand4 | Chartrand·Polimeni·Zhang, *Mathematical Proofs*, 4판, Pearson 2018 | 대조만: 증명의 정의·용어, 14·17·18장은 엄밀 층 참고 | 26.11.14 글자 뽑음 |
+| spivak3 | Spivak, *Calculus*, 3판, 1994 (+ Answer Book 1996, 스캔) | 대조만: 미적분 단원의 엄밀 층 | 26.11.14 OCR 글자 |
+| lockhart | Lockhart, *Measurement*, Harvard 2012 | 대조만: 직관 층(번호 붙은 문제 없음) | 26.11.14 글자 뽑음 |
+| k50 | 『50일 수학』 상·하 문제·해설, 『완포자를 위한 중학수학 특강』 | 한국어 수학 용어, `f-algebra` 문제 원천 후보 | 스캔본. 맥미니 OCR 필요 |
 
 serway·sadava는 판 번호를 아직 판권 쪽에서 확인하지 않아 줄임 이름에 판을 붙이지 않았다. mcmurry는 8판(판권 쪽 확인), 줄임 이름은 그대로 둔다.
 

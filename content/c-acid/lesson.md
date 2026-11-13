@@ -40,7 +40,7 @@ $$\mathrm{NH_3+H_2O\rightleftharpoons NH_4^++OH^-}$$
 
 $$K_w=[\mathrm{H_3O^+}][\mathrm{OH^-}]=1.0\times10^{-14}\ (25\ ^\circ\mathrm{C})$$
 
-순수한 물은 [H₃O⁺] = [OH⁻] = 1.0×10⁻⁷ M이다. [H₃O⁺] > [OH⁻]이면 산성, 같으면 중성, 반대면 염기성이다. pH는 $-\log[\mathrm{H_3O^+}]$([[f-sci|#]]), $\mathrm{pOH}=-\log[\mathrm{OH^-}]$이고 25 °C에서 pH + pOH = 14.00이다.
+순수한 물은 [H₃O⁺] = [OH⁻] = 1.0×10⁻⁷ M이다(M은 몰 농도 mol/L, [[c-solution|#]]). [H₃O⁺] > [OH⁻]이면 산성, 같으면 중성, 반대면 염기성이다. pH는 $-\log[\mathrm{H_3O^+}]$([[f-sci|#]]), $\mathrm{pOH}=-\log[\mathrm{OH^-}]$이고 25 °C에서 pH + pOH = 14.00이다.
 
 거의 다 이온화하는 산이 **강산**(強酸, strong acid)(HCl, HNO₃, H₂SO₄), 일부만 이온화하는 산이 **약산**(弱酸, weak acid)(CH₃COOH)이다. 염기도 **강염기**(強鹽基, strong base)(NaOH, Ca(OH)₂)와 **약염기**(弱鹽基, weak base)(NH₃)로 나눈다. 1가 강산 $c$ M은 [H₃O⁺] = $c$ M이다.
 
@@ -98,7 +98,7 @@ $n$은 **가수**(價數), 곧 산·염기 1 mol이 내놓는 H⁺·OH⁻의 mol
 
 ## 연결
 
-pH는 [[f-sci]], 전해질·몰 농도는 [[c-solution]], 몰비는 [[c-mole]]에서 왔다. 중화열은 [[c-thermochem|#]], 이온화 평형은 [[c-equilibrium|#]], $K_a$와 완충 용액은 [[c-buffer]], 혈액의 pH는 [[b-body]]에서 다룬다.
+pH는 [[f-sci]], 몰비는 [[c-mole]]에서 왔다. 전해질·몰 농도는 [[c-solution]], 중화열은 [[c-thermochem|#]], 이온화 평형은 [[c-equilibrium|#]], $K_a$와 완충 용액은 [[c-buffer]], 혈액의 pH는 [[b-body]]의 주제다.
 
 ## 요약
 

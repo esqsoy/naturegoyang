@@ -100,7 +100,7 @@ $$\mathrm{3Cu+2NO_3^-+8H^+\rightarrow 3Cu^{2+}+2NO+4H_2O}$$
 
 ## 연결
 
-[[c-bond]]의 이온·전기 음성도, [[c-periodic]]의 이온화 에너지, [[c-mole|#]] 계수 맞추기, [[p-circuit]]의 전류를 썼다. [[c-electro]]는 표준 환원 전위·전기 분해·부식을, [[b-respiration]]은 호흡의 전자 전달을 다룬다.
+[[c-bond]]의 이온·전기 음성도, [[c-periodic]]의 이온화 에너지, [[c-mole|#]] 계수 맞추기를 썼다. 도선을 흐르는 전류는 [[p-circuit]]의 주제다. [[c-electro]]는 표준 환원 전위·전기 분해·부식을, [[b-respiration]]은 호흡의 전자 전달을 다룬다.
 
 ## 요약
 

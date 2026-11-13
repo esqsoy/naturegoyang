@@ -28,6 +28,9 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 - **설명·카드는 미리 만들어 검수한다(PRINCIPLES 5, 26.11.09).** 원본은 `content/<단원 id>/`(lesson.md, cards.json, check.md), 형식은 [content/README](content/README.md). 순서: 초안 → 교과서 대조(`tools/unit-sources.py <id> --text`) → `python3 -I tools/content-check.py <id>` 오류 0 → `--upload <id> --out <폴더>`로 만든 JSON을 ArtifactData `batch`로 `lessons/<id>--v3`, `cards/<id>`에 올림(덮어쓸 때는 받은 판을 `if_version`으로) → 검수 페이지 다시 올림(`tools/review-page.py`) → DEPLOYMENT에 판 번호.
   - 영신이 그 단원에 닿기 전에 올린다. 앱은 저장소에 설명·카드가 없을 때만 그 자리에서 만든다.
   - 카드 id는 기록 열쇠다. 올린 카드의 id·뜻은 바꾸지 않고, 새 카드는 끝 번호 뒤에, 뺄 카드는 `"x": true`.
+  - 다른 단원은 번호를 글로 적지 않고 `[[id|#]]`(앱이 지금 번호를 보인다)나 `[[id]]`로 가리킨다. 지도를 바꾸면 번호가 바뀐다(26.11.14, content/README).
+- **지도(`N(...)` 줄)를 바꾸면** `python3 -I tools/curriculum.py`로 CURRICULUM.md를 다시 뽑는다. 단원을 더하거나 빼는 것은 영신 의견을 먼저 받는다.
+- **큰 일은 서브에이전트 팀원과 나눠 한다(영신 26.11.14: "작업할때 이솝을 파트너로 협업해줘 모든 자원을 총동원해서 마스터피스를 만들어보자").** 조사·초안은 나누고, 합치고 정하고 검산하는 것은 Claude가 한다.
   - 영신의 검수 댓글은 검수 페이지 Artifact에 달린다. 고친 것은 check.md와 WORK_LOG에 적는다.
 - 앱 원본은 `app/naturegoyang.html` 한 파일이다. 단원 데이터(`N(...)` 줄), 생성 지시(프롬프트), 화면이 모두 들어 있다.
 - 고친 뒤에는 claude.ai Artifact에 **같은 주소**로 다시 올린다(DEPLOYMENT). 새 주소로 올리면 영신의 기록이 이어지지 않는다.
@@ -47,3 +50,4 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 - 큰 PDF(100MB 넘는 것)는 통째로 읽지 않는다. 쪽별 글자를 뽑아 grep으로 찾고, 그림이 필요한 쪽만 줄여 그린다(`pdf-index.js png <pdf> <쪽> <out.jpg> 1200`).
 - iCloud에만 있는 파일(`ls -lO`에 `dataless`)은 샌드박스를 끄고 `brctl download <경로>`로 내려받는다. 안 내려오면 `killall bird`로 iCloud 데몬을 다시 띄운다(26.11.09에 이것으로 풀렸다, 비공개 폴더 README).
 - 스캔본(글자 층 없음)은 `pdf-index.js ocr`로 읽는다(macOS Vision, 쪽당 약 4초). 두 단 편집은 줄이 섞일 수 있다.
+- **Windows PC(26.11.14):** 저장소 `C:\Users\Young\Documents\naturegoyang`, 책은 iCloud Drive `30 과학/`·`20 수학/`. Python 3.12(`%LOCALAPPDATA%\Programs\Python\Python312\python.exe -I -X utf8 tools/…`), PDF 글자는 Git의 `pdftotext`(한글 경로를 못 열어 ASCII 이름으로 복사). 비공개 폴더 `과학고양/`은 이 PC에 내려오지 않는다 → 저장소 백업은 `Documents\naturegoyang-private\artifact-backup\<날짜>\`.

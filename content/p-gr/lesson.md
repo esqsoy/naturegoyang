@@ -90,7 +90,7 @@ $$r_s=\frac{2GM}{c^2}$$
 
 ## 연결
 
-[[p-force]]의 관성 기준계와 [[p-gravity]]의 만유인력을 [[p-relativity]]의 시공간으로 다시 썼고, [[p-light]]의 빛과 [[f-rate]]의 적분을 썼다. 수성 궤도는 [[e-solar|#]], 블랙홀이 되는 별은 [[e-star|#]]에서 왔다. [[p-field|#]]은 중력과 다른 상호작용을, [[e-galaxy]]는 우주 팽창을 다룬다.
+[[p-force]]의 관성 기준계와 [[p-gravity]]의 만유인력을 [[p-relativity]]의 시공간으로 다시 썼고, [[p-light]]의 빛과 [[f-rate]]의 적분을 썼다. 수성 궤도는 [[e-solar|#]]에서 왔고, 블랙홀이 되는 별은 [[e-star|#]]의 주제다. [[p-field|#]]은 중력과 다른 상호작용을, [[e-galaxy]]는 우주 팽창을 다룬다.
 
 ## 요약
 

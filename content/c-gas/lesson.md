@@ -104,7 +104,7 @@ $a$는 인력, $b$는 분자 부피를 나타내는 기체마다의 상수다.
 
 ## 연결
 
-[[c-particle]]의 평균 운동 에너지와 [[c-mole]]의 몰이 재료다. 압력은 [[p-fluid|#]], 충격량은 [[p-momentum|#]], 분자 간 힘은 [[c-shape|#]], 반비례·정비례는 [[f-ratio]]에서 왔다. 충돌 이론은 [[c-kinetics]], 대기압은 [[e-atmos]], 기체의 일은 [[p-thermo|#]], 용해도는 [[c-solution|#]], 평형 상수는 [[c-equilibrium|#]]에서 다룬다.
+[[c-particle]]의 평균 운동 에너지와 [[c-mole]]의 몰이 재료다. 압력은 [[p-fluid|#]], 충격량은 [[p-momentum|#]], 반비례·정비례는 [[f-ratio]]에서 왔다. 분자 간 힘은 [[c-shape|#]], 충돌 이론은 [[c-kinetics]], 대기압은 [[e-atmos]], 기체의 일은 [[p-thermo|#]], 용해도는 [[c-solution|#]], 평형 상수는 [[c-equilibrium|#]]의 주제다.
 
 ## 요약
 

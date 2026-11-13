@@ -102,7 +102,7 @@ $R=0.08206$ L·atm/(mol·K), $T$는 절대 온도다.
 
 ## 연결
 
-분자 간 힘은 [[c-shape]], 이온과 극성은 [[c-bond]], 몰은 [[c-mole]]에서 왔다. 수용액의 산·염기는 [[c-acid]], 포화 용액의 동적 평형은 [[c-equilibrium]], 세포막의 삼투는 [[b-membrane]]·[[b-body]]에서 다룬다. 용해열은 [[c-thermochem|#]] 열화학으로 이어진다.
+분자 간 힘은 [[c-shape]], 이온과 극성은 [[c-bond]], 몰은 [[c-mole]]에서 왔다. 수용액의 산·염기는 [[c-acid]], 용해열은 [[c-thermochem|#]], 포화 용액의 동적 평형은 [[c-equilibrium]], 세포막의 삼투는 [[b-membrane]]·[[b-body]]의 주제다.
 
 ## 요약
 

@@ -16,7 +16,7 @@
 
 $$Q=\Delta U+W\qquad(\Delta U=Q-W)$$
 
-열을 받으면 $Q>0$, 팽창하며 일을 하면 $W>0$이다. 압력이 일정하면 $W=P\Delta V$로 P-V 그래프 아래 넓이다. 이상 기체는 분자 사이 힘이 없어 $U$가 온도로만 정해지며 단원자 분자 기체는 $U=\frac32nRT$다([[c-gas|#]] $\frac32kT$×분자 수).
+열을 받으면 $Q>0$, 팽창하며 일을 하면 $W>0$이다. 압력이 일정하면 $W=P\Delta V$로 P-V 그래프 아래 넓이다. 이상 기체는 분자 사이 힘이 없어 $U$가 온도로만 정해지며 단원자 분자 기체는 $U=\frac32nRT$다($n$: 몰수, $R$: 기체 상수, [[c-gas|#]] $\frac32kT$×분자 수).
 
 | 과정 | 조건 | 제1법칙 |
 |---|---|---|
@@ -27,7 +27,7 @@ $$Q=\Delta U+W\qquad(\Delta U=Q-W)$$
 
 #### 엄밀
 
-$P$가 변하면 $W=\int P\,dV$([[f-rate|#]] 정적분)다. 경로마다 넓이가 달라 $Q$와 $W$는 경로에 따라 다르지만 $\Delta U$는 같다. $U$처럼 상태만으로 정해지는 양이 **상태 함수**(狀態函數, state function)다. 화학([[c-thermochem|#]])은 계가 받은 일 $w$로 $\Delta U=q+w$, 팽창이면 $w=-P\Delta V$로 쓴다. 일의 부호만 반대다. 단열로 오르는 공기 1 kg은 제1법칙, $PV=nRT$, [[p-fluid|#]]의 $P=P_0+\rho gh$로 $c_p\Delta T=-g\Delta z$를 따라 [[e-atmos|#]]의 건조 단열 감률 $g/c_p\approx9.8$ K/km가 된다.
+$P$가 변하면 $W=\int P\,dV$([[f-rate|#]] 정적분)다. 경로마다 넓이가 달라 $Q$와 $W$는 경로에 따라 다르지만 $\Delta U$는 같다. $U$처럼 상태만으로 정해지는 양이 **상태 함수**(狀態函數, state function)다. 화학([[c-thermochem|#]])은 계가 받은 일 $w$로 $\Delta U=q+w$, 팽창이면 $w=-P\Delta V$로 쓴다. 일의 부호만 반대다. 단열로 오르는 공기 1 kg은 제1법칙, 이상 기체 상태 방정식 $PV=nRT$, [[p-fluid|#]]의 $P=P_0+\rho gh$로 $c_p\Delta T=-g\Delta z$를 따라 [[e-atmos|#]]의 건조 단열 감률 $g/c_p\approx9.8$ K/km가 된다.
 
 #### 점검
 **Q.** 이상 기체가 단열 팽창하면 온도가 내려가는 까닭은?
@@ -101,7 +101,7 @@ $k=1.38\times10^{-23}$ J/K는 **볼츠만 상수**(Boltzmann常數, Boltzmann co
 
 ## 연결
 
-[[p-heat]]·[[p-energy]]의 열과 일, [[f-stats]]의 확률, [[c-gas|#]] $PV=nRT$가 재료다. [[c-solution]]의 녹아 퍼지는 경향도 미시 상태의 수로 풀린다. [[c-thermochem]]은 화학의 부호로 깁스 자유 에너지를, [[p-statmech]]은 볼츠만 분포를 다룬다.
+[[p-heat]]·[[p-energy]]의 열과 일, [[f-stats]]의 확률이 재료다. $PV=nRT$는 [[c-gas|#]]의 주제다. [[c-solution]]의 녹아 퍼지는 경향도 미시 상태의 수로 풀린다. [[c-thermochem]]은 화학의 부호로 깁스 자유 에너지를, [[p-statmech]]은 볼츠만 분포를 다룬다.
 
 ## 요약
 

@@ -14,7 +14,7 @@
 
 **강체**(剛體, rigid body)는 어느 두 점 사이의 거리도 변하지 않는다고 보는 물체다. 고정된 **회전축**(回轉軸, axis of rotation) 둘레로 도는 강체는 모든 점이 같은 각만큼 돈다.
 
-물체에 그은 선이 기준 방향과 이루는 각이 **각위치**(角位置, angular position) $\theta$, 그 변화량이 **각변위**(角變位, angular displacement) $\Delta\theta$다(rad, 시계 반대 방향이 $+$). 각속도 $\omega$([[p-gravity|#]])가 변하는 빠르기가 **각가속도**(角加速度, angular acceleration) $\alpha=\Delta\omega/\Delta t$(rad/s²)다. 축에서 $r$ 떨어진 점의 속력은 $v=r\omega$, 접선 방향 가속도는 $a_t=r\alpha$다(각은 rad).
+물체에 그은 선이 기준 방향과 이루는 각이 **각위치**(角位置, angular position) $\theta$, 그 변화량이 **각변위**(角變位, angular displacement) $\Delta\theta$다(rad, 시계 반대 방향이 $+$). 각속도 $\omega=\Delta\theta/\Delta t$([[p-gravity|#]])가 변하는 빠르기가 **각가속도**(角加速度, angular acceleration) $\alpha=\Delta\omega/\Delta t$(rad/s²)다. 축에서 $r$ 떨어진 점의 속력은 $v=r\omega$, 접선 방향 가속도는 $a_t=r\alpha$다(각은 rad).
 
 **돌림힘**(torque, 토크)의 크기는 $\tau=rF\sin\phi$(N·m)다. $r$은 축에서 작용점까지의 거리, $\phi$는 $\vec r$와 $\vec F$ 사이 각이다. **관성 모멘트**(慣性moment, moment of inertia)는 $I=\sum mr^2$(kg·m², $r$은 축까지의 거리)로, 축의 위치와 질량 분포에 따라 다르다. 돌림힘의 합인 **알짜 돌림힘**(net torque)이 각가속도를 정한다.
 
@@ -101,7 +101,7 @@ $$\sum\vec F=0,\qquad \sum\tau=0$$
 
 ## 연결
 
-[[p-force]]의 가속도 법칙과 힘의 평형, [[p-energy]]의 운동 에너지, [[p-gravity]]의 각속도가 바탕이다. [[p-momentum]]의 운동량 보존에 각운동량 보존이 대응하고, 돌림힘의 방향은 [[f-vector]]에서 미룬 벡터곱이다.
+[[p-force]]의 가속도 법칙과 힘의 평형, [[p-energy]]의 운동 에너지가 바탕이다. 각속도는 [[p-gravity]]의 원운동과 같다. [[p-momentum]]의 운동량 보존에 각운동량 보존이 대응하고, 돌림힘의 방향은 [[f-vector]]에서 미룬 벡터곱이다.
 
 ## 요약
 

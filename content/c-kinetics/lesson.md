@@ -100,7 +100,7 @@ $$v=k[\mathrm A]^m[\mathrm B]^n$$
 
 ## 연결
 
-[[c-gas]]의 분자 운동론, [[c-particle]]의 평균 운동 에너지, [[c-mole]]의 계수, [[f-rate]]의 도함수, [[f-sci]]의 로그, [[c-solution|#]] 몰 농도, [[b-enzyme|#]] 효소, [[c-thermochem|#]] $\Delta H$가 재료다. 평형은 [[c-equilibrium]], 에너지 분포는 [[p-statmech|#]]에서 다룬다.
+[[c-gas]]의 분자 운동론, [[c-particle]]의 평균 운동 에너지, [[c-mole]]의 계수, [[f-deriv|#]]의 도함수, [[f-sci]]의 로그, [[c-solution|#]] 몰 농도, [[b-enzyme|#]] 효소, [[c-thermochem|#]] $\Delta H$가 재료다. 평형은 [[c-equilibrium]], 에너지 분포는 [[p-statmech|#]]에서 다룬다.
 
 ## 요약
 

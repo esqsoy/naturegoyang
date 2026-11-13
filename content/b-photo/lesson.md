@@ -97,7 +97,7 @@ $$\mathrm{6CO_2+12H_2O\rightarrow C_6H_{12}O_6+6O_2+6H_2O}$$
 
 ## 연결
 
-[[c-redox]]의 산화수, [[p-light]]의 파장, [[b-enzyme]]의 동화 작용, [[b-respiration]]의 전자 전달계와 화학 삼투를 이었다. 생태계의 순환은 [[b-ecology]], 열의 방향은 [[p-thermo]], 광자는 [[p-quantum|#]], 분광 분석은 [[c-spectro|#]], 기후는 [[e-climate|#]]에서 다룬다.
+[[c-redox]]의 산화수, [[p-light]]의 파장, [[b-enzyme]]의 동화 작용, [[b-respiration]]의 전자 전달계와 화학 삼투를 이었다. 생태계의 순환은 [[b-ecology]], 열의 방향은 [[p-thermo]], 광자는 [[p-quantum|#]], 분광 분석은 [[c-spectro|#]], 기후는 [[e-climate|#]]의 주제다.
 
 ## 요약
 

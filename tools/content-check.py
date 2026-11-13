@@ -137,7 +137,7 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     link_part = '\n'.join(lines[c0:c1])
     for x in re.findall(r'\[\[([a-z]+-[a-z]+)\]\]', link_part):
         if x not in rel:
-            errs.append(f'연결의 [[{x}]]는 이 단원에서 쓸 수 없는 id다')
+            warns.append(f'연결의 [[{x}]]는 related() 밖이다(지도가 바뀌어 선수가 달라졌는지 본다)')
     for x in LINK.findall(md):
         if x not in ids_all:
             errs.append(f'[[{x}]]는 앱에 없는 단원 id다')
