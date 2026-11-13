@@ -7,6 +7,7 @@
   - 쓰는 기능: Claude 호출(설명·카드·문제 생성), Artifact 저장소(기록, 만들어 둔 설명·카드), 보는 사람 id
   - 원본: `app/naturegoyang.html`
 - **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원. 2판(26.11.10): 2번 직관 문장 고침. 3판: 2번 직관 비유 뺌. 4판: 6~10번 더함. 5판: 11~15번. 6판: 16~20번. 7판: 21~25번. 8판: 26~30번. 9판: 31~35번. 10판: 36~40번. 11판: 41~45번. 12판: 46~50번. 13판: 51~55번. 14판: 56~60번. 15판: 61~65번. 16판: 66~70번. 17판: 71~75번. 18판: 76~84번(전 단원).
+- **새 단원 검수 페이지(Artifact, 비공개, 26.11.14~):** https://claude.ai/artifact/CLXq5QMLDPNmQN4RbJHv4t — 화면 제목 '과학고양 새 단원 검수', capabilities `comments: {composer_only: true}`, `tools/review-page.py --out <파일> <id…>`로 만들고 제목만 바꾼다. 126단원 지도의 새 단원·다시 쓴 단원을 여기에 더한다(옛 검수 페이지는 84단원 전부가 든 5MB라 새 세션이 다시 올리기 무겁다). 1판: 수와 식, 함수와 그래프.
 - GitHub Pages: 없음. 지금 앱은 claude.ai 안에서만 Claude 호출과 저장소를 쓸 수 있다(README '어디서 돌아가나').
 
 ## 판 (같은 주소에 덮어씀. 1~5판 2026-11-09, 6~9판 2026-11-13, 10판~ 2026-11-14)
@@ -23,6 +24,7 @@
 | 8 | 모든 Claude 호출(설명·카드·확인·채점·응용 복습·질문·연결 정리)을 가장 유능한 등급(`complex`)으로. 기다림 안내를 1~2분으로 |
 | 9 | 가독성: 용어는 형광펜 밑줄 + 작은 풀이, 핵심 식 상자, 오개념 오해·사실 두 줄, 단원 첫 장에 용어 미리 보기(좁은 화면은 학습 목표도), 점검 답 아래 "이 목표에서 외울 것", 요약 상자 |
 | 10 | 단원 번호 칩 `[[id\|#]]`: 설명·카드가 다른 단원을 번호 대신 id로 가리키고, 앱이 지금 번호를 칩으로 보인다(누르면 그 단원). 표 칸 안의 `[[id\|…]]`도 깨지지 않게. 지도는 아직 84단원 |
+| 11 | 126단원 지도(design/map-126): 수학 38단원(토마스 13판·Epp·Lang)과 책 장에 맞춘 4단원을 더하고 선수·단계·목표를 고침. 새 1번 수와 식이 1번 측정과 단위의 선수다(하던 단원이 잠기고 읽던 자리는 남는다). 단계 설명, 지도의 기초 도구 5칸 |
 
 판 번호는 Artifact 쪽 판 번호와 같다.
 
@@ -53,3 +55,5 @@
 | 2026-11-10 | `lessons/`·`cards/` p-nuclear, p-qm, p-statmech, p-semicon, p-gr | 새로 1 | 71~75번. 검수 페이지 17판(75단원). |
 | 2026-11-10 | `lessons/`·`cards/` p-field, c-buffer, c-spectro, c-qchem, b-biotech, b-origin, b-brain, e-galaxy, e-life | 새로 1 | 76~84번. 전 84단원 올림(DB 문서 171개). 검수 페이지 18판(84단원). |
 | 2026-11-14 | `lessons/` 83개(f-measure 빼고 전부), `cards/` 80개 | 1 → 2 (f-method 설명 3 → 4) | 단원 번호 가리킴 1,136곳을 `[[id\|#]]`로(content/와 같게). 받은 판을 if_version으로. 고치기 전 원본은 Windows PC `Documents/naturegoyang-private/artifact-backup/2026-11-14/`(비공개 폴더가 이 PC에 내려오지 않아서). 지금 번호와 같은 번호가 보이므로 읽는 글은 그대로다. |
+| 2026-11-14 | `lessons/f-algebra--v3`, `f-func--v3`, `cards/f-algebra`, `f-func` | 새로 1 | 새 1번 수와 식, 5번 함수와 그래프(126단원 지도의 새 단원). 새 단원 검수 페이지 1판. |
+| 2026-11-14 | `lessons/` 16개(b-cell, b-ecology, b-photo, c-acid, c-bond, c-gas, c-kinetics, c-redox, c-solution, c-thermochem, e-rock, e-solar, f-ratio, p-gr, p-rotation, p-thermo), `cards/` b-ecology, f-ratio, p-magnet, p-motion | 2 → 3 | 새 순서에서 앞뒤가 거짓이 된 문장을 방향 없는 말로, 미분을 가리키던 f-rate를 f-deriv로. |
