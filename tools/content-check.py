@@ -96,7 +96,7 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     total = len(shown(md))
     info.append(f'설명 {total}자')
     if not 3000 <= total <= 5000:
-        warns.append(f'분량 {total}자 (3000~5000)')
+        warns.append(f'분량 {total}자 (어림 3000~5000, 문제가 쓰는 것을 실어 넘으면 둔다)')
     # 원리 블록
     try:
         a = next(i for i, t in h2 if t == '원리')
