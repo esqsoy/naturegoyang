@@ -1,0 +1,341 @@
+{
+ "about": "Lang, Linear Algebra 3판(Springer UTM, 1987)의 절별 연습문제 번호 범위. 26.11.16 Windows PC의 PDF(스캔본, OCR 글자 층)에서 절마다 문제 묶음의 처음과 끝을 쪽 글자로 확인했다. 문제는 장 끝이 아니라 절 끝에 있고 번호는 절마다 1번(V장 2절만 0번)부터 다시 시작한다. sec = 장(로마 숫자).절. 문제 글은 이 저장소에 두지 않는다.",
+ "book": "lang3",
+ "title": "Lang 선형대수 3판",
+ "answers": "책에 답·풀이가 없다(모든 절 ans=none). 일부 문제에 [Hint: …]가 문제 글 안에 붙어 있을 뿐이다.",
+ "groups": [
+  {
+   "unit": "f-linalg",
+   "sec": "I.1",
+   "label": "I장 1절",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "I.2",
+   "label": "I장 2절",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "I.4",
+   "label": "I장 4절",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "II.1a",
+   "label": "II장 1절(행렬)",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "II.1b",
+   "label": "II장 1절(차원)",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "II.2",
+   "label": "II장 2절",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linalg",
+   "sec": "II.3",
+   "label": "II장 3절",
+   "from": 1,
+   "to": 39,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "III.1",
+   "label": "III장 1절",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "III.2",
+   "label": "III장 2절",
+   "from": 1,
+   "to": 19,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "III.3",
+   "label": "III장 3절",
+   "from": 1,
+   "to": 18,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "III.4",
+   "label": "III장 4절",
+   "from": 1,
+   "to": 21,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "III.5",
+   "label": "III장 5절",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "IV.1",
+   "label": "IV장 1절",
+   "from": 1,
+   "to": 1,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "IV.2",
+   "label": "IV장 2절",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "f-linmap",
+   "sec": "IV.3",
+   "label": "IV장 3절",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.1",
+   "label": "V장 1절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.2",
+   "label": "V장 2절",
+   "from": 0,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.3",
+   "label": "V장 3절",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.4",
+   "label": "V장 4절",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.5",
+   "label": "V장 5절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.6",
+   "label": "V장 6절",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.7",
+   "label": "V장 7절",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "V.8",
+   "label": "V장 8절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.2",
+   "label": "VI장 2절",
+   "from": 1,
+   "to": 2,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.3",
+   "label": "VI장 3절",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.4",
+   "label": "VI장 4절",
+   "from": 1,
+   "to": 1,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.5",
+   "label": "VI장 5절",
+   "from": 1,
+   "to": 2,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.6",
+   "label": "VI장 6절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.7",
+   "label": "VI장 7절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.8",
+   "label": "VI장 8절",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "f-inner",
+   "sec": "VI.9",
+   "label": "VI장 9절",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VII.1",
+   "label": "VII장 1절",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VII.2",
+   "label": "VII장 2절",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VII.3",
+   "label": "VII장 3절",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VIII.1",
+   "label": "VIII장 1절",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VIII.2",
+   "label": "VIII장 2절",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VIII.3",
+   "label": "VIII장 3절",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VIII.4",
+   "label": "VIII장 4절",
+   "from": 1,
+   "to": 25,
+   "ans": "none"
+  },
+  {
+   "unit": "f-eigen",
+   "sec": "VIII.5",
+   "label": "VIII장 5절",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  }
+ ],
+ "units": {
+  "f-linalg": {
+   "count": 92
+  },
+  "f-linmap": {
+   "count": 102
+  },
+  "f-inner": {
+   "count": 78
+  },
+  "f-eigen": {
+   "count": 100
+  }
+ },
+ "notes": [
+  "II장 1절은 문제 묶음이 둘이다: '행렬 문제'(II.1a, 1~12)와 '차원 문제'(II.1b, 1~9). 번호가 각각 1번부터라 sec을 나눴다.",
+  "V장 2절은 0번부터 10번까지 11문제다(from=0).",
+  "문제가 없는 절: I장 3절, VI장 1절, VIII장 6절.",
+  "VI장 9절은 OCR에 홀수 번호만 잡혔으나 쪽을 보면 행렬 8개(1~8번)다. II장 3절 24번, VIII장 2절 4번도 OCR 줄 머리에서는 빠졌지만 쪽에 있다. 그래서 f-inner는 map-126 어림 76이 아니라 78이다(나머지 92/102/100은 같다).",
+  "스캔본이라 소문항((a),(b)…) 수는 세지 않았다. 번호 단위만 믿을 수 있다."
+ ]
+}

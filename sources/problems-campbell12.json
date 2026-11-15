@@ -1,0 +1,3442 @@
+{
+ "about": "Campbell Biology 12판 Global(Pearson)의 책에 실린 문제 번호 범위. 26.11.16 Windows PC의 PDF 글자 층에서 세었다. 묶음 셋: CC = 절 끝 개념 확인(Concept Check, 개념마다 1번부터), SS = 과학 기술 연습(Scientific Skills Exercise, 장마다 하나, 1번부터), T·TE = 장 끝 이해 점검(Test Your Understanding) 가운데 책에 실린 번호. Global판은 장 끝 객관식(1번~)을 온라인(Mastering Biology)에만 두므로 뺐고, 그래서 T의 from이 1이 아니다(14·15장만 객관식이 없어 1번부터). T = 단답·그리기·자료 해석 문제, TE = 서술형(Evolution Connection, Scientific Inquiry, Science·Technology·Society, Write About a Theme, Synthesize Your Knowledge). 한 장은 한 단원이 통째로 맡는다(math-path 6-4, map-126). 문제 글은 이 저장소에 두지 않는다.",
+ "book": "campbell12",
+ "title": "캠벨 12판 Global",
+ "answers": "부록 A(Appendix A Answers)에 장별로 실려 있다. 개념 확인(CC)은 모든 문항에 예시 답이 있다(ans=all). 과학 기술 연습(SS)의 답은 책에 없다(교수자 자료·Mastering Biology에만, ans=none). 장 끝 이해 점검은 '선택된 답'만 있다: 단답·그리기 문항(T)은 답이 있고(ans=all), 서술형(TE)은 대체로 없으며(ans=none) 그림·그래프를 그리게 하는 몇 문항만 있다(ans=some, answered = 부록에서 찾은 번호). 부록에는 이 밖에 그림 질문과 '핵심 개념 요약' 질문의 답도 있다(번호 없는 질문이라 여기서 세지 않았다).",
+ "groups": [
+  {
+   "unit": "b-life",
+   "sec": "1.1CC",
+   "label": "개념 1.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1.2CC",
+   "label": "개념 1.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1.3CC",
+   "label": "개념 1.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1.4CC",
+   "label": "개념 1.4 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1SS",
+   "label": "1장 과학 기술 연습",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1T",
+   "label": "1장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-life",
+   "sec": "1TE",
+   "label": "1장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2.1CC",
+   "label": "개념 2.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2.2CC",
+   "label": "개념 2.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2.3CC",
+   "label": "개념 2.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2.4CC",
+   "label": "개념 2.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2SS",
+   "label": "2장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2T",
+   "label": "2장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "2TE",
+   "label": "2장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3.1CC",
+   "label": "개념 3.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3.2CC",
+   "label": "개념 3.2 개념 확인",
+   "from": 1,
+   "to": 5,
+   "ans": "some"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3.3CC",
+   "label": "개념 3.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3SS",
+   "label": "3장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3T",
+   "label": "3장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "3TE",
+   "label": "3장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4.1CC",
+   "label": "개념 4.1 개념 확인",
+   "from": 1,
+   "to": 1,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4.2CC",
+   "label": "개념 4.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4.3CC",
+   "label": "개념 4.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4SS",
+   "label": "4장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4T",
+   "label": "4장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "4TE",
+   "label": "4장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 12,
+   "ans": "some",
+   "answered": [
+    9
+   ]
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.1CC",
+   "label": "개념 5.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.2CC",
+   "label": "개념 5.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.3CC",
+   "label": "개념 5.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.4CC",
+   "label": "개념 5.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.5CC",
+   "label": "개념 5.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5.6CC",
+   "label": "개념 5.6 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5SS",
+   "label": "5장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5T",
+   "label": "5장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-molecule",
+   "sec": "5TE",
+   "label": "5장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6.1CC",
+   "label": "개념 6.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6.2CC",
+   "label": "개념 6.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6.3CC",
+   "label": "개념 6.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6.4CC",
+   "label": "개념 6.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6.5CC",
+   "label": "개념 6.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6SS",
+   "label": "6장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-enzyme",
+   "sec": "6TE",
+   "label": "6장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.1CC",
+   "label": "개념 7.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.2CC",
+   "label": "개념 7.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.3CC",
+   "label": "개념 7.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.4CC",
+   "label": "개념 7.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.5CC",
+   "label": "개념 7.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.6CC",
+   "label": "개념 7.6 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.7CC",
+   "label": "개념 7.7 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7.8CC",
+   "label": "개념 7.8 개념 확인",
+   "from": 1,
+   "to": 1,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7SS",
+   "label": "7장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7T",
+   "label": "7장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-cell",
+   "sec": "7TE",
+   "label": "7장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8.1CC",
+   "label": "개념 8.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8.2CC",
+   "label": "개념 8.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8.3CC",
+   "label": "개념 8.3 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8.4CC",
+   "label": "개념 8.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8.5CC",
+   "label": "개념 8.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8SS",
+   "label": "8장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8T",
+   "label": "8장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-membrane",
+   "sec": "8TE",
+   "label": "8장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9.1CC",
+   "label": "개념 9.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9.2CC",
+   "label": "개념 9.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9.3CC",
+   "label": "개념 9.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9.4CC",
+   "label": "개념 9.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9.5CC",
+   "label": "개념 9.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9T",
+   "label": "9장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "9TE",
+   "label": "9장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40.1CC",
+   "label": "개념 40.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40.2CC",
+   "label": "개념 40.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40.3CC",
+   "label": "개념 40.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40.4CC",
+   "label": "개념 40.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40SS",
+   "label": "40장 과학 기술 연습",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40T",
+   "label": "40장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "40TE",
+   "label": "40장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41.1CC",
+   "label": "개념 41.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41.2CC",
+   "label": "개념 41.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41.3CC",
+   "label": "개념 41.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41SS",
+   "label": "41장 과학 기술 연습",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41T",
+   "label": "41장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "41TE",
+   "label": "41장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42.1CC",
+   "label": "개념 42.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42.2CC",
+   "label": "개념 42.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42.3CC",
+   "label": "개념 42.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42.4CC",
+   "label": "개념 42.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42.5CC",
+   "label": "개념 42.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42SS",
+   "label": "42장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42T",
+   "label": "42장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "42TE",
+   "label": "42장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.1CC",
+   "label": "개념 43.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.2CC",
+   "label": "개념 43.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.3CC",
+   "label": "개념 43.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.4CC",
+   "label": "개념 43.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.5CC",
+   "label": "개념 43.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.6CC",
+   "label": "개념 43.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43.7CC",
+   "label": "개념 43.7 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43SS",
+   "label": "43장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43T",
+   "label": "43장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "43TE",
+   "label": "43장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44.1CC",
+   "label": "개념 44.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44.2CC",
+   "label": "개념 44.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44.3CC",
+   "label": "개념 44.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44.4CC",
+   "label": "개념 44.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44.5CC",
+   "label": "개념 44.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44SS",
+   "label": "44장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44T",
+   "label": "44장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-body",
+   "sec": "44TE",
+   "label": "44장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.1CC",
+   "label": "개념 10.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.2CC",
+   "label": "개념 10.2 개념 확인",
+   "from": 1,
+   "to": 1,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.3CC",
+   "label": "개념 10.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.4CC",
+   "label": "개념 10.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.5CC",
+   "label": "개념 10.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10.6CC",
+   "label": "개념 10.6 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10SS",
+   "label": "10장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10T",
+   "label": "10장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 12,
+   "ans": "all"
+  },
+  {
+   "unit": "b-respiration",
+   "sec": "10TE",
+   "label": "10장 이해 점검(책에 실린 것, 서술형)",
+   "from": 13,
+   "to": 16,
+   "ans": "none"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.1CC",
+   "label": "개념 11.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.2CC",
+   "label": "개념 11.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.3CC",
+   "label": "개념 11.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.4CC",
+   "label": "개념 11.4 개념 확인",
+   "from": 1,
+   "to": 5,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.5CC",
+   "label": "개념 11.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11.6CC",
+   "label": "개념 11.6 개념 확인",
+   "from": 1,
+   "to": 1,
+   "ans": "all"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11SS",
+   "label": "11장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-photo",
+   "sec": "11TE",
+   "label": "11장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 12,
+   "ans": "some",
+   "answered": [
+    10
+   ]
+  },
+  {
+   "unit": "b-division",
+   "sec": "12.1CC",
+   "label": "개념 12.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "12.2CC",
+   "label": "개념 12.2 개념 확인",
+   "from": 1,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "12.3CC",
+   "label": "개념 12.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "12SS",
+   "label": "12장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-division",
+   "sec": "12T",
+   "label": "12장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "12TE",
+   "label": "12장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13.1CC",
+   "label": "개념 13.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13.2CC",
+   "label": "개념 13.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13.3CC",
+   "label": "개념 13.3 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13.4CC",
+   "label": "개념 13.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13SS",
+   "label": "13장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13T",
+   "label": "13장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-division",
+   "sec": "13TE",
+   "label": "13장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14.1CC",
+   "label": "개념 14.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14.2CC",
+   "label": "개념 14.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14.3CC",
+   "label": "개념 14.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14.4CC",
+   "label": "개념 14.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14SS",
+   "label": "14장 과학 기술 연습",
+   "from": 1,
+   "to": 2,
+   "ans": "none"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14T",
+   "label": "14장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 1,
+   "to": 14,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "14TE",
+   "label": "14장 이해 점검(책에 실린 것, 서술형)",
+   "from": 15,
+   "to": 18,
+   "ans": "none"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15.1CC",
+   "label": "개념 15.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15.2CC",
+   "label": "개념 15.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15.3CC",
+   "label": "개념 15.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15.4CC",
+   "label": "개념 15.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15.5CC",
+   "label": "개념 15.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15SS",
+   "label": "15장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15T",
+   "label": "15장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 1,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-mendel",
+   "sec": "15TE",
+   "label": "15장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 14,
+   "ans": "some",
+   "answered": [
+    12
+   ]
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16.1CC",
+   "label": "개념 16.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16.2CC",
+   "label": "개념 16.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16.3CC",
+   "label": "개념 16.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16SS",
+   "label": "16장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16T",
+   "label": "16장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "16TE",
+   "label": "16장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "some",
+   "answered": [
+    11
+   ]
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17.1CC",
+   "label": "개념 17.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17.2CC",
+   "label": "개념 17.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17.3CC",
+   "label": "개념 17.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17.4CC",
+   "label": "개념 17.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17.5CC",
+   "label": "개념 17.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17SS",
+   "label": "17장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17T",
+   "label": "17장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-dna",
+   "sec": "17TE",
+   "label": "17장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18.1CC",
+   "label": "개념 18.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18.2CC",
+   "label": "개념 18.2 개념 확인",
+   "from": 1,
+   "to": 5,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18.3CC",
+   "label": "개념 18.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18.4CC",
+   "label": "개념 18.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18.5CC",
+   "label": "개념 18.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18SS",
+   "label": "18장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18T",
+   "label": "18장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 11,
+   "to": 11,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "18TE",
+   "label": "18장 이해 점검(책에 실린 것, 서술형)",
+   "from": 12,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45.1CC",
+   "label": "개념 45.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45.2CC",
+   "label": "개념 45.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45.3CC",
+   "label": "개념 45.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45.4CC",
+   "label": "개념 45.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45.5CC",
+   "label": "개념 45.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45SS",
+   "label": "45장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45T",
+   "label": "45장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "45TE",
+   "label": "45장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46.1CC",
+   "label": "개념 46.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46.2CC",
+   "label": "개념 46.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46.3CC",
+   "label": "개념 46.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46SS",
+   "label": "46장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46T",
+   "label": "46장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-regulation",
+   "sec": "46TE",
+   "label": "46장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19.1CC",
+   "label": "개념 19.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19.2CC",
+   "label": "개념 19.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19.3CC",
+   "label": "개념 19.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19.4CC",
+   "label": "개념 19.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19T",
+   "label": "19장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "19TE",
+   "label": "19장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.1CC",
+   "label": "개념 20.1 개념 확인",
+   "from": 1,
+   "to": 1,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.2CC",
+   "label": "개념 20.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.3CC",
+   "label": "개념 20.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.4CC",
+   "label": "개념 20.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.5CC",
+   "label": "개념 20.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20.6CC",
+   "label": "개념 20.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20SS",
+   "label": "20장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20T",
+   "label": "20장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 4,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-biotech",
+   "sec": "20TE",
+   "label": "20장 이해 점검(책에 실린 것, 서술형)",
+   "from": 5,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "21.1CC",
+   "label": "개념 21.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "21.2CC",
+   "label": "개념 21.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "21.3CC",
+   "label": "개념 21.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "21SS",
+   "label": "21장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "21TE",
+   "label": "21장 이해 점검(책에 실린 것, 서술형)",
+   "from": 6,
+   "to": 9,
+   "ans": "some",
+   "answered": [
+    7
+   ]
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.1CC",
+   "label": "개념 22.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.2CC",
+   "label": "개념 22.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.3CC",
+   "label": "개념 22.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.4CC",
+   "label": "개념 22.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.5CC",
+   "label": "개념 22.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22.6CC",
+   "label": "개념 22.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22SS",
+   "label": "22장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "22TE",
+   "label": "22장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "some",
+   "answered": [
+    9
+   ]
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23.1CC",
+   "label": "개념 23.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23.2CC",
+   "label": "개념 23.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23.3CC",
+   "label": "개념 23.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23.4CC",
+   "label": "개념 23.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23SS",
+   "label": "23장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "23TE",
+   "label": "23장 이해 점검(책에 실린 것, 서술형)",
+   "from": 6,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24.1CC",
+   "label": "개념 24.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24.2CC",
+   "label": "개념 24.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24.3CC",
+   "label": "개념 24.3 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24.4CC",
+   "label": "개념 24.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24SS",
+   "label": "24장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-evolution",
+   "sec": "24TE",
+   "label": "24장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "some",
+   "answered": [
+    8
+   ]
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.1CC",
+   "label": "개념 25.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.2CC",
+   "label": "개념 25.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.3CC",
+   "label": "개념 25.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.4CC",
+   "label": "개념 25.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.5CC",
+   "label": "개념 25.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25.6CC",
+   "label": "개념 25.6 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25SS",
+   "label": "25장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-origin",
+   "sec": "25TE",
+   "label": "25장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26.1CC",
+   "label": "개념 26.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26.2CC",
+   "label": "개념 26.2 개념 확인",
+   "from": 1,
+   "to": 5,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26.3CC",
+   "label": "개념 26.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26SS",
+   "label": "26장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26T",
+   "label": "26장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "26TE",
+   "label": "26장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.1CC",
+   "label": "개념 27.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.2CC",
+   "label": "개념 27.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.3CC",
+   "label": "개념 27.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.4CC",
+   "label": "개념 27.4 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.5CC",
+   "label": "개념 27.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27.6CC",
+   "label": "개념 27.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27SS",
+   "label": "27장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "27TE",
+   "label": "27장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.1CC",
+   "label": "개념 28.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.2CC",
+   "label": "개념 28.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.3CC",
+   "label": "개념 28.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.4CC",
+   "label": "개념 28.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.5CC",
+   "label": "개념 28.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28.6CC",
+   "label": "개념 28.6 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28SS",
+   "label": "28장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-micro",
+   "sec": "28TE",
+   "label": "28장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "some",
+   "answered": [
+    7
+   ]
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29.1CC",
+   "label": "개념 29.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29.2CC",
+   "label": "개념 29.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29.3CC",
+   "label": "개념 29.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29SS",
+   "label": "29장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29T",
+   "label": "29장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "29TE",
+   "label": "29장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "some",
+   "answered": [
+    7
+   ]
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30.1CC",
+   "label": "개념 30.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30.2CC",
+   "label": "개념 30.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30.3CC",
+   "label": "개념 30.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30.4CC",
+   "label": "개념 30.4 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30SS",
+   "label": "30장 과학 기술 연습",
+   "from": 1,
+   "to": 2,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30T",
+   "label": "30장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 6,
+   "to": 6,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "30TE",
+   "label": "30장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "some",
+   "answered": [
+    8
+   ]
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31.1CC",
+   "label": "개념 31.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31.2CC",
+   "label": "개념 31.2 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31.3CC",
+   "label": "개념 31.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31.4CC",
+   "label": "개념 31.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31.5CC",
+   "label": "개념 31.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31SS",
+   "label": "31장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "31TE",
+   "label": "31장 이해 점검(책에 실린 것, 서술형)",
+   "from": 5,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32.1CC",
+   "label": "개념 32.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32.2CC",
+   "label": "개념 32.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32.3CC",
+   "label": "개념 32.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32.4CC",
+   "label": "개념 32.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32SS",
+   "label": "32장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "32TE",
+   "label": "32장 이해 점검(책에 실린 것, 서술형)",
+   "from": 5,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33.1CC",
+   "label": "개념 33.1 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33.2CC",
+   "label": "개념 33.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33.3CC",
+   "label": "개념 33.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33.4CC",
+   "label": "개념 33.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33.5CC",
+   "label": "개념 33.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33SS",
+   "label": "33장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "33TE",
+   "label": "33장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.1CC",
+   "label": "개념 34.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.2CC",
+   "label": "개념 34.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.3CC",
+   "label": "개념 34.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.4CC",
+   "label": "개념 34.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.5CC",
+   "label": "개념 34.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.6CC",
+   "label": "개념 34.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34.7CC",
+   "label": "개념 34.7 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34SS",
+   "label": "34장 과학 기술 연습",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "b-diversity",
+   "sec": "34TE",
+   "label": "34장 이해 점검(책에 실린 것, 서술형)",
+   "from": 7,
+   "to": 10,
+   "ans": "some",
+   "answered": [
+    8
+   ]
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35.1CC",
+   "label": "개념 35.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35.2CC",
+   "label": "개념 35.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35.3CC",
+   "label": "개념 35.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35.4CC",
+   "label": "개념 35.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35.5CC",
+   "label": "개념 35.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35SS",
+   "label": "35장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35T",
+   "label": "35장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 11,
+   "to": 13,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "35TE",
+   "label": "35장 이해 점검(책에 실린 것, 서술형)",
+   "from": 14,
+   "to": 18,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.1CC",
+   "label": "개념 36.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.2CC",
+   "label": "개념 36.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.3CC",
+   "label": "개념 36.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.4CC",
+   "label": "개념 36.4 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.5CC",
+   "label": "개념 36.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36.6CC",
+   "label": "개념 36.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36SS",
+   "label": "36장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "36TE",
+   "label": "36장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37.1CC",
+   "label": "개념 37.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37.2CC",
+   "label": "개념 37.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37.3CC",
+   "label": "개념 37.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37SS",
+   "label": "37장 과학 기술 연습",
+   "from": 1,
+   "to": 2,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37T",
+   "label": "37장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 10,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "37TE",
+   "label": "37장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38.1CC",
+   "label": "개념 38.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38.2CC",
+   "label": "개념 38.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38.3CC",
+   "label": "개념 38.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38SS",
+   "label": "38장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38T",
+   "label": "38장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "38TE",
+   "label": "38장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39.1CC",
+   "label": "개념 39.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39.2CC",
+   "label": "개념 39.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39.3CC",
+   "label": "개념 39.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39.4CC",
+   "label": "개념 39.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39.5CC",
+   "label": "개념 39.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39SS",
+   "label": "39장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39T",
+   "label": "39장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "b-plant",
+   "sec": "39TE",
+   "label": "39장 이해 점검(책에 실린 것, 서술형)",
+   "from": 9,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47.1CC",
+   "label": "개념 47.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47.2CC",
+   "label": "개념 47.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47.3CC",
+   "label": "개념 47.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47.4CC",
+   "label": "개념 47.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47SS",
+   "label": "47장 과학 기술 연습",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47T",
+   "label": "47장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 8,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-immune",
+   "sec": "47TE",
+   "label": "47장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48.1CC",
+   "label": "개념 48.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48.2CC",
+   "label": "개념 48.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48.3CC",
+   "label": "개념 48.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48.4CC",
+   "label": "개념 48.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48SS",
+   "label": "48장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48T",
+   "label": "48장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "48TE",
+   "label": "48장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.1CC",
+   "label": "개념 50.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.2CC",
+   "label": "개념 50.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.3CC",
+   "label": "개념 50.3 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.4CC",
+   "label": "개념 50.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.5CC",
+   "label": "개념 50.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50.6CC",
+   "label": "개념 50.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50SS",
+   "label": "50장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50T",
+   "label": "50장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-nerve",
+   "sec": "50TE",
+   "label": "50장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49.1CC",
+   "label": "개념 49.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49.2CC",
+   "label": "개념 49.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49.3CC",
+   "label": "개념 49.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49.4CC",
+   "label": "개념 49.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49.5CC",
+   "label": "개념 49.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49SS",
+   "label": "49장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49T",
+   "label": "49장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "49TE",
+   "label": "49장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52.1CC",
+   "label": "개념 52.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52.2CC",
+   "label": "개념 52.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52.3CC",
+   "label": "개념 52.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52.4CC",
+   "label": "개념 52.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52SS",
+   "label": "52장 과학 기술 연습",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52T",
+   "label": "52장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-brain",
+   "sec": "52TE",
+   "label": "52장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51.1CC",
+   "label": "개념 51.1 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51.2CC",
+   "label": "개념 51.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51.3CC",
+   "label": "개념 51.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51.4CC",
+   "label": "개념 51.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51.5CC",
+   "label": "개념 51.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51SS",
+   "label": "51장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51T",
+   "label": "51장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 9,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "51TE",
+   "label": "51장 이해 점검(책에 실린 것, 서술형)",
+   "from": 10,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.1CC",
+   "label": "개념 53.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.2CC",
+   "label": "개념 53.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.3CC",
+   "label": "개념 53.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.4CC",
+   "label": "개념 53.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.5CC",
+   "label": "개념 53.5 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53.6CC",
+   "label": "개념 53.6 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53SS",
+   "label": "53장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53T",
+   "label": "53장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 10,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "53TE",
+   "label": "53장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54.1CC",
+   "label": "개념 54.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54.2CC",
+   "label": "개념 54.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54.3CC",
+   "label": "개념 54.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54.4CC",
+   "label": "개념 54.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54.5CC",
+   "label": "개념 54.5 개념 확인",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54SS",
+   "label": "54장 과학 기술 연습",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54T",
+   "label": "54장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "54TE",
+   "label": "54장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55.1CC",
+   "label": "개념 55.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55.2CC",
+   "label": "개념 55.2 개념 확인",
+   "from": 1,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55.3CC",
+   "label": "개념 55.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55.4CC",
+   "label": "개념 55.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55.5CC",
+   "label": "개념 55.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55SS",
+   "label": "55장 과학 기술 연습",
+   "from": 1,
+   "to": 3,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55T",
+   "label": "55장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 9,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "55TE",
+   "label": "55장 이해 점검(책에 실린 것, 서술형)",
+   "from": 11,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56.1CC",
+   "label": "개념 56.1 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56.2CC",
+   "label": "개념 56.2 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56.3CC",
+   "label": "개념 56.3 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56.4CC",
+   "label": "개념 56.4 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56.5CC",
+   "label": "개념 56.5 개념 확인",
+   "from": 1,
+   "to": 3,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56SS",
+   "label": "56장 과학 기술 연습",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56T",
+   "label": "56장 이해 점검(책에 실린 것, 단답·그리기)",
+   "from": 7,
+   "to": 7,
+   "ans": "all"
+  },
+  {
+   "unit": "b-ecology",
+   "sec": "56TE",
+   "label": "56장 이해 점검(책에 실린 것, 서술형)",
+   "from": 8,
+   "to": 10,
+   "ans": "none"
+  }
+ ],
+ "units": {
+  "b-life": {
+   "count": 25
+  },
+  "b-molecule": {
+   "count": 91
+  },
+  "b-enzyme": {
+   "count": 24
+  },
+  "b-cell": {
+   "count": 28
+  },
+  "b-membrane": {
+   "count": 24
+  },
+  "b-body": {
+   "count": 146
+  },
+  "b-respiration": {
+   "count": 27
+  },
+  "b-photo": {
+   "count": 27
+  },
+  "b-division": {
+   "count": 42
+  },
+  "b-mendel": {
+   "count": 65
+  },
+  "b-dna": {
+   "count": 44
+  },
+  "b-regulation": {
+   "count": 74
+  },
+  "b-biotech": {
+   "count": 47
+  },
+  "b-evolution": {
+   "count": 81
+  },
+  "b-origin": {
+   "count": 24
+  },
+  "b-micro": {
+   "count": 69
+  },
+  "b-diversity": {
+   "count": 133
+  },
+  "b-plant": {
+   "count": 121
+  },
+  "b-immune": {
+   "count": 24
+  },
+  "b-nerve": {
+   "count": 55
+  },
+  "b-brain": {
+   "count": 50
+  },
+  "b-ecology": {
+   "count": 125
+  }
+ },
+ "notes": [
+  "합계 1346문항: 개념 확인 801(263개 개념), 과학 기술 연습 226(54개 장), 이해 점검 단답·그리기 83, 서술형 236.",
+  "장 → 단원: 1 b-life, 2~5 b-molecule, 6 b-enzyme, 7 b-cell, 8 b-membrane, 9·40~44 b-body, 10 b-respiration, 11 b-photo, 12~13 b-division, 14~15 b-mendel, 16~17 b-dna, 18·45~46 b-regulation, 19~20 b-biotech, 21~24 b-evolution, 25 b-origin, 26~28 b-micro, 29~34 b-diversity, 35~39 b-plant, 47 b-immune, 48·50 b-nerve, 49·52 b-brain, 51·53~56 b-ecology. 56장 모두 맡겼다.",
+  "sources/unit-map.json(설명 대조용)은 예전 지도라 이 표와 다르다: 22·28장을 b-origin에, b-molecule을 5장만, b-body를 40·41·44장만 적고 있고, 1장(f-method)·25장(e-history)·51장(e-sphere)·56장(e-climate)을 다른 단원의 대조 자료로도 쓴다. 문제는 한 단원에만 맡기므로 여기서는 math-path 6-4와 map-126을 따랐다(22장 → b-evolution, 28장 → b-micro, 31장 → b-diversity).",
+  "과학 기술 연습이 책에 없는 장: 9장·19장(Mastering Biology에만). 27장과 31장의 둘째 연습도 온라인에만 있어 세지 않았다.",
+  "문제 풀이 연습(Problem-Solving Exercise, 5·9·17·24·34·39·41·55장에 실림), 그림 설명 속 질문(Visual Skills·What If 등), 장 요약의 개념별 질문은 번호가 없거나 맡은 범위 밖이라 넣지 않았다. 넣을지는 정해야 한다.",
+  "과학 기술 연습 가운데 수학 도구를 쓰는 것(제목 기준): 2장 붕괴 곡선, 3장·11장 회귀 직선, 6장 기울기, 7장 부피·겉넓이, 15장 카이제곱, 23장 하디-바인베르크, 27장 평균·표준 오차, 30장 자연로그, 32장 상관 계수, 34장 회귀 직선의 식, 36장 온도 계수(Q10), 48장 과학적 표기, 50장 로그 눈금, 53장 로지스틱 식. 15·3·27·32장은 map-126에서 f-infer의 대조 자료로도 적혀 있다.",
+  "개념 3.2 개념 확인만 책에 '선택된 답'이라고 적혀 있고, 부록 글자 층에서 5문항 가운데 4문항의 답만 확인했다(ans=some).",
+  "서술형인데 부록에 답이 있는 것(answered): 4장 9, 11장 10, 15장 12, 16장 11, 21장 7, 22장 9, 24장 8, 28장 7, 29장 7, 30장 8, 34장 8번. 부록은 두 단 편집에 그림이 섞여 글자 층에서 번호가 빠질 수 있으므로 이 목록은 어림이다.",
+  "단답·그리기(T)인데 부록 글자 층에서 답 번호를 찾지 못한 것: 10장 11, 14장 9, 44장 7, 51장 9, 53장 10, 55장 10번. 답이 그림뿐이라 번호가 뽑히지 않았을 수 있다. 쓸 때 부록 쪽을 눈으로 확인한다.",
+  "14장 이해 점검 사이에 있는 '유전 문제 푸는 요령' 번호 목록(1~7)은 문제가 아니다. 14장 문제는 1~18번, 15장은 1~14번이다.",
+  "개념 확인 문항 수 분포: 1문항 5개, 2문항 35개, 3문항 172개, 4문항 46개, 5문항 4개, 6문항 1개. 16.3은 줄글 뽑기에서 빠져 쪽 배치 뽑기로 확인했다."
+ ]
+}

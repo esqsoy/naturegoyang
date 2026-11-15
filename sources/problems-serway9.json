@@ -1,0 +1,3802 @@
+{
+ "about": "Serway·Jewett, Physics for Scientists and Engineers with Modern Physics 9판(2013)의 장 끝 연습문제 번호 범위. 26.11.16 이 PC의 PDF에서 쪽을 두 단으로 나눠 글자를 뽑아 번호를 세었고, 각 장의 마지막 번호는 그 쪽에서 다시 확인했다. 한 묶음(group)은 from번부터 to번까지이고 단원 하나가 맡는다. 서웨이는 한 장의 문제(Problems)에 번호를 이어 붙인다: 절별 문제 → 추가 문제(AP) → 도전 문제(CP). 객관식 질문(OQ)과 개념 질문(CQ)은 따로 1번부터 센다. sec는 책 안에서 하나뿐인 이름이다(절 '2.3', 제목이 함께 묶인 절 '5.1-5.6', 장 끝 묶음 '2OQ'·'2CQ'·'2AP'·'2CP'). groups는 단원별로 푸는 순서(절 문제 → 그 장의 객관식 질문·개념 질문 → 추가 문제·도전 문제)로 적었다. 넣은 것: 객관식 질문, 개념 질문, 문제 전부(map-126 1절). 뺀 것: 없다. 이 책에는 컴퓨터·온라인 전용 문제가 따로 없다(WebAssign 표시는 같은 문제의 온라인 보조다). 본문 속 Quick Quiz와 예제, 부록 B의 연습(대조용)은 세지 않았다. 문제가 실리지 않은 절(7.1, 16.4 등)은 묶음이 없다. 장 끝의 섞인 묶음은 그 장을 맡은 단원 가운데 길에서 가장 뒤 단원이 맡는다(math-path 1절 규칙 4). 문제 글은 이 저장소에 두지 않는다.",
+ "book": "serway9",
+ "title": "Serway·Jewett 9판",
+ "answers": "책 뒤(Answers to Quick Quizzes and Odd-Numbered Problems)에 문제(절별·추가·도전)의 홀수 번호 답이 있다(ans: odd). 객관식 질문과 개념 질문의 답은 책에 없다(ans: none. 일부는 따로 파는 Student Solutions Manual/Study Guide에만 있다). 짝수 번호 문제의 답도 책에 없다.",
+ "groups": [
+  {
+   "unit": "f-measure",
+   "sec": "1.1",
+   "label": "1.1절 문제",
+   "from": 1,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.2",
+   "label": "1.2절 문제",
+   "from": 7,
+   "to": 8,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.3",
+   "label": "1.3절 문제",
+   "from": 9,
+   "to": 14,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.4",
+   "label": "1.4절 문제",
+   "from": 15,
+   "to": 30,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.5",
+   "label": "1.5절 문제",
+   "from": 31,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.6",
+   "label": "1.6절 문제",
+   "from": 35,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1OQ",
+   "label": "1장 객관식 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1CQ",
+   "label": "1장 개념 질문",
+   "from": 1,
+   "to": 4,
+   "ans": "none"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1AP",
+   "label": "1장 추가 문제",
+   "from": 54,
+   "to": 71,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1CP",
+   "label": "1장 도전 문제",
+   "from": 72,
+   "to": 73,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3.1",
+   "label": "3.1절 문제",
+   "from": 1,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3.2-3.3",
+   "label": "3.2~3.3절 문제",
+   "from": 7,
+   "to": 14,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3.4",
+   "label": "3.4절 문제",
+   "from": 15,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3OQ",
+   "label": "3장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3CQ",
+   "label": "3장 개념 질문",
+   "from": 1,
+   "to": 5,
+   "ans": "none"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3AP",
+   "label": "3장 추가 문제",
+   "from": 48,
+   "to": 66,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-vector",
+   "sec": "3CP",
+   "label": "3장 도전 문제",
+   "from": 67,
+   "to": 67,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.1",
+   "label": "2.1절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.2",
+   "label": "2.2절 문제",
+   "from": 6,
+   "to": 9,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.3",
+   "label": "2.3절 문제",
+   "from": 10,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.4",
+   "label": "2.4절 문제",
+   "from": 14,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.5",
+   "label": "2.5절 문제",
+   "from": 22,
+   "to": 23,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.6",
+   "label": "2.6절 문제",
+   "from": 24,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.7",
+   "label": "2.7절 문제",
+   "from": 45,
+   "to": 56,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2.8",
+   "label": "2.8절 문제",
+   "from": 57,
+   "to": 59,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2OQ",
+   "label": "2장 객관식 질문",
+   "from": 1,
+   "to": 18,
+   "ans": "none"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2CQ",
+   "label": "2장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2AP",
+   "label": "2장 추가 문제",
+   "from": 60,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "2CP",
+   "label": "2장 도전 문제",
+   "from": 81,
+   "to": 85,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.1",
+   "label": "4.1절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.2",
+   "label": "4.2절 문제",
+   "from": 6,
+   "to": 10,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.3",
+   "label": "4.3절 문제",
+   "from": 11,
+   "to": 32,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.4",
+   "label": "4.4절 문제",
+   "from": 33,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.5",
+   "label": "4.5절 문제",
+   "from": 40,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4.6",
+   "label": "4.6절 문제",
+   "from": 44,
+   "to": 54,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4OQ",
+   "label": "4장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4CQ",
+   "label": "4장 개념 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4AP",
+   "label": "4장 추가 문제",
+   "from": 55,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-motion",
+   "sec": "4CP",
+   "label": "4장 도전 문제",
+   "from": 81,
+   "to": 89,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5.1-5.6",
+   "label": "5.1~5.6절 문제",
+   "from": 1,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5.7",
+   "label": "5.7절 문제",
+   "from": 25,
+   "to": 51,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5.8",
+   "label": "5.8절 문제",
+   "from": 52,
+   "to": 71,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5OQ",
+   "label": "5장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5CQ",
+   "label": "5장 개념 질문",
+   "from": 1,
+   "to": 23,
+   "ans": "none"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5AP",
+   "label": "5장 추가 문제",
+   "from": 72,
+   "to": 95,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "5CP",
+   "label": "5장 도전 문제",
+   "from": 96,
+   "to": 104,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "6.1",
+   "label": "6.1절 문제",
+   "from": 1,
+   "to": 11,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "6.2",
+   "label": "6.2절 문제",
+   "from": 12,
+   "to": 19,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-force",
+   "sec": "6.3",
+   "label": "6.3절 문제",
+   "from": 20,
+   "to": 25,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.2",
+   "label": "7.2절 문제",
+   "from": 1,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.3",
+   "label": "7.3절 문제",
+   "from": 7,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.4",
+   "label": "7.4절 문제",
+   "from": 14,
+   "to": 30,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.5",
+   "label": "7.5절 문제",
+   "from": 31,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.6",
+   "label": "7.6절 문제",
+   "from": 40,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.7",
+   "label": "7.7절 문제",
+   "from": 43,
+   "to": 46,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.8",
+   "label": "7.8절 문제",
+   "from": 47,
+   "to": 51,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7.9",
+   "label": "7.9절 문제",
+   "from": 52,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7OQ",
+   "label": "7장 객관식 질문",
+   "from": 1,
+   "to": 16,
+   "ans": "none"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7CQ",
+   "label": "7장 개념 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7AP",
+   "label": "7장 추가 문제",
+   "from": 54,
+   "to": 65,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "7CP",
+   "label": "7장 도전 문제",
+   "from": 66,
+   "to": 67,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8.1",
+   "label": "8.1절 문제",
+   "from": 1,
+   "to": 2,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8.2",
+   "label": "8.2절 문제",
+   "from": 3,
+   "to": 11,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8.3",
+   "label": "8.3절 문제",
+   "from": 12,
+   "to": 17,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8.4",
+   "label": "8.4절 문제",
+   "from": 18,
+   "to": 27,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8.5",
+   "label": "8.5절 문제",
+   "from": 28,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8OQ",
+   "label": "8장 객관식 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8CQ",
+   "label": "8장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8AP",
+   "label": "8장 추가 문제",
+   "from": 42,
+   "to": 78,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-energy",
+   "sec": "8CP",
+   "label": "8장 도전 문제",
+   "from": 79,
+   "to": 85,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.1",
+   "label": "9.1절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.2",
+   "label": "9.2절 문제",
+   "from": 6,
+   "to": 11,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.3",
+   "label": "9.3절 문제",
+   "from": 12,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.4",
+   "label": "9.4절 문제",
+   "from": 22,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.5",
+   "label": "9.5절 문제",
+   "from": 35,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.6",
+   "label": "9.6절 문제",
+   "from": 45,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.7",
+   "label": "9.7절 문제",
+   "from": 51,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.8",
+   "label": "9.8절 문제",
+   "from": 56,
+   "to": 59,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9.9",
+   "label": "9.9절 문제",
+   "from": 60,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9OQ",
+   "label": "9장 객관식 질문",
+   "from": 1,
+   "to": 18,
+   "ans": "none"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9CQ",
+   "label": "9장 개념 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9AP",
+   "label": "9장 추가 문제",
+   "from": 65,
+   "to": 91,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-momentum",
+   "sec": "9CP",
+   "label": "9장 도전 문제",
+   "from": 92,
+   "to": 96,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.1",
+   "label": "10.1절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.2",
+   "label": "10.2절 문제",
+   "from": 5,
+   "to": 14,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.3",
+   "label": "10.3절 문제",
+   "from": 15,
+   "to": 26,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.4",
+   "label": "10.4절 문제",
+   "from": 27,
+   "to": 28,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.5",
+   "label": "10.5절 문제",
+   "from": 29,
+   "to": 37,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.6",
+   "label": "10.6절 문제",
+   "from": 38,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.7",
+   "label": "10.7절 문제",
+   "from": 44,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.8",
+   "label": "10.8절 문제",
+   "from": 48,
+   "to": 58,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10.9",
+   "label": "10.9절 문제",
+   "from": 59,
+   "to": 65,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10OQ",
+   "label": "10장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10CQ",
+   "label": "10장 개념 질문",
+   "from": 1,
+   "to": 16,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10AP",
+   "label": "10장 추가 문제",
+   "from": 66,
+   "to": 86,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "10CP",
+   "label": "10장 도전 문제",
+   "from": 87,
+   "to": 94,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11.1",
+   "label": "11.1절 문제",
+   "from": 1,
+   "to": 10,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11.2",
+   "label": "11.2절 문제",
+   "from": 11,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11.3",
+   "label": "11.3절 문제",
+   "from": 22,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11.4",
+   "label": "11.4절 문제",
+   "from": 30,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11.5",
+   "label": "11.5절 문제",
+   "from": 42,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11OQ",
+   "label": "11장 객관식 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11CQ",
+   "label": "11장 개념 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11AP",
+   "label": "11장 추가 문제",
+   "from": 44,
+   "to": 60,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "11CP",
+   "label": "11장 도전 문제",
+   "from": 61,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12.1",
+   "label": "12.1절 문제",
+   "from": 1,
+   "to": 2,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12.2",
+   "label": "12.2절 문제",
+   "from": 3,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12.3",
+   "label": "12.3절 문제",
+   "from": 8,
+   "to": 25,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12.4",
+   "label": "12.4절 문제",
+   "from": 26,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12OQ",
+   "label": "12장 객관식 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12CQ",
+   "label": "12장 개념 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12AP",
+   "label": "12장 추가 문제",
+   "from": 37,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-rotation",
+   "sec": "12CP",
+   "label": "12장 도전 문제",
+   "from": 65,
+   "to": 68,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.1",
+   "label": "13.1절 문제",
+   "from": 1,
+   "to": 10,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.2",
+   "label": "13.2절 문제",
+   "from": 11,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.3",
+   "label": "13.3절 문제",
+   "from": 14,
+   "to": 16,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.4",
+   "label": "13.4절 문제",
+   "from": 17,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.5",
+   "label": "13.5절 문제",
+   "from": 30,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13.6",
+   "label": "13.6절 문제",
+   "from": 36,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13OQ",
+   "label": "13장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13CQ",
+   "label": "13장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13AP",
+   "label": "13장 추가 문제",
+   "from": 50,
+   "to": 77,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gravity",
+   "sec": "13CP",
+   "label": "13장 도전 문제",
+   "from": 78,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "6.4",
+   "label": "6.4절 문제",
+   "from": 26,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "6OQ",
+   "label": "6장 객관식 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "6CQ",
+   "label": "6장 개념 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "6AP",
+   "label": "6장 추가 문제",
+   "from": 37,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "6CP",
+   "label": "6장 도전 문제",
+   "from": 65,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.1",
+   "label": "14.1절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.2",
+   "label": "14.2절 문제",
+   "from": 6,
+   "to": 18,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.3",
+   "label": "14.3절 문제",
+   "from": 19,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.4",
+   "label": "14.4절 문제",
+   "from": 25,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.5-14.6",
+   "label": "14.5~14.6절 문제",
+   "from": 40,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14.7",
+   "label": "14.7절 문제",
+   "from": 51,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14OQ",
+   "label": "14장 객관식 질문",
+   "from": 1,
+   "to": 16,
+   "ans": "none"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14CQ",
+   "label": "14장 개념 질문",
+   "from": 1,
+   "to": 19,
+   "ans": "none"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14AP",
+   "label": "14장 추가 문제",
+   "from": 56,
+   "to": 84,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-fluid",
+   "sec": "14CP",
+   "label": "14장 도전 문제",
+   "from": 85,
+   "to": 87,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19.2-19.3",
+   "label": "19.2~19.3절 문제",
+   "from": 1,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19.4",
+   "label": "19.4절 문제",
+   "from": 8,
+   "to": 25,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19.5",
+   "label": "19.5절 문제",
+   "from": 26,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19OQ",
+   "label": "19장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19CQ",
+   "label": "19장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19AP",
+   "label": "19장 추가 문제",
+   "from": 45,
+   "to": 71,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "19CP",
+   "label": "19장 도전 문제",
+   "from": 72,
+   "to": 79,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "20.1",
+   "label": "20.1절 문제",
+   "from": 1,
+   "to": 1,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "20.2",
+   "label": "20.2절 문제",
+   "from": 2,
+   "to": 15,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "20.3",
+   "label": "20.3절 문제",
+   "from": 16,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-heat",
+   "sec": "20.7",
+   "label": "20.7절 문제",
+   "from": 43,
+   "to": 57,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20.4",
+   "label": "20.4절 문제",
+   "from": 25,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20.5",
+   "label": "20.5절 문제",
+   "from": 30,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20.6",
+   "label": "20.6절 문제",
+   "from": 35,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20OQ",
+   "label": "20장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20CQ",
+   "label": "20장 개념 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20AP",
+   "label": "20장 추가 문제",
+   "from": 58,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "20CP",
+   "label": "20장 도전 문제",
+   "from": 81,
+   "to": 84,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21.1",
+   "label": "21.1절 문제",
+   "from": 1,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21.2",
+   "label": "21.2절 문제",
+   "from": 14,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21.3",
+   "label": "21.3절 문제",
+   "from": 22,
+   "to": 25,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21.4",
+   "label": "21.4절 문제",
+   "from": 26,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21.5",
+   "label": "21.5절 문제",
+   "from": 35,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21OQ",
+   "label": "21장 객관식 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21CQ",
+   "label": "21장 개념 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21AP",
+   "label": "21장 추가 문제",
+   "from": 44,
+   "to": 73,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "21CP",
+   "label": "21장 도전 문제",
+   "from": 74,
+   "to": 75,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.1",
+   "label": "22.1절 문제",
+   "from": 1,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.2",
+   "label": "22.2절 문제",
+   "from": 8,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.3-22.4",
+   "label": "22.3~22.4절 문제",
+   "from": 14,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.5",
+   "label": "22.5절 문제",
+   "from": 36,
+   "to": 38,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.6",
+   "label": "22.6절 문제",
+   "from": 39,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22.7-22.8",
+   "label": "22.7~22.8절 문제",
+   "from": 42,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22OQ",
+   "label": "22장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22CQ",
+   "label": "22장 개념 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22AP",
+   "label": "22장 추가 문제",
+   "from": 56,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-thermo",
+   "sec": "22CP",
+   "label": "22장 도전 문제",
+   "from": 81,
+   "to": 82,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.1",
+   "label": "23.1절 문제",
+   "from": 1,
+   "to": 2,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.2-23.3",
+   "label": "23.2~23.3절 문제",
+   "from": 3,
+   "to": 22,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.4",
+   "label": "23.4절 문제",
+   "from": 23,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.5",
+   "label": "23.5절 문제",
+   "from": 37,
+   "to": 46,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.6",
+   "label": "23.6절 문제",
+   "from": 47,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23.7",
+   "label": "23.7절 문제",
+   "from": 51,
+   "to": 57,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23OQ",
+   "label": "23장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23CQ",
+   "label": "23장 개념 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23AP",
+   "label": "23장 추가 문제",
+   "from": 58,
+   "to": 83,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "23CP",
+   "label": "23장 도전 문제",
+   "from": 84,
+   "to": 91,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24.1",
+   "label": "24.1절 문제",
+   "from": 1,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24.2",
+   "label": "24.2절 문제",
+   "from": 7,
+   "to": 22,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24.3",
+   "label": "24.3절 문제",
+   "from": 23,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24.4",
+   "label": "24.4절 문제",
+   "from": 37,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24OQ",
+   "label": "24장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24CQ",
+   "label": "24장 개념 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24AP",
+   "label": "24장 추가 문제",
+   "from": 48,
+   "to": 60,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "24CP",
+   "label": "24장 도전 문제",
+   "from": 61,
+   "to": 69,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.1-25.2",
+   "label": "25.1~25.2절 문제",
+   "from": 1,
+   "to": 11,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.3",
+   "label": "25.3절 문제",
+   "from": 12,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.4",
+   "label": "25.4절 문제",
+   "from": 36,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.5",
+   "label": "25.5절 문제",
+   "from": 43,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.6",
+   "label": "25.6절 문제",
+   "from": 48,
+   "to": 51,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25.8",
+   "label": "25.8절 문제",
+   "from": 52,
+   "to": 52,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25OQ",
+   "label": "25장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25CQ",
+   "label": "25장 개념 질문",
+   "from": 1,
+   "to": 6,
+   "ans": "none"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25AP",
+   "label": "25장 추가 문제",
+   "from": 53,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-electric",
+   "sec": "25CP",
+   "label": "25장 도전 문제",
+   "from": 71,
+   "to": 77,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.1",
+   "label": "26.1절 문제",
+   "from": 1,
+   "to": 3,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.2",
+   "label": "26.2절 문제",
+   "from": 4,
+   "to": 12,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.3",
+   "label": "26.3절 문제",
+   "from": 13,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.4",
+   "label": "26.4절 문제",
+   "from": 30,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.5",
+   "label": "26.5절 문제",
+   "from": 42,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.6",
+   "label": "26.6절 문제",
+   "from": 50,
+   "to": 52,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26.7",
+   "label": "26.7절 문제",
+   "from": 53,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26OQ",
+   "label": "26장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26CQ",
+   "label": "26장 개념 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26AP",
+   "label": "26장 추가 문제",
+   "from": 54,
+   "to": 71,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "26CP",
+   "label": "26장 도전 문제",
+   "from": 72,
+   "to": 78,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27.1",
+   "label": "27.1절 문제",
+   "from": 1,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27.2",
+   "label": "27.2절 문제",
+   "from": 14,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27.3",
+   "label": "27.3절 문제",
+   "from": 22,
+   "to": 25,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27.4",
+   "label": "27.4절 문제",
+   "from": 26,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27.6",
+   "label": "27.6절 문제",
+   "from": 36,
+   "to": 56,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27OQ",
+   "label": "27장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27CQ",
+   "label": "27장 개념 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27AP",
+   "label": "27장 추가 문제",
+   "from": 57,
+   "to": 81,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "27CP",
+   "label": "27장 도전 문제",
+   "from": 82,
+   "to": 85,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28.1",
+   "label": "28.1절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28.2",
+   "label": "28.2절 문제",
+   "from": 5,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28.3",
+   "label": "28.3절 문제",
+   "from": 22,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28.4",
+   "label": "28.4절 문제",
+   "from": 37,
+   "to": 45,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28.5",
+   "label": "28.5절 문제",
+   "from": 46,
+   "to": 48,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28OQ",
+   "label": "28장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28CQ",
+   "label": "28장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28AP",
+   "label": "28장 추가 문제",
+   "from": 49,
+   "to": 81,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-circuit",
+   "sec": "28CP",
+   "label": "28장 도전 문제",
+   "from": 82,
+   "to": 83,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.1",
+   "label": "15.1절 문제",
+   "from": 1,
+   "to": 2,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.2",
+   "label": "15.2절 문제",
+   "from": 3,
+   "to": 20,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.3",
+   "label": "15.3절 문제",
+   "from": 21,
+   "to": 32,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.4",
+   "label": "15.4절 문제",
+   "from": 33,
+   "to": 33,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.5",
+   "label": "15.5절 문제",
+   "from": 34,
+   "to": 45,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.6",
+   "label": "15.6절 문제",
+   "from": 46,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15.7",
+   "label": "15.7절 문제",
+   "from": 50,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15OQ",
+   "label": "15장 객관식 질문",
+   "from": 1,
+   "to": 17,
+   "ans": "none"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15CQ",
+   "label": "15장 개념 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15AP",
+   "label": "15장 추가 문제",
+   "from": 56,
+   "to": 83,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-osc",
+   "sec": "15CP",
+   "label": "15장 도전 문제",
+   "from": 84,
+   "to": 89,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16.1",
+   "label": "16.1절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16.2",
+   "label": "16.2절 문제",
+   "from": 5,
+   "to": 20,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16.3",
+   "label": "16.3절 문제",
+   "from": 21,
+   "to": 31,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16.5",
+   "label": "16.5절 문제",
+   "from": 32,
+   "to": 40,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16.6",
+   "label": "16.6절 문제",
+   "from": 41,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16OQ",
+   "label": "16장 객관식 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16CQ",
+   "label": "16장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16AP",
+   "label": "16장 추가 문제",
+   "from": 45,
+   "to": 63,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "16CP",
+   "label": "16장 도전 문제",
+   "from": 64,
+   "to": 67,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17.1",
+   "label": "17.1절 문제",
+   "from": 1,
+   "to": 3,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17.2",
+   "label": "17.2절 문제",
+   "from": 4,
+   "to": 18,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17.3",
+   "label": "17.3절 문제",
+   "from": 19,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17.4",
+   "label": "17.4절 문제",
+   "from": 37,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17OQ",
+   "label": "17장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17CQ",
+   "label": "17장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17AP",
+   "label": "17장 추가 문제",
+   "from": 48,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "17CP",
+   "label": "17장 도전 문제",
+   "from": 71,
+   "to": 73,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.1",
+   "label": "18.1절 문제",
+   "from": 1,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.2",
+   "label": "18.2절 문제",
+   "from": 14,
+   "to": 19,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.3",
+   "label": "18.3절 문제",
+   "from": 20,
+   "to": 33,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.4",
+   "label": "18.4절 문제",
+   "from": 34,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.5",
+   "label": "18.5절 문제",
+   "from": 37,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.6",
+   "label": "18.6절 문제",
+   "from": 54,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.7",
+   "label": "18.7절 문제",
+   "from": 56,
+   "to": 59,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18.8",
+   "label": "18.8절 문제",
+   "from": 60,
+   "to": 61,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18OQ",
+   "label": "18장 객관식 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18CQ",
+   "label": "18장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18AP",
+   "label": "18장 추가 문제",
+   "from": 62,
+   "to": 86,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-wave",
+   "sec": "18CP",
+   "label": "18장 도전 문제",
+   "from": 87,
+   "to": 88,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.1",
+   "label": "29.1절 문제",
+   "from": 1,
+   "to": 12,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.2",
+   "label": "29.2절 문제",
+   "from": 13,
+   "to": 23,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.3",
+   "label": "29.3절 문제",
+   "from": 24,
+   "to": 31,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.4",
+   "label": "29.4절 문제",
+   "from": 32,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.5",
+   "label": "29.5절 문제",
+   "from": 45,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29.6",
+   "label": "29.6절 문제",
+   "from": 54,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29OQ",
+   "label": "29장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29CQ",
+   "label": "29장 개념 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29AP",
+   "label": "29장 추가 문제",
+   "from": 56,
+   "to": 76,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "29CP",
+   "label": "29장 도전 문제",
+   "from": 77,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.1",
+   "label": "30.1절 문제",
+   "from": 1,
+   "to": 20,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.2",
+   "label": "30.2절 문제",
+   "from": 21,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.3",
+   "label": "30.3절 문제",
+   "from": 30,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.4",
+   "label": "30.4절 문제",
+   "from": 40,
+   "to": 45,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.5",
+   "label": "30.5절 문제",
+   "from": 46,
+   "to": 48,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30.6",
+   "label": "30.6절 문제",
+   "from": 49,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30OQ",
+   "label": "30장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30CQ",
+   "label": "30장 개념 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30AP",
+   "label": "30장 추가 문제",
+   "from": 51,
+   "to": 68,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "30CP",
+   "label": "30장 도전 문제",
+   "from": 69,
+   "to": 77,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31.1",
+   "label": "31.1절 문제",
+   "from": 1,
+   "to": 20,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31.2-31.3",
+   "label": "31.2~31.3절 문제",
+   "from": 21,
+   "to": 38,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31.4",
+   "label": "31.4절 문제",
+   "from": 39,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31.5",
+   "label": "31.5절 문제",
+   "from": 42,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31.6",
+   "label": "31.6절 문제",
+   "from": 50,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31OQ",
+   "label": "31장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31CQ",
+   "label": "31장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31AP",
+   "label": "31장 추가 문제",
+   "from": 51,
+   "to": 78,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "31CP",
+   "label": "31장 도전 문제",
+   "from": 79,
+   "to": 83,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.1",
+   "label": "32.1절 문제",
+   "from": 1,
+   "to": 14,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.2",
+   "label": "32.2절 문제",
+   "from": 15,
+   "to": 31,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.3",
+   "label": "32.3절 문제",
+   "from": 32,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.4",
+   "label": "32.4절 문제",
+   "from": 40,
+   "to": 46,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.5",
+   "label": "32.5절 문제",
+   "from": 47,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32.6",
+   "label": "32.6절 문제",
+   "from": 56,
+   "to": 59,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32OQ",
+   "label": "32장 객관식 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32CQ",
+   "label": "32장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32AP",
+   "label": "32장 추가 문제",
+   "from": 60,
+   "to": 77,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "32CP",
+   "label": "32장 도전 문제",
+   "from": 78,
+   "to": 83,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.1-33.2",
+   "label": "33.1~33.2절 문제",
+   "from": 1,
+   "to": 8,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.3",
+   "label": "33.3절 문제",
+   "from": 9,
+   "to": 16,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.4",
+   "label": "33.4절 문제",
+   "from": 17,
+   "to": 23,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.5",
+   "label": "33.5절 문제",
+   "from": 24,
+   "to": 33,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.6",
+   "label": "33.6절 문제",
+   "from": 34,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.7",
+   "label": "33.7절 문제",
+   "from": 42,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.8",
+   "label": "33.8절 문제",
+   "from": 48,
+   "to": 52,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33.9",
+   "label": "33.9절 문제",
+   "from": 53,
+   "to": 56,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33OQ",
+   "label": "33장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33CQ",
+   "label": "33장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33AP",
+   "label": "33장 추가 문제",
+   "from": 57,
+   "to": 76,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-magnet",
+   "sec": "33CP",
+   "label": "33장 도전 문제",
+   "from": 77,
+   "to": 81,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.1",
+   "label": "34.1절 문제",
+   "from": 1,
+   "to": 3,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.2",
+   "label": "34.2절 문제",
+   "from": 4,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.3",
+   "label": "34.3절 문제",
+   "from": 7,
+   "to": 19,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.4",
+   "label": "34.4절 문제",
+   "from": 20,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.5",
+   "label": "34.5절 문제",
+   "from": 35,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.6",
+   "label": "34.6절 문제",
+   "from": 44,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34.7",
+   "label": "34.7절 문제",
+   "from": 50,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34OQ",
+   "label": "34장 객관식 질문",
+   "from": 1,
+   "to": 11,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34CQ",
+   "label": "34장 개념 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34AP",
+   "label": "34장 추가 문제",
+   "from": 54,
+   "to": 75,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "34CP",
+   "label": "34장 도전 문제",
+   "from": 76,
+   "to": 79,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35.1-35.2",
+   "label": "35.1~35.2절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35.3-35.5",
+   "label": "35.3~35.5절 문제",
+   "from": 5,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35.6-35.7",
+   "label": "35.6~35.7절 문제",
+   "from": 36,
+   "to": 40,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35.8",
+   "label": "35.8절 문제",
+   "from": 41,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35OQ",
+   "label": "35장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35CQ",
+   "label": "35장 개념 질문",
+   "from": 1,
+   "to": 17,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35AP",
+   "label": "35장 추가 문제",
+   "from": 51,
+   "to": 80,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "35CP",
+   "label": "35장 도전 문제",
+   "from": 81,
+   "to": 87,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.1",
+   "label": "36.1절 문제",
+   "from": 1,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.2",
+   "label": "36.2절 문제",
+   "from": 8,
+   "to": 28,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.3",
+   "label": "36.3절 문제",
+   "from": 29,
+   "to": 37,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.4",
+   "label": "36.4절 문제",
+   "from": 38,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.5",
+   "label": "36.5절 문제",
+   "from": 54,
+   "to": 55,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.6",
+   "label": "36.6절 문제",
+   "from": 56,
+   "to": 57,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.7",
+   "label": "36.7절 문제",
+   "from": 58,
+   "to": 65,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.8",
+   "label": "36.8절 문제",
+   "from": 66,
+   "to": 66,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.9",
+   "label": "36.9절 문제",
+   "from": 67,
+   "to": 67,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36.10",
+   "label": "36.10절 문제",
+   "from": 68,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36OQ",
+   "label": "36장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36CQ",
+   "label": "36장 개념 질문",
+   "from": 1,
+   "to": 17,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36AP",
+   "label": "36장 추가 문제",
+   "from": 71,
+   "to": 92,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "36CP",
+   "label": "36장 도전 문제",
+   "from": 93,
+   "to": 97,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37.1-37.2",
+   "label": "37.1~37.2절 문제",
+   "from": 1,
+   "to": 22,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37.3",
+   "label": "37.3절 문제",
+   "from": 23,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37.4-37.5",
+   "label": "37.4~37.5절 문제",
+   "from": 30,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37.6",
+   "label": "37.6절 문제",
+   "from": 42,
+   "to": 44,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37OQ",
+   "label": "37장 객관식 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37CQ",
+   "label": "37장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37AP",
+   "label": "37장 추가 문제",
+   "from": 45,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "37CP",
+   "label": "37장 도전 문제",
+   "from": 71,
+   "to": 76,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38.2",
+   "label": "38.2절 문제",
+   "from": 1,
+   "to": 13,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38.3",
+   "label": "38.3절 문제",
+   "from": 14,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38.4",
+   "label": "38.4절 문제",
+   "from": 25,
+   "to": 37,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38.5",
+   "label": "38.5절 문제",
+   "from": 38,
+   "to": 41,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38.6",
+   "label": "38.6절 문제",
+   "from": 42,
+   "to": 52,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38OQ",
+   "label": "38장 객관식 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38CQ",
+   "label": "38장 개념 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38AP",
+   "label": "38장 추가 문제",
+   "from": 53,
+   "to": 74,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-light",
+   "sec": "38CP",
+   "label": "38장 도전 문제",
+   "from": 75,
+   "to": 79,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.1",
+   "label": "39.1절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.2-39.4",
+   "label": "39.2~39.4절 문제",
+   "from": 5,
+   "to": 26,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.5",
+   "label": "39.5절 문제",
+   "from": 27,
+   "to": 31,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.6",
+   "label": "39.6절 문제",
+   "from": 32,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.7",
+   "label": "39.7절 문제",
+   "from": 36,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-relativity",
+   "sec": "39.8",
+   "label": "39.8절 문제",
+   "from": 44,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.1",
+   "label": "40.1절 문제",
+   "from": 1,
+   "to": 16,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.2",
+   "label": "40.2절 문제",
+   "from": 17,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.3",
+   "label": "40.3절 문제",
+   "from": 25,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.4",
+   "label": "40.4절 문제",
+   "from": 37,
+   "to": 38,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.5",
+   "label": "40.5절 문제",
+   "from": 39,
+   "to": 48,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.6",
+   "label": "40.6절 문제",
+   "from": 49,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.7",
+   "label": "40.7절 문제",
+   "from": 51,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40.8",
+   "label": "40.8절 문제",
+   "from": 54,
+   "to": 59,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40OQ",
+   "label": "40장 객관식 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40CQ",
+   "label": "40장 개념 질문",
+   "from": 1,
+   "to": 17,
+   "ans": "none"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40AP",
+   "label": "40장 추가 문제",
+   "from": 60,
+   "to": 71,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-quantum",
+   "sec": "40CP",
+   "label": "40장 도전 문제",
+   "from": 72,
+   "to": 76,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.1",
+   "label": "41.1절 문제",
+   "from": 1,
+   "to": 4,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.2",
+   "label": "41.2절 문제",
+   "from": 5,
+   "to": 23,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.3",
+   "label": "41.3절 문제",
+   "from": 24,
+   "to": 28,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.4",
+   "label": "41.4절 문제",
+   "from": 29,
+   "to": 30,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.5",
+   "label": "41.5절 문제",
+   "from": 31,
+   "to": 33,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.6",
+   "label": "41.6절 문제",
+   "from": 34,
+   "to": 35,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41.7",
+   "label": "41.7절 문제",
+   "from": 36,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41OQ",
+   "label": "41장 객관식 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41CQ",
+   "label": "41장 개념 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41AP",
+   "label": "41장 추가 문제",
+   "from": 43,
+   "to": 58,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "41CP",
+   "label": "41장 도전 문제",
+   "from": 59,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.1",
+   "label": "42.1절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.2",
+   "label": "42.2절 문제",
+   "from": 6,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.3",
+   "label": "42.3절 문제",
+   "from": 8,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.4",
+   "label": "42.4절 문제",
+   "from": 22,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.5",
+   "label": "42.5절 문제",
+   "from": 25,
+   "to": 29,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.6",
+   "label": "42.6절 문제",
+   "from": 30,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.7",
+   "label": "42.7절 문제",
+   "from": 40,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.8",
+   "label": "42.8절 문제",
+   "from": 48,
+   "to": 57,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42.9-42.10",
+   "label": "42.9~42.10절 문제",
+   "from": 58,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42OQ",
+   "label": "42장 객관식 질문",
+   "from": 1,
+   "to": 15,
+   "ans": "none"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42CQ",
+   "label": "42장 개념 질문",
+   "from": 1,
+   "to": 12,
+   "ans": "none"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42AP",
+   "label": "42장 추가 문제",
+   "from": 65,
+   "to": 88,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-qm",
+   "sec": "42CP",
+   "label": "42장 도전 문제",
+   "from": 89,
+   "to": 91,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.1",
+   "label": "44.1절 문제",
+   "from": 1,
+   "to": 14,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.2",
+   "label": "44.2절 문제",
+   "from": 15,
+   "to": 21,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.3",
+   "label": "44.3절 문제",
+   "from": 22,
+   "to": 24,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.4",
+   "label": "44.4절 문제",
+   "from": 25,
+   "to": 34,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.5",
+   "label": "44.5절 문제",
+   "from": 35,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.6",
+   "label": "44.6절 문제",
+   "from": 43,
+   "to": 46,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.7",
+   "label": "44.7절 문제",
+   "from": 47,
+   "to": 51,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44.8",
+   "label": "44.8절 문제",
+   "from": 52,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44OQ",
+   "label": "44장 객관식 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44CQ",
+   "label": "44장 개념 질문",
+   "from": 1,
+   "to": 17,
+   "ans": "none"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44AP",
+   "label": "44장 추가 문제",
+   "from": 54,
+   "to": 76,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "44CP",
+   "label": "44장 도전 문제",
+   "from": 77,
+   "to": 78,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45.1-45.2",
+   "label": "45.1~45.2절 문제",
+   "from": 1,
+   "to": 11,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45.3",
+   "label": "45.3절 문제",
+   "from": 12,
+   "to": 20,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45.4",
+   "label": "45.4절 문제",
+   "from": 21,
+   "to": 31,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45.5",
+   "label": "45.5절 문제",
+   "from": 32,
+   "to": 42,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45.6",
+   "label": "45.6절 문제",
+   "from": 43,
+   "to": 45,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45OQ",
+   "label": "45장 객관식 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45CQ",
+   "label": "45장 개념 질문",
+   "from": 1,
+   "to": 9,
+   "ans": "none"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45AP",
+   "label": "45장 추가 문제",
+   "from": 46,
+   "to": 70,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "45CP",
+   "label": "45장 도전 문제",
+   "from": 71,
+   "to": 73,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.1",
+   "label": "43.1절 문제",
+   "from": 1,
+   "to": 6,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.2",
+   "label": "43.2절 문제",
+   "from": 7,
+   "to": 23,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.3",
+   "label": "43.3절 문제",
+   "from": 24,
+   "to": 26,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.4-43.5",
+   "label": "43.4~43.5절 문제",
+   "from": 27,
+   "to": 39,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.6",
+   "label": "43.6절 문제",
+   "from": 40,
+   "to": 46,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.7",
+   "label": "43.7절 문제",
+   "from": 47,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43.8",
+   "label": "43.8절 문제",
+   "from": 51,
+   "to": 53,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43OQ",
+   "label": "43장 객관식 질문",
+   "from": 1,
+   "to": 7,
+   "ans": "none"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43CQ",
+   "label": "43장 개념 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43AP",
+   "label": "43장 추가 문제",
+   "from": 54,
+   "to": 62,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "43CP",
+   "label": "43장 도전 문제",
+   "from": 63,
+   "to": 64,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gr",
+   "sec": "39.9",
+   "label": "39.9절 문제",
+   "from": 65,
+   "to": 65,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gr",
+   "sec": "39OQ",
+   "label": "39장 객관식 질문",
+   "from": 1,
+   "to": 10,
+   "ans": "none"
+  },
+  {
+   "unit": "p-gr",
+   "sec": "39CQ",
+   "label": "39장 개념 질문",
+   "from": 1,
+   "to": 14,
+   "ans": "none"
+  },
+  {
+   "unit": "p-gr",
+   "sec": "39AP",
+   "label": "39장 추가 문제",
+   "from": 66,
+   "to": 87,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-gr",
+   "sec": "39CP",
+   "label": "39장 도전 문제",
+   "from": 88,
+   "to": 91,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.1-46.2",
+   "label": "46.1~46.2절 문제",
+   "from": 1,
+   "to": 5,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.3",
+   "label": "46.3절 문제",
+   "from": 6,
+   "to": 7,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.4-46.5",
+   "label": "46.4~46.5절 문제",
+   "from": 8,
+   "to": 19,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.6",
+   "label": "46.6절 문제",
+   "from": 20,
+   "to": 27,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.7-46.10",
+   "label": "46.7~46.10절 문제",
+   "from": 28,
+   "to": 36,
+   "ans": "odd"
+  },
+  {
+   "unit": "p-field",
+   "sec": "46.12",
+   "label": "46.12절 문제",
+   "from": 50,
+   "to": 50,
+   "ans": "odd"
+  },
+  {
+   "unit": "e-galaxy",
+   "sec": "46.11",
+   "label": "46.11절 문제",
+   "from": 37,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "e-galaxy",
+   "sec": "46OQ",
+   "label": "46장 객관식 질문",
+   "from": 1,
+   "to": 8,
+   "ans": "none"
+  },
+  {
+   "unit": "e-galaxy",
+   "sec": "46CQ",
+   "label": "46장 개념 질문",
+   "from": 1,
+   "to": 13,
+   "ans": "none"
+  },
+  {
+   "unit": "e-galaxy",
+   "sec": "46AP",
+   "label": "46장 추가 문제",
+   "from": 51,
+   "to": 66,
+   "ans": "odd"
+  },
+  {
+   "unit": "e-galaxy",
+   "sec": "46CP",
+   "label": "46장 도전 문제",
+   "from": 67,
+   "to": 73,
+   "ans": "odd"
+  }
+ ],
+ "units": {
+  "f-measure": {
+   "count": 87
+  },
+  "f-vector": {
+   "count": 85
+  },
+  "p-motion": {
+   "count": 222
+  },
+  "p-force": {
+   "count": 165
+  },
+  "p-energy": {
+   "count": 201
+  },
+  "p-momentum": {
+   "count": 127
+  },
+  "p-rotation": {
+   "count": 290
+  },
+  "p-gravity": {
+   "count": 100
+  },
+  "p-fluid": {
+   "count": 185
+  },
+  "p-heat": {
+   "count": 142
+  },
+  "p-thermo": {
+   "count": 269
+  },
+  "p-electric": {
+   "count": 306
+  },
+  "p-circuit": {
+   "count": 314
+  },
+  "p-osc": {
+   "count": 119
+  },
+  "p-wave": {
+   "count": 290
+  },
+  "p-magnet": {
+   "count": 512
+  },
+  "p-light": {
+   "count": 548
+  },
+  "p-relativity": {
+   "count": 64
+  },
+  "p-quantum": {
+   "count": 107
+  },
+  "p-qm": {
+   "count": 200
+  },
+  "p-nuclear": {
+   "count": 199
+  },
+  "p-semicon": {
+   "count": 81
+  },
+  "p-gr": {
+   "count": 51
+  },
+  "p-field": {
+   "count": 37
+  },
+  "e-galaxy": {
+   "count": 57
+  }
+ },
+ "notes": [
+  "합계: 46장 전부, 묶음 463개, 연습 4758개(문제 3681 + 객관식 질문 565 + 개념 질문 512), 단원 25개.",
+  "6장(나뉜 장): 6.1~6.3절 문제(1~25) → p-force, 6.4절(26~36) → p-fluid(math-path 6-2). 장 끝 묶음(객관식 7, 개념 11, 추가 37~64, 도전 65~70, 모두 52개)은 규칙 4대로 뒤 단원 p-fluid에 두었다. 추가 문제의 대부분은 원운동이라 p-force의 주제인데 2단계 p-fluid에서 풀게 된다. 확인 필요.",
+  "20장(나뉜 장): 20.1~20.3·20.7절 → p-heat, 20.4~20.6절 → p-thermo. 20.7절(43~57)은 번호가 20.6절(35~42) 뒤지만 앞 단원 p-heat가 맡는다(math-path 6-2 그대로). 장 끝 묶음은 뒤 단원 p-thermo.",
+  "39장(나뉜 장): 39.1~39.8절 → p-relativity, 39.9절(65번 한 문제) → p-gr. 장 끝 묶음(객관식 10, 개념 14, 추가 66~87, 도전 88~91, 모두 50개)은 규칙 4대로 p-gr(4단계)에 두었다. 내용은 거의 특수 상대성이라 p-relativity가 맡는 편이 맞아 보인다. 확인 필요.",
+  "46장(나뉜 장): 46.11절(37~49) → e-galaxy, 나머지 절과 46.12절(50번) → p-field. 장 끝 묶음(객관식 8, 개념 13, 추가 51~66, 도전 67~73, 모두 44개)은 규칙 4대로 e-galaxy(길에서 p-field보다 뒤)에 두었다. 내용은 대부분 입자 물리다. 확인 필요.",
+  "21·22장은 math-path 6-2대로 p-thermo가 맡는다. sources/unit-map.json(옛 지도)은 p-statmech에 21·22장, p-osc에 18장을 적어 두었는데 대조용으로 보고 문제를 주지 않았다(18장은 p-wave). 부록 B(f-ratio·f-trig·f-sci·f-rate의 대조)도 문제를 주지 않았다. p-statmech는 이 책에서 맡는 문제가 없다.",
+  "제목이 연달아 묶인 절은 책이 문제를 절 하나로 가르지 않아 한 묶음으로 두었다: 3.2-3.3, 5.1-5.6, 14.5-14.6, 19.2-19.3, 22.3-22.4, 22.7-22.8, 23.2-23.3, 25.1-25.2, 31.2-31.3, 33.1-33.2, 35.1-35.2, 35.3-35.5, 35.6-35.7, 37.1-37.2, 37.4-37.5, 39.2-39.4, 42.9-42.10, 43.4-43.5, 45.1-45.2, 46.1-46.2, 46.4-46.5, 46.7-46.10. 모두 한 단원 안이다.",
+  "장 순서와 길 순서가 다른 곳: 3장(f-vector)이 2장보다 먼저, 19~22장(열)이 15~18장보다 먼저(이상 math-path 6-2 순서 예외), 23~28장(p-electric·p-circuit)이 15~18장(p-osc·p-wave)보다 먼저(지금 앱의 길 순서).",
+  "글자 뽑기에서 줄 머리에 번호가 안 잡힌 여섯(2장 43, 4장 41, 8장 46, 23장 27, 7장 객관식 3, 19장 객관식 12)은 앞뒤 번호가 이어져 있어 범위에 넣었다. 묶음 경계가 아니다.",
+  "객관식 질문·개념 질문의 마지막 번호는 두 단을 차례로 읽어 번호가 끊기지 않는 것으로 확인했고(쪽 그림으로 본 것은 아니다), 문제의 마지막 번호는 책 뒤 홀수 답 목록과도 맞춰 보았다.",
+  "장마다 낱개로 뒤 도구를 쓰는 문제(이월 문제, textbook-problems 5절 2번)는 가리지 않았다. 번호 범위만 세었다."
+ ]
+}

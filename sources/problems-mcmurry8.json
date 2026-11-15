@@ -1,0 +1,2317 @@
+{
+ "about": "Robinson·McMurry·Fay, Chemistry 8판 Global(Pearson 2020)의 문제 번호 범위와 맡는 단원. 26.11.16 이 PC의 PDF에서 번호를 세고, 책 뒤 답(Answers to Selected Problems)의 절 제목·번호와 대조했다. 책은 문제에 \"장.번호\"를 장마다 1번부터 이어 붙인다: 본문 문제(예제 뒤 PRACTICE·APPLY) → 탐구(Inquiry) 문제(PROBLEM) → 장 끝 개념 문제(Conceptual) → 절 문제(Section, 절 제목 아래) → 다개념 문제(Multiconcept). from·to는 점 뒤 번호(4.32번 → 32)이고 양 끝을 포함한다. sec: 절 문제는 책의 절 제목 그대로(\"1.3-1.5\"), 본문 문제는 끝에 i(\"3i\" 또는 \"4.7-4.9i\"), 탐구 Q, 개념 C, 다개념 M. 묶음은 책 순서이고 한 단원 안에서도 이 순서로 푼다. 장 끝의 섞인 문제(탐구·개념·다개념)는 그 장을 맡은 단원 가운데 길에서 가장 뒤 단원이 맡는다(math-path 1절 규칙 4). 학습 안내 안의 Practice Test(장.번호가 아닌 1, 2, …번)는 넣지 않았다. 문제 글은 이 저장소에 두지 않는다.",
+ "book": "mcmurry8",
+ "title": "맥머리 8판 Global",
+ "answers": "본문 문제(PRACTICE·APPLY)와 탐구 문제는 전부, 장 끝 문제(개념·절·다개념)는 짝수 번만 책 뒤에 답이 있다(짧은 답, 풀이 없음). 절 문제는 짝수 번과 바로 다음 홀수 번이 비슷한 문제로 짝을 이룬다. ans: all = 전부, even = 짝수 번만.",
+ "groups": [
+  {
+   "unit": "f-measure",
+   "sec": "1.2-1.11i",
+   "label": "1.2~1.11절 본문 문제",
+   "from": 1,
+   "to": 18,
+   "ans": "all"
+  },
+  {
+   "unit": "f-method",
+   "sec": "1Q",
+   "label": "1장 탐구 문제",
+   "from": 19,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "f-method",
+   "sec": "1C",
+   "label": "1장 개념 문제",
+   "from": 27,
+   "to": 31,
+   "ans": "even"
+  },
+  {
+   "unit": "f-method",
+   "sec": "1.1",
+   "label": "1.1절",
+   "from": 32,
+   "to": 37,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.2",
+   "label": "1.2절",
+   "from": 38,
+   "to": 49,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.3-1.5",
+   "label": "1.3~1.5절",
+   "from": 50,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.6-1.7",
+   "label": "1.6~1.7절",
+   "from": 62,
+   "to": 77,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.8",
+   "label": "1.8절",
+   "from": 78,
+   "to": 83,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.9-1.10",
+   "label": "1.9~1.10절",
+   "from": 84,
+   "to": 93,
+   "ans": "even"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.11",
+   "label": "1.11절",
+   "from": 94,
+   "to": 106,
+   "ans": "even"
+  },
+  {
+   "unit": "f-method",
+   "sec": "1M",
+   "label": "1장 다개념 문제",
+   "from": 107,
+   "to": 119,
+   "ans": "even"
+  },
+  {
+   "unit": "c-matter",
+   "sec": "2.1-2.3i",
+   "label": "2.1~2.3절 본문 문제",
+   "from": 1,
+   "to": 2,
+   "ans": "all"
+  },
+  {
+   "unit": "c-particle",
+   "sec": "2.4-2.5i",
+   "label": "2.4~2.5절 본문 문제",
+   "from": 3,
+   "to": 4,
+   "ans": "all"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2.6-2.13i",
+   "label": "2.6~2.13절 본문 문제",
+   "from": 5,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2Q",
+   "label": "2장 탐구 문제",
+   "from": 27,
+   "to": 33,
+   "ans": "all"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2C",
+   "label": "2장 개념 문제",
+   "from": 34,
+   "to": 45,
+   "ans": "even"
+  },
+  {
+   "unit": "c-matter",
+   "sec": "2.1-2.3",
+   "label": "2.1~2.3절",
+   "from": 46,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "c-particle",
+   "sec": "2.4-2.5",
+   "label": "2.4~2.5절",
+   "from": 76,
+   "to": 85,
+   "ans": "even"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2.6-2.8",
+   "label": "2.6~2.8절",
+   "from": 86,
+   "to": 111,
+   "ans": "even"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2.9-2.10",
+   "label": "2.9~2.10절",
+   "from": 112,
+   "to": 133,
+   "ans": "even"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2.11-2.12",
+   "label": "2.11~2.12절",
+   "from": 134,
+   "to": 145,
+   "ans": "even"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2.13",
+   "label": "2.13절",
+   "from": 146,
+   "to": 165,
+   "ans": "even"
+  },
+  {
+   "unit": "c-atom",
+   "sec": "2M",
+   "label": "2장 다개념 문제",
+   "from": 166,
+   "to": 172,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3i",
+   "label": "3장 본문 문제",
+   "from": 1,
+   "to": 22,
+   "ans": "all"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3Q",
+   "label": "3장 탐구 문제",
+   "from": 23,
+   "to": 28,
+   "ans": "all"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3C",
+   "label": "3장 개념 문제",
+   "from": 29,
+   "to": 35,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.2",
+   "label": "3.2절",
+   "from": 36,
+   "to": 43,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.3",
+   "label": "3.3절",
+   "from": 44,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.4",
+   "label": "3.4절",
+   "from": 62,
+   "to": 71,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.5-3.6",
+   "label": "3.5~3.6절",
+   "from": 72,
+   "to": 85,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.7",
+   "label": "3.7절",
+   "from": 86,
+   "to": 91,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.8",
+   "label": "3.8절",
+   "from": 92,
+   "to": 101,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3.9",
+   "label": "3.9절",
+   "from": 102,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "3M",
+   "label": "3장 다개념 문제",
+   "from": 108,
+   "to": 124,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.1-4.6i",
+   "label": "4.1~4.6절 본문 문제",
+   "from": 1,
+   "to": 14,
+   "ans": "all"
+  },
+  {
+   "unit": "c-acid",
+   "sec": "4.7-4.9i",
+   "label": "4.7~4.9절 본문 문제",
+   "from": 15,
+   "to": 22,
+   "ans": "all"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4.10-4.14i",
+   "label": "4.10~4.14절 본문 문제",
+   "from": 23,
+   "to": 30,
+   "ans": "all"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4Q",
+   "label": "4장 탐구 문제",
+   "from": 31,
+   "to": 36,
+   "ans": "all"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4C",
+   "label": "4장 개념 문제",
+   "from": 37,
+   "to": 45,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.1",
+   "label": "4.1절",
+   "from": 46,
+   "to": 56,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.2",
+   "label": "4.2절",
+   "from": 57,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.3",
+   "label": "4.3절",
+   "from": 62,
+   "to": 71,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.4-4.5",
+   "label": "4.4~4.5절",
+   "from": 72,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "c-mole",
+   "sec": "4.6",
+   "label": "4.6절",
+   "from": 76,
+   "to": 93,
+   "ans": "even"
+  },
+  {
+   "unit": "c-acid",
+   "sec": "4.7",
+   "label": "4.7절",
+   "from": 94,
+   "to": 99,
+   "ans": "even"
+  },
+  {
+   "unit": "c-acid",
+   "sec": "4.8-4.9",
+   "label": "4.8~4.9절",
+   "from": 100,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4.10",
+   "label": "4.10절",
+   "from": 108,
+   "to": 113,
+   "ans": "even"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4.11",
+   "label": "4.11절",
+   "from": 114,
+   "to": 119,
+   "ans": "even"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4.12",
+   "label": "4.12절",
+   "from": 120,
+   "to": 123,
+   "ans": "even"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4.13",
+   "label": "4.13절",
+   "from": 124,
+   "to": 133,
+   "ans": "even"
+  },
+  {
+   "unit": "c-redox",
+   "sec": "4M",
+   "label": "4장 다개념 문제",
+   "from": 134,
+   "to": 158,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5i",
+   "label": "5장 본문 문제",
+   "from": 1,
+   "to": 18,
+   "ans": "all"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5Q",
+   "label": "5장 탐구 문제",
+   "from": 19,
+   "to": 25,
+   "ans": "all"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5C",
+   "label": "5장 개념 문제",
+   "from": 26,
+   "to": 33,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.1",
+   "label": "5.1절",
+   "from": 34,
+   "to": 41,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.2",
+   "label": "5.2절",
+   "from": 42,
+   "to": 55,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.3",
+   "label": "5.3절",
+   "from": 56,
+   "to": 65,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.4",
+   "label": "5.4절",
+   "from": 66,
+   "to": 71,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.5-5.8",
+   "label": "5.5~5.8절",
+   "from": 72,
+   "to": 93,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.9",
+   "label": "5.9절",
+   "from": 94,
+   "to": 103,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.10-5.12",
+   "label": "5.10~5.12절",
+   "from": 104,
+   "to": 117,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5.13",
+   "label": "5.13절",
+   "from": 118,
+   "to": 123,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "5M",
+   "label": "5장 다개념 문제",
+   "from": 124,
+   "to": 139,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.1-6.5i",
+   "label": "6.1~6.5절 본문 문제",
+   "from": 1,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6.6-6.8i",
+   "label": "6.6~6.8절 본문 문제",
+   "from": 11,
+   "to": 16,
+   "ans": "all"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6Q",
+   "label": "6장 탐구 문제",
+   "from": 17,
+   "to": 20,
+   "ans": "all"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6C",
+   "label": "6장 개념 문제",
+   "from": 21,
+   "to": 33,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.1",
+   "label": "6.1절",
+   "from": 34,
+   "to": 47,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.2",
+   "label": "6.2절",
+   "from": 48,
+   "to": 55,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.3",
+   "label": "6.3절",
+   "from": 56,
+   "to": 59,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.4",
+   "label": "6.4절",
+   "from": 60,
+   "to": 65,
+   "ans": "even"
+  },
+  {
+   "unit": "c-periodic",
+   "sec": "6.5",
+   "label": "6.5절",
+   "from": 66,
+   "to": 73,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6.6",
+   "label": "6.6절",
+   "from": 74,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6.7",
+   "label": "6.7절",
+   "from": 80,
+   "to": 97,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6.8",
+   "label": "6.8절",
+   "from": 98,
+   "to": 99,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "6M",
+   "label": "6장 다개념 문제",
+   "from": 100,
+   "to": 105,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7i",
+   "label": "7장 본문 문제",
+   "from": 1,
+   "to": 24,
+   "ans": "all"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7Q",
+   "label": "7장 탐구 문제",
+   "from": 25,
+   "to": 30,
+   "ans": "all"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7C",
+   "label": "7장 개념 문제",
+   "from": 31,
+   "to": 39,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.1",
+   "label": "7.1절",
+   "from": 40,
+   "to": 41,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.2",
+   "label": "7.2절",
+   "from": 42,
+   "to": 45,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.3",
+   "label": "7.3절",
+   "from": 46,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.4",
+   "label": "7.4절",
+   "from": 62,
+   "to": 63,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.5-7.7",
+   "label": "7.5~7.7절",
+   "from": 64,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.8",
+   "label": "7.8절",
+   "from": 80,
+   "to": 83,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.9",
+   "label": "7.9절",
+   "from": 84,
+   "to": 93,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7.10",
+   "label": "7.10절",
+   "from": 94,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "c-bond",
+   "sec": "7M",
+   "label": "7장 다개념 문제",
+   "from": 108,
+   "to": 113,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8i",
+   "label": "8장 본문 문제",
+   "from": 1,
+   "to": 22,
+   "ans": "all"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8Q",
+   "label": "8장 탐구 문제",
+   "from": 23,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8C",
+   "label": "8장 개념 문제",
+   "from": 27,
+   "to": 37,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8.1",
+   "label": "8.1절",
+   "from": 38,
+   "to": 57,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8.2-8.4",
+   "label": "8.2~8.4절",
+   "from": 58,
+   "to": 77,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8.5",
+   "label": "8.5절",
+   "from": 78,
+   "to": 85,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8.6",
+   "label": "8.6절",
+   "from": 86,
+   "to": 95,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8.7-8.9",
+   "label": "8.7~8.9절",
+   "from": 96,
+   "to": 109,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "8M",
+   "label": "8장 다개념 문제",
+   "from": 110,
+   "to": 115,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9i",
+   "label": "9장 본문 문제",
+   "from": 1,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9Q",
+   "label": "9장 탐구 문제",
+   "from": 27,
+   "to": 33,
+   "ans": "all"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9C",
+   "label": "9장 개념 문제",
+   "from": 34,
+   "to": 43,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.1-9.3",
+   "label": "9.1~9.3절",
+   "from": 44,
+   "to": 57,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.4",
+   "label": "9.4절",
+   "from": 58,
+   "to": 65,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.5-9.6",
+   "label": "9.5~9.6절",
+   "from": 66,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.7",
+   "label": "9.7절",
+   "from": 76,
+   "to": 91,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.8",
+   "label": "9.8절",
+   "from": 92,
+   "to": 97,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.9",
+   "label": "9.9절",
+   "from": 98,
+   "to": 117,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.10",
+   "label": "9.10절",
+   "from": 118,
+   "to": 121,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9.11-9.12",
+   "label": "9.11~9.12절",
+   "from": 122,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-thermochem",
+   "sec": "9M",
+   "label": "9장 다개념 문제",
+   "from": 144,
+   "to": 155,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.1-10.8i",
+   "label": "10.1~10.8절 본문 문제",
+   "from": 1,
+   "to": 18,
+   "ans": "all"
+  },
+  {
+   "unit": "e-climate",
+   "sec": "10Q",
+   "label": "10장 탐구 문제",
+   "from": 19,
+   "to": 22,
+   "ans": "all"
+  },
+  {
+   "unit": "e-climate",
+   "sec": "10C",
+   "label": "10장 개념 문제",
+   "from": 23,
+   "to": 33,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.1",
+   "label": "10.1절",
+   "from": 34,
+   "to": 47,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.2-10.3",
+   "label": "10.2~10.3절",
+   "from": 48,
+   "to": 63,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.4",
+   "label": "10.4절",
+   "from": 64,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.5",
+   "label": "10.5절",
+   "from": 80,
+   "to": 91,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.6",
+   "label": "10.6절",
+   "from": 92,
+   "to": 101,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.7",
+   "label": "10.7절",
+   "from": 102,
+   "to": 109,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gas",
+   "sec": "10.8",
+   "label": "10.8절",
+   "from": 110,
+   "to": 115,
+   "ans": "even"
+  },
+  {
+   "unit": "e-climate",
+   "sec": "10.9-10.11",
+   "label": "10.9~10.11절",
+   "from": 116,
+   "to": 133,
+   "ans": "even"
+  },
+  {
+   "unit": "e-climate",
+   "sec": "10M",
+   "label": "10장 다개념 문제",
+   "from": 134,
+   "to": 150,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11i",
+   "label": "11장 본문 문제",
+   "from": 1,
+   "to": 8,
+   "ans": "all"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11Q",
+   "label": "11장 탐구 문제",
+   "from": 9,
+   "to": 14,
+   "ans": "all"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11C",
+   "label": "11장 개념 문제",
+   "from": 15,
+   "to": 19,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11.1",
+   "label": "11.1절",
+   "from": 20,
+   "to": 25,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11.2",
+   "label": "11.2절",
+   "from": 26,
+   "to": 37,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11.3-11.4",
+   "label": "11.3~11.4절",
+   "from": 38,
+   "to": 51,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11.5",
+   "label": "11.5절",
+   "from": 52,
+   "to": 67,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11.6",
+   "label": "11.6절",
+   "from": 68,
+   "to": 73,
+   "ans": "even"
+  },
+  {
+   "unit": "c-shape",
+   "sec": "11M",
+   "label": "11장 다개념 문제",
+   "from": 74,
+   "to": 77,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12i",
+   "label": "12장 본문 문제",
+   "from": 1,
+   "to": 12,
+   "ans": "all"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12Q",
+   "label": "12장 탐구 문제",
+   "from": 13,
+   "to": 17,
+   "ans": "all"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12C",
+   "label": "12장 개념 문제",
+   "from": 18,
+   "to": 25,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.1",
+   "label": "12.1절",
+   "from": 26,
+   "to": 31,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.2",
+   "label": "12.2절",
+   "from": 32,
+   "to": 33,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.3",
+   "label": "12.3절",
+   "from": 34,
+   "to": 49,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.4",
+   "label": "12.4절",
+   "from": 50,
+   "to": 53,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.5",
+   "label": "12.5절",
+   "from": 54,
+   "to": 57,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.6",
+   "label": "12.6절",
+   "from": 58,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.7-12.8",
+   "label": "12.7~12.8절",
+   "from": 76,
+   "to": 109,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.9",
+   "label": "12.9절",
+   "from": 110,
+   "to": 115,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12.10",
+   "label": "12.10절",
+   "from": 116,
+   "to": 133,
+   "ans": "even"
+  },
+  {
+   "unit": "p-semicon",
+   "sec": "12M",
+   "label": "12장 다개념 문제",
+   "from": 134,
+   "to": 144,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13i",
+   "label": "13장 본문 문제",
+   "from": 1,
+   "to": 22,
+   "ans": "all"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13Q",
+   "label": "13장 탐구 문제",
+   "from": 23,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13C",
+   "label": "13장 개념 문제",
+   "from": 27,
+   "to": 35,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13.1-13.3",
+   "label": "13.1~13.3절",
+   "from": 36,
+   "to": 53,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13.4",
+   "label": "13.4절",
+   "from": 54,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13.5",
+   "label": "13.5절",
+   "from": 80,
+   "to": 87,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13.6-13.9",
+   "label": "13.6~13.9절",
+   "from": 88,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-solution",
+   "sec": "13M",
+   "label": "13장 다개념 문제",
+   "from": 144,
+   "to": 154,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14i",
+   "label": "14장 본문 문제",
+   "from": 1,
+   "to": 32,
+   "ans": "all"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14Q",
+   "label": "14장 탐구 문제",
+   "from": 33,
+   "to": 38,
+   "ans": "all"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14C",
+   "label": "14장 개념 문제",
+   "from": 39,
+   "to": 49,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.1",
+   "label": "14.1절",
+   "from": 50,
+   "to": 59,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.2-14.3",
+   "label": "14.2~14.3절",
+   "from": 60,
+   "to": 69,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.4-14.6",
+   "label": "14.4~14.6절",
+   "from": 70,
+   "to": 85,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.7-14.8",
+   "label": "14.7~14.8절",
+   "from": 86,
+   "to": 103,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.9-14.11",
+   "label": "14.9~14.11절",
+   "from": 104,
+   "to": 115,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14.13",
+   "label": "14.13절",
+   "from": 116,
+   "to": 123,
+   "ans": "even"
+  },
+  {
+   "unit": "c-kinetics",
+   "sec": "14M",
+   "label": "14장 다개념 문제",
+   "from": 124,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15i",
+   "label": "15장 본문 문제",
+   "from": 1,
+   "to": 34,
+   "ans": "all"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15Q",
+   "label": "15장 탐구 문제",
+   "from": 35,
+   "to": 40,
+   "ans": "all"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15C",
+   "label": "15장 개념 문제",
+   "from": 41,
+   "to": 51,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15.1",
+   "label": "15.1절",
+   "from": 52,
+   "to": 53,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15.2-15.4",
+   "label": "15.2~15.4절",
+   "from": 54,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15.5",
+   "label": "15.5절",
+   "from": 76,
+   "to": 117,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15.6-15.9",
+   "label": "15.6~15.9절",
+   "from": 118,
+   "to": 131,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15.10",
+   "label": "15.10절",
+   "from": 132,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-equilibrium",
+   "sec": "15M",
+   "label": "15장 다개념 문제",
+   "from": 144,
+   "to": 163,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16i",
+   "label": "16장 본문 문제",
+   "from": 1,
+   "to": 30,
+   "ans": "all"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16Q",
+   "label": "16장 탐구 문제",
+   "from": 31,
+   "to": 37,
+   "ans": "all"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16C",
+   "label": "16장 개념 문제",
+   "from": 38,
+   "to": 47,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.1",
+   "label": "16.1절",
+   "from": 48,
+   "to": 55,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.2",
+   "label": "16.2절",
+   "from": 56,
+   "to": 59,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.3",
+   "label": "16.3절",
+   "from": 60,
+   "to": 67,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.4-16.6",
+   "label": "16.4~16.6절",
+   "from": 68,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.7",
+   "label": "16.7절",
+   "from": 80,
+   "to": 87,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.8-16.10",
+   "label": "16.8~16.10절",
+   "from": 88,
+   "to": 101,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.11",
+   "label": "16.11절",
+   "from": 102,
+   "to": 111,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.12",
+   "label": "16.12절",
+   "from": 112,
+   "to": 119,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.13",
+   "label": "16.13절",
+   "from": 120,
+   "to": 123,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.14",
+   "label": "16.14절",
+   "from": 124,
+   "to": 137,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16.15",
+   "label": "16.15절",
+   "from": 138,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "16M",
+   "label": "16장 다개념 문제",
+   "from": 144,
+   "to": 160,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17i",
+   "label": "17장 본문 문제",
+   "from": 1,
+   "to": 32,
+   "ans": "all"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17Q",
+   "label": "17장 탐구 문제",
+   "from": 33,
+   "to": 37,
+   "ans": "all"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17C",
+   "label": "17장 개념 문제",
+   "from": 38,
+   "to": 46,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.1",
+   "label": "17.1절",
+   "from": 47,
+   "to": 54,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.2",
+   "label": "17.2절",
+   "from": 55,
+   "to": 62,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.3-17.4",
+   "label": "17.3~17.4절",
+   "from": 63,
+   "to": 80,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.5-17.6",
+   "label": "17.5~17.6절",
+   "from": 81,
+   "to": 84,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.7",
+   "label": "17.7절",
+   "from": 85,
+   "to": 88,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.8",
+   "label": "17.8절",
+   "from": 89,
+   "to": 94,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.9",
+   "label": "17.9절",
+   "from": 95,
+   "to": 98,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.10-17.11",
+   "label": "17.10~17.11절",
+   "from": 99,
+   "to": 108,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.12",
+   "label": "17.12절",
+   "from": 109,
+   "to": 126,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17.13-17.15",
+   "label": "17.13~17.15절",
+   "from": 127,
+   "to": 139,
+   "ans": "even"
+  },
+  {
+   "unit": "c-buffer",
+   "sec": "17M",
+   "label": "17장 다개념 문제",
+   "from": 140,
+   "to": 154,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18i",
+   "label": "18장 본문 문제",
+   "from": 1,
+   "to": 20,
+   "ans": "all"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18Q",
+   "label": "18장 탐구 문제",
+   "from": 21,
+   "to": 25,
+   "ans": "all"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18C",
+   "label": "18장 개념 문제",
+   "from": 26,
+   "to": 37,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.1",
+   "label": "18.1절",
+   "from": 38,
+   "to": 41,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.2",
+   "label": "18.2절",
+   "from": 42,
+   "to": 47,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.3-18.4",
+   "label": "18.3~18.4절",
+   "from": 48,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.5",
+   "label": "18.5절",
+   "from": 62,
+   "to": 67,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.6",
+   "label": "18.6절",
+   "from": 68,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.7",
+   "label": "18.7절",
+   "from": 80,
+   "to": 91,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.8-18.9",
+   "label": "18.8~18.9절",
+   "from": 92,
+   "to": 105,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.10",
+   "label": "18.10절",
+   "from": 106,
+   "to": 111,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18.11",
+   "label": "18.11절",
+   "from": 112,
+   "to": 125,
+   "ans": "even"
+  },
+  {
+   "unit": "c-gibbs",
+   "sec": "18M",
+   "label": "18장 다개념 문제",
+   "from": 126,
+   "to": 142,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19i",
+   "label": "19장 본문 문제",
+   "from": 1,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19Q",
+   "label": "19장 탐구 문제",
+   "from": 27,
+   "to": 33,
+   "ans": "all"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19C",
+   "label": "19장 개념 문제",
+   "from": 34,
+   "to": 41,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.1",
+   "label": "19.1절",
+   "from": 42,
+   "to": 53,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.2-19.3",
+   "label": "19.2~19.3절",
+   "from": 54,
+   "to": 65,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.4",
+   "label": "19.4절",
+   "from": 66,
+   "to": 73,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.5-19.6",
+   "label": "19.5~19.6절",
+   "from": 74,
+   "to": 93,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.7-19.8",
+   "label": "19.7~19.8절",
+   "from": 94,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.9",
+   "label": "19.9절",
+   "from": 108,
+   "to": 117,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.10",
+   "label": "19.10절",
+   "from": 118,
+   "to": 123,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.11",
+   "label": "19.11절",
+   "from": 124,
+   "to": 131,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19.12-19.14",
+   "label": "19.12~19.14절",
+   "from": 132,
+   "to": 147,
+   "ans": "even"
+  },
+  {
+   "unit": "c-electro",
+   "sec": "19M",
+   "label": "19장 다개념 문제",
+   "from": 148,
+   "to": 164,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20i",
+   "label": "20장 본문 문제",
+   "from": 1,
+   "to": 18,
+   "ans": "all"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20Q",
+   "label": "20장 탐구 문제",
+   "from": 19,
+   "to": 24,
+   "ans": "all"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20C",
+   "label": "20장 개념 문제",
+   "from": 25,
+   "to": 25,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.1-20.2",
+   "label": "20.1~20.2절",
+   "from": 26,
+   "to": 39,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.3",
+   "label": "20.3절",
+   "from": 40,
+   "to": 49,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.4",
+   "label": "20.4절",
+   "from": 50,
+   "to": 63,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.5",
+   "label": "20.5절",
+   "from": 64,
+   "to": 73,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.6",
+   "label": "20.6절",
+   "from": 74,
+   "to": 87,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.7",
+   "label": "20.7절",
+   "from": 88,
+   "to": 97,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.8",
+   "label": "20.8절",
+   "from": 98,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20.9",
+   "label": "20.9절",
+   "from": 108,
+   "to": 113,
+   "ans": "even"
+  },
+  {
+   "unit": "p-nuclear",
+   "sec": "20M",
+   "label": "20장 다개념 문제",
+   "from": 114,
+   "to": 120,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21i",
+   "label": "21장 본문 문제",
+   "from": 1,
+   "to": 20,
+   "ans": "all"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21Q",
+   "label": "21장 탐구 문제",
+   "from": 21,
+   "to": 25,
+   "ans": "all"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21C",
+   "label": "21장 개념 문제",
+   "from": 26,
+   "to": 35,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.1",
+   "label": "21.1절",
+   "from": 36,
+   "to": 39,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.2",
+   "label": "21.2절",
+   "from": 40,
+   "to": 51,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.3",
+   "label": "21.3절",
+   "from": 52,
+   "to": 61,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.4",
+   "label": "21.4절",
+   "from": 62,
+   "to": 73,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.5",
+   "label": "21.5절",
+   "from": 74,
+   "to": 77,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.6",
+   "label": "21.6절",
+   "from": 78,
+   "to": 83,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.7-21.8",
+   "label": "21.7~21.8절",
+   "from": 84,
+   "to": 99,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.9-21.10",
+   "label": "21.9~21.10절",
+   "from": 100,
+   "to": 125,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21.11",
+   "label": "21.11절",
+   "from": 126,
+   "to": 129,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "21M",
+   "label": "21장 다개념 문제",
+   "from": 130,
+   "to": 142,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22i",
+   "label": "22장 본문 문제",
+   "from": 1,
+   "to": 10,
+   "ans": "all"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22Q",
+   "label": "22장 탐구 문제",
+   "from": 11,
+   "to": 17,
+   "ans": "all"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22C",
+   "label": "22장 개념 문제",
+   "from": 18,
+   "to": 31,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.1",
+   "label": "22.1절",
+   "from": 32,
+   "to": 45,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.2",
+   "label": "22.2절",
+   "from": 46,
+   "to": 51,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.3",
+   "label": "22.3절",
+   "from": 52,
+   "to": 67,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.4",
+   "label": "22.4절",
+   "from": 68,
+   "to": 79,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.5",
+   "label": "22.5절",
+   "from": 80,
+   "to": 87,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.6",
+   "label": "22.6절",
+   "from": 88,
+   "to": 103,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.7",
+   "label": "22.7절",
+   "from": 104,
+   "to": 115,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.8",
+   "label": "22.8절",
+   "from": 116,
+   "to": 143,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22.9-22.10",
+   "label": "22.9~22.10절",
+   "from": 144,
+   "to": 159,
+   "ans": "even"
+  },
+  {
+   "unit": "c-elements",
+   "sec": "22M",
+   "label": "22장 다개념 문제",
+   "from": 160,
+   "to": 167,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23i",
+   "label": "23장 본문 문제",
+   "from": 1,
+   "to": 26,
+   "ans": "all"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23Q",
+   "label": "23장 탐구 문제",
+   "from": 27,
+   "to": 29,
+   "ans": "all"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23C",
+   "label": "23장 개념 문제",
+   "from": 30,
+   "to": 39,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.1",
+   "label": "23.1절",
+   "from": 40,
+   "to": 47,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.2",
+   "label": "23.2절",
+   "from": 48,
+   "to": 53,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.3",
+   "label": "23.3절",
+   "from": 54,
+   "to": 69,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.4",
+   "label": "23.4절",
+   "from": 70,
+   "to": 75,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.5",
+   "label": "23.5절",
+   "from": 76,
+   "to": 85,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.6",
+   "label": "23.6절",
+   "from": 86,
+   "to": 95,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.7",
+   "label": "23.7절",
+   "from": 96,
+   "to": 107,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.8",
+   "label": "23.8절",
+   "from": 108,
+   "to": 113,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.9",
+   "label": "23.9절",
+   "from": 114,
+   "to": 119,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.10",
+   "label": "23.10절",
+   "from": 120,
+   "to": 125,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23.11",
+   "label": "23.11절",
+   "from": 126,
+   "to": 133,
+   "ans": "even"
+  },
+  {
+   "unit": "c-organic",
+   "sec": "23M",
+   "label": "23장 다개념 문제",
+   "from": 134,
+   "to": 138,
+   "ans": "even"
+  }
+ ],
+ "units": {
+  "f-measure": {
+   "count": 87
+  },
+  "f-method": {
+   "count": 32
+  },
+  "c-matter": {
+   "count": 32
+  },
+  "c-particle": {
+   "count": 12
+  },
+  "c-atom": {
+   "count": 128
+  },
+  "c-mole": {
+   "count": 186
+  },
+  "c-acid": {
+   "count": 22
+  },
+  "c-redox": {
+   "count": 74
+  },
+  "c-periodic": {
+   "count": 189
+  },
+  "c-bond": {
+   "count": 168
+  },
+  "c-shape": {
+   "count": 192
+  },
+  "c-thermochem": {
+   "count": 155
+  },
+  "c-gas": {
+   "count": 100
+  },
+  "e-climate": {
+   "count": 50
+  },
+  "p-semicon": {
+   "count": 144
+  },
+  "c-solution": {
+   "count": 154
+  },
+  "c-kinetics": {
+   "count": 143
+  },
+  "c-equilibrium": {
+   "count": 163
+  },
+  "c-buffer": {
+   "count": 314
+  },
+  "c-gibbs": {
+   "count": 142
+  },
+  "c-electro": {
+   "count": 164
+  },
+  "p-nuclear": {
+   "count": 120
+  },
+  "c-elements": {
+   "count": 309
+  },
+  "c-organic": {
+   "count": 138
+  }
+ },
+ "notes": [
+  "전체 3218문제(1~23장 전부). 장별 마지막 번호: 1장 119, 2장 172, 3장 124, 4장 158, 5장 139, 6장 105, 7장 113, 8장 115, 9장 155, 10장 150, 11장 77, 12장 144, 13장 154, 14장 143, 15장 163, 16장 160, 17장 154, 18장 142, 19장 164, 20장 120, 21장 142, 22장 167, 23장 138.",
+  "규칙 4를 그대로 적용해서 뜻밖의 자리에 간 묶음 ①: 1장 탐구·개념·다개념(1Q, 1C, 1M, 26문제)은 f-method(길 3번)가 맡는다. 1.1절만 f-method이고 1.2~1.11절은 f-measure(길 2번)인데 f-method가 길에서 뒤이기 때문이다. 내용은 대부분 측정·단위·밀도다. f-measure로 옮기려면 이 세 묶음의 unit만 바꾸면 된다.",
+  "규칙 4를 그대로 적용해서 뜻밖의 자리에 간 묶음 ②: 10장 탐구·개념·다개념(10Q, 10C, 10M, 32문제)은 e-climate(길 108번)가 맡는다. 10.10~10.11절이 e-climate이기 때문이다. 낱말로 훑어 보면 이 문제들은 기체 법칙·화학량론 문제이고 온실 기체·오존은 나오지 않는다(문제를 낱낱이 읽고 확인한 것은 아니다). c-gas(길 50번)로 옮길지 정해야 한다.",
+  "10.9~10.11절 문제(116~133)는 책이 한 제목 아래 묶어 놓아서 나눌 수 없다. 묶음 하나는 단원 하나이므로 뒤 단원 e-climate가 맡고, e-atmos(10.9절)는 맥머리 문제가 없다(10.9~10.11절에는 본문 문제도 없다).",
+  "2장: 2.11~2.12절(혼합물·화합물, 이온)과 2.13절(이름 붙이기)은 math-path 6-3대로 c-atom이 맡는다. 4장: 4.14절은 절 문제 제목이 따로 없다(본문 문제 23~30과 탐구 문제는 c-redox).",
+  "절 문제 제목이 없는 절: 3.1, 4.14, 14.12, 14.14~14.15 등. 14장 마지막 절 문제(116~123)는 본문에 \"Sections 14.13\", 답에는 \"Sections 14.13–14.15\"로 적혀 있다. 본문 제목을 따랐다.",
+  "17장은 절 문제가 홀수 번에서 시작한다(47, 55, 63, …). 다른 장은 4.2절(57)을 빼면 짝수 번에서 시작한다. 19장 146~147번은 19.12~19.14절 묶음 끝에 있지만 19.10절(납 축전지)을 가리킨다.",
+  "옛 지도(sources/unit-map.json)에서 다른 단원이 대조용으로 가리키던 절(9.7·11.4 → p-heat, 5.1~5.8 → p-quantum·p-qm, 8.7~8.9 → c-qchem, 18장 → p-thermo, 20.5 → e-history, 23.4·23.6·23.9·23.11 → b-molecule 등)은 여기서는 문제를 맡지 않는다. 문제는 math-path 6-3과 map-126대로 한 단원만 맡는다.",
+  "번호 세는 법: pdftotext 배치 모드에서 쪽마다 큰 제목(개념·절·다개념)으로 띠를 나누고 띠 안에서 왼쪽 단 → 오른쪽 단 순서로 읽었다. 묶음의 첫 번호를 읽고 끝 번호는 다음 묶음 첫 번호 − 1로 정했다. 23개 장 모두 번호가 1번부터 빠짐없이 이어지는 것, 책 뒤 답의 절 제목별 첫 짝수 번과 맞는 것을 확인했다."
+ ]
+}

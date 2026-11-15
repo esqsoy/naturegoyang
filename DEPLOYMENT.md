@@ -7,7 +7,7 @@
   - 쓰는 기능: Claude 호출(설명·카드·문제 생성), Artifact 저장소(기록, 만들어 둔 설명·카드), 보는 사람 id
   - 원본: `app/naturegoyang.html`
 - **영신 검수 페이지(Artifact, 비공개):** https://claude.ai/artifact/4LuPsZwy4i4q2ye2NKnjN8 — 화면 제목 '과학고양 내용 검수', capabilities `comments: {composer_only: true}`, 원본 `tools/review-page.py`가 content/에서 만든다. 1판(26.11.09): 1~5단원. 2판(26.11.10): 2번 직관 문장 고침. 3판: 2번 직관 비유 뺌. 4판: 6~10번 더함. 5판: 11~15번. 6판: 16~20번. 7판: 21~25번. 8판: 26~30번. 9판: 31~35번. 10판: 36~40번. 11판: 41~45번. 12판: 46~50번. 13판: 51~55번. 14판: 56~60번. 15판: 61~65번. 16판: 66~70번. 17판: 71~75번. 18판: 76~84번(전 단원).
-- **새 단원 검수 페이지(Artifact, 비공개, 26.11.14~):** https://claude.ai/artifact/CLXq5QMLDPNmQN4RbJHv4t — 화면 제목 '과학고양 새 단원 검수', capabilities `comments: {composer_only: true}`, `tools/review-page.py --out <파일> <id…>`로 만들고 제목만 바꾼다. 126단원 지도의 새 단원·다시 쓴 단원을 여기에 더한다(옛 검수 페이지는 84단원 전부가 든 5MB라 새 세션이 다시 올리기 무겁다). 1판: 수와 식, 함수와 그래프.
+- **새 단원 검수 페이지(Artifact, 비공개, 26.11.14~):** https://claude.ai/artifact/CLXq5QMLDPNmQN4RbJHv4t — 화면 제목 '과학고양 새 단원 검수', capabilities `comments: {composer_only: true}`, `tools/review-page.py --out <파일> <id…>`로 만들고 제목만 바꾼다. 126단원 지도의 새 단원·다시 쓴 단원을 여기에 더한다(옛 검수 페이지는 84단원 전부가 든 5MB라 새 세션이 다시 올리기 무겁다). 1판: 수와 식, 함수와 그래프. 2판(26.11.16): 1·5~14번 11단원.
 - GitHub Pages: 없음. 지금 앱은 claude.ai 안에서만 Claude 호출과 저장소를 쓸 수 있다(README '어디서 돌아가나').
 
 ## 판 (같은 주소에 덮어씀. 1~5판 2026-11-09, 6~9판 2026-11-13, 10판~ 2026-11-14)
@@ -26,6 +26,7 @@
 | 10 | 단원 번호 칩 `[[id\|#]]`: 설명·카드가 다른 단원을 번호 대신 id로 가리키고, 앱이 지금 번호를 칩으로 보인다(누르면 그 단원). 표 칸 안의 `[[id\|…]]`도 깨지지 않게. 지도는 아직 84단원 |
 | 11 | 126단원 지도(design/map-126): 수학 38단원(토마스 13판·Epp·Lang)과 책 장에 맞춘 4단원을 더하고 선수·단계·목표를 고침. 새 1번 수와 식이 1번 측정과 단위의 선수다(하던 단원이 잠기고 읽던 자리는 남는다). 단계 설명, 지도의 기초 도구 5칸 |
 | 12 | 교재 문제 단계 첫 판(설명 · 암기 · 확인 · **교재** · 결과): 토마스 문제가 걸린 33단원에 문제 번호 목록(8,903문제, 컴퓨터 탐구 뺌). 문제 사진 → 내 답·풀이 → 책 뒤 답 맞춰 보기(홀수 번) 또는 Claude 독립 풀이 → 읽은 문제 확인 → 견주기·재판정 → 혼자 풂·스스로 고침·도움 받아 풂·틀림·보류. 힌트 3단계, 따라쓰기, 하루 뒤 재풀이(풀이 함께), 5문제 묶음·미루기, 이의, 빠진 계단 진단, 계산기(math.js 14.9.1, 늦게 싣고 풀이 도구는 막음). 숙달 = 확인 100점 + 카드 + 교재 문제 전부 혼자 풂. 기록은 계정 비공개 `book1`~`book4`(단계별)에 상태·힌트·횟수·날짜만. 선언에 사진 보내기(`sample: {images: true}`) |
+| 13 | 교재 문제 목록을 여섯 책으로: 토마스 8,903, 서웨이 4,758, 맥머리 3,218, Epp 1,519, 캠벨 1,346, Lang 372 = 20,116문제(108단원). 책 뒤 답 규칙을 책·묶음마다(홀수·짝수·전부·일부·없음). 맥머리 번호는 1.32 꼴로 보인다. 목록은 `tools/problems.py`가 `sources/problems-*.json`에서 만든다 |
 
 판 번호는 Artifact 쪽 판 번호와 같다.
 
@@ -58,3 +59,5 @@
 | 2026-11-14 | `lessons/` 83개(f-measure 빼고 전부), `cards/` 80개 | 1 → 2 (f-method 설명 3 → 4) | 단원 번호 가리킴 1,136곳을 `[[id\|#]]`로(content/와 같게). 받은 판을 if_version으로. 고치기 전 원본은 Windows PC `Documents/naturegoyang-private/artifact-backup/2026-11-14/`(비공개 폴더가 이 PC에 내려오지 않아서). 지금 번호와 같은 번호가 보이므로 읽는 글은 그대로다. |
 | 2026-11-14 | `lessons/f-algebra--v3`, `f-func--v3`, `cards/f-algebra`, `f-func` | 새로 1 | 새 1번 수와 식, 5번 함수와 그래프(126단원 지도의 새 단원). 새 단원 검수 페이지 1판. |
 | 2026-11-14 | `lessons/` 16개(b-cell, b-ecology, b-photo, c-acid, c-bond, c-gas, c-kinetics, c-redox, c-solution, c-thermochem, e-rock, e-solar, f-ratio, p-gr, p-rotation, p-thermo), `cards/` b-ecology, f-ratio, p-magnet, p-motion | 2 → 3 | 새 순서에서 앞뒤가 거짓이 된 문장을 방향 없는 말로, 미분을 가리키던 f-rate를 f-deriv로. |
+| 2026-11-16 | `lessons/`·`cards/` f-logic, f-proof, f-set, f-induct, f-limit, f-deriv | 새로 1 | 9~14번 새 단원(126단원 지도). 새 단원 검수 페이지 2판. |
+| 2026-11-16 | `lessons/`·`cards/` f-sci, f-trig, f-vector | 2 → 3 | 6~8번 새 지도 목표로 다시 씀(카드 id 그대로, 맞지 않는 카드는 x, 새 카드는 끝 번호 뒤). 원본 백업 `Documents/naturegoyang-private/artifact-backup/2026-11-16/`. |
