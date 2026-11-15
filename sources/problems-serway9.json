@@ -49,6 +49,30 @@
    "sec": "1.6",
    "label": "1.6절 문제",
    "from": 35,
+   "to": 43,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.6-b",
+   "label": "1.6절 문제",
+   "from": 46,
+   "to": 47,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.6-c",
+   "label": "1.6절 문제",
+   "from": 49,
+   "to": 49,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1.6-d",
+   "label": "1.6절 문제",
+   "from": 52,
    "to": 53,
    "ans": "odd"
   },
@@ -73,15 +97,39 @@
    "sec": "1AP",
    "label": "1장 추가 문제",
    "from": 54,
-   "to": 71,
+   "to": 58,
    "ans": "odd"
   },
   {
    "unit": "f-measure",
-   "sec": "1CP",
-   "label": "1장 도전 문제",
-   "from": 72,
-   "to": 73,
+   "sec": "1AP-b",
+   "label": "1장 추가 문제",
+   "from": 61,
+   "to": 63,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1AP-c",
+   "label": "1장 추가 문제",
+   "from": 65,
+   "to": 65,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1AP-d",
+   "label": "1장 추가 문제",
+   "from": 69,
+   "to": 69,
+   "ans": "odd"
+  },
+  {
+   "unit": "f-measure",
+   "sec": "1AP-e",
+   "label": "1장 추가 문제",
+   "from": 71,
+   "to": 71,
    "ans": "odd"
   },
   {
@@ -3707,6 +3755,132 @@
    "from": 67,
    "to": 73,
    "ans": "odd"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1.6>f-trig-44",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 44,
+   "to": 44,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1.6>f-trig-45",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 45,
+   "to": 45,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1.6>f-trig-48",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 48,
+   "to": 48,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1AP>f-trig-59",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 59,
+   "to": 59,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1AP>f-trig-60",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 60,
+   "to": 60,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1AP>f-trig-68",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 68,
+   "to": 68,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1AP>f-trig-70",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 70,
+   "to": 70,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1CP>f-trig-72",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 72,
+   "to": 72,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-trig",
+   "sec": "1CP>f-trig-73",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 73,
+   "to": 73,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-ratio",
+   "sec": "1.6>f-ratio-50",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 50,
+   "to": 50,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-ratio",
+   "sec": "1.6>f-ratio-51",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 51,
+   "to": 51,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-curve",
+   "sec": "1AP>f-curve-64",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 64,
+   "to": 64,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-chain",
+   "sec": "1AP>f-chain-66",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 66,
+   "to": 66,
+   "ans": "odd",
+   "carry": "f-measure"
+  },
+  {
+   "unit": "f-rate",
+   "sec": "1AP>f-rate-67",
+   "label": "1장 문제(앞 단원에서 이월)",
+   "from": 67,
+   "to": 67,
+   "ans": "odd",
+   "carry": "f-measure"
   }
  ],
  "units": {
@@ -3797,6 +3971,7 @@
   "장 순서와 길 순서가 다른 곳: 3장(f-vector)이 2장보다 먼저, 19~22장(열)이 15~18장보다 먼저(이상 math-path 6-2 순서 예외), 23~28장(p-electric·p-circuit)이 15~18장(p-osc·p-wave)보다 먼저(지금 앱의 길 순서).",
   "글자 뽑기에서 줄 머리에 번호가 안 잡힌 여섯(2장 43, 4장 41, 8장 46, 23장 27, 7장 객관식 3, 19장 객관식 12)은 앞뒤 번호가 이어져 있어 범위에 넣었다. 묶음 경계가 아니다.",
   "객관식 질문·개념 질문의 마지막 번호는 두 단을 차례로 읽어 번호가 끊기지 않는 것으로 확인했고(쪽 그림으로 본 것은 아니다), 문제의 마지막 번호는 책 뒤 홀수 답 목록과도 맞춰 보았다.",
-  "장마다 낱개로 뒤 도구를 쓰는 문제(이월 문제, textbook-problems 5절 2번)는 가리지 않았다. 번호 범위만 세었다."
+  "장마다 낱개로 뒤 도구를 쓰는 문제(이월 문제, textbook-problems 5절 2번)는 가리지 않았다. 번호 범위만 세었다.",
+  "26.11.16 이월: f-measure의 f-trig ← [44, 45, 48, 59, 60, 68, 70, 72, 73], f-ratio ← [50, 51], f-curve ← [64], f-chain ← [66], f-rate ← [67] (뒤 단원의 도구를 쓰는 문제를 그 도구 단원에서 푼다. map-126 결정 2)"
  ]
 }
