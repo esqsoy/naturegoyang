@@ -94,8 +94,20 @@ def md_to_html(md, by, num, target_prefix):
                    f'<button type="button" class="cbtn" data-comment aria-label="이 덩어리에 댓글">댓글</button>')
         open_block[0] = True
 
+    fence = None
     for raw in lines:
         l = raw.strip()
+        if fence is not None:  # ```graph … ```: 앱과 같은 코드로 브라우저에서 그린다(26.11.16)
+            if l.startswith('```'):
+                out.append(f'<div class="graph-src" data-src="{esc(chr(10).join(fence))}"></div>')
+                fence = None
+            else:
+                fence.append(raw)
+            continue
+        if l.startswith('```'):
+            flush()
+            fence = []
+            continue
         m = re.match(r'^(#{2,4})\s+(.*)$', l)
         if m:
             lv, t = len(m.group(1)), m.group(2).strip()
@@ -281,6 +293,11 @@ math{font-size:1.05em}
 .hint{font-size:13px; color:var(--ink-3)}
 @media (max-width:640px){ .cq,.ca{min-width:0} .cards td:first-child{display:none} }
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+/* 그림(앱 CSS를 그대로 가져온다) */
+:root{ --surface-2:var(--sunk); --line-2:var(--line); --font-ui:var(--ui); --font-mono:var(--mono); --d-p:#2A58D6; --d-c:#C25F0C; --d-b:#1D8653; --d-e:#7444C2; --bad:#C2352A }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --d-p:#7495FF; --d-c:#F09A4E; --d-b:#4FC68A; --d-e:#B391F2; --bad:#F06C60 }}
+:root[data-theme="dark"]{ --d-p:#7495FF; --d-c:#F09A4E; --d-b:#4FC68A; --d-e:#B391F2; --bad:#F06C60 }
+__GRAPHCSS__
 </style>
 <header class="bar"><div class="bar-in"><p class="brand">과학고양 내용 검수</p><nav class="chips" aria-label="단원">__CHIPS__</nav></div></header>
 <main>
@@ -319,6 +336,11 @@ document.querySelectorAll('.unit').forEach(function(u){
   var saved = null; try{ saved = localStorage.getItem('tab-'+u.id); }catch(e){}
   if(saved){ var b = u.querySelector('.tab[aria-controls="'+saved+'"]'); if(b) b.click(); }
 });
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function inl(s){ return esc(s).replace(/\$([^$]+)\$/g, function(_, t){ return '<span class="tex" data-tex="'+t+'">'+t+'</span>'; }); }
+__GRAPHJS__
+document.querySelectorAll('.graph-src').forEach(function(el){ var d=document.createElement('div'); d.innerHTML=graphHTML(el.dataset.src); el.replaceWith(d.firstElementChild||d); });
+document.addEventListener('click', function(ev){ var b=ev.target.closest('[data-act="g-play"]'); if(b) gPlay(b.dataset.g, b.dataset.gv); });
 drawMath(document);
 window.addEventListener('load', function(){ drawMath(document); });
 if(window.claude && window.claude.use){
@@ -343,7 +365,11 @@ def render(units, gen):
 <div class="panel" id="{u["id"]}-p2" role="tabpanel" hidden><div class="tbl"><table class="cards"><thead><tr><th>id</th><th>종류</th><th>앞면</th><th>뒷면</th><th></th></tr></thead><tbody>{u["rows"]}</tbody></table></div></div>
 <div class="panel" id="{u["id"]}-p3" role="tabpanel" hidden><p class="note">교과서: {esc(u["tb"])}</p><p class="note">학습 목표</p><ol class="note">{obj}</ol>{u["check"]}</div>
 </article>''')
-    return PAGE.replace('__CHIPS__', chips).replace('__UNITS__', '\n'.join(blocks)).replace('__GEN__', esc(gen))
+    app = open(os.path.join(REPO, 'app', 'naturegoyang.html'), encoding='utf-8').read()
+    js = app[app.index('/*GRAPH-START*/'):app.index('/*GRAPH-END*/') + len('/*GRAPH-END*/')]
+    css = '\n'.join(l for l in app.split('\n') if re.match(r'^\.(graph|g-)', l))
+    return (PAGE.replace('__CHIPS__', chips).replace('__UNITS__', '\n'.join(blocks)).replace('__GEN__', esc(gen))
+            .replace('__GRAPHCSS__', css).replace('__GRAPHJS__', js))
 
 
 def main():

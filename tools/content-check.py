@@ -79,7 +79,97 @@ def related(nid, nodes, by, unlocks):
     return [x for x in s if x != nid]
 
 
+FENCE = re.compile(r'```[\s\S]*?```')
+GFN = {'sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'sqrt', 'cbrt', 'abs', 'exp', 'ln', 'log', 'floor', 'ceil', 'sign', 'min', 'max'}
+GSTYLE = {'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'dash', 'dot', 'thin', 'bold', 'open'}
+GARGS = {'x': 2, 'y': 2, 'h': 1, 'equal': 0, 'nogrid': 0, 'numline': 0, 'cap': None, 'slider': None, 'f': 1, 'par': 4,
+         'pt': 1, 'text': 2, 'seg': 4, 'vec': 4, 'area': 3, 'bars': 4, 'iv': 2, 'hline': 1, 'vline': 1}
+
+
+def check_expr(e, names):
+    """앱 gExpr()와 같은 문법: 수, 이름, + - * / ^, 괄호, 함수(인자는 쉼표)."""
+    depth = 0
+    for ch in e:
+        depth += ch == '('
+        depth -= ch == ')'
+        if depth < 0:
+            return '괄호'
+    if depth:
+        return '괄호'
+    if re.search(r'[^0-9A-Za-z_.+\-*/^(),]', e):
+        return '쓸 수 없는 글자(식에는 띄어쓰기도 없다)'
+    for m in re.finditer(r'[A-Za-z_]\w*', e):
+        w, nxt = m.group(0), e[m.end():m.end() + 1]
+        if nxt == '(':
+            if w not in GFN:
+                return f'모르는 함수 {w}'
+        elif w not in names and w not in ('pi', 'e') and not re.match(r'^\d', w):
+            if not (m.start() > 0 and re.match(r'[\d.]', e[m.start() - 1])):  # 1e-3
+                return f'모르는 이름 {w}'
+    return ''
+
+
+def check_graphs(md, errs):
+    """```graph 블록(앱 gParse와 같은 문법). 그림은 앱이 식으로 계산해 그린다(26.11.16)."""
+    for m in re.finditer(r'^```(\w*)\n([\s\S]*?)^```', md, re.M):
+        kind, body = m.group(1), m.group(2)
+        at = md[:m.start()].count('\n') + 1
+        if kind != 'graph':
+            errs.append(f'{at}줄: ```{kind} 블록은 앱이 그리지 않는다(graph만)')
+            continue
+        lines = body.split('\n')
+        if any(not l.strip() for l in lines[:-1]):
+            errs.append(f'{at}줄 그림: 빈 줄을 두지 않는다(장 나누기가 그림을 자른다)')
+        names = {'x', 't'}
+        for l in lines:
+            tk = l.split('|')[0].split()
+            if tk and tk[0] == 'slider':
+                names.add(tk[1] if len(tk) > 1 else '')
+        has = set()
+        for k, l in enumerate(lines):
+            l = l.strip()
+            if not l:
+                continue
+            b = l.split('|', 1)[0].strip()
+            tk = b.split()
+            cmd, args = tk[0], [t for t in tk[1:] if t not in GSTYLE]
+            has.add(cmd)
+            where = f'{at + k + 1}줄 그림'
+            if cmd not in GARGS:
+                errs.append(f'{where}: 모르는 줄 "{cmd}"')
+                continue
+            if cmd == 'cap':
+                continue
+            if cmd == 'slider':
+                if len(args) < 4 or not re.match(r'^[A-Za-z_]\w*$', args[0]) or args[0] in GFN | {'x', 't', 'pi', 'e'}:
+                    errs.append(f'{where}: slider 이름 최소 최대 처음값 [간격] [play]')
+                    continue
+                for a in args[1:]:
+                    if a != 'play' and (bad := check_expr(a, set())):
+                        errs.append(f'{where}: "{a}" {bad}')
+                continue
+            if cmd == 'f':
+                exprs = [args[0]] if args else []
+                for w in ('from', 'to'):
+                    if w in args and args.index(w) + 1 < len(args):
+                        exprs.append(args[args.index(w) + 1])
+            elif cmd == 'iv':
+                exprs = [a for a in args[:2] if a not in ('-inf', 'inf')]
+                if len(args) > 2 and not re.match(r'^[\[(][\])]$', args[2]):
+                    errs.append(f'{where}: 구간 끝 "{args[2]}"')
+            else:
+                exprs = args
+            if len(args) < GARGS[cmd]:
+                errs.append(f'{where}: {cmd}에 값이 모자란다')
+            for a in exprs:
+                if (bad := check_expr(a, names if cmd not in ('x', 'y', 'h') else set())):
+                    errs.append(f'{where}: "{a}" {bad}')
+        if not has & {'f', 'par', 'pt', 'seg', 'vec', 'area', 'bars', 'iv', 'text'}:
+            errs.append(f'{at}줄 그림: 그릴 것이 없다')
+
+
 def plain_len(s):
+    s = FENCE.sub('', s)
     s = shown(s)
     s = re.sub(r'\$\$[\s\S]*?\$\$', '수식수식수식', s)
     s = re.sub(r'\$[^$\n]+\$', '수식', s)
@@ -93,8 +183,10 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     names = [t for _, t in h2]
     if names != SECTIONS:
         errs.append(f'큰 제목 순서가 다르다: {names}')
-    total = len(shown(md))
-    info.append(f'설명 {total}자')
+    check_graphs(md, errs)
+    nfig = len(re.findall(r'^```graph', md, re.M))
+    total = len(shown(FENCE.sub('', md)))
+    info.append(f'설명 {total}자' + (f', 그림 {nfig}' if nfig else ''))
     if not 3000 <= total <= 5000:
         warns.append(f'분량 {total}자 (어림 3000~5000, 문제가 쓰는 것을 실어 넘으면 둔다)')
     # 원리 블록
