@@ -10,6 +10,19 @@
 
 비탈을 구르는 공이 $t$ s 동안 $s=2t^2$ m를 간다고 하자. $t=3$부터 $h$ s 동안의 평균 빠르기는 $\frac{2(3+h)^2-18}{h}=12+2h$ ($h\neq0$)이다. $h=0.1$이면 12.2, $h=0.01$이면 12.02이고, $h$를 0에 가까이 가져갈수록 12에 다가간다. $h=0$을 넣은 것이 아니다. 극한은 그 점에서의 값을 묻지 않고 그 점 가까이에서의 값만 묻는다.
 
+아래 그림의 가로축은 $h$, 세로축은 평균 빠르기이다. 손잡이로 $h$를 0 쪽으로 옮겨 본다.
+
+```graph
+x -1.2 1.5
+y 9 15
+slider h -1 1 0.5 0.05 | h (s)
+hline 12 c2
+f 12+2*x c1 | 평균 빠르기 12+2h
+pt 0 12 open c1
+pt h (2*(3+h)^2-18)/h c1 | {(2*(3+h)^2-18)/h} m/s
+cap $h$를 양쪽에서 0에 가까이 가져가면 점의 높이가 12(주황 점선)에 다가간다. $h=0$에서는 $\frac00$이 되어 점이 사라지고 그래프에는 구멍(속 빈 점)이 남는다. 극한 12는 구멍 둘레의 값들이 정한다.
+```
+
 #### 통상
 
 **평균변화율**(平均變化率, average rate of change)은 $x$가 $x_1$에서 $x_2$까지 변할 때 함숫값의 변화량을 $x$의 변화량으로 나눈 값이다.
@@ -46,6 +59,22 @@ $n$이 자연수이면 $\lim f^n=L^n$, $\lim\sqrt[n]{f}=\sqrt[n]{L}$이다($n$�
 
 '한없이 가깝다'는 주문과 응답으로 바꿀 수 있다. 상대가 허용 오차 $\varepsilon$을 아무리 작게 불러도, $x$를 $c$에서 $\delta$ 안쪽에만 두면 $f(x)$가 $L$에서 $\varepsilon$ 안에 든다고 답할 $\delta$를 내가 늘 찾을 수 있으면 극한이 $L$이다. 한쪽 극한은 $c$의 한쪽에서만 다가가는 것이다. $x\to\infty$는 $x$가 어떤 수보다도 커지는 것을 뜻하며, $\infty$라는 수에 닿는다는 뜻이 아니다.
 
+아래 그림은 예제 1의 $\lim_{x\to4}\sqrt x=2$이다. 손잡이 $\varepsilon$이 상대가 부르는 허용 오차이고, 초록 띠가 그 주문에 답하는 $\delta$이다.
+
+```graph
+x 0 10
+y 0 3.5
+slider ep 0.05 1 0.5 0.05 | ε
+hband 2-ep 2+ep c2 | 2±ε
+vband 4-(4*ep-ep^2) 4+(4*ep-ep^2) c3 | δ={4*ep-ep^2}
+vline (2-ep)^2 c0
+vline (2+ep)^2 c0
+f sqrt(x) c1
+f sqrt(x) from 4-(4*ep-ep^2) to 4+(4*ep-ep^2) c1 bold
+pt 4 2 c1
+cap 주황 띠는 $2-\varepsilon<y<2+\varepsilon$, 초록 띠는 $4-\delta<x<4+\delta$이다. 초록 띠 안의 곡선(굵은 부분)은 모두 주황 띠 안에 든다. 회색 점선 사이는 $\lvert\sqrt x-2\rvert<\varepsilon$을 푼 구간 $(2-\varepsilon)^2<x<(2+\varepsilon)^2$이고, $\delta$는 4에서 가까운 쪽 끝까지의 거리 $4\varepsilon-\varepsilon^2$이다. $\varepsilon$을 줄이면 $\delta$도 줄지만 0이 되지는 않는다($\varepsilon=0.1$이면 $\delta=0.39$).
+```
+
 #### 통상
 
 **우극한**(右極限, right-hand limit) $\lim_{x\to c^+}f(x)$는 $x$가 $c$보다 큰 값을 가지면서 $c$에 한없이 가까워질 때 $f(x)$가 한없이 가까워지는 일정한 수이다. **좌극한**(左極限, left-hand limit) $\lim_{x\to c^-}f(x)$는 $x$가 $c$보다 작은 값을 가지면서 $c$에 한없이 가까워질 때 $f(x)$가 한없이 가까워지는 일정한 수이다. 극한이 $L$인 것은 좌극한과 우극한이 모두 $L$인 것과 같다. 각을 라디안으로 잴 때 다음이 성립한다.
@@ -62,11 +91,33 @@ $x$가 한없이 커질 때 $f(x)$가 $L$에 한없이 가까워지면 $\lim_{x\
 
 $$\forall\varepsilon>0\ \exists\delta>0\ \forall x\ \bigl(0<|x-c|<\delta\Rightarrow|f(x)-L|<\varepsilon\bigr)$$
 
-$\delta$는 $\varepsilon$을 보고 정하며 $x$보다 먼저 정한다. $0<|x-c|$가 $x=c$를 뺀다. $\delta$는 $|f(x)-L|<\varepsilon$을 풀어 얻은 $x$의 구간에서, $c$와 가까운 쪽 끝점까지의 거리 이하로 잡는다. 부정([[f-logic|#]])은 '어떤 $\varepsilon>0$이 있어, 모든 $\delta>0$마다 $0<|x-c|<\delta$이면서 $|f(x)-L|\ge\varepsilon$인 $x$가 있다'이다.
+$\delta$는 $\varepsilon$을 보고 정하며 $x$보다 먼저 정한다. $0<|x-c|$가 $x=c$를 뺀다. $\delta$는 $|f(x)-L|<\varepsilon$을 풀어 얻은 $x$의 구간이 $c$를 안에 품을 때, $c$와 가까운 쪽 끝점까지의 거리 이하로 잡는다. 부정([[f-logic|#]])은 '어떤 $\varepsilon>0$이 있어, 모든 $\delta>0$마다 $0<|x-c|<\delta$이면서 $|f(x)-L|\ge\varepsilon$인 $x$가 있다'이다.
 
 우극한은 조건을 $c<x<c+\delta$로, 좌극한은 $c-\delta<x<c$로 바꾼다. $\lim_{x\to\infty}f(x)=L$은 '임의의 $\varepsilon>0$에 대하여 어떤 $M$이 존재하여 $x>M$이면 $|f(x)-L|<\varepsilon$'이다. $\lim_{x\to c}f(x)=\infty$는 '임의의 $B>0$에 대하여 어떤 $\delta>0$가 존재하여 $0<|x-c|<\delta$이면 $f(x)>B$'이다. $\infty$는 수가 아니므로 이 극한은 존재하지 않으며, 기호는 없는 방식을 적은 것이다.
 
-$\frac{\sin\theta}{\theta}$의 극한은 넓이로 보인다. $0<\theta<\frac\pi2$일 때 단위원에서 중심각 $\theta$인 부채꼴은 그 안의 삼각형보다 넓고, 호의 한 끝에서 그은 접선으로 만든 직각삼각형보다 좁으므로 $\frac12\sin\theta<\frac12\theta<\frac12\tan\theta$이다. 각 변을 $\frac12\sin\theta$로 나누고 역수를 취하면 $\cos\theta<\frac{\sin\theta}{\theta}<1$이다. 세 식 모두 짝함수라 $\theta<0$에서도 성립하고, 샌드위치 정리로 극한은 1이다. 부채꼴 넓이 $\frac12\theta$가 라디안의 식이어서 각을 도로 재면 극한은 $\frac{\pi}{180}$이 된다. $x\to-\infty$의 계산에서는 $\sqrt{x^2}=-x$이다.
+$\frac{\sin\theta}{\theta}$의 극한은 넓이로 보인다. $0<\theta<\frac\pi2$일 때 단위원에서 중심각 $\theta$인 부채꼴은 그 안의 삼각형보다 넓고, 호의 한 끝에서 그은 접선으로 만든 직각삼각형보다 좁으므로 $\frac12\sin\theta<\frac12\theta<\frac12\tan\theta$이다. 각 변을 $\frac12\sin\theta$로 나누고 역수를 취하면 $\cos\theta<\frac{\sin\theta}{\theta}<1$이다. 세 식 모두 짝함수라 $\theta<0$에서도 성립하고, 샌드위치 정리로 극한은 1이다. 아래 그림에서 손잡이로 $\theta$를 바꾸며 세 넓이를 견준다.
+
+```graph
+x -0.1 1.8
+y -0.1 1.6
+equal
+slider th 0.05 1 0.8 0.01 | θ (라디안)
+area x*tan(th) 0 1 c0
+area min(x*tan(th),sqrt(1-x^2)) 0 1 c1
+area min(x*tan(th),(1-x)*sin(th)/(1-cos(th))) 0 1 c4
+par cos(t) sin(t) 0 pi/2 c0 thin
+seg 0 0 1 tan(th) c0 thin
+seg 1 0 1 tan(th) c0 thin
+seg cos(th) sin(th) 1 0 c4 thin
+text 1.42 1.5 c4 | ½sinθ={sin(th)/2}
+text 1.42 1.35 c1 | ½θ={th/2}
+text 1.42 1.2 c0 | ½tanθ={tan(th)/2}
+text 1.42 0.95 c1 | sinθ/θ={sin(th)/th}
+text 1.42 0.8 c0 | cosθ={cos(th)}
+cap 보라는 삼각형 $\frac12\sin\theta$, 파랑은 부채꼴 $\frac12\theta$, 회색은 접선으로 만든 직각삼각형 $\frac12\tan\theta$이다. 셋은 늘 안쪽부터 이 순서로 겹쳐 있다. $\theta$를 줄이면 $\frac{\sin\theta}{\theta}$가 $\cos\theta$와 1 사이에 끼인 채 1에 다가간다.
+```
+
+부채꼴 넓이 $\frac12\theta$가 라디안의 식이어서 각을 도로 재면 극한은 $\frac{\pi}{180}$이 된다. $x\to-\infty$의 계산에서는 $\sqrt{x^2}=-x$이다.
 
 #### 점검
 **Q.** $\lim_{x\to0}\dfrac{\sin5x}{2x}$의 값은?
@@ -89,6 +140,26 @@ $f$가 $x=c$에서 연속이 아니면 $x=c$에서 **불연속**(不連續, disc
 다항함수, 유리함수, 거듭제곱근, 절댓값, 삼각함수, 지수함수와 로그함수는 연속함수이다. 연속함수의 합·차·곱·몫(분모가 0이 아닌 곳)과 합성은 연속이다. $g$가 $b$에서 연속이고 $\lim_{x\to c}f(x)=b$이면 $\lim_{x\to c}g(f(x))=g(b)$이다.
 
 **사잇값 정리**(intermediate value theorem)는 $f$가 닫힌구간 $[a,b]$에서 연속이고 $f(a)\neq f(b)$이면, $f(a)$와 $f(b)$ 사이의 임의의 값 $k$에 대하여 $f(c)=k$인 $c$가 $a$와 $b$ 사이에 적어도 하나 존재한다는 정리이다. 그래서 $f(a)$와 $f(b)$의 부호가 다르면 방정식 $f(x)=0$은 $a$와 $b$ 사이에 실근을 갖는다.
+
+아래 그림은 예제 3의 $f(x)=x^3+x-3$이다. 손잡이로 $f(1)$과 $f(2)$ 사이의 값 $k$를 고른다.
+
+```graph
+x 0 2.5
+y -4 10
+slider k -0.9 6.9 0 0.1 | k
+fn R cbrt((3+x)/2+sqrt((3+x)^2/4+1/27))+cbrt((3+x)/2-sqrt((3+x)^2/4+1/27))
+vline 1 c0
+vline 2 c0
+f x^3+x-3 from 0 to 2.2 c1 | y=x³+x−3
+hline k c2
+pt 1 -1 c1
+pt 2 7 c1
+text 0.68 -1.25 c1 | f(1)=−1
+text 1.72 7.05 c1 | f(2)=7
+seg R(k) 0 R(k) k c3 dot
+pt R(k) k c3 | c={R(k)}
+cap 주황 수평선 $y=k$는 $k$를 $-1$과 7 사이 어디에 두어도 1과 2 사이에서 그래프와 만나고, 만나는 점의 $x$좌표가 $c$(초록)이다. $k=0$이면 $c\approx1.21$로, 예제 3에서 1.2와 1.25 사이에 가둔 근이다.
+```
 
 #### 엄밀
 

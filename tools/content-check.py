@@ -81,12 +81,42 @@ def related(nid, nodes, by, unlocks):
 
 FENCE = re.compile(r'```[\s\S]*?```')
 GFN = {'sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'sqrt', 'cbrt', 'abs', 'exp', 'ln', 'log', 'floor', 'ceil', 'sign', 'min', 'max'}
-GSTYLE = {'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'dash', 'dot', 'thin', 'bold', 'open'}
+GSTYLE = {'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'dash', 'dot', 'thin', 'bold', 'open', 'fill'}
 GARGS = {'x': 2, 'y': 2, 'h': 1, 'equal': 0, 'nogrid': 0, 'numline': 0, 'cap': None, 'slider': None, 'f': 1, 'par': 4,
-         'pt': 1, 'text': 2, 'seg': 4, 'vec': 4, 'area': 3, 'bars': 4, 'iv': 2, 'hline': 1, 'vline': 1}
+         'pt': 1, 'text': 2, 'seg': 4, 'vec': 4, 'area': 3, 'bars': 4, 'iv': 2, 'hline': 1, 'vline': 1,
+         'fn': None, 'dots': 3, 'hband': 2, 'vband': 2, 'noaxes': 0, 'xticks': 0, 'yticks': 0}
+IMAGES = os.path.join(REPO, 'sources', 'images.json')
+IMG_LICENSES = re.compile(r'^(public domain|CC0 1\.0|CC BY(-SA)? \d\.\d)$')
 
 
-def check_expr(e, names):
+def check_img(body, where, errs):
+    """```img 블록(앱 17판): 자유 이용 사진·그림. src는 app/img/ 안, sources/images.json에 출처·저작자·이용 허락이 있어야 한다."""
+    o = {}
+    for l in body.split('\n'):
+        m = re.match(r'^(\w+)\s+(.*)$', l.strip())
+        if m:
+            o[m.group(1)] = m.group(2).strip()
+    for k in ('src', 'alt', 'cap', 'credit', 'url'):
+        if not o.get(k):
+            errs.append(f'{where}: {k} 줄이 없다')
+    src = o.get('src', '')
+    if src and not re.match(r'^img/[\w./-]+\.(jpg|jpeg|png|webp|svg)$', src, re.I):
+        errs.append(f'{where}: src는 img/… 그림 파일')
+        return
+    if src and not os.path.exists(os.path.join(REPO, 'app', src)):
+        errs.append(f'{where}: app/{src} 파일이 없다')
+    reg = json.load(open(IMAGES, encoding='utf-8')).get('images', {}) if os.path.exists(IMAGES) else {}
+    r = reg.get(src)
+    if src and not r:
+        errs.append(f'{where}: sources/images.json에 {src}가 없다')
+    elif r:
+        if not IMG_LICENSES.match(r.get('license', '')):
+            errs.append(f'{where}: 이용 허락 "{r.get("license")}"(공유 저작물·CC0·CC BY·CC BY-SA만)')
+        if r.get('source') != o.get('url'):
+            errs.append(f'{where}: url이 sources/images.json의 source와 다르다')
+
+
+def check_expr(e, names, fns=frozenset()):
     """앱 gExpr()와 같은 문법: 수, 이름, + - * / ^, 괄호, 함수(인자는 쉼표)."""
     depth = 0
     for ch in e:
@@ -101,7 +131,7 @@ def check_expr(e, names):
     for m in re.finditer(r'[A-Za-z_]\w*', e):
         w, nxt = m.group(0), e[m.end():m.end() + 1]
         if nxt == '(':
-            if w not in GFN:
+            if w not in GFN and w not in fns:
                 return f'모르는 함수 {w}'
         elif w not in names and w not in ('pi', 'e') and not re.match(r'^\d', w):
             if not (m.start() > 0 and re.match(r'[\d.]', e[m.start() - 1])):  # 1e-3
@@ -114,17 +144,32 @@ def check_graphs(md, errs):
     for m in re.finditer(r'^```(\w*)\n([\s\S]*?)^```', md, re.M):
         kind, body = m.group(1), m.group(2)
         at = md[:m.start()].count('\n') + 1
-        if kind != 'graph':
-            errs.append(f'{at}줄: ```{kind} 블록은 앱이 그리지 않는다(graph만)')
+        if kind not in ('graph', 'img'):
+            errs.append(f'{at}줄: ```{kind} 블록은 앱이 그리지 않는다(graph, img만)')
             continue
         lines = body.split('\n')
         if any(not l.strip() for l in lines[:-1]):
             errs.append(f'{at}줄 그림: 빈 줄을 두지 않는다(장 나누기가 그림을 자른다)')
+        if kind == 'img':
+            check_img(body, f'{at}줄 사진', errs)
+            continue
         names = {'x', 't'}
         for l in lines:
             tk = l.split('|')[0].split()
             if tk and tk[0] == 'slider':
                 names.add(tk[1] if len(tk) > 1 else '')
+        fns = set()
+        for k, l in enumerate(lines):
+            tk = l.split('|')[0].split()
+            if not tk or tk[0] != 'fn':
+                continue
+            where = f'{at + k + 1}줄 그림'
+            if len(tk) < 3 or not re.match(r'^[A-Za-z_]\w*$', tk[1]) or tk[1] in GFN | names | fns | {'pi', 'e'}:
+                errs.append(f'{where}: fn 이름 식 (이름은 슬라이더·함수와 겹치지 않게)')
+                continue
+            if (bad := check_expr(tk[2], names, fns)):
+                errs.append(f'{where}: "{tk[2]}" {bad}')
+            fns.add(tk[1])
         has = set()
         for k, l in enumerate(lines):
             l = l.strip()
@@ -138,7 +183,7 @@ def check_graphs(md, errs):
             if cmd not in GARGS:
                 errs.append(f'{where}: 모르는 줄 "{cmd}"')
                 continue
-            if cmd == 'cap':
+            if cmd in ('cap', 'fn'):
                 continue
             if cmd == 'slider':
                 if len(args) < 4 or not re.match(r'^[A-Za-z_]\w*$', args[0]) or args[0] in GFN | {'x', 't', 'pi', 'e'}:
@@ -150,7 +195,7 @@ def check_graphs(md, errs):
                 continue
             if cmd == 'f':
                 exprs = [args[0]] if args else []
-                for w in ('from', 'to'):
+                for w in ('from', 'to', 'at'):
                     if w in args and args.index(w) + 1 < len(args):
                         exprs.append(args[args.index(w) + 1])
             elif cmd == 'iv':
@@ -162,9 +207,9 @@ def check_graphs(md, errs):
             if len(args) < GARGS[cmd]:
                 errs.append(f'{where}: {cmd}에 값이 모자란다')
             for a in exprs:
-                if (bad := check_expr(a, names if cmd not in ('x', 'y', 'h') else set())):
+                if (bad := check_expr(a, names, fns) if cmd not in ('h', 'xticks', 'yticks') else check_expr(a, set())):
                     errs.append(f'{where}: "{a}" {bad}')
-        if not has & {'f', 'par', 'pt', 'seg', 'vec', 'area', 'bars', 'iv', 'text'}:
+        if not has & {'f', 'par', 'pt', 'seg', 'vec', 'area', 'bars', 'iv', 'text', 'dots', 'hband', 'vband'}:
             errs.append(f'{at}줄 그림: 그릴 것이 없다')
 
 

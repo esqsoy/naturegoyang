@@ -32,7 +32,7 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 - **지도(`N(...)` 줄)를 바꾸면** `python3 -I tools/curriculum.py`로 CURRICULUM.md를 다시 뽑는다. 단원을 더하거나 빼는 것은 영신 의견을 먼저 받는다.
 - **큰 일은 서브에이전트 팀원과 나눠 한다(영신 26.11.14: "작업할때 이솝을 파트너로 협업해줘 모든 자원을 총동원해서 마스터피스를 만들어보자").** 조사·초안은 나누고, 합치고 정하고 검산하는 것은 Claude가 한다.
   - 영신의 검수 댓글은 검수 페이지 Artifact에 달린다. 고친 것은 check.md와 WORK_LOG에 적는다.
-- 그림은 설명 안 ` ```graph ` 블록으로 쓴다(content/README, PRINCIPLES 2-2-2). 3B1B 영상 짝을 바꾸면 `python3 -I tools/videos.py`로 앱 목록을 다시 뽑는다. 교재 문제의 목표(`sources/problem-objs.json`)를 바꾸면 `tools/problems.py`.
+- 그림은 설명 안 ` ```graph ` 블록으로 쓴다(content/README, PRINCIPLES 2-2-2). 식으로 못 그리는 실물은 자유 이용 그림을 ` ```img ` 블록으로(장부 `sources/images.json`, `tools/images.py fetch`·`credits`·`check`, 파일 `app/img/`는 앱을 올릴 때 `files`로 같이 올린다). 3B1B 영상 짝을 바꾸면 `python3 -I tools/videos.py`로 앱 목록을 다시 뽑는다. 교재 문제의 목표(`sources/problem-objs.json`)를 바꾸면 `tools/problems.py`.
 - 앱 원본은 `app/naturegoyang.html` 한 파일이다. 단원 데이터(`N(...)` 줄), 생성 지시(프롬프트), 화면이 모두 들어 있다.
 - 고친 뒤에는 claude.ai Artifact에 **같은 주소**로 다시 올린다(DEPLOYMENT). 새 주소로 올리면 영신의 기록이 이어지지 않는다.
 - 기록 열쇠: 단원 id(`f-measure` 등)와 카드 id(`c01`…)가 기록의 열쇠다. 단원 id를 바꾸지 않는다. 화면 번호는 열 때 계산하므로 단원을 더해도 기록은 그대로다.

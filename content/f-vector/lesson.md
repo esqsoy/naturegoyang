@@ -22,6 +22,25 @@ $$|\vec A|=\sqrt{A_x^2+A_y^2+A_z^2}$$
 
 평면에서는 수 2개를 쓴다. **위치벡터**(位置vector, position vector)는 원점에서 그 점까지 그은 벡터이며 성분이 그 점의 좌표와 같다. **영벡터**(零vector, zero vector)는 크기가 0인 벡터 $\vec 0=(0,0,0)$이며 방향이 정해지지 않는다.
 
+아래 그림은 평면의 벡터 $\overrightarrow{PQ}$이다. 시작점 $P$를 옮기며 두 끝점의 좌표와 성분을 견준다.
+
+```graph
+x -4.2 6.2
+y -0.6 4
+equal
+slider s -3 2 1 0.1 | 시작점 P의 x좌표
+seg s 1 s+3 1 c1 dash thin
+seg s+3 1 s+3 3 c1 dash thin
+vec s 1 s+3 3 c1 bold
+pt s 1 c0
+text s 0.45 c0 | P({s}, 1)
+text s+3 3.4 c0 | Q({s+3}, 3)
+text s+1.5 0.45 c1 | x성분 3
+text s+3.75 1.85 c1 | y성분 2
+text s+2.1 1.35 c1 | 크기 {sqrt(13)}
+cap $P$를 옮기면 $P$와 $Q$의 좌표는 바뀌지만, 끝점 좌표에서 시작점 좌표를 뺀 성분 $(3,\ 2)$와 크기 $\sqrt{3^2+2^2}\approx3.61$은 그대로이다. 길이와 방향이 같은 화살표는 어디에 그려도 같은 벡터이다.
+```
+
 **단위벡터**(單位vector, unit vector)는 크기가 1인 벡터이다. 세 축의 양의 방향 단위벡터를 $\hat\imath=(1,0,0)$, $\hat\jmath=(0,1,0)$, $\hat k=(0,0,1)$로 쓴다. 영벡터가 아닌 벡터의 방향은 그 벡터를 크기로 나눈 단위벡터로 나타낸다.
 
 $$\vec A=A_x\hat\imath+A_y\hat\jmath+A_z\hat k,\qquad \hat u=\frac{\vec A}{|\vec A|}$$
@@ -51,6 +70,24 @@ $$(x-a)^2+(y-b)^2+(z-c)^2=r^2$$
 
 $$\vec A+\vec B=(A_x+B_x,\ A_y+B_y,\ A_z+B_z),\qquad c\vec A=(cA_x,\ cA_y,\ cA_z)$$
 
+그림은 크기 3인 $\vec A$와 크기 4인 $\vec B$를 두 방법으로 더한 것이다. 두 벡터 사이의 각을 움직이며 $|\vec A+\vec B|$를 본다.
+
+```graph
+x -4.6 7.6
+y -0.8 5.2
+equal
+slider ph 0 180 90 1 | A와 B 사이의 각 (°)
+vec 0 0 4*cos(ph*pi/180) 4*sin(ph*pi/180) c2 dash thin
+vec 4*cos(ph*pi/180) 4*sin(ph*pi/180) 3+4*cos(ph*pi/180) 4*sin(ph*pi/180) c1 dash thin
+vec 0 0 3+4*cos(ph*pi/180) 4*sin(ph*pi/180) c4 bold
+text (3+4*cos(ph*pi/180))/2-0.55*4*sin(ph*pi/180)/sqrt(25+24*cos(ph*pi/180)) 2*sin(ph*pi/180)+0.55*(3+4*cos(ph*pi/180))/sqrt(25+24*cos(ph*pi/180)) c4 | A+B
+vec 0 0 3 0 c1 bold | A
+vec 3 0 3+4*cos(ph*pi/180) 4*sin(ph*pi/180) c2 bold | B
+text -2.6 4.75 c0 | |A|+|B| = 7
+text -2.6 4.2 c4 | |A+B| = {sqrt(25+24*cos(ph*pi/180))}
+cap 실선은 삼각형법이고, 점선까지 그리면 평행사변형이 되어 $\vec A+\vec B$(보라)가 그 대각선이다. 점선 길($\vec B$ 다음 $\vec A$)로 가도 같은 점에 닿는다. 합의 크기는 각이 0°이면 7, 90°이면 5, 180°이면 1이다. 크기가 그대로 더해지는 것은 같은 방향일 때뿐이다.
+```
+
 실수배 $c\vec A$는 크기가 $|c|A$이고 $c>0$이면 같은 방향, $c<0$이면 반대 방향이다. **음벡터**(negative vector) $-\vec A$는 $\vec A$와 크기가 같고 방향이 반대인 벡터이며, $\vec A-\vec B=\vec A+(-\vec B)$다. 두 꼬리를 모으면 $\vec A-\vec B$는 $\vec B$의 머리에서 $\vec A$의 머리로 가는 화살표여서, $\overrightarrow{PQ}$는 $Q$의 위치벡터에서 $P$의 위치벡터를 뺀 것이다. 선분 $PQ$의 중점은 좌표마다 평균을 낸 점, 곧 두 위치벡터 합의 절반이다.
 
 **분해**(分解, resolution)는 벡터 하나를 좌표축 방향 벡터들의 합으로 나누는 것이다. 평면에서 $+x$축에서 시계 반대 방향으로 잰 각을 $\theta$라 하면 다음과 같다.
@@ -62,6 +99,26 @@ $$A_x=A\cos\theta,\quad A_y=A\sin\theta,\quad A=\sqrt{A_x^2+A_y^2},\quad \tan\th
 합성과 실수배는 성분마다 하는 실수 계산이라 수의 연산 법칙을 물려받는다. 교환법칙 $\vec A+\vec B=\vec B+\vec A$, 결합법칙 $(\vec A+\vec B)+\vec C=\vec A+(\vec B+\vec C)$, 분배법칙 $a(\vec A+\vec B)=a\vec A+a\vec B$, $(a+b)\vec A=a\vec A+b\vec A$가 성립하고, $\vec A+\vec 0=\vec A$, $\vec A+(-\vec A)=\vec 0$이다. 영벡터가 아닌 두 벡터는 한쪽이 다른 쪽의 실수배일 때 평행하다.
 
 삼각형의 한 변은 다른 두 변의 합보다 길지 않으므로 $|A-B|\le|\vec A+\vec B|\le A+B$이고, 크기가 그대로 더해지는 것은 방향이 같을 때뿐이다. 계산기의 $\tan^{-1}$은 $-90^\circ$와 $90^\circ$ 사이 값만 주므로([[f-trig|#]]) $A_x<0$이면 $180^\circ$를 더한다. 벡터는 같은 종류끼리만 더한다(변위 + 속도는 m + m/s처럼 뜻이 없다).
+
+그림에서 θ를 움직이면 성분 $A_x=A\cos\theta$, $A_y=A\sin\theta$가 바뀌고 크기 $A=3$은 그대로이다. $A_x<0$인 쪽으로 가면 계산기의 $\tan^{-1}(A_y/A_x)$가 가리키는 방향(빨간 점선)이 $\vec A$와 반대가 된다.
+
+```graph
+x -3.6 9
+y -3.5 3.5
+equal
+slider th 0 360 135 1 | θ (°)
+par 3*cos(t) 3*sin(t) 0 2*pi c0 dot thin
+par 0.7*cos(t) 0.7*sin(t) 0 th*pi/180 c0 thin
+vec 0 0 3*cos(atan(tan(th*pi/180))) 3*sin(atan(tan(th*pi/180))) c5 dash
+vec 0 0 3*cos(th*pi/180) 0 c1 dash thin
+vec 3*cos(th*pi/180) 0 3*cos(th*pi/180) 3*sin(th*pi/180) c1 dash thin
+vec 0 0 3*cos(th*pi/180) 3*sin(th*pi/180) c1 bold | A
+text 6.3 2.7 c1 | Ax = {3*cos(th*pi/180)}
+text 6.3 2.1 c1 | Ay = {3*sin(th*pi/180)}
+text 6.3 1.1 c1 | θ = {th}°
+text 6.3 0.5 c5 | tan⁻¹(Ay/Ax) = {atan(tan(th*pi/180))*180/pi}°
+cap 점선 원은 크기 3인 벡터의 머리가 놓이는 자리이다. 처음 그림 $\theta=135^\circ$에서는 $\tan^{-1}(A_y/A_x)=\tan^{-1}(-1)=-45^\circ$라 $180^\circ$를 더해야 θ가 된다. $A_x>0$이면 빨간 점선은 $\vec A$와 겹친다.
+```
 
 #### 점검
 **Q.** $+x$축에서 시계 반대 방향으로 $\theta$만큼 기운 벡터 $\vec A$의 성분은?
@@ -85,7 +142,24 @@ $$\theta=\cos^{-1}\frac{\vec A\cdot\vec B}{|\vec A||\vec B|}$$
 
 $$\mathrm{proj}_{\vec B}\vec A=\frac{\vec A\cdot\vec B}{|\vec B|^2}\,\vec B,\qquad A\cos\theta=\frac{\vec A\cdot\vec B}{|\vec B|}$$
 
-뒤의 수 $A\cos\theta$는 $\vec A$의 $\vec B$ 방향 스칼라 성분이다.
+뒤의 수 $A\cos\theta$는 $\vec A$의 $\vec B$ 방향 스칼라 성분이다. 그림에서 사이의 각 θ를 움직이며 $\vec A$가 $\vec B$의 직선에 드리운 그림자인 정사영(초록)과 스칼라곱을 본다.
+
+```graph
+x -4.4 5.6
+y -1.9 3.4
+equal
+slider th 0 180 60 1 | A와 B 사이의 각 θ (°)
+seg -4.4*cos(pi/9) -4.4*sin(pi/9) 4.5*cos(pi/9) 4.5*sin(pi/9) c2 dot thin
+vec 0 0 4*cos(pi/9) 4*sin(pi/9) c2 bold | B
+seg 3*cos(th*pi/180+pi/9) 3*sin(th*pi/180+pi/9) 3*cos(th*pi/180)*cos(pi/9) 3*cos(th*pi/180)*sin(pi/9) c0 dash thin
+vec 0 0 3*cos(th*pi/180)*cos(pi/9) 3*cos(th*pi/180)*sin(pi/9) c3 bold
+vec 0 0 3*cos(th*pi/180+pi/9) 3*sin(th*pi/180+pi/9) c1 bold | A
+par 0.6*cos(t) 0.6*sin(t) pi/9 th*pi/180+pi/9 c0 thin
+text 0.95*cos(th*pi/360+pi/9) 0.95*sin(th*pi/360+pi/9) c0 | θ
+text 4.1 3 c3 | A cos θ = {3*cos(th*pi/180)}
+text 4.1 2.45 c0 | A·B = 4 × A cos θ = {12*cos(th*pi/180)}
+cap $\vec A$의 크기는 3, $\vec B$의 크기는 4이다. θ를 키우면 정사영이 짧아져 90°에서 0이 되고, 둔각에서는 $\vec B$와 반대쪽을 향해 스칼라 성분 $A\cos\theta$와 스칼라곱이 음수가 된다. 스칼라곱은 그림자 길이 $A\cos\theta$에 $\vec B$의 크기 4를 곱한 값이다.
+```
 
 **변위**(變位, displacement)는 처음 위치에서 나중 위치로 그은 벡터 $\Delta\vec r=\vec r_2-\vec r_1$이고 SI 단위는 m다. 변위의 크기는 지나간 길의 길이보다 크지 않다. 속도는 속력에 운동 방향의 단위벡터를 곱한 벡터이고(자세히는 [[p-motion|#]]), 힘도 벡터라서 여러 힘은 합성하며, 가만히 있는 물체가 받는 힘의 합은 영벡터다(자세히는 [[p-force|#]]). 일정한 힘 $\vec F$를 받으며 곧게 $\vec d$만큼 옮겨질 때 힘이 한 일은 $W=\vec F\cdot\vec d$이다(자세히는 [[p-energy|#]]).
 

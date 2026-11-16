@@ -16,7 +16,29 @@
 
 $$\sin\theta=\frac{a}{c},\quad\cos\theta=\frac{b}{c},\quad\tan\theta=\frac{a}{b}$$
 
-각각 **사인**(sine), **코사인**(cosine), **탄젠트**(tangent)라 읽으며 단위가 없다.
+각각 **사인**(sine), **코사인**(cosine), **탄젠트**(tangent)라 읽으며 단위가 없다. 아래 그림에서 빗변 $c$와 각 θ를 하나씩 움직여 보면, 세 비는 $c$가 아니라 θ에 따라 바뀐다.
+
+```graph
+x -0.4 7
+y -0.75 4.3
+equal
+slider th 10 80 30 1 | 각 θ (°)
+slider c 1 4 3 0.1 | 빗변 c
+par 0.18*c*cos(t) 0.18*c*sin(t) 0 th*pi/180 c4 thin
+text 0.32*c*cos(th*pi/360) 0.32*c*sin(th*pi/360) c4 | θ
+seg c*cos(th*pi/180)-0.07*c 0 c*cos(th*pi/180)-0.07*c 0.07*c c0 thin
+seg c*cos(th*pi/180)-0.07*c 0.07*c c*cos(th*pi/180) 0.07*c c0 thin
+seg c*cos(th*pi/180) 0 0 0 c1 bold
+text c*cos(th*pi/180)/2 -0.5 c1 | b
+seg c*cos(th*pi/180) 0 c*cos(th*pi/180) c*sin(th*pi/180) c2 bold | a
+seg c*cos(th*pi/180) c*sin(th*pi/180) 0 0 c0 bold | c
+text 5 3.6 c2 | a = {c*sin(th*pi/180)}
+text 6.3 3.6 c1 | b = {c*cos(th*pi/180)}
+text 5.65 2.8 c2 | sin θ = a/c = {sin(th*pi/180)}
+text 5.65 2.25 c1 | cos θ = b/c = {cos(th*pi/180)}
+text 5.65 1.7 c3 | tan θ = a/b = {tan(th*pi/180)}
+cap $c$를 움직이면 세 변의 길이는 함께 늘고 줄지만 오른쪽 세 비는 그대로이다. θ를 움직여야 비가 바뀐다. 처음 그림은 $\theta=30^\circ$, $c=3$이라 $a=1.5$, $\sin30^\circ=0.5$이다.
+```
 
 | θ | sin θ | cos θ | tan θ |
 |---|---|---|---|
@@ -49,6 +71,35 @@ $\sin^{-1}k$의 $-1$은 역수가 아니다. $1/\sin\theta$는 2절의 $\csc\the
 **단위원**(單位圓, unit circle)은 원점이 중심이고 반지름이 1인 원이다. $x$축의 양의 방향을 시계 반대 방향으로 θ만큼 돌린 반직선(시계 방향은 음의 각)이 단위원과 만나는 점을 P$(x,y)$라 할 때, 다음과 같이 정한 함수가 **삼각함수**(三角函數, trigonometric function)이다.
 
 $$\cos\theta=x,\quad\sin\theta=y,\quad\tan\theta=\frac{y}{x}$$
+
+그림에서 θ를 움직이면 P가 단위원을 돌고, P의 높이 $\sin\theta$가 오른쪽에 θ의 함수로 그려진다.
+
+```graph
+x -2.7 8.4
+y -1.5 1.5
+equal
+slider th 0 2*pi 1 0.01 play | 각 θ (rad)
+vline pi c0 dot
+vline 2*pi c0 dot
+f sin(x) from 0 to 2*pi c0 dot thin
+par -1.5+cos(t) sin(t) 0 2*pi c0 thin
+par -1.5+cos(t) sin(t) 0 th c4 bold
+seg 0 0 th 0 c4 bold
+seg -1.5 0 -1.5+cos(th) sin(th) c0
+seg -1.5 0 -1.5+cos(th) 0 c1 bold
+seg -1.5+cos(th) 0 -1.5+cos(th) sin(th) c2 bold
+f sin(x) from 0 to th c2
+seg th 0 th sin(th) c2 bold
+seg -1.5+cos(th) sin(th) th sin(th) c0 dash thin
+pt -1.5+cos(th) sin(th) c0 | P
+pt th sin(th) c2
+text pi -1.32 c0 | π
+text 2*pi -1.32 c0 | 2π
+text 7.4 1.25 c4 | θ = {th*180/pi}°
+text 7.4 0.8 c2 | sin θ = {sin(th)}
+text 7.4 0.35 c1 | cos θ = {cos(th)}
+cap 주황 세로 길이는 P의 높이 $\sin\theta$, 파랑 가로 길이는 P의 가로 좌표 $\cos\theta$이다(음수이면 아래·왼쪽). 단위원은 그래프 왼쪽에 옮겨 그렸고, 가로 눈금은 그래프의 θ(rad)이다. 보라색 호의 길이와 가로축 위 보라색 선분의 길이가 같다($s=r\theta$, $r=1$).
+```
 
 **시컨트**(secant)는 $\sec\theta=1/\cos\theta$로 정한 함수이다. **코시컨트**(cosecant)는 $\csc\theta=1/\sin\theta$로 정한 함수이다. **코탄젠트**(cotangent)는 $\cot\theta=\cos\theta/\sin\theta$로 정한 함수이다.
 
@@ -107,11 +158,46 @@ $$c^2=a^2+b^2-2ab\cos\theta$$
 
 $$f(x)=A\sin\left(\frac{2\pi}{B}(x-C)\right)+D$$
 
-$|A|$는 진폭, $|B|$는 주기, $C$는 가로로 옮긴 양, $D$는 세로로 옮긴 양(가운데 값)이다.
+$|A|$는 진폭, $|B|$는 주기, $C$는 가로로 옮긴 양, $D$는 세로로 옮긴 양(가운데 값)이다. 그림은 $C=0$, $D=1$로 두고 $A$와 $B$를 움직인다.
+
+```graph
+x 0 12.5
+y -3 5
+slider A 0.5 3 2 0.1 | 진폭 A
+slider B 2 12 6 0.5 | 주기 B
+hline 1+A c0 dot
+hline 1-A c0 dot
+hline 1 c0
+f A*sin(2*pi/B*x)+1 c2
+seg B/4 1 B/4 1+A c0 bold
+seg 0 0.4-A B 0.4-A c4 bold
+seg B 1 B 0.4-A c4 dash thin
+pt 0 1 c4
+pt B 1 c4
+text 3 4.35 c0 | 진폭 |A| = {A}
+text 9.2 4.35 c4 | 주기 |B| = {B}
+cap 위아래 점선은 최댓값 $1+A$와 최솟값 $1-A$이고, 진폭(회색 굵은 선)은 그 사이 거리의 절반이다. $A$를 바꾸면 물결의 높이만, $B$를 바꾸면 한 번 되풀이하는 가로 길이(보라)만 바뀐다. 가운데 값 $D=1$은 그대로이다.
+```
 
 #### 엄밀
 
 첫 항등식을 $\cos^2\theta$, $\sin^2\theta$로 나누면 둘째, 셋째가 된다. 덧셈 정리의 $B$에 $-B$를 넣으면 $\cos(A-B)=\cos A\cos B+\sin A\sin B$, $\sin(A-B)=\sin A\cos B-\cos A\sin B$이다. $\cos^2\theta+\sin^2\theta=1$과 $\cos^2\theta-\sin^2\theta=\cos2\theta$를 더하고 빼면 반각 공식이다. 한국 교과서의 반각 공식은 θ 자리에 $\theta/2$를 쓴 같은 식이다.
+
+그래프로 보면 $\cos^2\theta$와 $\sin^2\theta$는 가운데 값 $\tfrac12$에서 $\tfrac12\cos2\theta$만큼씩 서로 반대쪽으로 벗어나는 물결이다.
+
+```graph
+x 0 6.6
+y -1.3 1.35
+hline 0.5 c0 dot
+f cos(2*x) c0 dash thin
+f cos(x)^2+sin(x)^2 c3 | cos²θ+sin²θ = 1
+f cos(x)^2 c1 bold
+f sin(x)^2 c2 bold
+text pi 1.12 c1 | cos²θ
+text pi/2 1.12 c2 | sin²θ
+text 3*pi/2 -1.24 c0 | cos 2θ
+cap 회색 파선이 $\cos2\theta$이다. $\cos^2\theta$(파랑)는 그것을 절반으로 줄여 $\tfrac12$만큼 올린 것이고, $\sin^2\theta$(주황)는 $\tfrac12$을 사이에 두고 그 반대쪽에 있다. 그래서 둘의 합(초록)은 어디서나 1이다. 가로축은 θ(rad)이다.
+```
 
 코사인 법칙은 끼인각의 꼭짓점을 원점에, 변 $b$를 $x$축에 놓고 두 꼭짓점 $(b,0)$과 $(a\cos\theta,\ a\sin\theta)$ 사이 거리의 제곱을 계산하면 나온다. $\theta=\pi/2$이면 피타고라스 정리다. **사인 법칙**(sine法則, law of sines)은 삼각형의 세 각 $A$, $B$, $C$와 각각의 맞은편 변 $a$, $b$, $c$ 사이의 관계식 $\sin A/a=\sin B/b=\sin C/c$이다.
 

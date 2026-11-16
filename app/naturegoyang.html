@@ -377,6 +377,9 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .g-sl input[type=range]{width:min(220px,46vw); accent-color:var(--d-p)}
 .g-sl output{font:500 13px var(--font-mono); min-width:3.2em; color:var(--ink)}
 .graph figcaption{margin-top:8px; font:13.5px/1.55 var(--font-ui); color:var(--ink-2)}
+.g-photo img{display:block; width:100%; height:auto; max-height:480px; object-fit:contain; background:var(--surface-2); border:1px solid var(--line-2); border-radius:8px}
+.g-credit{display:block; margin-top:3px; font:12px/1.45 var(--font-ui); color:var(--ink-3)}
+.g-credit a{color:inherit; text-decoration:underline}
 .vids{list-style:none; margin:0; padding:0; display:grid; gap:12px}
 .vids a{font:600 13.5px/1.4 var(--font-ui); color:var(--ink); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:3px}
 .vids a:hover{text-decoration-color:var(--ink-2)}
@@ -1093,7 +1096,7 @@ function md(src){
     if(l.startsWith('```')){ // ```graph … ``` draws a figure; any other fence shows as code
       flush(); const kind=l.slice(3).trim(), acc=[];
       while(i+1<L.length){ i++; if(L[i].trim().startsWith('```')) break; acc.push(L[i]); }
-      out.push(kind==='graph'?graphHTML(acc.join('\n')):`<pre class="code">${esc(acc.join('\n'))}</pre>`); continue;
+      out.push(kind==='graph'?graphHTML(acc.join('\n')):kind==='img'?imgHTML(acc.join('\n')):`<pre class="code">${esc(acc.join('\n'))}</pre>`); continue;
     }
     const open = l.startsWith('$$') ? ['$$','$$'] : l.startsWith('\\[') ? ['\\[','\\]'] : null;
     if(open){
@@ -1129,10 +1132,16 @@ function md(src){
      slider k 0 3 1 [0.1] [play] | 라벨      f expr [from a to b] | 라벨      par xexpr yexpr t0 t1 | 라벨
      pt x y [open] | 라벨   seg x1 y1 x2 y2 | 라벨   vec x1 y1 x2 y2 | 라벨   area expr a b   bars expr a b n
      iv a b [] | 라벨 (numline; a, b may be -inf, inf; ends [] [) (] ())   text x y | 라벨   hline y   vline x
-   style words on any item: c0~c5 (색), dash, dot, thin, bold. A label may hold {expr}: the value, at most two decimals. */
+     (17판) fn F expr (F(…) in any later expr, x is its argument) · dots expr a b [step] (points at x=a, a+step, …)
+     hband a b · vband a b (shaded strip) · area expr a b [lower] (between two curves) · par … fill (filled closed curve)
+     noaxes (no axes, grid or tick numbers) · xticks 0 1 2 | 1 10 100 (tick places | their labels) · yticks …
+     x a b and y a b may use slider names (zoom) · f expr … at X | 라벨 (label at x=X)
+   style words on any item: c0~c5 (색), dash, dot, thin, bold, fill. A label may hold {expr}: the value, at most two decimals.
+   ```img blocks (17판, 영신 "그림을 찾아서 넣는건 어때?"): src img/… · alt · cap · credit · url — a freely licensed picture
+   published next to the app, its credit always shown (sources/images.json). */
 const GFN={sin:Math.sin,cos:Math.cos,tan:Math.tan,asin:Math.asin,acos:Math.acos,atan:Math.atan,sqrt:Math.sqrt,cbrt:Math.cbrt,abs:Math.abs,exp:Math.exp,ln:Math.log,log:Math.log10,floor:Math.floor,ceil:Math.ceil,sign:Math.sign,min:Math.min,max:Math.max};
-const GSTYLE=new Set(['c0','c1','c2','c3','c4','c5','dash','dot','thin','bold','open']);
-function gExpr(src, names){
+const GSTYLE=new Set(['c0','c1','c2','c3','c4','c5','dash','dot','thin','bold','open','fill']);
+function gExpr(src, names, fns){
   const s=String(src); let i=0;
   const err=m=>{ throw new Error(`식 "${s}": ${m}`); };
   const atom=()=>{
@@ -1141,7 +1150,7 @@ function gExpr(src, names){
     if(m){ i+=m[0].length; const v=+m[0]; return ()=>v; }
     m=s.slice(i).match(/^[A-Za-z_][A-Za-z_0-9]*/); if(!m) err(`${i+1}번째 글자 '${s[i]??''}'`);
     i+=m[0].length; const id=m[0];
-    if(s[i]==='('){ const f=GFN[id]; if(!f) err(`모르는 함수 ${id}`); i++; const args=[add()]; while(s[i]===','){ i++; args.push(add()); } if(s[i]!==')') err('닫는 괄호가 없다'); i++; return v=>f(...args.map(a=>a(v))); }
+    if(s[i]==='('){ const f=GFN[id], uf=fns&&fns[id]; if(!f&&!uf) err(`모르는 함수 ${id}`); i++; const args=[add()]; while(s[i]===','){ i++; args.push(add()); } if(s[i]!==')') err('닫는 괄호가 없다'); i++; return uf?v=>uf(args[0](v),v):v=>f(...args.map(a=>a(v))); }
     if(id==='pi') return ()=>Math.PI;
     if(id==='e') return ()=>Math.E;
     if(names&&!names.has(id)) err(`모르는 이름 ${id}`);
@@ -1155,31 +1164,42 @@ function gExpr(src, names){
   return e;
 }
 function gParse(text){
-  const G={x:[-5,5], y:null, h:0, equal:false, grid:true, numline:false, cap:'', items:[], sliders:[]};
+  const G={x:[-5,5], y:null, h:0, equal:false, grid:true, axes:true, numline:false, cap:'', items:[], sliders:[]};
   const lines=String(text).split('\n').map(l=>l.trim()).filter(Boolean), names=new Set(['x','t']);
   const split=l=>{ const j=l.indexOf('|'); return j<0?[l,'']:[l.slice(0,j).trim(), l.slice(j+1).trim()]; };
   for(const l of lines){ const [b,lab]=split(l), tk=b.split(/\s+/); if(tk[0]!=='slider') continue;
     const [, name, lo, hi, v0, st]=tk; if(!/^[A-Za-z_]\w*$/.test(name||'')||GFN[name]||['x','t','pi','e'].includes(name)) throw new Error(`슬라이더 이름 "${name}"`);
     const c=k=>gExpr(k,new Set())({}); const s={name, lo:c(lo), hi:c(hi), v:c(v0??lo), step:st&&st!=='play'?c(st):0, play:tk.includes('play'), label:lab};
     if(!(s.hi>s.lo)) throw new Error(`슬라이더 ${name}: 범위`); G.sliders.push(s); names.add(name); }
-  const E=k=>{ if(k==null) throw new Error('값이 모자란다'); return gExpr(k,names); }, C=k=>gExpr(k,new Set())({});
+  G.fns={};
+  for(const l of lines){ const [b]=split(l), tk=b.split(/\s+/); if(tk[0]!=='fn') continue;
+    const name=tk[1]; if(!/^[A-Za-z_]\w*$/.test(name||'')||GFN[name]||names.has(name)||['pi','e'].includes(name)||G.fns[name]) throw new Error(`함수 이름 "${name}"`);
+    if(tk[2]==null) throw new Error(`fn ${name}: 식이 없다`);
+    const body=gExpr(tk[2],names,G.fns); G.fns[name]=(xv,v)=>body(Object.assign({},v,{x:xv})); }
+  const E=k=>{ if(k==null) throw new Error('값이 모자란다'); return gExpr(k,names,G.fns); }, C=k=>gExpr(k,new Set())({});
   for(const l of lines){
     const [b,label]=split(l), tk=b.split(/\s+/), cmd=tk.shift(), st=tk.filter(t=>GSTYLE.has(t)), a=tk.filter(t=>!GSTYLE.has(t));
     const it={k:cmd, st, label};
     switch(cmd){
-      case 'x': case 'y': G[cmd]=[C(a[0]),C(a[1])]; if(!(G[cmd][1]>G[cmd][0])) throw new Error(`${cmd} 범위`); continue;
+      case 'fn': continue;
+      case 'dots': it.e=E(a[0]); it.a=E(a[1]); it.b=E(a[2]); it.s=a[3]!=null?E(a[3]):()=>1; break;
+      case 'hband': case 'vband': it.a=E(a[0]); it.b=E(a[1]); break;
+      case 'x': case 'y': { const e0=E(a[0]), e1=E(a[1]), v={...Object.fromEntries(G.sliders.map(s=>[s.name,s.v])), x:0, t:0};
+        G[cmd]=[e0(v),e1(v)]; if(!(G[cmd][1]>G[cmd][0])) throw new Error(`${cmd} 범위`); if(/[A-Za-z]/.test(a[0]+a[1])) G[cmd+'E']=[e0,e1]; continue; }
+      case 'noaxes': G.axes=false; continue;
+      case 'xticks': case 'yticks': { const v=a.map(C), lab=label?label.split(/\s+/):v.map(gFmt); G[cmd==='xticks'?'xt':'yt']={v, lab}; continue; }
       case 'h': G.h=Math.max(60,Math.min(640,C(a[0]))); continue;
       case 'equal': G.equal=true; continue;
       case 'nogrid': G.grid=false; continue;
       case 'numline': G.numline=true; continue;
-      case 'cap': G.cap=b.slice(3).trim()+(label?' | '+label:''); continue;
+      case 'cap': G.cap=l.replace(/^cap\s*/,''); continue; // the whole line: a caption may hold |x| in its math
       case 'slider': continue;
-      case 'f': { it.e=E(a[0]); const fi=a.indexOf('from'), ti=a.indexOf('to'); if(fi>0) it.a=E(a[fi+1]); if(ti>0) it.b=E(a[ti+1]); break; }
+      case 'f': { it.e=E(a[0]); const fi=a.indexOf('from'), ti=a.indexOf('to'), ai=a.indexOf('at'); if(fi>0) it.a=E(a[fi+1]); if(ti>0) it.b=E(a[ti+1]); if(ai>0) it.at=E(a[ai+1]); break; }
       case 'par': it.ex=E(a[0]); it.ey=E(a[1]); it.t0=E(a[2]); it.t1=E(a[3]); break;
       case 'pt': it.ex=E(a[0]); it.ey=a[1]!=null?E(a[1]):()=>0; break;
       case 'text': it.ex=E(a[0]); it.ey=E(a[1]); break;
       case 'seg': case 'vec': it.x1=E(a[0]); it.y1=E(a[1]); it.x2=E(a[2]); it.y2=E(a[3]); break;
-      case 'area': it.e=E(a[0]); it.a=E(a[1]); it.b=E(a[2]); break;
+      case 'area': it.e=E(a[0]); it.a=E(a[1]); it.b=E(a[2]); if(a[3]!=null) it.lo=E(a[3]); break;
       case 'bars': it.e=E(a[0]); it.a=E(a[1]); it.b=E(a[2]); it.n=E(a[3]); break;
       case 'iv': { const inf=k=>k==='-inf'?()=>-Infinity:k==='inf'?()=>Infinity:E(k); it.a=inf(a[0]); it.b=inf(a[1]); it.ends=a[2]||'[]'; if(!/^[[(][\])]$/.test(it.ends)) throw new Error(`구간 끝 "${it.ends}"`); break; }
       case 'hline': case 'vline': it.e=E(a[0]); break;
@@ -1193,27 +1213,32 @@ function gParse(text){
 const gNice=r=>{ const raw=r/7, p=Math.pow(10,Math.floor(Math.log10(raw))), m=raw/p; return (m<1.5?1:m<3.5?2:m<7.5?5:10)*p; };
 const gFmt=v=>{ if(!isFinite(v)) return v>0?'∞':'−∞'; const r=Math.round(v*100)/100; return String(Object.is(r,-0)?0:r).replace('-','−'); };
 function gSVG(G, vals){
-  const W=560, L=G.numline?14:38, R=14, T=G.numline?44:14, B=G.numline?24:26, pw=W-L-R;
-  const [x0,x1]=G.x, [y0,y1]=G.y;
+  const W=560, L=G.numline||!G.axes?14:38, R=14, T=G.numline?44:14, B=G.numline?24:G.axes?26:14, pw=W-L-R;
+  const rng=(c,E)=>{ if(!E) return c; try{ const r=E.map(f=>f(Object.assign({},vals))); return isFinite(r[0])&&isFinite(r[1])&&r[1]>r[0]?r:c; }catch(e){ return c; } };
+  const [x0,x1]=rng(G.x,G.xE), [y0,y1]=rng(G.y,G.yE);
   const ph=G.numline?10:G.h?G.h-T-B:G.equal?Math.max(140,Math.min(520,pw*(y1-y0)/(x1-x0))):300-T-B, H=T+ph+B;
   const sx=x=>L+(x-x0)/(x1-x0)*pw, sy=y=>G.numline?T+ph/2:T+(y1-y)/(y1-y0)*ph, f2=n=>Math.round(n*10)/10;
   const V=Object.assign({},vals), ev=(fn,ex)=>{ try{ return fn(Object.assign(V,ex||{})); }catch(e){ return NaN; } };
-  const lab=s=>esc(String(s||'').replace(/\{([^}]+)\}/g,(_,k)=>{ try{ return gFmt(gExpr(k,null)(V)); }catch(e){ return '?'; } }));
+  const lab=s=>esc(String(s||'').replace(/\{([^}]+)\}/g,(_,k)=>{ try{ return gFmt(gExpr(k,null,G.fns)(V)); }catch(e){ return '?'; } }));
   const cls=it=>'g-'+(it.st.find(s=>/^c\d$/.test(s))||'c1'), mod=it=>it.st.filter(s=>['dash','dot','thin','bold','open'].includes(s)).join(' ');
   const id='gc'+Math.random().toString(36).slice(2,8);
   let g='', top='', tk='';
-  if(!G.numline){
-    if(G.grid){ const sxp=gNice(x1-x0), syp=gNice(y1-y0);
-      for(let v=Math.ceil(x0/sxp)*sxp; v<=x1+1e-9; v+=sxp) g+=`<line class="g-grid" x1="${f2(sx(v))}" x2="${f2(sx(v))}" y1="${T}" y2="${T+ph}"/>`;
-      for(let v=Math.ceil(y0/syp)*syp; v<=y1+1e-9; v+=syp) g+=`<line class="g-grid" x1="${L}" x2="${L+pw}" y1="${f2(sy(v))}" y2="${f2(sy(v))}"/>`; }
-    const ax=Math.min(Math.max(0,y0),y1), ay=Math.min(Math.max(0,x0),x1), sxp=gNice(x1-x0), syp=gNice(y1-y0);
+  const tks=(lo,hi)=>{ const st=gNice(hi-lo), o=[]; for(let v=Math.ceil(lo/st)*st; v<=hi+1e-9; v+=st) o.push(v); return o; };
+  const XV=G.xt?G.xt.v.filter(v=>v>=x0-1e-9&&v<=x1+1e-9):tks(x0,x1), YV=G.yt?G.yt.v.filter(v=>v>=y0-1e-9&&v<=y1+1e-9):tks(y0,y1);
+  const fS=(v,st)=>{ const d=Math.min(6,Math.max(0,Math.ceil(-Math.log10(st)-1e-9))), r=+v.toFixed(d); return String(Object.is(r,-0)?0:r).replace('-','−'); };
+  const xl=v=>G.xt?G.xt.lab[G.xt.v.indexOf(v)]??gFmt(v):fS(v,gNice(x1-x0)), yl=v=>G.yt?G.yt.lab[G.yt.v.indexOf(v)]??gFmt(v):fS(v,gNice(y1-y0));
+  if(!G.numline&&G.axes){
+    if(G.grid){
+      for(const v of XV) g+=`<line class="g-grid" x1="${f2(sx(v))}" x2="${f2(sx(v))}" y1="${T}" y2="${T+ph}"/>`;
+      for(const v of YV) g+=`<line class="g-grid" x1="${L}" x2="${L+pw}" y1="${f2(sy(v))}" y2="${f2(sy(v))}"/>`; }
+    const ax=Math.min(Math.max(0,y0),y1), ay=Math.min(Math.max(0,x0),x1);
     g+=`<line class="g-ax" x1="${L}" x2="${L+pw}" y1="${f2(sy(ax))}" y2="${f2(sy(ax))}"/><line class="g-ax" x1="${f2(sx(ay))}" x2="${f2(sx(ay))}" y1="${T}" y2="${T+ph}"/>`;
-    for(let v=Math.ceil(x0/sxp)*sxp; v<=x1+1e-9; v+=sxp) if(Math.abs(v)>1e-9) tk+=`<text class="g-tk" x="${f2(sx(v))}" y="${f2(Math.min(T+ph,sy(ax))+14)}" text-anchor="middle">${gFmt(v)}</text>`;
-    for(let v=Math.ceil(y0/syp)*syp; v<=y1+1e-9; v+=syp) if(Math.abs(v)>1e-9) tk+=`<text class="g-tk" x="${f2(Math.max(L,sx(ay))-5)}" y="${f2(sy(v)+4)}" text-anchor="end">${gFmt(v)}</text>`;
-  } else {
-    const sxp=gNice(x1-x0), yy=sy(0);
+    for(const v of XV) if(G.xt||Math.abs(v)>1e-9) tk+=`<text class="g-tk" x="${f2(sx(v))}" y="${f2(Math.min(T+ph,sy(ax))+14)}" text-anchor="middle">${esc(xl(v))}</text>`;
+    for(const v of YV) if(G.yt||Math.abs(v)>1e-9) tk+=`<text class="g-tk" x="${f2(Math.max(L,sx(ay))-5)}" y="${f2(sy(v)+4)}" text-anchor="end">${esc(yl(v))}</text>`;
+  } else if(G.numline){
+    const yy=sy(0);
     g+=`<line class="g-ax" x1="${L}" x2="${L+pw}" y1="${yy}" y2="${yy}"/>`;
-    for(let v=Math.ceil(x0/sxp)*sxp; v<=x1+1e-9; v+=sxp){ g+=`<line class="g-ax" x1="${f2(sx(v))}" x2="${f2(sx(v))}" y1="${yy-4}" y2="${yy+4}"/>`; tk+=`<text class="g-tk" x="${f2(sx(v))}" y="${yy+18}" text-anchor="middle">${gFmt(v)}</text>`; }
+    for(const v of XV){ g+=`<line class="g-ax" x1="${f2(sx(v))}" x2="${f2(sx(v))}" y1="${yy-4}" y2="${yy+4}"/>`; if(G.axes) tk+=`<text class="g-tk" x="${f2(sx(v))}" y="${yy+18}" text-anchor="middle">${esc(xl(v))}</text>`; }
   }
   const curve=(fx,fy,t0,t1,n)=>{ let d='', on=false, py=null; const span=(y1-y0)*3;
     for(let k=0;k<=n;k++){ const t=t0+(t1-t0)*k/n, X=fx(t), Y=fy(t);
@@ -1224,17 +1249,27 @@ function gSVG(G, vals){
   for(const it of G.items){ const c=cls(it), m=mod(it);
     if(it.k==='f'){ const a=Math.max(x0,ev(it.a||(()=>x0))), b=Math.min(x1,ev(it.b||(()=>x1)));
       g+=`<path class="g-line ${c} ${m}" d="${curve(x=>x,x=>ev(it.e,{x}),a,b,640)}"/>`;
-      if(it.label){ let lx=b, ly=ev(it.e,{x:lx}); for(let k=0;k<60&&!(isFinite(ly)&&ly>=y0&&ly<=y1);k++){ lx-=(b-a)/60; ly=ev(it.e,{x:lx}); }
+      if(it.label&&it.at){ const lx=ev(it.at), ly=ev(it.e,{x:lx}); if(isFinite(lx)&&isFinite(ly)) top+=`<text class="g-lb ${c}" x="${f2(Math.max(L+4,Math.min(sx(lx),L+pw-4)))}" y="${f2(Math.max(T+12,Math.min(T+ph-4,sy(ly)-8)))}" text-anchor="middle">${lab(it.label)}</text>`; }
+      else if(it.label){ let lx=b, ly=ev(it.e,{x:lx}); for(let k=0;k<60&&!(isFinite(ly)&&ly>=y0&&ly<=y1);k++){ lx-=(b-a)/60; ly=ev(it.e,{x:lx}); }
         if(isFinite(ly)) top+=`<text class="g-lb ${c}" x="${f2(Math.min(sx(lx),L+pw-4))}" y="${f2(Math.max(T+12,sy(ly)-8))}" text-anchor="end">${lab(it.label)}</text>`; } }
-    else if(it.k==='par'){ const t0=ev(it.t0), t1=ev(it.t1); g+=`<path class="g-line ${c} ${m}" d="${curve(t=>ev(it.ex,{t}),t=>ev(it.ey,{t}),t0,t1,480)}"/>`;
+    else if(it.k==='par'){ const t0=ev(it.t0), t1=ev(it.t1), d=curve(t=>ev(it.ex,{t}),t=>ev(it.ey,{t}),t0,t1,480); if(it.st.includes('fill')&&d) g+=`<path class="g-fill ${c}" d="${d}Z"/>`; g+=`<path class="g-line ${c} ${m}" d="${d}"/>`;
       if(it.label){ const X=ev(it.ex,{t:t1}), Y=ev(it.ey,{t:t1}); top+=`<text class="g-lb ${c}" x="${f2(sx(X)+6)}" y="${f2(sy(Y)-6)}">${lab(it.label)}</text>`; } }
     else if(it.k==='area'||it.k==='bars'){ const a=Math.max(x0,ev(it.a)), b=Math.min(x1,ev(it.b)), base=f2(sy(Math.min(Math.max(0,y0),y1)));
-      if(it.k==='area'){ let d=`M${f2(sx(a))} ${base}`; for(let k=0;k<=240;k++){ const X=a+(b-a)*k/240, Y=ev(it.e,{x:X}); if(isFinite(Y)) d+=`L${f2(sx(X))} ${f2(sy(Math.max(y0,Math.min(y1,Y))))}`; } g+=`<path class="g-fill ${c}" d="${d}L${f2(sx(b))} ${base}Z"/>`; }
+      if(it.k==='area'&&it.lo){ const P=(fn,k)=>{ const X=a+(b-a)*k/240, Y=ev(fn,{x:X}); return isFinite(Y)?`${f2(sx(X))} ${f2(sy(Math.max(y0,Math.min(y1,Y))))}`:null; };
+        const up=[], dn=[]; for(let k=0;k<=240;k++){ const p=P(it.e,k), q=P(it.lo,240-k); if(p) up.push(p); if(q) dn.push(q); }
+        if(up.length&&dn.length) g+=`<path class="g-fill ${c}" d="M${up.join('L')}L${dn.join('L')}Z"/>`; }
+      else if(it.k==='area'){ let d=`M${f2(sx(a))} ${base}`; for(let k=0;k<=240;k++){ const X=a+(b-a)*k/240, Y=ev(it.e,{x:X}); if(isFinite(Y)) d+=`L${f2(sx(X))} ${f2(sy(Math.max(y0,Math.min(y1,Y))))}`; } g+=`<path class="g-fill ${c}" d="${d}L${f2(sx(b))} ${base}Z"/>`; }
       else { const n=Math.max(1,Math.min(200,Math.round(ev(it.n)))), w=(b-a)/n; for(let k=0;k<n;k++){ const X=a+k*w, Y=ev(it.e,{x:X}); if(!isFinite(Y)) continue; const yy=sy(Math.max(y0,Math.min(y1,Y))); g+=`<rect class="g-bar ${c}" x="${f2(sx(X))}" y="${f2(Math.min(yy,base))}" width="${f2(sx(X+w)-sx(X))}" height="${f2(Math.abs(base-yy))}"/>`; } }
-      if(it.label) top+=`<text class="g-lb ${c}" x="${f2(sx((a+b)/2))}" y="${f2(base-8)}" text-anchor="middle">${lab(it.label)}</text>`; }
+      if(it.label){ const m=(a+b)/2, ly=it.lo?sy((ev(it.e,{x:m})+ev(it.lo,{x:m}))/2)+4:base-8; if(isFinite(ly)) top+=`<text class="g-lb ${c}" x="${f2(sx(m))}" y="${f2(ly)}" text-anchor="middle">${lab(it.label)}</text>`; } }
     else if(it.k==='seg'||it.k==='vec'){ const X1=sx(ev(it.x1)), Y1=sy(ev(it.y1)), X2=sx(ev(it.x2)), Y2=sy(ev(it.y2)); if(![X1,Y1,X2,Y2].every(isFinite)) continue;
       g+=`<line class="g-line ${c} ${m}" x1="${f2(X1)}" y1="${f2(Y1)}" x2="${f2(X2)}" y2="${f2(Y2)}"/>`+(it.k==='vec'&&Math.hypot(X2-X1,Y2-Y1)>4?arrow(X1,Y1,X2,Y2,c):'');
       if(it.label){ const nx=-(Y2-Y1), ny=X2-X1, d=Math.hypot(nx,ny)||1; top+=`<text class="g-lb ${c}" x="${f2((X1+X2)/2+nx/d*12)}" y="${f2((Y1+Y2)/2+ny/d*12+4)}" text-anchor="middle">${lab(it.label)}</text>`; } }
+    else if(it.k==='dots'){ const a=ev(it.a), b=ev(it.b), s=ev(it.s); if(!(isFinite(a)&&isFinite(b)&&s>0)) continue; let X=a, k=0, lx=null, ly=null;
+      for(; X<=b+1e-9&&k<400; k++, X=a+k*s){ const Y=ev(it.e,{x:X}); if(!isFinite(Y)||Y<y0||Y>y1||X<x0||X>x1) continue; g+=`<circle class="g-pt ${c} ${m}" cx="${f2(sx(X))}" cy="${f2(sy(Y))}" r="3.6"/>`; lx=X; ly=Y; }
+      if(it.label&&lx!=null) top+=`<text class="g-lb ${c}" x="${f2(Math.min(sx(lx),L+pw-4))}" y="${f2(Math.max(T+12,sy(ly)-9))}" text-anchor="end">${lab(it.label)}</text>`; }
+    else if(it.k==='hband'||it.k==='vband'){ const a=ev(it.a), b=ev(it.b); if(!isFinite(a)||!isFinite(b)) continue;
+      if(it.k==='hband'){ const Y1=sy(Math.max(a,b)), Y2=sy(Math.min(a,b)); g+=`<rect class="g-fill ${c}" x="${L}" y="${f2(Y1)}" width="${pw}" height="${f2(Y2-Y1)}"/>`; if(it.label) top+=`<text class="g-lb ${c}" x="${L+pw-4}" y="${f2(Math.max(T+12,Y1-5))}" text-anchor="end">${lab(it.label)}</text>`; }
+      else { const X1=sx(Math.min(a,b)), X2=sx(Math.max(a,b)); g+=`<rect class="g-fill ${c}" x="${f2(X1)}" y="${G.numline?0:T}" width="${f2(X2-X1)}" height="${G.numline?H:ph}"/>`; if(it.label) top+=`<text class="g-lb ${c}" x="${f2((X1+X2)/2)}" y="${G.numline?14:T+14}" text-anchor="middle">${lab(it.label)}</text>`; } }
     else if(it.k==='hline'||it.k==='vline'){ const v=ev(it.e); if(!isFinite(v)) continue; g+=it.k==='hline'?`<line class="g-line ${c} ${m||'dash'} thin" x1="${L}" x2="${L+pw}" y1="${f2(sy(v))}" y2="${f2(sy(v))}"/>`:`<line class="g-line ${c} ${m||'dash'} thin" x1="${f2(sx(v))}" x2="${f2(sx(v))}" y1="${T}" y2="${T+ph}"/>`; }
     else if(it.k==='iv'){ const a=ev(it.a), b=ev(it.b), yy=sy(0), A=sx(Math.max(x0,a)), Bx=sx(Math.min(x1,b));
       g+=`<line class="g-line ${c} bold" x1="${f2(A)}" x2="${f2(Bx)}" y1="${yy}" y2="${yy}"/>`;
@@ -1257,6 +1292,12 @@ function graphHTML(text){
     const ctl=G.sliders.map(s=>`<label class="g-sl"><span>${esc(s.label||s.name)}</span><input type="range" min="${s.lo}" max="${s.hi}" step="${s.step||(s.hi-s.lo)/200}" value="${vals[s.name]}" data-g="${key}" data-gv="${s.name}"><output>${gFmt(vals[s.name])}</output>${s.play?`<button type="button" class="btn sm ghost" data-act="g-play" data-g="${key}" data-gv="${s.name}">움직이기</button>`:''}</label>`).join('');
     return `<figure class="graph" data-g="${key}"><div class="g-svg">${gSVG(G,vals)}</div>${ctl?`<div class="g-ctl">${ctl}</div>`:''}${G.cap?`<figcaption>${inl(G.cap)}</figcaption>`:''}</figure>`;
   }catch(e){ return `<div class="note bad g-err">그림을 그리지 못했어: ${esc(e.message||e)}</div>`; }
+}
+function imgHTML(text){
+  const o={}; for(const l of String(text).split('\n')){ const m=l.trim().match(/^(\w+)\s+(.*)$/); if(m) o[m[1]]=m[2].trim(); }
+  if(!/^img\/[\w.\/-]+\.(jpg|jpeg|png|webp|svg)$/i.test(o.src||'')) return `<div class="note bad g-err">사진을 넣지 못했어: src "${esc(o.src||'')}"</div>`;
+  const link=/^https:\/\/[^\s"<>]+$/.test(o.url||'')?o.url:'';
+  return `<figure class="graph g-photo"><img src="${esc(o.src)}" alt="${esc(o.alt||'')}" loading="lazy"><figcaption>${o.cap?inl(o.cap):''}<span class="g-credit">${esc(o.credit||'')}${link?` · <a href="${esc(link)}" target="_blank" rel="noopener">출처</a>`:''}</span></figcaption></figure>`;
 }
 function gPaint(key){
   const R=GR[key]; if(!R) return;
