@@ -84,6 +84,173 @@
       "file_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/2014_American_Canyon_earthquake_seismometer.jpg",
       "changes": "가로 1200px로 줄임",
       "retrieved": "2026-11-16"
+    },
+    "img/b-life-onion.jpg": {
+      "unit": "b-life",
+      "title": "Onion epidermis high power (Wiki Science Competition 2019 Ireland)",
+      "author": "Mccloughlin",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Onion_epidermis_high_power.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Onion_epidermis_high_power.jpg",
+      "crop": [
+        0,
+        0,
+        820,
+        768
+      ],
+      "changes": "초점이 흐린 오른쪽을 잘라 냄(원본 픽셀 0,0~820,768)",
+      "retrieved": "2026-11-18"
+    },
+    "img/b-life-paramecium.jpg": {
+      "unit": "b-life",
+      "title": "Grupo de Paramecium caudatum",
+      "author": "HernanToro",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Grupo_de_Paramecium_caudatum.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Grupo_de_Paramecium_caudatum.jpg",
+      "changes": "위키미디어 축소판(1280px)에서 받음, 세로 1400px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Grupo_de_Paramecium_caudatum.jpg/1280px-Grupo_de_Paramecium_caudatum.jpg"
+    },
+    "img/b-life-ecoli.jpg": {
+      "unit": "b-life",
+      "title": "E coli at 10000x, original (USDA ARS K11077-1)",
+      "author": "Eric Erbe (photo), Christopher Pooley (digital colorization), USDA ARS EMU",
+      "license": "public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-ARS",
+      "source": "https://commons.wikimedia.org/wiki/File:E_coli_at_10000x,_original.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/E_coli_at_10000x%2C_original.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/E_coli_at_10000x%2C_original.jpg/1920px-E_coli_at_10000x%2C_original.jpg"
+    },
+    "img/b-life-methanogen.jpg": {
+      "unit": "b-life",
+      "title": "Methanothermobacter thermautotrophicus",
+      "author": "Andreas Klingl",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Methanothermobacter_thermautotrophicus.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Methanothermobacter_thermautotrophicus.jpg",
+      "changes": "위키미디어 축소판(960px)에서 받음, 없음(원 출처 VAAM 보도 사진 쪽의 CC BY 4.0 표기를 따로 확인)",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Methanothermobacter_thermautotrophicus.jpg/960px-Methanothermobacter_thermautotrophicus.jpg"
+    },
+    "img/c-matter-separatory-funnel.jpg": {
+      "unit": "c-matter",
+      "title": "Separatory funnel with oil and colored water",
+      "author": "PRHaney",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Separatory_funnel_with_oil_and_colored_water.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Separatory_funnel_with_oil_and_colored_water.jpg",
+      "changes": "위키미디어 축소판(1280px)에서 받음, 세로 1400px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Separatory_funnel_with_oil_and_colored_water.jpg/1280px-Separatory_funnel_with_oil_and_colored_water.jpg"
+    },
+    "img/c-matter-distillation.jpg": {
+      "unit": "c-matter",
+      "title": "Distillation 2-3 (derivative of Distillation 2.jpg)",
+      "author": "Arlen (original), Mario Link (derivative work)",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Distillation_2-3.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Distillation_2-3.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Distillation_2-3.jpg/1920px-Distillation_2-3.jpg"
+    },
+    "img/c-matter-chromatography.jpg": {
+      "unit": "c-matter",
+      "title": "Chromatographieren-eines-Filzstiftes",
+      "author": "Stefan Kleyer",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Chromatographieren-eines-Filzstiftes.png",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Chromatographieren-eines-Filzstiftes.png",
+      "changes": "위키미디어 축소판(1920px)에서 받음, PNG를 JPEG로 바꾸고 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Chromatographieren-eines-Filzstiftes.png/1920px-Chromatographieren-eines-Filzstiftes.png"
+    },
+    "img/c-matter-graphite-diamond.jpg": {
+      "unit": "c-matter",
+      "title": "Graphite-and-diamond-with-scale",
+      "author": "Rob Lavinsky, iRocks.com",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Graphite-and-diamond-with-scale.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Graphite-and-diamond-with-scale.jpg",
+      "changes": "위키미디어 축소판(960px)에서 받음",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Graphite-and-diamond-with-scale.jpg/960px-Graphite-and-diamond-with-scale.jpg"
+    },
+    "img/e-sky-star-trails.jpg": {
+      "unit": "e-sky",
+      "title": "Circumpolar AZ81 (northern Arizona, 1982-10-16, single film exposure over 7 hours)",
+      "author": "LCGS Russ",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Circumpolar_AZ81.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Circumpolar_AZ81.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Circumpolar_AZ81.jpg/1920px-Circumpolar_AZ81.jpg"
+    },
+    "img/e-sky-moon-phases.jpg": {
+      "unit": "e-sky",
+      "title": "Moon Phases in January 2025 (27979851320)",
+      "author": "Giuseppe Donatiello",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Moon_Phases_in_January_2025_(27979851320).jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Moon_Phases_in_January_2025_%2827979851320%29.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Moon_Phases_in_January_2025_%2827979851320%29.jpg/1920px-Moon_Phases_in_January_2025_%2827979851320%29.jpg"
+    },
+    "img/e-sky-total-eclipse.jpg": {
+      "unit": "e-sky",
+      "title": "2017 Total Solar Eclipse (NHQ201708210100) - square crop",
+      "author": "NASA/Aubrey Gemignani",
+      "license": "public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NASA",
+      "source": "https://commons.wikimedia.org/wiki/File:2017_Total_Solar_Eclipse_(NHQ201708210100)_-_square_crop.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/2017_Total_Solar_Eclipse_%28NHQ201708210100%29_-_square_crop.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/2017_Total_Solar_Eclipse_%28NHQ201708210100%29_-_square_crop.jpg/1920px-2017_Total_Solar_Eclipse_%28NHQ201708210100%29_-_square_crop.jpg"
+    },
+    "img/e-sky-annular-eclipse.jpg": {
+      "unit": "e-sky",
+      "title": "NASA Annular Eclipse Imagery (SVS14450 - 14450 001 20231015-012931-jfs)",
+      "author": "NASA/Jim Spann",
+      "license": "public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NASA",
+      "source": "https://commons.wikimedia.org/wiki/File:NASA_Annular_Eclipse_Imagery_(SVS14450_-_14450_001_20231015-012931-jfs).jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/6/68/NASA_Annular_Eclipse_Imagery_%28SVS14450_-_14450_001_20231015-012931-jfs%29.jpg",
+      "crop": [
+        674,
+        267,
+        1360,
+        953
+      ],
+      "changes": "위키미디어 축소판(1920px)에서 받음, 고리 둘레를 정사각형으로 잘라 냄(원본 픽셀 2900,1150~5850,4100)",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/NASA_Annular_Eclipse_Imagery_%28SVS14450_-_14450_001_20231015-012931-jfs%29.jpg/1920px-NASA_Annular_Eclipse_Imagery_%28SVS14450_-_14450_001_20231015-012931-jfs%29.jpg"
+    },
+    "img/c-particle-diffusion.jpg": {
+      "unit": "c-particle",
+      "title": "Temperature-dependent-diffusion",
+      "author": "MikeRun",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Temperature-dependent-diffusion.jpg",
+      "file_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Temperature-dependent-diffusion.jpg",
+      "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
+      "retrieved": "2026-11-18",
+      "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Temperature-dependent-diffusion.jpg/1920px-Temperature-dependent-diffusion.jpg"
     }
   }
 }

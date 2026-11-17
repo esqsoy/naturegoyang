@@ -30,6 +30,18 @@ $w=\rho(\cos\varphi+i\sin\varphi)$이면 $zw=\rho(\cos\varphi\,z+\sin\varphi\,iz
 
 연립방정식 $ax+by=p$, $cx+dy=q$에서 미지수를 떼면 계수의 표가 남는다. 이 표는 점 $(x,y)$를 $(p,q)$로 옮기는 규칙이고, 방정식 풀기는 처음 점을 거꾸로 찾는 일이다. 행렬의 곱 $AB$는 '$B$로 옮긴 뒤 $A$로 옮기기'라서, [[f-vector|#]]의 책 돌리기처럼 순서가 결과를 바꿀 수 있다.
 
+평면 전체를 옮기는 두 변환을 이어서 할 때 곱 행렬이 어떻게 나오고 순서를 바꾸면 왜 달라지는지를, 아래 영상이 격자를 움직여 보인다.
+
+```link
+url https://www.youtube.com/watch?v=XkY2DOUCWMU
+title Matrix multiplication as composition | Chapter 4, Essence of linear algebra
+kind 영상
+who 3Blue1Brown
+min 10
+note 한국어 자막
+why 행렬의 두 열은 $(1,0)$과 $(0,1)$이 옮겨 가는 곳이라는 데서 출발해, 90° 회전 뒤 비스듬히 미는 변환을 따라가 곱의 열을 얻는다. 같은 두 변환을 거꾸로 하면 다른 행렬이 나온다.
+```
+
 #### 통상
 
 수를 직사각형으로 늘어놓은 것이 **행렬**(行列, matrix)이다. 가로줄이 **행**(行, row), 세로줄이 **열**(列, column)이고 $i$행 $j$열의 수를 성분 $a_{ij}$라 한다. 행과 열의 수가 같으면 **정사각행렬**(正四角行列, square matrix)이다. $AB$의 $(i,j)$ 성분은 $A$의 $i$행과 $B$의 $j$열을 차례로 곱해 더한 $\sum_k a_{ik}b_{kj}$이고, 일반적으로 $AB\ne BA$다.

@@ -46,19 +46,19 @@ def fetch(only):
             continue
         tmp = tempfile.mkdtemp(prefix='ng-img-')
         raw = os.path.join(tmp, 'download')
-        for attempt in range(5):  # 위키미디어는 몰아 받으면 429를 낸다: 기다렸다 다시
+        for attempt in range(8):  # 위키미디어는 몰아 받으면 429를 낸다: 기다렸다 다시
             try:
-                req = urllib.request.Request(r['file_url'], headers={'User-Agent': UA})
+                req = urllib.request.Request(r.get('fetch_url') or r['file_url'], headers={'User-Agent': UA})  # fetch_url: 위키미디어 축소판(원본은 429가 잦다)
                 with urllib.request.urlopen(req, timeout=60) as f, open(raw, 'wb') as o:
                     o.write(f.read(40 * 1024 * 1024))
                 break
             except urllib.error.HTTPError as e:
-                if e.code != 429 or attempt == 4:
+                if e.code != 429 or attempt == 7:
                     raise
-                wait = int(e.headers.get('Retry-After') or 0) or 20 * (attempt + 1)
+                wait = int(e.headers.get('Retry-After') or 0) or 30 * (attempt + 1)
                 print(f'429, {wait}초 기다림')
                 time.sleep(wait)
-        time.sleep(3)
+        time.sleep(30)
         im = Image.open(raw)
         im.load()
         if r.get('crop'):  # [왼, 위, 오른, 아래] 원본 픽셀
@@ -88,7 +88,8 @@ def credits():
         r = reg[k]
         lic = f'[{r["license"]}]({r["license_url"]})' if r.get('license_url') else r['license']
         src = r['source'].replace('(', '%28').replace(')', '%29')
-        lines.append(f'| `{k}` | {r.get("unit", "")} | {r.get("title", "")} | {r.get("author", "")} | {lic} | [출처]({src}) | {r.get("changes", "")} |')
+        got = '' if os.path.exists(os.path.join(REPO, 'app', k)) else ' (받기 전)'
+        lines.append(f'| `{k}`{got} | {r.get("unit", "")} | {r.get("title", "")} | {r.get("author", "")} | {lic} | [출처]({src}) | {r.get("changes", "")} |')
     open(os.path.join(IMG, 'CREDITS.md'), 'w', encoding='utf-8', newline='\n').write('\n'.join(lines) + '\n')
     print(f'CREDITS.md {len(reg)}개')
 

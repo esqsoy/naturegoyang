@@ -75,6 +75,18 @@ pt 4 2 c1
 cap 주황 띠는 $2-\varepsilon<y<2+\varepsilon$, 초록 띠는 $4-\delta<x<4+\delta$이다. 초록 띠 안의 곡선(굵은 부분)은 모두 주황 띠 안에 든다. 회색 점선 사이는 $\lvert\sqrt x-2\rvert<\varepsilon$을 푼 구간 $(2-\varepsilon)^2<x<(2+\varepsilon)^2$이고, $\delta$는 4에서 가까운 쪽 끝까지의 거리 $4\varepsilon-\varepsilon^2$이다. $\varepsilon$을 줄이면 $\delta$도 줄지만 0이 되지는 않는다($\varepsilon=0.1$이면 $\delta=0.39$).
 ```
 
+아래 영상은 같은 주문과 응답을 입력 쪽과 출력 쪽의 범위로 그려, 극한이 있는 함수와 없는 함수를 견준다.
+
+```link
+url https://www.youtube.com/watch?v=kfF40MiS7zA
+title Limits, L'Hôpital's rule, and epsilon delta definitions | Chapter 7, Essence of calculus
+kind 영상
+who 3Blue1Brown
+min 18
+note 한국어 자막
+why 가운데 대목에서 출력 쪽 허용 범위 $\varepsilon$을 아무리 좁혀도 맞는 입력 쪽 범위 $\delta$가 있는지로 극한을 정하고, 왼쪽에서 1, 오른쪽에서 2로 다가가는 함수에는 그런 $\delta$가 없음을 본다. 앞부분의 도함수 정의와 끝의 로피탈 법칙(0/0 꼴의 극한을 도함수로 구하는 법)은 뒤 단원에서 다시 만난다.
+```
+
 #### 통상
 
 **우극한**(右極限, right-hand limit) $\lim_{x\to c^+}f(x)$는 $x$가 $c$보다 큰 값을 가지면서 $c$에 한없이 가까워질 때 $f(x)$가 한없이 가까워지는 일정한 수이다. **좌극한**(左極限, left-hand limit) $\lim_{x\to c^-}f(x)$는 $x$가 $c$보다 작은 값을 가지면서 $c$에 한없이 가까워질 때 $f(x)$가 한없이 가까워지는 일정한 수이다. 극한이 $L$인 것은 좌극한과 우극한이 모두 $L$인 것과 같다. 각을 라디안으로 잴 때 다음이 성립한다.

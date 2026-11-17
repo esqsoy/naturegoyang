@@ -53,3 +53,22 @@
 - 카드가 25장으로 상한이다. c08($|x|$)이나 c25(같은 비율)는 줄일 후보다.
 - '자연상수'를 용어로 굵게 했으나 사전 표제어가 없다. '무리수 $e$'나 '자연로그의 밑'으로 바꿀지.
 - 2절 직관의 수조 장면은 물이 빠질 때(빠르기 음수)를 말하지 않는다. 부호 있는 넓이는 통상과 엄밀에서만 다룬다.
+
+## 26.11.18 영상·링크 (앱 18판)
+
+이 단원은 새 지도(목표: 리만 합의 극한과 누적량, 미적분의 기본 정리, 치환 적분과 곡선 사이 넓이)에 맞춰 다시 쓸 단원이다. 지금 글에서 맞는 자리에 넣고, 다시 쓸 때 옮길 곳을 아래에 적는다. 있던 글은 고치지 않았고, 더한 글은 블록마다 앞 한 문장이다(설명 4981 → 5188자, 분량 경고가 새로 생겼다).
+
+- **넣은 것:**
+  1. 'The essence of calculus'(WUvTyaaNkzM, 17분, 한국어 자막) — 2절 직관 끝. 직관이 말한 '좁은 직사각형 넓이의 합'과 '쌓기는 미분을 거꾸로 하는 일'을 영상이 원의 넓이(고리 $2\pi r\,dr$를 펴서 직선 $y=2\pi r$ 아래 삼각형)와 $y=x^2$ 아래 넓이 $A(x)$($dA\approx x^2dx$)로 함께 보인다. [[f-deriv|#]]에도 짝지어져 있으나 적분 쪽이 몸통이라 여기에만 넣었다. 확인: 3blue1brown.com lessons/essence-of-calculus 글.
+  2. 'Integration and the fundamental theorem of calculus'(rfG8ce4nNh0, 21분, 한국어 자막) — 2절 통상 끝, '$\Delta x=\int v\,dt$' 뒤. 영상이 $v(t)=t(8-t)$ m/s인 차의 거리를 직사각형 합 → 정적분 → $F(t)=4t^2-\frac13t^3$으로 셈하고, 적분 상수가 빠지는 까닭과 가로축 아래 넓이를 음수로 세는 까닭까지 다뤄 통상 층 전체와 맞는다. 확인: 3blue1brown.com lessons/integration 글($F$는 $8t-t^2$에서 손으로 다시 셈).
+  3. (다른 링크) PhET 'Calculus Grapher' — 2절 엄밀 끝, 넓이 함수 $S'=f$ 문단 뒤. 아래 '더한 다른 링크'.
+- **뺀 것:** 'What does area have to do with slope?'(FnJqaIESC2s, 13분) — 함수의 평균값 $\frac{1}{b-a}\int_a^bf\,dx$가 $F$의 평균 변화율 $\frac{F(b)-F(a)}{b-a}$와 같다는 영상이다. 지금 글은 평균값을 다루지 않아 넣으려면 새 내용을 더해야 한다.
+- **다시 쓸 때 옮길 곳:**
+  - WUvTyaaNkzM → 목표 1(리만 합) 직관. 원의 넓이 예가 '잘게 나눠 더하기'의 첫 그림이다.
+  - rfG8ce4nNh0 → 목표 1 통상 끝(리만 합 → 정적분) 또는 목표 2 통상(기본 정리로 계산). 둘 다 다루므로 목표 1과 2를 잇는 자리.
+  - Calculus Grapher → 목표 2 엄밀(넓이 함수를 미분하면 $f$).
+  - FnJqaIESC2s → 목표 2. 기본 정리를 '정적분 ÷ 폭 = $F$의 평균 변화율'로 한 줄 다시 읽으면 그 뒤.
+  - 지금의 1절(도함수)·3절(지수적 변화)은 [[f-deriv|#]]·[[f-expo|#]]·[[f-ode|#]]와 겹쳐 빠질 것이라 여기에는 넣지 않았다.
+- **더한 다른 링크:** PhET 'Calculus Grapher' 영어판(https://phet.colorado.edu/sims/html/calculus-grapher/latest/calculus-grapher_en.html).
+  - 확인: 주소가 200으로 열린다. PhET 저장소의 doc/model.md로 화면(Derivative, Integral, Advanced, Lab)과 도구(Tangent, Area Under Curve, Reference Line)를 보았다. 브라우저로 Integral 화면을 열어 $f$를 끌어 올리면 위 그래프에 넓이 함수가 S자로 그려지고, Area Under Curve를 켜면 초록 손잡이와 'Net Signed Area' 막대가 나오는 것을 보았다. 로그인·광고 없음.
+  - 한국어판(_ko)도 있으나 화면 이름이 '파생적인'(Derivative), '적분학', '상급', 제목이 '미분학 그래퍼'로 옮겨져 우리 용어(도함수, 적분)와 어긋나 영어판을 걸었다. 화면의 글자는 몇 단어뿐이다.

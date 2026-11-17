@@ -38,11 +38,34 @@ $$F=k\frac{|q_1||q_2|}{r^2},\quad k\approx8.99\times10^9\ \mathrm{N\cdot m^2/C^2
 
 작은 양전하(시험 전하) $q$가 받는 힘이 $\vec F$인 점의 **전기장**(電氣場, electric field)은 $\vec E=\vec F/q$(N/C)다. 점전하 $Q$에서 $r$ 떨어진 곳은 $E=k|Q|/r^2$이고 $Q>0$이면 바깥, $Q<0$이면 $Q$ 쪽을 향하며, 여러 전하의 전기장은 벡터 합이다. **전기력선**(電氣力線, electric field line)은 접선이 전기장 방향인 선으로, 양전하에서 나와 음전하로 들어가고 엇갈리지 않으며 촘촘할수록 세다.
 
+공간의 점마다 화살표를 붙인 그림을 물의 흐름처럼 읽는 법은 아래 영상에서 본다.
+
+```link
+url https://www.youtube.com/watch?v=rB83DpBJQsE
+title Divergence and curl: The language of Maxwell's equations, fluid flow, and more
+kind 영상
+who 3Blue1Brown
+min 16
+note 한국어 자막
+why 앞의 두 장(0:00~4:31)에서 점마다 화살표를 단 그림을 흐름으로 읽어 화살표가 솟아나는 곳과 빨려 드는 곳을 보고, 맥스웰 방정식 장(5:47~7:36)의 첫 식에서 양전하가 전기장이 솟아나는 곳, 음전하가 빨려 드는 곳임을 본다. 소용돌이 이야기(4:31~)는 자기장과 함께 다시 쓰인다.
+```
+
 전하 $q$의 전기 퍼텐셜 에너지가 $E_p$이면 **전위**(電位, electric potential)는 $V=E_p/q$, 단위는 볼트(1 V = 1 J/C)다. 두 점의 전위의 차가 **전위차**(電位差, potential difference), 곧 전압(電壓, voltage)이다. $q$를 전위차 $\Delta V$만큼 천천히 옮기는 일은 $W=q\Delta V$이고, 전기력만 받으면 운동 에너지가 $-q\Delta V$만큼 는다.
 
 #### 엄밀
 
 균일한 전기장에서 양전하 $q$를 전기장과 반대로 $d$ 옮기는 일은 $qEd$라서 두 점의 전위차는 $V=Ed$이다(V/m = N/C). 전기장 방향으로 갈수록 전위가 낮다. 전위가 같은 점을 이은 **등전위면**(等電位面, equipotential surface) 위에서는 일이 0이라 전기력선과 수직이다. 전기력은 보존력([[p-energy|#]])이라 일이 경로와 상관없다. **전자볼트**(電子volt, electron volt) 1 eV는 기본 전하가 1 V를 지날 때의 에너지 변화, $1.602\times10^{-19}$ J이다.
+
+전하를 놓아 가며 전기장과 전위를 직접 재 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_ko.html
+title 하전과 전기장
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판, 전하를 '하전'으로 적음
+why +1 nC·−1 nC 전하를 끌어다 놓고 '전기장'을 켜면 점마다 화살표가 보이고, '센서'로 한 점의 전기장 크기와 방향을 잰다. 전위를 재는 도구로 전위가 같은 점을 이은 선(평면에서 본 등전위면)을 그려, 전기장 화살표와 수직인지 본다.
+```
 
 #### 점검
 **Q.** 12 V의 전위차로 가속된 전자의 운동 에너지는 몇 eV, 몇 J인가?
@@ -59,6 +82,17 @@ $$F=k\frac{|q_1||q_2|}{r^2},\quad k\approx8.99\times10^9\ \mathrm{N\cdot m^2/C^2
 전하가 자유롭게 옮겨 다니는 물질이 **도체**(導體, conductor), 그렇지 못한 물질이 **절연체**(絕緣體, insulator) 또는 부도체(不導體)다. 금속 속을 돌아다니는 바깥 전자가 **자유 전자**(自由電子, free electron)다.
 
 대전체를 도체에 가까이 하면 자유 전자가 움직여 가까운 쪽에 반대 부호, 먼 쪽에 같은 부호 전하가 나타나는 **정전기 유도**(靜電氣誘導, electrostatic induction)가 일어난다. 절연체에서는 원자·분자 안의 전하가 조금 치우쳐 가까운 쪽에 반대 부호 전하가 나타나는 **유전 분극**(誘電分極, dielectric polarization)이 일어난다. 둘 다 중성 물체가 대전체에 끌리는 까닭이다. 물체를 땅(큰 도체)에 이어 전하가 드나들게 하는 것이 **접지**(接地, grounding)다. **검전기**(檢電器, electroscope)는 금속박 두 장이 벌어지는지로 대전을 알아보는 기구다.
+
+문지른 풍선이 중성인 벽에 붙는 까닭을 전하의 움직임으로 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/balloons-and-static-electricity/latest/balloons-and-static-electricity_ko.html
+title 풍선과 정전기
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판, 전하를 '하전'으로 적음
+why 풍선을 스웨터에 문지르면 전자가 풍선으로 옮겨 가고(1절), 그 풍선을 벽에 가까이 하면 벽 속 전하가 제자리에서 살짝 치우쳐(유전 분극) 풍선을 끄는 것을 '모든 하전 보기'로 본다.
+```
 
 #### 엄밀
 

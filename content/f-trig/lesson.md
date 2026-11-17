@@ -46,7 +46,7 @@ cap $c$를 움직이면 세 변의 길이는 함께 늘고 줄지만 오른쪽 �
 | 45° | $\sqrt2/2$ | $\sqrt2/2$ | $1$ |
 | 60° | $\sqrt3/2$ | $1/2$ | $\sqrt3$ |
 
-**역삼각비**(逆三角比, inverse trigonometric ratio)는 삼각비의 값에서 각을 구하는 계산이다. $\sin\theta=k$인 각을 $\theta=\sin^{-1}k$ 또는 $\arcsin k$로 쓰고, $\cos^{-1}$, $\tan^{-1}$도 같다. 계산기는 각을 하나만 낸다. $\sin^{-1}$과 $\tan^{-1}$은 $-90°$에서 $90°$까지, $\cos^{-1}$은 $0°$에서 $180°$까지의 각을 낸다.
+**역삼각비**(逆三角比, inverse trigonometric ratio)는 삼각비의 값에서 각을 구하는 계산이다. $\sin\theta=k$인 각을 $\theta=\sin^{-1}k$ 또는 $\arcsin k$로 쓰고, $\cos^{-1}$, $\tan^{-1}$도 같다. 계산기는 각을 하나만 낸다. $\sin^{-1}$은 $-90°$에서 $90°$까지, $\tan^{-1}$은 $-90°$와 $90°$ 사이(두 끝은 빼고), $\cos^{-1}$은 $0°$에서 $180°$까지의 각을 낸다.
 
 #### 엄밀
 
@@ -197,6 +197,18 @@ text pi 1.12 c1 | cos²θ
 text pi/2 1.12 c2 | sin²θ
 text 3*pi/2 -1.24 c0 | cos 2θ
 cap 회색 파선이 $\cos2\theta$이다. $\cos^2\theta$(파랑)는 그것을 절반으로 줄여 $\tfrac12$만큼 올린 것이고, $\sin^2\theta$(주황)는 $\tfrac12$을 사이에 두고 그 반대쪽에 있다. 그래서 둘의 합(초록)은 어디서나 1이다. 가로축은 θ(rad)이다.
+```
+
+$\cos^2\theta$의 그래프 모양을 먼저 짐작해 보고 거기서 반각 공식에 닿는 과정을 영상으로 한 번 더 보고 넘어가자.
+
+```link
+url https://www.youtube.com/watch?v=yBw67Fb31Cs
+title Trigonometry fundamentals | Ep. 2 Lockdown live math
+kind 영상
+who 3Blue1Brown
+min 73
+note 한국어 자막
+why 라이브 강의라 길다. 앞쪽에서 $\cos^2\theta$의 그래프를 그려 놓고, $\cos\theta$의 그래프를 옮기고 줄이고 주기를 절반으로 하면 겹친다는 것에서 $\cos^2\theta=\frac{1+\cos2\theta}2$에 닿는다. 위 그림의 생각이다. 그 뒤 단위원으로 삼각함수를 정의하는 대목은 2절을 다시 보는 것이다.
 ```
 
 코사인 법칙은 끼인각의 꼭짓점을 원점에, 변 $b$를 $x$축에 놓고 두 꼭짓점 $(b,0)$과 $(a\cos\theta,\ a\sin\theta)$ 사이 거리의 제곱을 계산하면 나온다. $\theta=\pi/2$이면 피타고라스 정리다. **사인 법칙**(sine法則, law of sines)은 삼각형의 세 각 $A$, $B$, $C$와 각각의 맞은편 변 $a$, $b$, $c$ 사이의 관계식 $\sin A/a=\sin B/b=\sin C/c$이다.

@@ -10,6 +10,17 @@
 
 가운데가 트인 상자 두 칸에 분자 100개가 있다. 미시 상태 $2^{100}$가지 가운데 50개씩인 거시 상태에는 약 $1.01\times10^{29}$가지가 들고, 모두 왼쪽인 것은 1가지라 확률이 $2^{-100}\approx7.9\times10^{-31}$이다. 그래도 왼쪽 수는 흔들려 45~55개일 확률이 약 73 %다. 이 흔들림이 **요동**(搖動, fluctuation)이다. 분자가 $10^{22}$개면 요동은 평균의 $10^{-11}$배라 밀도가 한 값으로 보인다.
 
+칸막이를 걷은 상자에서 양쪽 분자 수가 흔들리는 것을 직접 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_ko.html
+title 확산
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판
+why '입자의 수'에서 파란 입자만 왼쪽 칸에 넣고 '분할기 제거'를 누른 뒤 '데이터'를 펼치면, 양쪽 칸의 입자 수가 곧 거의 반반이 되고 그 둘레에서 계속 흔들린다. 입자를 적게 넣을수록 반반에서 벗어나는 몫이 크다.
+```
+
 #### 통상
 
 **통계역학**(統計力學, statistical mechanics)은 미시 상태의 수와 확률로 거시적 성질을 끌어낸다. 고립계의 미시 상태는 모두 같은 확률이라고 가정한다(동일 선험 확률 원리). $N$개를 두 칸에 $n$, $N-n$개로 나누는 미시 상태 수 $W={}_N\mathrm C_n=\frac{N!}{n!(N-n)!}$는 $n=N/2$에서 가장 크며 큰 $N$에서 $\ln W\approx N\ln2$다. 표준편차([[f-stats|#]])가 $\sqrt N/2$라 상대 요동은 $1/\sqrt N$이다.
@@ -34,6 +45,18 @@ $\partial$는 부피·입자 수를 묶고 $E$로만 미분하는 편미분이�
 
 분자 하나가 온도 $T$인 큰 열원과 에너지를 주고받는다. 분자가 $E$를 가져가면 열원의 엔트로피가 $E/T$ 줄어 열원의 미시 상태 수가 $e^{-E/kT}$배가 된다. 분자의 각 상태가 나올 확률은 그 수에 비례하므로, 에너지가 $kT$ 높은 상태마다 확률이 $1/e\approx0.37$배로 준다.
 
+큰 열원의 미시 상태 수를 세어 이 인자를 끌어내는 과정은 아래 영상이 격자 모형과 함께 보인다.
+
+```link
+url https://www.youtube.com/watch?v=itRV2jEtV8Q
+title Simulating and understanding phase change | Guest video by Vilas Winstein
+kind 영상
+who 3Blue1Brown
+min 41
+note 영어, 한국어 자막 없음
+why 41분짜리라 가운데 두 장('Defining temperature', 'Deriving the Boltzmann law', 약 9분)을 먼저 보면 된다. 에너지를 주고받는 두 계에서 $\Delta S/\Delta E$가 같아질 때 평형이라 이것으로 온도를 정하는 1절 통상과, 큰 열원에 닿은 작은 계의 상태 확률이 $e^{-E/kT}$에 비례한다는 이 직관이 차례로 나온다. 앞쪽 장들은 칸마다 분자를 놓는 격자 모형에서 온도를 바꾸면 분자가 뭉치거나 흩어지는 상태 변화를 보이고, 뒤쪽의 시뮬레이션 방법은 넘어가도 된다.
+```
+
 #### 통상
 
 온도 $T$에서 열평형인 계가 에너지 $E$인 한 미시 상태에 있을 확률은 **볼츠만 분포**(Boltzmann分布, Boltzmann distribution)를 따르고, $e^{-E/kT}$가 **볼츠만 인자**(Boltzmann因子, Boltzmann factor)다.
@@ -43,6 +66,17 @@ $$P(E)\propto e^{-E/kT}$$
 300 K에서 $kT=0.02585$ eV이고 몰당 에너지에는 $e^{-E/RT}$를 쓴다. 기체 분자의 운동 에너지에 쓰면 **맥스웰-볼츠만 속력 분포**(Maxwell-Boltzmann速力分布, Maxwell–Boltzmann speed distribution)다. 곡선은 0에서 올라 봉우리 뒤 오른쪽 꼬리가 길고, 온도가 오르면 낮아지며 오른쪽으로 퍼진다. 봉우리의 속력이 **최빈 속력**(最頻速力, most probable speed)이다.
 
 $$v_p=\sqrt{2RT/M}<v_{\rm avg}=\sqrt{8RT/\pi M}<v_{\rm rms}=\sqrt{3RT/M}$$
+
+분자 속력의 분포가 온도에 따라 바뀌는 것을 직접 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_ko.html
+title 기체의 성질
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판
+why '에너지' 화면에서 펌프로 무거운 입자를 넣고 '속력' 막대그래프를 보면 0 가까이는 드물고 봉우리 뒤로 오른쪽 꼬리가 길다. 아래 통의 손잡이로 데우면 봉우리가 낮아지며 오른쪽으로 퍼지고, 가벼운 입자를 함께 넣으면 같은 온도에서 더 빠른 쪽에 퍼진다.
+```
 
 #### 엄밀
 

@@ -84,7 +84,7 @@ $$t_F=\frac95\,t_C+32,\qquad t_C=\frac59\,(t_F-32)$$
 ```img
 src img/f-measure-thermometer.jpg
 alt 왼쪽에 섭씨, 오른쪽에 화씨 눈금이 나란히 새겨진 막대 온도계와 빨간 액체 기둥
-cap 왼쪽은 섭씨(°C), 오른쪽은 화씨(°F) 눈금이다. 0 °C 줄은 32 °F, 10 °C 줄은 50 °F와 높이가 같아 섭씨 10칸이 화씨 18칸과 같은 길이다. 두 눈금은 −40에서 만난다($t_F=	frac95	imes(-40)+32=-40$). 빨간 기둥 끝은 0 °C(32 °F) 근처다.
+cap 왼쪽은 섭씨(°C), 오른쪽은 화씨(°F) 눈금이다. 0 °C 줄은 32 °F, 10 °C 줄은 50 °F와 높이가 같아 섭씨 10칸이 화씨 18칸과 같은 길이다. 두 눈금은 −40에서 만난다($t_F=\tfrac95\times(-40)+32=-40$). 빨간 기둥 끝은 0 °C(32 °F) 근처다.
 credit Olibac · CC BY 2.0 · 위키미디어 공용(원본 Flickr) · 잘라 냄
 url https://commons.wikimedia.org/wiki/File:FahrenheitCelsius.jpg
 ```

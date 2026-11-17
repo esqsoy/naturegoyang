@@ -73,3 +73,13 @@
 - 자유도를 '에너지의 제곱 항 수'로 정의한 것이 사전·kphys의 '좌표 수' 뜻과 다르다. 진동을 2로 세는 데서만 갈린다.
 - $\mu$의 이름(화학 퍼텐셜)을 쓰지 않고 뜻만 적었다. 74번에서 페르미 준위로 이어 쓸 때 맞출 것.
 - 카드 c13(아레니우스 비율)·c16(질소 속력)·c11(두 준위)은 예제 수치라 빼도 된다.
+
+## 26.11.18 영상·링크 (앱 18판)
+
+영신(26.11.18) "영상은 봐야하는거라면 설명에 녹여서 보고 지나가게 하자 … 블로그 링크든 뭐든 링크로 보게해도 됨"에 따라 목록(`sources/videos-3b1b.json`)의 영상 1개를 ` ```link ` 카드로 넣고, 다른 링크 2개(시뮬레이션)를 더했다. 있던 글은 지우거나 고치지 않았고 문단도 나누지 않았다(링크는 층 끝에만). 더한 글은 링크마다 앞 문장 하나와 why이고 새 용어는 없다.
+
+- **넣음: Simulating and understanding phase change | Guest video by Vilas Winstein (41분, 한국어 자막 없음)** — 2절 직관 끝, '에너지가 $kT$ 높은 상태마다 확률이 $1/e\approx0.37$배로 준다' 뒤. 이 직관(큰 열원의 미시 상태 수를 세어 $e^{-E/kT}$를 얻는 것)을 영상의 'Deriving the Boltzmann law' 장이 그대로 하고, 바로 앞 'Defining temperature' 장은 1절 통상의 $1/T=\partial S/\partial E$(두 계의 $\Delta S/\Delta E$가 같아지는 평형)를 다룬다. 상전이는 이 단원 목표가 아니라서, 41분 가운데 이 두 장(약 9분)을 먼저 볼 대목으로 적고 앞쪽(격자 모형의 상태 변화)은 보고 싶으면, 뒤쪽 시뮬레이션 방법(MCMC)은 넘어가도 된다고 적었다. 장 목록(What is phase change? 0:00, The Boltzmann law and free energy 6:27, A preliminary simulation 12:05, Defining temperature 15:30, Deriving the Boltzmann law 21:25, Sampling with MCMC 24:30, Chemical potential 28:30, Interesting properties 33:20)은 YouTube 쪽 설명으로, 장 안의 내용(열원과 맞닿은 작은 계, 합친 계의 미시 상태는 모두 같은 확률)은 자막을 옮겨 둔 쪽(rosetta.to)으로 확인했다. 자막 트랙은 zh·en·fr·hi·es뿐이다.
+- **뺀 것:** 없음.
+- **더한 링크 1: PhET '확산'(Diffusion) 한국어판** (`…/diffusion/latest/diffusion_ko.html`) — 1절 직관 끝. 칸막이를 걷은 상자에서 양쪽 분자 수가 반반 둘레로 흔들리는 요동은 움직임으로 볼 때 도움이 크다. 확인한 것: 브라우저로 열어 '입자의 수'(파랑·빨강 두 칸, 누르면 10개씩), '분할기 제거' 단추, '데이터'(칸마다 입자 수와 평균 온도)를 보았다.
+- **더한 링크 2: PhET '기체의 성질'(Gas Properties) 한국어판** (`…/gas-properties/latest/gas-properties_ko.html`) — 2절 통상 끝, 세 속력 식 뒤. 맥스웰-볼츠만 분포의 모양과 온도에 따른 변화를 입자 막대그래프로 본다. 확인한 것: 화면 이름(이상기체·실험·에너지·확산), '에너지' 화면의 '평균 속력'·'속력'·'운동에너지' 막대그래프, 무거운·가벼운 입자를 넣는 펌프, 열 조절 통을 보았다.
+- 검사: `content-check.py p-statmech` 오류 0(분량 4977 → 5138자 경고는 링크 글이 더해진 것). `videos.py` 맞음(넣음 1). 앱의 장 나누기를 Python으로 옮겨 세어 보니 세 링크 모두 앞 문장과 한 장에 있고, 쪽 수는 14쪽 그대로다.

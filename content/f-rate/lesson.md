@@ -34,6 +34,18 @@ $x$마다 $f'(x)$를 짝지은 함수가 **도함수**(導函數, derivative) $f
 
 수조에 들어오는 물의 빠르기가 바뀌어도 짧은 동안은 거의 일정해, 그동안 들어온 양은 (빠르기)×(짧은 시간)이다. 이를 더한 총량은 좁은 직사각형 넓이의 합이고, 폭을 줄일수록 곡선 아래 넓이에 다가간다. 거꾸로 총량이 느는 빠르기는 지금 들어오는 빠르기 자체라, 쌓기는 미분을 거꾸로 하는 일이다.
 
+원의 넓이를 얇은 고리로 잘라 더하는 데서 '잘게 나눠 더하기'와 '쌓기는 미분을 거꾸로 하는 일'이 함께 나오는 것을 아래 영상으로 본다.
+
+```link
+url https://www.youtube.com/watch?v=WUvTyaaNkzM
+title The essence of calculus
+kind 영상
+who 3Blue1Brown
+min 17
+note 한국어 자막
+why 넓이가 약 $2\pi r\,dr$인 고리들을 펴서 나란히 놓으면 직선 $y=2\pi r$ 아래 넓이가 되어 $\pi R^2$이 나온다. 이어 $y=x^2$ 아래 넓이 $A(x)$는 $x$가 $dx$ 늘 때 약 $x^2\,dx$ 늘어 $\frac{dA}{dx}=x^2$이 된다.
+```
+
 #### 통상
 
 $F'(x)=f(x)$인 $F(x)$를 $f(x)$의 **부정적분**(不定積分, indefinite integral)이라 하고 $\int f(x)\,dx=F(x)+C$로 쓴다. $C$는 **적분 상수**(積分常數, constant of integration)로, 상수는 미분하면 0이라 정해지지 않는다. $\int x^n\,dx=\frac{x^{n+1}}{n+1}+C$ ($n\neq-1$)이다.
@@ -44,9 +56,32 @@ $$\int_a^b f(x)\,dx=\Big[F(x)\Big]_a^b=F(b)-F(a)$$
 
 그래서 $\Delta x=\int_{t_1}^{t_2}v\,dt$, $\Delta v=\int_{t_1}^{t_2}a\,dt$이다.
 
+속도 그래프 아래 넓이가 지나간 거리라는 것과 기본 정리를 아래 영상이 자동차의 예로 처음부터 셈한다.
+
+```link
+url https://www.youtube.com/watch?v=rfG8ce4nNh0
+title Integration and the fundamental theorem of calculus | Chapter 8, Essence of calculus
+kind 영상
+who 3Blue1Brown
+min 21
+note 한국어 자막
+why $v(t)=t(8-t)$ m/s로 달리는 차의 0~8 s 거리를 좁은 직사각형의 합으로 어림하고 폭을 줄여 정적분으로 만든 뒤, $F'=v$인 $F(t)=4t^2-\frac13t^3$으로 계산한다. 적분 상수가 셈에서 빠지는 까닭과 가로축 아래 넓이를 음수로 세는 까닭도 다룬다.
+```
+
 #### 엄밀
 
 $f$가 연속이면 넓이 함수 $S(x)=\int_a^x f(t)\,dt$는 $x$가 $h$ 늘 때 약 $f(x)h$ 늘어 $S'=f=F'$이고, $S(a)=0$이라 $S=F-F(a)$이다. 고교 수학Ⅱ는 이 $F(b)-F(a)$를 정적분의 정의로 쓴다. 적분 상수는 처음 조건으로 정해, $a$가 일정하면 $v=v_0+at$를 적분한 $x=x_0+v_0t+\frac12at^2$이 [[p-motion|#]]의 식이다. 이동 거리는 $\int|v|\,dt$이다.
+
+위 끝 $x$를 옮기며 넓이 함수가 느는 빠르기가 그 자리의 높이 $f(x)$인지 시뮬레이션에서 직접 본다.
+
+```link
+url https://phet.colorado.edu/sims/html/calculus-grapher/latest/calculus-grapher_en.html
+title Calculus Grapher
+kind 시뮬레이션
+who PhET
+note 영어판
+why 'Integral' 화면에서 아래 그래프의 $f$를 끌어 모양을 바꾸면 위 그래프에 왼쪽 끝부터 쌓인 넓이가 그려진다. 'Area Under Curve'를 켜고 초록 손잡이를 옮겨 보면 $f$가 높은 곳에서 넓이 그래프가 가장 가파르고, $f$가 음수인 곳에서는 넓이 그래프가 내려간다.
+```
 
 #### 점검
 **Q.** 속도가 $v=3t^2$ (m/s)인 물체의 $t=0$~2 s 동안 변위는?

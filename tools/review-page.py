@@ -99,7 +99,7 @@ def md_to_html(md, by, num, target_prefix):
         l = raw.strip()
         if fence is not None:  # ```graph … ```: 앱과 같은 코드로 브라우저에서 그린다(26.11.16)
             if l.startswith('```'):
-                out.append(f'<div class="{"img" if fkind == "img" else "graph"}-src" data-src="{esc(chr(10).join(fence))}"></div>')
+                out.append(f'<div class="{fkind if fkind in ("img", "link") else "graph"}-src" data-src="{esc(chr(10).join(fence))}"></div>')
                 fence = None
             else:
                 fence.append(raw)
@@ -341,6 +341,7 @@ function inl(s){ return esc(s).replace(/\$([^$]+)\$/g, function(_, t){ return '<
 __GRAPHJS__
 document.querySelectorAll('.graph-src').forEach(function(el){ var d=document.createElement('div'); d.innerHTML=graphHTML(el.dataset.src); el.replaceWith(d.firstElementChild||d); });
 document.querySelectorAll('.img-src').forEach(function(el){ var d=document.createElement('div'); d.innerHTML=imgHTML(el.dataset.src); el.replaceWith(d.firstElementChild||d); });
+document.querySelectorAll('.link-src').forEach(function(el){ var d=document.createElement('div'); d.innerHTML=linkHTML(el.dataset.src); el.replaceWith(d.firstElementChild||d); });
 document.addEventListener('click', function(ev){ var b=ev.target.closest('[data-act="g-play"]'); if(b) gPlay(b.dataset.g, b.dataset.gv); });
 drawMath(document);
 window.addEventListener('load', function(){ drawMath(document); });

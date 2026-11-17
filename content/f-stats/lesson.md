@@ -46,6 +46,18 @@ $$\sigma=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar x)^2}$$
 
 고교의 확률의 곱셈정리 $P(A\cap B)=P(A)P(B|A)$에서 $A$가 일어났을 때 $B$의 확률 $P(B|A)$가 $P(B)$와 같을 때가 독립이다. 확률이 0이 아닌 배반 사건은 독립이 아니다. 하나가 일어나면 다른 것의 확률이 0이 된다.
 
+아래 영상은 전체를 넓이 1인 정사각형으로 놓고, 폭 $P(A)$인 띠에서 다시 $B$인 몫 $P(B|A)$만큼을 칠해 곱셈정리의 $P(A)P(B|A)$를 넓이로 보인다.
+
+```link
+url https://www.youtube.com/watch?v=HZGCoVF3YvM
+title Bayes theorem, the geometry of changing beliefs
+kind 영상
+who 3Blue1Brown
+min 15
+note 한국어 자막
+why 영상의 가설 $H$와 증거 $E$를 여기의 $A$, $B$로 읽는다. 증거에 맞는 넓이만 남겨 그 가운데 가설 쪽 비를 재는 것이 $P(H|E)$이고, 곱셈정리를 $P(H)P(E|H)=P(E)P(H|E)$로 두 번 써서 $P(H|E)$를 푼 것이 베이즈 정리다.
+```
+
 시행을 되풀이할수록 사건이 일어난 비율은 확률에, 결과의 평균은 기댓값에 가까워진다. 이것이 **큰수의 법칙**(큰數의法則, law of large numbers)이다.
 
 #### 점검
@@ -58,6 +70,18 @@ $$\sigma=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar x)^2}$$
 
 3명보다 30명을 잰 평균 키가 전교 평균에 가까울 가능성이 크다. 우연히 크거나 작은 몇 명의 영향이 상쇄되기 때문이다. 그러나 줄자 눈금이 2 cm 밀렸거나 농구부원만 골라 재면 몇 명을 재든 평균이 어긋난다. 반복과 큰 표본은 우연은 줄여도 치우침은 줄이지 못한다.
 
+표본이 작으면 관찰한 비율이 우연에 얼마나 흔들리는지를, 아래 영상은 참 비율을 하나 정해 두고 독립 시행의 곱셈으로 셈한다.
+
+```link
+url https://www.youtube.com/watch?v=8idr1WZ1A7Q
+title Binomial distributions | Probabilities of probabilities, part 1
+kind 영상
+who 3Blue1Brown
+min 13
+note 한국어 자막
+why 좋은 평가가 100%(10개), 96%(50개), 93%(200개)인 세 판매자 가운데 누구를 믿을지 묻는다. 참 비율이 95%여도 10개가 모두 좋게 나올 확률은 $0.95^{10}\approx0.60$이라, 10개 모두 좋다는 자료만으로는 참 비율을 좁히기 어렵다.
+```
+
 #### 통상
 
 측정값이 참값 둘레로 벗어날 수 있는 폭이 불확도(uncertainty, [[f-measure|#]]·[[f-ratio|#]] 단원의 '불확실도')다. $n$번 잰 값의 **표본평균**(標本平均, sample mean)도 표본마다 달라지며, 그 퍼짐이 **표준오차**(標準誤差, standard error)이다.
@@ -65,6 +89,17 @@ $$\sigma=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar x)^2}$$
 $$\sigma_{\bar x}=\frac{\sigma}{\sqrt n}$$
 
 고교 '확률과 통계'에서는 표본평균의 표준편차 $\sigma(\bar X)=\sigma/\sqrt n$으로 배우며, 실제로는 $\sigma$ 대신 $s$를 넣는다. 측정을 4배로 늘리면 표준오차는 절반이 된다. 결과를 $\bar x\pm$(폭)으로 쓸 때는 폭이 $s$인지 표준오차인지 밝힌다.
+
+표본이 커질 때 $s$는 거의 그대로이고 표준오차만 $1/\sqrt n$로 주는 것을 시뮬레이션에서 직접 본다.
+
+```link
+url https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_ko.html
+title 플린코 확률
+kind 시뮬레이션
+who PhET
+note 한국어판
+why '실험' 화면에서 공을 계속 떨어뜨리면 공마다 못에서 독립으로 왼쪽·오른쪽이 갈려 막대그래프가 종 모양으로 쌓인다. 공의 수 $N$이 약 100에서 300으로 늘 때 $s$는 약 1.7로 그대로인데 표준오차($s/\sqrt N$, 화면의 s평균)는 약 0.17에서 0.10으로 준다.
+```
 
 #### 엄밀
 

@@ -16,9 +16,32 @@
 
 **겉보기 등급**(겉보기等級, apparent magnitude) $m$은 보이는 밝기의 등급으로, 작을수록 밝고 5등급 차가 밝기 100배(1등급 차 약 2.512배)다. 10 pc에 둔 별의 등급이 **절대 등급**(絕對等級, absolute magnitude) $M$이고, $m-M=5\log d-5$가 **거리 지수**(距離指數, distance modulus)다. 별이 1초에 내는 전체 에너지가 **광도**(光度, luminosity) $L$이다.
 
+연주 시차로 가까운 별까지 재고, 그 거리를 자로 삼아 밝기로 더 먼 별을 재는 과정은 아래 영상의 가운데가 보인다.
+
+```link
+url https://www.youtube.com/watch?v=hFMaT9oRbs4
+title Terence Tao continuing history's cleverest cosmological measurements
+kind 영상
+who 3Blue1Brown
+min 26
+note 영어, 한국어 자막 없음
+why 'Nearby stars'와 'The Milky Way' 두 장(가운데 약 8분)을 보면 된다. 반년 간격으로 지구 궤도의 양 끝에서 잰 방향 차로 길쭉한 삼각형을 그려 가까운 별의 거리를 재고, 밝기가 거리의 제곱에 반비례하는 것으로 그 별들의 참 밝기를 안다. 그 별들을 색과 참 밝기로 찍은 그림(2절의 H-R도)에서 분광형으로 먼 별의 자리를 찾으면 참 밝기를 알고, 겉보기 밝기와 견주어 거리를 잰다. 한 단의 결과가 다음 단의 자가 된다.
+```
+
 별은 흑체에 가까워 [[e-climate|#]]의 흑체·슈테판-볼츠만 법칙·빈의 변위 법칙을 그대로 쓴다. 빛이 가장 센 파장 $\lambda_{\max}=2898\ \mu\mathrm{m\,K}/T$로 표면 온도를 구하고(태양 5800 K는 0.50 μm), 1 m²가 1초에 내는 $\sigma T^4$에 겉넓이 $4\pi R^2$를 곱하면 광도다.
 
 $$L=4\pi R^2\sigma T^4$$
+
+온도에 따라 흑체 복사의 곡선과 색이 어떻게 바뀌는지 직접 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_ko.html
+title 흑체 스펙트럼
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판
+why 오른쪽 온도계를 '전구'에서 '태양'(5800 K), '시리우스 A'로 올리면 곡선의 봉우리가 짧은 파장 쪽으로 옮겨 가며 높아지고, 위의 별 색이 주황빛에서 흰빛, 푸른 기가 도는 흰빛으로 바뀐다. '그래프 값'을 켜면 봉우리의 파장(5800 K에서 0.500 μm)이, '세기'를 켜면 1 m²가 1초에 내는 에너지 $\sigma T^4$(5800 K에서 $6.42\times10^7$ W/m²)가 숫자로 나온다.
+```
 
 #### 엄밀
 

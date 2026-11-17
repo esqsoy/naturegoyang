@@ -1,201 +1,913 @@
 {
- "about": "3Blue1Brown(Grant Sanderson) 영상과 과학고양 단원의 짝. 26.11.16 팀원이 3blue1brown.com sitemap의 lesson 177쪽에서 영상 ID를 모으고 YouTube watch 쪽을 하나씩 열어 제목·길이·한국어 자막(ko 트랙)을 확인했다. 영신 \"시각적 설명이 필요하지 않을까? 3blue1brown의 유튜브를 참조해줘\". 앱은 단원 옆 칸에 링크로 보인다(tools/videos.py가 앱 VIDEOS 줄을 만든다). visual은 영상의 시각화 생각을 우리 말로 적은 것으로, 우리 그림(graph 블록)을 설계할 때 참고한다. 영상 화면을 베끼지 않는다.",
- "principles": [
-  "공식보다 그림이 먼저: 식을 내놓기 전에 무엇이 얼마나 변하나를 도형으로 보인다(x²은 정사각형, 곱은 직사각형, 스칼라곱은 그림자).",
-  "작은 변화 하나를 눈에 보이게: dx를 얇은 띠·작은 삼각형으로 그리고, 줄여 가며 무시해도 되는 부분이 사라지는 것을 보인다.",
-  "손잡이 하나, 결과 하나: 한 그림에서 움직이는 양은 하나로 두고 따라 변하는 것을 같은 화면에서 본다.",
-  "같은 대상을 두 표현으로 나란히: 단위원과 사인 그래프, 화살표와 성분, 넓이와 기울기.",
-  "변환은 격자 전체를 움직여서 보인다.",
-  "색을 뜻에 묶는다: 한 양은 그림·식·글에서 늘 같은 색.",
-  "구체적인 물음에서 출발한다: 숫자를 넣을 수 있는 상황을 먼저 놓고 일반 꼴은 뒤에.",
-  "틀리는 그림도 보인다: 규칙이 깨지는 예, 그럴듯하지만 틀린 그림 증명, 근사가 벌어지는 범위."
- ],
- "units": {
-  "f-algebra": [
-   {"id": "MHXO86wKeDY", "title": "The simpler quadratic formula | Ep. 1 Lockdown live math", "series": "Lockdown math", "minutes": 52, "ko": true, "why": "이차방정식과 근의 공식. 공식을 외우지 않고 다시 세우는 길.", "visual": "두 근을 '가운데 값 ± 떨어진 거리'로 놓고, 합(가운데)과 곱만으로 거리를 구한다. 근이 대칭축 양쪽에 같은 거리로 놓인 그림 하나가 공식을 대신한다."}
+  "about": "3Blue1Brown(Grant Sanderson) 영상과 과학고양 단원의 짝. 26.11.16 팀원이 3blue1brown.com sitemap의 lesson 177쪽에서 영상 ID를 모으고 YouTube watch 쪽을 하나씩 열어 제목·길이·한국어 자막(ko 트랙)을 확인했다. 영신 \"시각적 설명이 필요하지 않을까? 3blue1brown의 유튜브를 참조해줘\". 앱은 단원 옆 칸에 링크로 보인다(tools/videos.py가 앱 VIDEOS 줄을 만든다). visual은 영상의 시각화 생각을 우리 말로 적은 것으로, 우리 그림(graph 블록)을 설계할 때 참고한다. 영상 화면을 베끼지 않는다. 26.11.18(앱 18판): 앱은 이 목록을 읽지 않는다. 영상은 설명의 그 자리에 ```link 블록으로 넣고, 맞지 않는 짝은 \"skip\": \"까닭\"으로 남긴다(tools/videos.py가 맞춰 본다).",
+  "principles": [
+    "공식보다 그림이 먼저: 식을 내놓기 전에 무엇이 얼마나 변하나를 도형으로 보인다(x²은 정사각형, 곱은 직사각형, 스칼라곱은 그림자).",
+    "작은 변화 하나를 눈에 보이게: dx를 얇은 띠·작은 삼각형으로 그리고, 줄여 가며 무시해도 되는 부분이 사라지는 것을 보인다.",
+    "손잡이 하나, 결과 하나: 한 그림에서 움직이는 양은 하나로 두고 따라 변하는 것을 같은 화면에서 본다.",
+    "같은 대상을 두 표현으로 나란히: 단위원과 사인 그래프, 화살표와 성분, 넓이와 기울기.",
+    "변환은 격자 전체를 움직여서 보인다.",
+    "색을 뜻에 묶는다: 한 양은 그림·식·글에서 늘 같은 색.",
+    "구체적인 물음에서 출발한다: 숫자를 넣을 수 있는 상황을 먼저 놓고 일반 꼴은 뒤에.",
+    "틀리는 그림도 보인다: 규칙이 깨지는 예, 그럴듯하지만 틀린 그림 증명, 근사가 벌어지는 범위."
   ],
-  "f-sci": [
-   {"id": "cEvgcoyZvB4", "title": "Logarithm Fundamentals | Ep. 6 Lockdown live math", "series": "Lockdown math", "minutes": 94, "ko": true, "why": "로그 정의·로그 법칙·로그 척도.", "visual": "로그를 '10을 몇 번 곱했나(자릿수 세기)'로 읽고, 곱셈이 덧셈으로 바뀌는 것을 자릿수가 더해지는 것으로 보인다. 로그 눈금에서 같은 간격이 같은 배수다."},
-   {"id": "Kas0tIxDvrg", "title": "Exponential growth and epidemics", "series": "단독", "minutes": 9, "ko": true, "why": "지수함수와 로그 척도로 실제 자료 읽기.", "visual": "지수 증가 자료를 세로 로그 눈금에 그리면 직선이 되고 기울기가 증가율이다. 직선에서 꺾이는 점이 로지스틱으로 넘어가는 신호다."},
-   {"id": "sULa9Lc4pck", "title": "Triangle of Power", "series": "단독", "minutes": 8, "ko": true, "why": "지수·거듭제곱근·로그가 한 관계의 세 얼굴.", "visual": "밑·지수·결과를 삼각형 세 꼭짓점에 놓고 어느 꼭짓점을 비우느냐로 거듭제곱·근·로그를 한 그림에 적는다."}
-  ],
-  "f-trig": [
-   {"id": "yBw67Fb31Cs", "title": "Trigonometry fundamentals | Ep. 2 Lockdown live math", "series": "Lockdown math", "minutes": 73, "ko": true, "why": "단위원으로 삼각함수를 정의하고 그래프·항등식으로 잇는다.", "visual": "단위원 위를 도는 점의 가로·세로 좌표를 그대로 cos·sin 그래프로 펼친다. cos²의 그래프가 두 배 진동수의 cos를 옮긴 꼴임을 그래프 겹치기로 먼저 보인다."}
-  ],
-  "f-vector": [
-   {"id": "fNk_zzaMoSs", "title": "Vectors | Chapter 1, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 10, "ko": true, "why": "벡터를 성분과 단위벡터로 나타내고 합성한다.", "visual": "화살표와 숫자 목록(성분)을 같은 것의 두 표현으로 나란히 놓는다. 덧셈은 꼬리 잇기, 스칼라배는 늘이기·뒤집기."},
-   {"id": "LyGKycYT2v0", "title": "Dot products and duality | Chapter 9, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 14, "ko": true, "why": "스칼라곱으로 각과 정사영을 구한다.", "visual": "한 벡터를 다른 벡터의 직선 위로 떨어뜨린 그림자 길이에 상대 길이를 곱한 것이 스칼라곱이다."}
-  ],
-  "f-proof": [
-   {"id": "VYQVlVoWoPY", "title": "How to lie using visual proofs", "series": "단독", "minutes": 19, "ko": true, "why": "그림만으로는 증명이 아니다. 숨은 가정을 찾아 반증하는 연습.", "visual": "그럴듯한 그림 증명 세 개를 보이고 어디서 틀렸는지 찾게 한다. 극한에서 모양은 가까워져도 길이는 가까워지지 않는 경우."}
-  ],
-  "f-induct": [
-   {"id": "2SUvWfNJSsM", "title": "Binary, Hanoi and Sierpinski, part 1", "series": "단독", "minutes": 14, "ko": true, "why": "n일 때의 풀이가 n-1일 때의 풀이로 되는 재귀 구조(귀납 증명 자체는 다루지 않는다).", "visual": "하노이 탑 풀이를 '작은 탑 옮기기 → 큰 원판 → 작은 탑 다시'로 접고, 이진수 세기의 자리 올림과 같은 리듬임을 보인다."}
-  ],
-  "f-limit": [
-   {"id": "kfF40MiS7zA", "title": "Limits, L'Hôpital's rule, and epsilon delta definitions | Chapter 7, Essence of calculus", "series": "Essence of calculus", "minutes": 18, "ko": true, "why": "극한과 엡실론-델타 정의.", "visual": "입력 쪽 구간을 좁히면 출력 쪽 구간이 한 값 둘레로 같이 좁아지는지를 띠 두 개로 보인다."}
-  ],
-  "f-deriv": [
-   {"id": "9vKqVkMQHKk", "title": "The paradox of the derivative | Chapter 2, Essence of calculus", "series": "Essence of calculus", "minutes": 17, "ko": true, "why": "도함수를 순간 변화율의 극한이자 접선 기울기로.", "visual": "거리-시간 그래프에서 Δs/Δt를 잡고 Δt를 줄여 간다. '순간'의 역설을 '0으로 가는 동안 비가 모이는 값'으로 푼다."},
-   {"id": "S0_qX4VJhMQ", "title": "Derivative formulas through geometry | Chapter 3, Essence of calculus", "series": "Essence of calculus", "minutes": 18, "ko": true, "why": "거듭제곱 법칙과 삼각함수의 도함수.", "visual": "x²을 정사각형, x³을 정육면체로 그리고 변을 dx만큼 키울 때 새로 붙는 얇은 띠의 넓이가 도함수다."},
-   {"id": "WUvTyaaNkzM", "title": "The essence of calculus", "series": "Essence of calculus", "minutes": 17, "ko": true, "why": "도함수가 왜 필요한지 큰 그림.", "visual": "원을 얇은 고리로 잘라 펴서 삼각형 꼴로 쌓는다. 변화율과 누적이 서로 역이다."}
-  ],
-  "f-chain": [
-   {"id": "YG15m2VwSjA", "title": "Visualizing the chain rule and product rule | Chapter 4, Essence of calculus", "series": "Essence of calculus", "minutes": 16, "ko": true, "why": "연쇄 법칙과 곱의 법칙.", "visual": "곱은 직사각형의 두 변이 자랄 때 붙는 두 띠로, 합성은 수직선 세 개에서 작은 밀림이 차례로 전해지며 배율이 곱해지는 것으로 보인다."},
-   {"id": "qb40J4N1fa4", "title": "Implicit differentiation, what's going on here? | Chapter 6, Essence of calculus", "series": "Essence of calculus", "minutes": 16, "ko": true, "why": "음함수 미분과 관련 변화율.", "visual": "곡선 위의 점을 (dx, dy)만큼 옮길 때 식의 값이 변하지 않아야 한다는 조건으로 dy/dx를 읽는다."}
-  ],
-  "f-curve": [
-   {"id": "BLkz5LGWihw", "title": "Higher order derivatives | Chapter 10, Essence of calculus", "series": "Essence of calculus", "minutes": 6, "ko": true, "why": "2계 도함수로 오목·볼록 판정.", "visual": "기울기가 변하는 빠르기를 그래프의 휘는 방향으로 읽는다. '변화의 변화'를 가속도와 잇는다."}
-  ],
-  "f-optim": [
-   {"id": "-RdOwhmqP5s", "title": "Newton's fractal (which Newton knew nothing about)", "series": "단독", "minutes": 26, "ko": true, "why": "뉴턴 방법으로 근을 어림(앞부분).", "visual": "어림값에서 접선을 그어 x축과 만나는 점을 다음 어림값으로 삼는 걸음을 되풀이한다."}
-  ],
-  "f-rate": [
-   {"id": "rfG8ce4nNh0", "title": "Integration and the fundamental theorem of calculus | Chapter 8, Essence of calculus", "series": "Essence of calculus", "minutes": 21, "ko": true, "why": "리만 합의 극한으로 정적분, 기본 정리.", "visual": "속도-시간 그래프 아래를 얇은 직사각형으로 채우고 폭을 줄인다. 오른쪽 끝을 조금 밀 때 넓이가 느는 양이 그 높이다."},
-   {"id": "FnJqaIESC2s", "title": "What does area have to do with slope? | Chapter 9, Essence of calculus", "series": "Essence of calculus", "minutes": 13, "ko": true, "why": "정적분을 누적량·평균값으로.", "visual": "평균 높이 = 넓이 ÷ 폭이 역도함수 그래프 양 끝을 이은 직선의 기울기와 같다."},
-   {"id": "WUvTyaaNkzM", "title": "The essence of calculus", "series": "Essence of calculus", "minutes": 17, "ko": true, "why": "잘게 나눠 더하는 생각과 기본 정리의 큰 그림.", "visual": "원의 넓이를 고리들의 합으로, 다시 그래프 아래 넓이로 바꾼다."}
-  ],
-  "f-count": [
-   {"id": "YtkIWDE36qU", "title": "This pattern breaks, but for a good reason | Moser's circle problem", "series": "단독", "minutes": 16, "ko": true, "why": "조합으로 세기, 파스칼 삼각형. 규칙이 깨지는 예로 증명의 필요.", "visual": "원 위의 점을 모두 이으면 조각 수가 1, 2, 4, 8, 16 다음 31이 된다. 교점 하나가 점 4개 고르기와 짝지어진다."}
-  ],
-  "f-stats": [
-   {"id": "HZGCoVF3YvM", "title": "Bayes theorem, the geometry of changing beliefs", "series": "Probability", "minutes": 15, "ko": true, "why": "조건부 확률과 베이즈 정리.", "visual": "경우 전체를 정사각형으로 그리고 가설로 나눈 뒤 증거에 맞는 부분만 남긴다. 남은 넓이 중 가설 쪽 비가 사후 확률이다."},
-   {"id": "lG4VkPoG3ko", "title": "The medical test paradox, and redesigning Bayes' rule", "series": "Probability", "minutes": 21, "ko": true, "why": "베이즈 정리로 검사 결과 해석.", "visual": "1000명을 점으로 그려 실제 환자와 양성 판정을 센다. 승산으로 적으면 증거가 한 배수를 곱하는 일이 된다."},
-   {"id": "8idr1WZ1A7Q", "title": "Binomial distributions | Probabilities of probabilities, part 1", "series": "Probability", "minutes": 13, "ko": true, "why": "독립 시행의 확률과 표본 크기.", "visual": "참 성공률을 가정할 때마다 관찰 자료가 나올 확률을 막대그래프로 그린다. 성공률 슬라이더로 분포가 옮겨 간다."}
-  ],
-  "f-infer": [
-   {"id": "zeJD6dqJ5lo", "title": "But what is the Central Limit Theorem?", "series": "Probability", "minutes": 31, "ko": true, "why": "표준 오차와 신뢰 구간의 바탕.", "visual": "주사위 합의 분포를 더하는 개수를 늘려 가며 그린다. 평균과 표준편차로 맞추면 같은 종 모양으로 모인다."}
-  ],
-  "f-intapp": [
-   {"id": "GNcFjFmqEc8", "title": "But why is a sphere's surface area four times its shadow?", "series": "단독", "minutes": 16, "ko": true, "why": "회전면의 넓이를 띠로 잘라 더하기.", "visual": "구를 감싼 원기둥으로 작은 조각을 수평으로 밀어 내면 가로는 늘고 세로는 줄어 넓이가 그대로다."}
-  ],
-  "f-space": [
-   {"id": "eu6i7WJeinw", "title": "Cross products | Chapter 10, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 9, "ko": true, "why": "벡터곱과 행렬식, 넓이.", "visual": "두 벡터가 만드는 평행사변형의 넓이가 크기, 오른손 규칙으로 정한 수직 방향이 방향이다."},
-   {"id": "BaM7OCEm3G0", "title": "Cross products in the light of linear transformations | Chapter 11, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 13, "ko": true, "why": "벡터곱을 왜 행렬식 꼴로 계산하는지.", "visual": "셋째 벡터를 변수로 두고 평행육면체 부피를 내놓는 함수를 생각한다. 그 함수와 같은 스칼라곱의 상대가 벡터곱이다."}
-  ],
-  "f-expo": [
-   {"id": "m2MIpDrF7Es", "title": "What's so special about Euler's number e? | Chapter 5, Essence of calculus", "series": "Essence of calculus", "minutes": 14, "ko": true, "why": "e^x와 ln의 미분, dy/dt = ky.", "visual": "2^t의 변화율이 자기 자신에 상수를 곱한 것임을 보이고, 그 상수가 1이 되는 밑을 e로 잡는다."},
-   {"id": "4PDoT7jtxmw", "title": "What makes the natural log \"natural\"? | Ep. 7 Lockdown live math", "series": "Lockdown math", "minutes": 75, "ko": true, "why": "자연로그의 정의와 미분·적분.", "visual": "e^x 그래프를 대각선으로 뒤집어 ln x를 얻고, 기울기가 역수로 바뀌어 1/x가 된다."},
-   {"id": "Kas0tIxDvrg", "title": "Exponential growth and epidemics", "series": "단독", "minutes": 9, "ko": true, "why": "dy/dt = ky가 만드는 지수적 증가와 배가 시간.", "visual": "'늘어나는 양이 지금 양에 비례한다'를 하루 단위 곱셈으로 보이고, 로그 눈금에서 직선으로 확인한다."}
-  ],
-  "f-hyper": [
-   {"id": "kfF40MiS7zA", "title": "Limits, L'Hôpital's rule, and epsilon delta definitions | Chapter 7, Essence of calculus", "series": "Essence of calculus", "minutes": 18, "ko": true, "why": "로피탈 법칙(영상 뒷부분).", "visual": "0/0 꼴이 되는 점 근처를 확대하면 두 그래프가 직선처럼 보이고, 비가 두 기울기의 비가 된다."}
-  ],
-  "f-improp": [
-   {"id": "ZA4JkHKZM50", "title": "Why \"probability of 0\" does not mean \"impossible\" | Probabilities of probabilities, part 2", "series": "Probability", "minutes": 10, "ko": true, "why": "확률 밀도 함수: 확률은 높이가 아니라 넓이.", "visual": "막대를 잘게 쪼개면 높이는 0으로 가지만, 세로축을 '확률 ÷ 폭'으로 바꾸면 매끄러운 곡선으로 모인다."},
-   {"id": "cy8r7WSuT1I", "title": "Why π is in the normal distribution (beyond integral tricks)", "series": "Probability", "minutes": 25, "ko": true, "why": "가우스 적분과 정규 분포.", "visual": "e^(-x²)을 회전 대칭인 종 모양 곡면으로 올리고 부피를 원통 껍질로 구한다."},
-   {"id": "zeJD6dqJ5lo", "title": "But what is the Central Limit Theorem?", "series": "Probability", "minutes": 31, "ko": true, "why": "정규 분포를 평균·표준편차로 읽기.", "visual": "합의 분포를 평균만큼 옮기고 표준편차로 나누면 같은 표준 종 곡선에 겹친다."}
-  ],
-  "f-ode": [
-   {"id": "p_di4Zn4wz4", "title": "Differential equations, a tourist's guide | DE1", "series": "Differential equations", "minutes": 27, "ko": false, "why": "기울기장과 오일러 방법, 평형과 안정성.", "visual": "진자의 상태를 평면의 점으로 놓고 점마다 다음 순간 가는 방향을 화살표로 그린다. 화살표를 작은 걸음으로 따라가는 것이 수치 풀이다."},
-   {"id": "Kas0tIxDvrg", "title": "Exponential growth and epidemics", "series": "단독", "minutes": 9, "ko": true, "why": "로지스틱 성장.", "visual": "증가율에 '남은 여유' 비율을 곱하면 지수 곡선이 S자로 눕는다."}
-  ],
-  "f-conic": [
-   {"id": "pQa_tWZmlGs", "title": "Why slicing a cone gives an ellipse (beautiful proof)", "series": "단독", "minutes": 13, "ko": true, "why": "타원의 두 정의가 같음.", "visual": "원뿔 안에 자르는 평면 위아래로 꼭 끼는 구 두 개를 넣는다. 구가 평면에 닿는 점이 초점이다."},
-   {"id": "xdIjYBtnvZU", "title": "Feynman's Lost Lecture (ft. 3Blue1Brown)", "series": "minutephysics 협업", "minutes": 22, "ko": true, "why": "타원의 초점 성질과 접선.", "visual": "원 안의 치우친 점에서 원둘레의 점들로 선분을 긋고 수직이등분선을 그리면 그 선들이 타원을 감싼다."}
-  ],
-  "f-series": [
-   {"id": "XFDM1ip5HdU", "title": "What does it feel like to invent math?", "series": "단독", "minutes": 15, "ko": true, "why": "부분합과 기하급수, 수렴의 정의.", "visual": "1/2 + 1/4 + 1/8 + …을 수직선에서 남은 거리를 반씩 줄여 가는 걸음으로 그린다."}
-  ],
-  "f-complex": [
-   {"id": "5PcpBw5Hbwo", "title": "Complex number fundamentals | Ep. 3 Lockdown live math", "series": "Lockdown math", "minutes": 82, "ko": true, "why": "복소평면과 극형식 곱셈.", "visual": "i를 곱하는 것을 90도 회전으로, 복소수 곱을 '돌리고 늘이기'로 보인다."},
-   {"id": "ZxYOEwM6Wbk", "title": "What is Euler's formula actually saying? | Ep. 4 Lockdown live math", "series": "Lockdown math", "minutes": 51, "ko": true, "why": "오일러 공식과 극형식.", "visual": "허수를 넣은 급수의 항들을 꺾은선으로 이어 붙이면 단위원 위의 점으로 감겨 들어간다."},
-   {"id": "v0YEaeIClKY", "title": "e^(iπ) in 3.14 minutes, using dynamics | DE5", "series": "Differential equations", "minutes": 4, "ko": true, "why": "오일러 공식의 짧은 직관.", "visual": "속도가 늘 위치에 수직이면 점이 단위원을 일정한 빠르기로 돈다. π초 뒤에는 반 바퀴, 곧 -1이다."}
-  ],
-  "f-taylor": [
-   {"id": "3d6DsjIBzJ4", "title": "Taylor series | Chapter 11, Essence of calculus", "series": "Essence of calculus", "minutes": 22, "ko": true, "why": "테일러·매클로린 급수와 수렴 반지름.", "visual": "한 점에서 함숫값·기울기·휘는 정도를 차례로 맞춘 다항식을 겹쳐 그리면 차수를 올릴수록 더 멀리까지 붙는다."},
-   {"id": "ZxYOEwM6Wbk", "title": "What is Euler's formula actually saying? | Ep. 4 Lockdown live math", "series": "Lockdown math", "minutes": 51, "ko": true, "why": "오일러 등식을 급수로.", "visual": "e^(iθ)의 급수 항을 복소평면에서 벡터로 차례로 더하면 나선으로 한 점에 모인다."}
-  ],
-  "f-odetwo": [
-   {"id": "-j8PzkZ70Lg", "title": "The Physics of Euler's Formula | Laplace Transform Prelude", "series": "Laplace transform", "minutes": 28, "ko": true, "why": "특성 방정식과 감쇠 진동.", "visual": "e^(st)를 넣으면 s에 대한 이차방정식이 되고, 근의 실수부가 줄어드는 빠르기, 허수부가 진동수다."},
-   {"id": "FE-hM1kRK4Y", "title": "Why Laplace transforms are so useful", "series": "Laplace transform", "minutes": 23, "ko": true, "why": "강제 진동과 공명(라플라스 변환 자체는 범위 밖).", "visual": "미는 힘의 진동수를 고유 진동수 쪽으로 옮기면 두 극이 가까워지고 응답 진폭이 커진다."}
-  ],
-  "f-linalg": [
-   {"id": "k7RM-ot2NWY", "title": "Linear combinations, span, and basis vectors | Chapter 2, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 10, "ko": true, "why": "일차 결합, 생성, 기저, 일차 독립.", "visual": "두 벡터에 곱하는 수를 움직여 끝점이 닿는 곳을 전부 칠한다. 한 줄에 있으면 직선만 칠해진다."},
-   {"id": "TgKwz5Ikpc8", "title": "Abstract vector spaces | Chapter 16, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 17, "ko": true, "why": "벡터 공간의 공리.", "visual": "다항식을 계수의 목록으로 적으면 미분이 행렬이 된다."},
-   {"id": "XkY2DOUCWMU", "title": "Matrix multiplication as composition | Chapter 4, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 10, "ko": true, "why": "행렬 곱이 왜 그 꼴인지.", "visual": "변환 두 개를 이어서 할 때 기저 벡터가 어디로 가는지 따라가면 곱의 각 열이 나온다."}
-  ],
-  "f-linmap": [
-   {"id": "kYB8IZa5AuE", "title": "Linear transformations and matrices | Chapter 3, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 11, "ko": false, "why": "선형 사상을 행렬로.", "visual": "격자선이 평행하고 같은 간격으로 남고 원점이 그대로인 움직임이 선형 변환이다. 기저 벡터 둘이 간 곳이 행렬의 열이다."},
-   {"id": "uQhTuRlWMxw", "title": "Inverse matrices, column space and null space | Chapter 7, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 12, "ko": true, "why": "핵과 상, 차원 정리.", "visual": "변환이 공간을 눌러 버리면 되돌릴 수 없다. 닿는 곳 전체가 상, 원점으로 눌리는 벡터 전체가 핵이다."},
-   {"id": "P2LTAUO1TdA", "title": "Change of basis | Chapter 13, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 13, "ko": true, "why": "기저를 바꿀 때 행렬이 바뀌는 법.", "visual": "같은 화살표를 두 격자로 읽는다. 옮기고, 변환하고, 돌아오는 세 걸음이 A⁻¹MA다."}
-  ],
-  "f-inner": [
-   {"id": "Ip3X9LOh2dk", "title": "The determinant | Chapter 6, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 10, "ko": true, "why": "행렬식의 뜻.", "visual": "단위 정사각형이 변환 뒤 차지하는 넓이의 배율이 행렬식이다. 뒤집히면 음수, 눌리면 0."},
-   {"id": "LyGKycYT2v0", "title": "Dot products and duality | Chapter 9, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 14, "ko": true, "why": "스칼라곱과 직교, 정사영.", "visual": "스칼라곱을 한 직선 위로의 정사영으로 읽는다. 수직이면 그림자가 0이다."},
-   {"id": "jBsC34PxzoM", "title": "Cramer's rule, explained geometrically | Chapter 12, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 12, "ko": true, "why": "크라메르 공식.", "visual": "좌표를 기저 벡터와 만드는 평행사변형의 넓이로 적으면 좌표가 두 행렬식의 비로 나온다."}
-  ],
-  "f-eigen": [
-   {"id": "PFDu9oVAE-g", "title": "Eigenvectors and eigenvalues | Chapter 14, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 17, "ko": true, "why": "고윳값·고유벡터와 대각화.", "visual": "변환을 걸 때 제 직선을 벗어나지 않고 늘거나 줄기만 하는 벡터를 찾는다. 그 벡터들을 기저로 잡으면 행렬이 대각이 된다."},
-   {"id": "e50Bj7jn9IQ", "title": "A quick trick for computing eigenvalues | Chapter 15, Essence of linear algebra", "series": "Essence of linear algebra", "minutes": 13, "ko": true, "why": "2×2 행렬의 고윳값을 빨리.", "visual": "두 고윳값의 평균은 대각합의 반, 곱은 행렬식이다. 평균을 가운데 두고 양쪽으로 같은 거리의 두 점을 찾는다."}
-  ],
-  "f-partial": [
-   {"id": "IHZwWFHWa-w", "title": "Gradient descent, how neural networks learn | Deep Learning Chapter 2", "series": "Neural networks", "minutes": 21, "ko": true, "why": "기울기 벡터가 가장 가파른 방향(신경망 부분은 범위 밖).", "visual": "두 변수 함수의 곡면에 공을 놓고 내리막 방향으로 한 걸음씩 굴린다."},
-   {"id": "ly4S0oi3Yz8", "title": "But what is a partial differential equation? | DE2", "series": "Differential equations", "minutes": 18, "ko": true, "why": "편도함수의 뜻.", "visual": "막대의 온도를 위치와 시간의 곡면으로 그리고 한 방향으로만 썬 단면의 기울기를 편도함수로 읽는다."}
-  ],
-  "f-multint": [
-   {"id": "cy8r7WSuT1I", "title": "Why π is in the normal distribution (beyond integral tricks)", "series": "Probability", "minutes": 25, "ko": true, "why": "극좌표 이중 적분의 대표 예.", "visual": "종 모양 곡면 아래 부피를 얇은 원통 껍질로 썬다. 껍질 둘레 2πr에서 π가 나온다."}
-  ],
-  "f-vcalc": [
-   {"id": "rB83DpBJQsE", "title": "Divergence and curl: The language of Maxwell's equations, fluid flow, and more", "series": "단독", "minutes": 16, "ko": true, "why": "발산·회전의 뜻.", "visual": "벡터장을 유체의 흐름으로 보고, 솟거나 빨려 드는 정도가 발산, 작은 바람개비가 도는 정도가 회전이다."}
-  ],
-  "f-fourier": [
-   {"id": "r6sGWTCMz2k", "title": "But what is a Fourier series? From heat flow to drawing with circles | DE4", "series": "Differential equations", "minutes": 25, "ko": true, "why": "주기 함수의 푸리에 급수.", "visual": "서로 다른 정수 빠르기로 도는 화살표들을 이으면 끝점이 닫힌 그림을 그린다. 계단 함수도 사인파를 더해 다가간다."},
-   {"id": "ToIXSwZ1pJU", "title": "Solving the heat equation | DE3", "series": "Differential equations", "minutes": 14, "ko": true, "why": "변수 분리로 편미분방정식 풀기.", "visual": "사인 모양 온도 분포는 모양을 지킨 채 낮아지고 진동수가 높을수록 빨리 사라진다."},
-   {"id": "spUNpyF58BY", "title": "But what is the Fourier Transform? A visual introduction.", "series": "단독", "minutes": 20, "ko": true, "why": "신호를 진동수 성분으로 나누기.", "visual": "신호 그래프를 원 둘레에 감고 감는 빠르기를 바꾼다. 빠르기가 신호의 진동수와 맞으면 무게중심이 튄다."}
-  ],
-  "p-momentum": [
-   {"id": "6dTyOl1fmDo", "title": "Why colliding blocks compute pi", "series": "단독", "minutes": 26, "ko": false, "why": "탄성 충돌에서 운동량·운동 에너지 보존.", "visual": "속도를 √질량으로 맞춘 평면에서 에너지 보존은 원, 운동량 보존은 직선이다. 충돌 한 번이 원 위의 한 걸음이다."},
-   {"id": "HEfHFsfGXjs", "title": "The most unexpected answer to a counting puzzle", "series": "단독", "minutes": 5, "ko": true, "why": "위 영상의 문제 제시.", "visual": "질량비가 100배씩 커지는 두 블록과 벽의 충돌 횟수를 센다."}
-  ],
-  "p-gravity": [
-   {"id": "xdIjYBtnvZU", "title": "Feynman's Lost Lecture (ft. 3Blue1Brown)", "series": "minutephysics 협업", "minutes": 22, "ko": true, "why": "케플러 법칙을 역제곱 중력과 각운동량 보존으로.", "visual": "궤도를 같은 각으로 썰면 속도 벡터의 끝점이 원을 그리고, 그 원에서 궤도가 타원임이 나온다."}
-  ],
-  "p-osc": [
-   {"id": "-j8PzkZ70Lg", "title": "The Physics of Euler's Formula | Laplace Transform Prelude", "series": "Laplace transform", "minutes": 28, "ko": true, "why": "단진동과 감쇠 진동.", "visual": "용수철 운동을 복소평면에서 도는 벡터의 그림자로 본다. 감쇠가 있으면 나선으로 감긴다."},
-   {"id": "p_di4Zn4wz4", "title": "Differential equations, a tourist's guide | DE1", "series": "Differential equations", "minutes": 27, "ko": false, "why": "진자의 운동과 에너지 전환, 감쇠.", "visual": "진자의 (각, 각속도) 평면에서 마찰이 없으면 닫힌 고리, 있으면 안쪽으로 감기는 나선이다."},
-   {"id": "FE-hM1kRK4Y", "title": "Why Laplace transforms are so useful", "series": "Laplace transform", "minutes": 23, "ko": true, "why": "강제 진동과 공명.", "visual": "미는 진동수가 고유 진동수에 가까워지면 진폭이 부풀다 줄고, 같아지면 계속 자란다."}
-  ],
-  "p-wave": [
-   {"id": "spUNpyF58BY", "title": "But what is the Fourier Transform? A visual introduction.", "series": "단독", "minutes": 20, "ko": true, "why": "중첩 원리, 소리의 높낮이와 진동수.", "visual": "순음 두 개를 더한 그래프에서 감기 그림으로 원래 진동수 둘을 도로 찾는다."}
-  ],
-  "p-electric": [
-   {"id": "rB83DpBJQsE", "title": "Divergence and curl: The language of Maxwell's equations, fluid flow, and more", "series": "단독", "minutes": 16, "ko": true, "why": "전기장을 벡터장으로, 가우스 법칙의 그림.", "visual": "양전하는 화살표가 솟아나는 샘, 음전하는 빨려 드는 구멍. 자기장에는 샘이 없고 고리만 있다."}
-  ],
-  "p-heat": [
-   {"id": "ly4S0oi3Yz8", "title": "But what is a partial differential equation? | DE2", "series": "Differential equations", "minutes": 18, "ko": true, "why": "열전도.", "visual": "막대의 각 점이 양옆 이웃의 평균 쪽으로 끌려간다. 뾰족한 곳이 먼저 무뎌진다."}
-  ],
-  "p-light": [
-   {"id": "aXRTczANuIs", "title": "How wiggling charges give rise to light", "series": "Optics", "minutes": 22, "ko": false, "why": "전자기파, 편광·산란.", "visual": "흔들리는 전하가 주변 전하에 늦게 닿는 힘을 준다. 전하들을 줄지어 세우면 힘이 한 방향으로 모여 빛줄기가 된다."},
-   {"id": "KTzGBJPuJwM", "title": "But why would light \"slow down\"? | Visualizing Feynman's lecture on the refractive index", "series": "Optics", "minutes": 29, "ko": true, "why": "굴절과 분산.", "visual": "물질을 얇은 층으로 보고 층마다 위상을 조금씩 뒤로 민다. 층이 촘촘해지면 파장이 짧아진 것처럼 보인다."},
-   {"id": "EmKQsSDlaa4", "title": "How are holograms possible?", "series": "Optics", "minutes": 46, "ko": true, "why": "간섭·회절.", "visual": "물체에서 온 파와 기준 파가 만드는 줄무늬에 기준 파를 다시 비추면 원래 파면이 되살아난다."}
-  ],
-  "p-quantum": [
-   {"id": "MzRCDLre1b4", "title": "Some light quantum mechanics (with minutephysics)", "series": "단독", "minutes": 22, "ko": true, "why": "광자와 E=hf, 파동과 입자.", "visual": "에너지가 hf의 정수 배로만 온다는 조건을 넣으면 편광 필터를 지날 '에너지 비율'이 광자 하나에서는 '지날 확률'이 된다."},
-   {"id": "MBnnXbOM5S4", "title": "The more general uncertainty principle, regarding Fourier transforms", "series": "단독", "minutes": 18, "ko": true, "why": "불확정성 원리와 물질파.", "visual": "짧게 끊긴 파동은 진동수 봉우리가 넓고, 오래 이어진 파동은 좁다."}
-  ],
-  "p-qm": [
-   {"id": "RQWpF2Gb-gU", "title": "But what is quantum computing? (Grover's Algorithm)", "series": "단독", "minutes": 37, "ko": true, "why": "중첩·측정·보른 규칙(상태 벡터로).", "visual": "상태를 길이 1인 벡터로 놓고 성분의 제곱이 측정 확률이다. 연산은 벡터를 돌리거나 뒤집는 일이다."},
-   {"id": "MBnnXbOM5S4", "title": "The more general uncertainty principle, regarding Fourier transforms", "series": "단독", "minutes": 18, "ko": true, "why": "파동함수와 위치-운동량 불확정성.", "visual": "파동 묶음을 좁히면 그 푸리에 변환이 넓어진다."},
-   {"id": "MzRCDLre1b4", "title": "Some light quantum mechanics (with minutephysics)", "series": "단독", "minutes": 22, "ko": true, "why": "중첩과 측정의 가장 쉬운 예(편광).", "visual": "비스듬한 편광을 두 기저 상태의 합으로 적고, 기저를 돌려 잡으면 같은 상태가 다른 합으로 적힌다."}
-  ],
-  "p-statmech": [
-   {"id": "itRV2jEtV8Q", "title": "Simulating and understanding phase change | Guest video by Vilas Winstein", "series": "객원", "minutes": 41, "ko": false, "why": "미시 상태와 볼츠만 분포, 온도.", "visual": "격자 칸에 분자를 놓고 상태 확률이 e^(-E/kT)에 비례한다는 규칙 하나로 온도를 올리면 뭉친 덩어리가 흩어진다."}
-  ],
-  "b-ecology": [
-   {"id": "Kas0tIxDvrg", "title": "Exponential growth and epidemics", "series": "단독", "minutes": 9, "ko": true, "why": "개체군의 지수 성장과 로지스틱 성장.", "visual": "지수 곡선과 S자 곡선을 겹쳐 그린다. 초반에는 둘을 가를 수 없다."}
-  ],
-  "e-sky": [
-   {"id": "YdOXS_9_P4U", "title": "Terence Tao on the cosmic distance ladder", "series": "Cosmic distance ladder", "minutes": 29, "ko": false, "why": "달의 위상·월식·일식을 기하로 읽어 크기와 거리를 잰다.", "visual": "월식 때 지구 그림자의 둥근 가장자리로 크기 비를, 반달일 때 직각삼각형으로 해까지 거리를 잰다."}
-  ],
-  "e-solar": [
-   {"id": "YdOXS_9_P4U", "title": "Terence Tao on the cosmic distance ladder", "series": "Cosmic distance ladder", "minutes": 29, "ko": false, "why": "케플러가 궤도를 알아낸 방법.", "visual": "화성이 제자리로 돌아오는 주기마다 방향을 기록해 움직이는 지구에서 삼각 측량한다."}
-  ],
-  "e-star": [
-   {"id": "hFMaT9oRbs4", "title": "Terence Tao continuing history's cleverest cosmological measurements", "series": "Cosmic distance ladder", "minutes": 26, "ko": false, "why": "연주 시차와 겉보기 밝기로 별의 거리.", "visual": "지구 궤도 양 끝에서 본 방향 차이로 길쭉한 삼각형을 그린다. 한 단의 결과가 다음 단의 자가 된다."}
-  ],
-  "e-galaxy": [
-   {"id": "hFMaT9oRbs4", "title": "Terence Tao continuing history's cleverest cosmological measurements", "series": "Cosmic distance ladder", "minutes": 26, "ko": false, "why": "표준 촛불과 허블-르메트르 법칙.", "visual": "주기가 참 밝기를 알려 주는 별로 거리를 구하고, 거리와 적색 편이를 한 그래프에 찍으면 직선이다."}
-  ]
- }
+  "units": {
+    "f-algebra": [
+      {
+        "id": "MHXO86wKeDY",
+        "title": "The simpler quadratic formula | Ep. 1 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 52,
+        "ko": true,
+        "why": "이차방정식과 근의 공식. 공식을 외우지 않고 다시 세우는 길.",
+        "visual": "두 근을 '가운데 값 ± 떨어진 거리'로 놓고, 합(가운데)과 곱만으로 거리를 구한다. 근이 대칭축 양쪽에 같은 거리로 놓인 그림 하나가 공식을 대신한다."
+      }
+    ],
+    "f-sci": [
+      {
+        "id": "cEvgcoyZvB4",
+        "title": "Logarithm Fundamentals | Ep. 6 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 94,
+        "ko": true,
+        "why": "로그 정의·로그 법칙·로그 척도.",
+        "visual": "로그를 '10을 몇 번 곱했나(자릿수 세기)'로 읽고, 곱셈이 덧셈으로 바뀌는 것을 자릿수가 더해지는 것으로 보인다. 로그 눈금에서 같은 간격이 같은 배수다."
+      },
+      {
+        "id": "Kas0tIxDvrg",
+        "title": "Exponential growth and epidemics",
+        "series": "단독",
+        "minutes": 9,
+        "ko": true,
+        "why": "지수함수와 로그 척도로 실제 자료 읽기.",
+        "visual": "지수 증가 자료를 세로 로그 눈금에 그리면 직선이 되고 기울기가 증가율이다. 직선에서 꺾이는 점이 로지스틱으로 넘어가는 신호다."
+      },
+      {
+        "id": "sULa9Lc4pck",
+        "title": "Triangle of Power",
+        "series": "단독",
+        "minutes": 8,
+        "ko": true,
+        "why": "지수·거듭제곱근·로그가 한 관계의 세 얼굴.",
+        "visual": "밑·지수·결과를 삼각형 세 꼭짓점에 놓고 어느 꼭짓점을 비우느냐로 거듭제곱·근·로그를 한 그림에 적는다."
+      }
+    ],
+    "f-trig": [
+      {
+        "id": "yBw67Fb31Cs",
+        "title": "Trigonometry fundamentals | Ep. 2 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 73,
+        "ko": true,
+        "why": "단위원으로 삼각함수를 정의하고 그래프·항등식으로 잇는다.",
+        "visual": "단위원 위를 도는 점의 가로·세로 좌표를 그대로 cos·sin 그래프로 펼친다. cos²의 그래프가 두 배 진동수의 cos를 옮긴 꼴임을 그래프 겹치기로 먼저 보인다."
+      }
+    ],
+    "f-vector": [
+      {
+        "id": "fNk_zzaMoSs",
+        "title": "Vectors | Chapter 1, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 10,
+        "ko": true,
+        "why": "벡터를 성분과 단위벡터로 나타내고 합성한다.",
+        "visual": "화살표와 숫자 목록(성분)을 같은 것의 두 표현으로 나란히 놓는다. 덧셈은 꼬리 잇기, 스칼라배는 늘이기·뒤집기."
+      },
+      {
+        "id": "LyGKycYT2v0",
+        "title": "Dot products and duality | Chapter 9, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 14,
+        "ko": true,
+        "why": "스칼라곱으로 각과 정사영을 구한다.",
+        "visual": "한 벡터를 다른 벡터의 직선 위로 떨어뜨린 그림자 길이에 상대 길이를 곱한 것이 스칼라곱이다."
+      }
+    ],
+    "f-proof": [
+      {
+        "id": "VYQVlVoWoPY",
+        "title": "How to lie using visual proofs",
+        "series": "단독",
+        "minutes": 19,
+        "ko": true,
+        "why": "그림만으로는 증명이 아니다. 숨은 가정을 찾아 반증하는 연습.",
+        "visual": "그럴듯한 그림 증명 세 개를 보이고 어디서 틀렸는지 찾게 한다. 극한에서 모양은 가까워져도 길이는 가까워지지 않는 경우."
+      }
+    ],
+    "f-induct": [
+      {
+        "id": "2SUvWfNJSsM",
+        "title": "Binary, Hanoi and Sierpinski, part 1",
+        "series": "단독",
+        "minutes": 14,
+        "ko": true,
+        "why": "n일 때의 풀이가 n-1일 때의 풀이로 되는 재귀 구조(귀납 증명 자체는 다루지 않는다).",
+        "visual": "하노이 탑 풀이를 '작은 탑 옮기기 → 큰 원판 → 작은 탑 다시'로 접고, 이진수 세기의 자리 올림과 같은 리듬임을 보인다."
+      }
+    ],
+    "f-limit": [
+      {
+        "id": "kfF40MiS7zA",
+        "title": "Limits, L'Hôpital's rule, and epsilon delta definitions | Chapter 7, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 18,
+        "ko": true,
+        "why": "극한과 엡실론-델타 정의.",
+        "visual": "입력 쪽 구간을 좁히면 출력 쪽 구간이 한 값 둘레로 같이 좁아지는지를 띠 두 개로 보인다."
+      }
+    ],
+    "f-deriv": [
+      {
+        "id": "9vKqVkMQHKk",
+        "title": "The paradox of the derivative | Chapter 2, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 17,
+        "ko": true,
+        "why": "도함수를 순간 변화율의 극한이자 접선 기울기로.",
+        "visual": "거리-시간 그래프에서 Δs/Δt를 잡고 Δt를 줄여 간다. '순간'의 역설을 '0으로 가는 동안 비가 모이는 값'으로 푼다."
+      },
+      {
+        "id": "S0_qX4VJhMQ",
+        "title": "Derivative formulas through geometry | Chapter 3, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 18,
+        "ko": true,
+        "why": "거듭제곱 법칙과 삼각함수의 도함수.",
+        "visual": "x²을 정사각형, x³을 정육면체로 그리고 변을 dx만큼 키울 때 새로 붙는 얇은 띠의 넓이가 도함수다."
+      },
+      {
+        "id": "WUvTyaaNkzM",
+        "title": "The essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 17,
+        "ko": true,
+        "why": "도함수가 왜 필요한지 큰 그림.",
+        "visual": "원을 얇은 고리로 잘라 펴서 삼각형 꼴로 쌓는다. 변화율과 누적이 서로 역이다.",
+        "skip": "몸통이 적분(고리 넓이, 넓이 함수)이라 f-rate 2절 직관에만 넣음(26.11.18)"
+      }
+    ],
+    "f-chain": [
+      {
+        "id": "YG15m2VwSjA",
+        "title": "Visualizing the chain rule and product rule | Chapter 4, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 16,
+        "ko": true,
+        "why": "연쇄 법칙과 곱의 법칙.",
+        "visual": "곱은 직사각형의 두 변이 자랄 때 붙는 두 띠로, 합성은 수직선 세 개에서 작은 밀림이 차례로 전해지며 배율이 곱해지는 것으로 보인다."
+      },
+      {
+        "id": "qb40J4N1fa4",
+        "title": "Implicit differentiation, what's going on here? | Chapter 6, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 16,
+        "ko": true,
+        "why": "음함수 미분과 관련 변화율.",
+        "visual": "곡선 위의 점을 (dx, dy)만큼 옮길 때 식의 값이 변하지 않아야 한다는 조건으로 dy/dx를 읽는다."
+      }
+    ],
+    "f-curve": [
+      {
+        "id": "BLkz5LGWihw",
+        "title": "Higher order derivatives | Chapter 10, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 6,
+        "ko": true,
+        "why": "2계 도함수로 오목·볼록 판정.",
+        "visual": "기울기가 변하는 빠르기를 그래프의 휘는 방향으로 읽는다. '변화의 변화'를 가속도와 잇는다."
+      }
+    ],
+    "f-optim": [
+      {
+        "id": "-RdOwhmqP5s",
+        "title": "Newton's fractal (which Newton knew nothing about)",
+        "series": "단독",
+        "minutes": 26,
+        "ko": true,
+        "why": "뉴턴 방법으로 근을 어림(앞부분).",
+        "visual": "어림값에서 접선을 그어 x축과 만나는 점을 다음 어림값으로 삼는 걸음을 되풀이한다."
+      }
+    ],
+    "f-rate": [
+      {
+        "id": "rfG8ce4nNh0",
+        "title": "Integration and the fundamental theorem of calculus | Chapter 8, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 21,
+        "ko": true,
+        "why": "리만 합의 극한으로 정적분, 기본 정리.",
+        "visual": "속도-시간 그래프 아래를 얇은 직사각형으로 채우고 폭을 줄인다. 오른쪽 끝을 조금 밀 때 넓이가 느는 양이 그 높이다."
+      },
+      {
+        "id": "FnJqaIESC2s",
+        "title": "What does area have to do with slope? | Chapter 9, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 13,
+        "ko": true,
+        "why": "정적분을 누적량·평균값으로.",
+        "visual": "평균 높이 = 넓이 ÷ 폭이 역도함수 그래프 양 끝을 이은 직선의 기울기와 같다.",
+        "skip": "함수의 평균값을 지금 글이 다루지 않음. 새 지도로 다시 쓸 때 기본 정리 절에(26.11.18)"
+      },
+      {
+        "id": "WUvTyaaNkzM",
+        "title": "The essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 17,
+        "ko": true,
+        "why": "잘게 나눠 더하는 생각과 기본 정리의 큰 그림.",
+        "visual": "원의 넓이를 고리들의 합으로, 다시 그래프 아래 넓이로 바꾼다."
+      }
+    ],
+    "f-count": [
+      {
+        "id": "YtkIWDE36qU",
+        "title": "This pattern breaks, but for a good reason | Moser's circle problem",
+        "series": "단독",
+        "minutes": 16,
+        "ko": true,
+        "why": "조합으로 세기, 파스칼 삼각형. 규칙이 깨지는 예로 증명의 필요.",
+        "visual": "원 위의 점을 모두 이으면 조각 수가 1, 2, 4, 8, 16 다음 31이 된다. 교점 하나가 점 4개 고르기와 짝지어진다."
+      }
+    ],
+    "f-stats": [
+      {
+        "id": "HZGCoVF3YvM",
+        "title": "Bayes theorem, the geometry of changing beliefs",
+        "series": "Probability",
+        "minutes": 15,
+        "ko": true,
+        "why": "조건부 확률과 베이즈 정리.",
+        "visual": "경우 전체를 정사각형으로 그리고 가설로 나눈 뒤 증거에 맞는 부분만 남긴다. 남은 넓이 중 가설 쪽 비가 사후 확률이다."
+      },
+      {
+        "id": "lG4VkPoG3ko",
+        "title": "The medical test paradox, and redesigning Bayes' rule",
+        "series": "Probability",
+        "minutes": 21,
+        "ko": true,
+        "why": "베이즈 정리로 검사 결과 해석.",
+        "visual": "1000명을 점으로 그려 실제 환자와 양성 판정을 센다. 승산으로 적으면 증거가 한 배수를 곱하는 일이 된다.",
+        "skip": "베이즈 정리·승산이 지금 글에 없음. 목표 2(조건부 확률·베이즈 정리)를 쓰면 그 예 뒤에(26.11.18)"
+      },
+      {
+        "id": "8idr1WZ1A7Q",
+        "title": "Binomial distributions | Probabilities of probabilities, part 1",
+        "series": "Probability",
+        "minutes": 13,
+        "ko": true,
+        "why": "독립 시행의 확률과 표본 크기.",
+        "visual": "참 성공률을 가정할 때마다 관찰 자료가 나올 확률을 막대그래프로 그린다. 성공률 슬라이더로 분포가 옮겨 간다."
+      }
+    ],
+    "f-infer": [
+      {
+        "id": "zeJD6dqJ5lo",
+        "title": "But what is the Central Limit Theorem?",
+        "series": "Probability",
+        "minutes": 31,
+        "ko": true,
+        "why": "표준 오차와 신뢰 구간의 바탕.",
+        "visual": "주사위 합의 분포를 더하는 개수를 늘려 가며 그린다. 평균과 표준편차로 맞추면 같은 종 모양으로 모인다."
+      }
+    ],
+    "f-intapp": [
+      {
+        "id": "GNcFjFmqEc8",
+        "title": "But why is a sphere's surface area four times its shadow?",
+        "series": "단독",
+        "minutes": 16,
+        "ko": true,
+        "why": "회전면의 넓이를 띠로 잘라 더하기.",
+        "visual": "구를 감싼 원기둥으로 작은 조각을 수평으로 밀어 내면 가로는 늘고 세로는 줄어 넓이가 그대로다."
+      }
+    ],
+    "f-space": [
+      {
+        "id": "eu6i7WJeinw",
+        "title": "Cross products | Chapter 10, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 9,
+        "ko": true,
+        "why": "벡터곱과 행렬식, 넓이.",
+        "visual": "두 벡터가 만드는 평행사변형의 넓이가 크기, 오른손 규칙으로 정한 수직 방향이 방향이다."
+      },
+      {
+        "id": "BaM7OCEm3G0",
+        "title": "Cross products in the light of linear transformations | Chapter 11, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 13,
+        "ko": true,
+        "why": "벡터곱을 왜 행렬식 꼴로 계산하는지.",
+        "visual": "셋째 벡터를 변수로 두고 평행육면체 부피를 내놓는 함수를 생각한다. 그 함수와 같은 스칼라곱의 상대가 벡터곱이다."
+      }
+    ],
+    "f-expo": [
+      {
+        "id": "m2MIpDrF7Es",
+        "title": "What's so special about Euler's number e? | Chapter 5, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 14,
+        "ko": true,
+        "why": "e^x와 ln의 미분, dy/dt = ky.",
+        "visual": "2^t의 변화율이 자기 자신에 상수를 곱한 것임을 보이고, 그 상수가 1이 되는 밑을 e로 잡는다."
+      },
+      {
+        "id": "4PDoT7jtxmw",
+        "title": "What makes the natural log \"natural\"? | Ep. 7 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 75,
+        "ko": true,
+        "why": "자연로그의 정의와 미분·적분.",
+        "visual": "e^x 그래프를 대각선으로 뒤집어 ln x를 얻고, 기울기가 역수로 바뀌어 1/x가 된다."
+      },
+      {
+        "id": "Kas0tIxDvrg",
+        "title": "Exponential growth and epidemics",
+        "series": "단독",
+        "minutes": 9,
+        "ko": true,
+        "why": "dy/dt = ky가 만드는 지수적 증가와 배가 시간.",
+        "visual": "'늘어나는 양이 지금 양에 비례한다'를 하루 단위 곱셈으로 보이고, 로그 눈금에서 직선으로 확인한다."
+      }
+    ],
+    "f-hyper": [
+      {
+        "id": "kfF40MiS7zA",
+        "title": "Limits, L'Hôpital's rule, and epsilon delta definitions | Chapter 7, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 18,
+        "ko": true,
+        "why": "로피탈 법칙(영상 뒷부분).",
+        "visual": "0/0 꼴이 되는 점 근처를 확대하면 두 그래프가 직선처럼 보이고, 비가 두 기울기의 비가 된다."
+      }
+    ],
+    "f-improp": [
+      {
+        "id": "ZA4JkHKZM50",
+        "title": "Why \"probability of 0\" does not mean \"impossible\" | Probabilities of probabilities, part 2",
+        "series": "Probability",
+        "minutes": 10,
+        "ko": true,
+        "why": "확률 밀도 함수: 확률은 높이가 아니라 넓이.",
+        "visual": "막대를 잘게 쪼개면 높이는 0으로 가지만, 세로축을 '확률 ÷ 폭'으로 바꾸면 매끄러운 곡선으로 모인다."
+      },
+      {
+        "id": "cy8r7WSuT1I",
+        "title": "Why π is in the normal distribution (beyond integral tricks)",
+        "series": "Probability",
+        "minutes": 25,
+        "ko": true,
+        "why": "가우스 적분과 정규 분포.",
+        "visual": "e^(-x²)을 회전 대칭인 종 모양 곡면으로 올리고 부피를 원통 껍질로 구한다."
+      },
+      {
+        "id": "zeJD6dqJ5lo",
+        "title": "But what is the Central Limit Theorem?",
+        "series": "Probability",
+        "minutes": 31,
+        "ko": true,
+        "why": "정규 분포를 평균·표준편차로 읽기.",
+        "visual": "합의 분포를 평균만큼 옮기고 표준편차로 나누면 같은 표준 종 곡선에 겹친다."
+      }
+    ],
+    "f-ode": [
+      {
+        "id": "p_di4Zn4wz4",
+        "title": "Differential equations, a tourist's guide | DE1",
+        "series": "Differential equations",
+        "minutes": 27,
+        "ko": false,
+        "why": "기울기장과 오일러 방법, 평형과 안정성.",
+        "visual": "진자의 상태를 평면의 점으로 놓고 점마다 다음 순간 가는 방향을 화살표로 그린다. 화살표를 작은 걸음으로 따라가는 것이 수치 풀이다."
+      },
+      {
+        "id": "Kas0tIxDvrg",
+        "title": "Exponential growth and epidemics",
+        "series": "단독",
+        "minutes": 9,
+        "ko": true,
+        "why": "로지스틱 성장.",
+        "visual": "증가율에 '남은 여유' 비율을 곱하면 지수 곡선이 S자로 눕는다."
+      }
+    ],
+    "f-conic": [
+      {
+        "id": "pQa_tWZmlGs",
+        "title": "Why slicing a cone gives an ellipse (beautiful proof)",
+        "series": "단독",
+        "minutes": 13,
+        "ko": true,
+        "why": "타원의 두 정의가 같음.",
+        "visual": "원뿔 안에 자르는 평면 위아래로 꼭 끼는 구 두 개를 넣는다. 구가 평면에 닿는 점이 초점이다."
+      },
+      {
+        "id": "xdIjYBtnvZU",
+        "title": "Feynman's Lost Lecture (ft. 3Blue1Brown)",
+        "series": "minutephysics 협업",
+        "minutes": 22,
+        "ko": true,
+        "why": "타원의 초점 성질과 접선.",
+        "visual": "원 안의 치우친 점에서 원둘레의 점들로 선분을 긋고 수직이등분선을 그리면 그 선들이 타원을 감싼다."
+      }
+    ],
+    "f-series": [
+      {
+        "id": "XFDM1ip5HdU",
+        "title": "What does it feel like to invent math?",
+        "series": "단독",
+        "minutes": 15,
+        "ko": true,
+        "why": "부분합과 기하급수, 수렴의 정의.",
+        "visual": "1/2 + 1/4 + 1/8 + …을 수직선에서 남은 거리를 반씩 줄여 가는 걸음으로 그린다."
+      }
+    ],
+    "f-complex": [
+      {
+        "id": "5PcpBw5Hbwo",
+        "title": "Complex number fundamentals | Ep. 3 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 82,
+        "ko": true,
+        "why": "복소평면과 극형식 곱셈.",
+        "visual": "i를 곱하는 것을 90도 회전으로, 복소수 곱을 '돌리고 늘이기'로 보인다."
+      },
+      {
+        "id": "ZxYOEwM6Wbk",
+        "title": "What is Euler's formula actually saying? | Ep. 4 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 51,
+        "ko": true,
+        "why": "오일러 공식과 극형식.",
+        "visual": "허수를 넣은 급수의 항들을 꺾은선으로 이어 붙이면 단위원 위의 점으로 감겨 들어간다."
+      },
+      {
+        "id": "v0YEaeIClKY",
+        "title": "e^(iπ) in 3.14 minutes, using dynamics | DE5",
+        "series": "Differential equations",
+        "minutes": 4,
+        "ko": true,
+        "why": "오일러 공식의 짧은 직관.",
+        "visual": "속도가 늘 위치에 수직이면 점이 단위원을 일정한 빠르기로 돈다. π초 뒤에는 반 바퀴, 곧 -1이다."
+      }
+    ],
+    "f-taylor": [
+      {
+        "id": "3d6DsjIBzJ4",
+        "title": "Taylor series | Chapter 11, Essence of calculus",
+        "series": "Essence of calculus",
+        "minutes": 22,
+        "ko": true,
+        "why": "테일러·매클로린 급수와 수렴 반지름.",
+        "visual": "한 점에서 함숫값·기울기·휘는 정도를 차례로 맞춘 다항식을 겹쳐 그리면 차수를 올릴수록 더 멀리까지 붙는다."
+      },
+      {
+        "id": "ZxYOEwM6Wbk",
+        "title": "What is Euler's formula actually saying? | Ep. 4 Lockdown live math",
+        "series": "Lockdown math",
+        "minutes": 51,
+        "ko": true,
+        "why": "오일러 등식을 급수로.",
+        "visual": "e^(iθ)의 급수 항을 복소평면에서 벡터로 차례로 더하면 나선으로 한 점에 모인다."
+      }
+    ],
+    "f-odetwo": [
+      {
+        "id": "-j8PzkZ70Lg",
+        "title": "The Physics of Euler's Formula | Laplace Transform Prelude",
+        "series": "Laplace transform",
+        "minutes": 28,
+        "ko": true,
+        "why": "특성 방정식과 감쇠 진동.",
+        "visual": "e^(st)를 넣으면 s에 대한 이차방정식이 되고, 근의 실수부가 줄어드는 빠르기, 허수부가 진동수다."
+      },
+      {
+        "id": "FE-hM1kRK4Y",
+        "title": "Why Laplace transforms are so useful",
+        "series": "Laplace transform",
+        "minutes": 23,
+        "ko": true,
+        "why": "강제 진동과 공명(라플라스 변환 자체는 범위 밖).",
+        "visual": "미는 힘의 진동수를 고유 진동수 쪽으로 옮기면 두 극이 가까워지고 응답 진폭이 커진다."
+      }
+    ],
+    "f-linalg": [
+      {
+        "id": "k7RM-ot2NWY",
+        "title": "Linear combinations, span, and basis vectors | Chapter 2, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 10,
+        "ko": true,
+        "why": "일차 결합, 생성, 기저, 일차 독립.",
+        "visual": "두 벡터에 곱하는 수를 움직여 끝점이 닿는 곳을 전부 칠한다. 한 줄에 있으면 직선만 칠해진다.",
+        "skip": "지금 글에 일차 결합·기저가 없음. 새 지도('벡터 공간과 행렬')로 다시 쓸 때 목표 1~2에(26.11.18)"
+      },
+      {
+        "id": "TgKwz5Ikpc8",
+        "title": "Abstract vector spaces | Chapter 16, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 17,
+        "ko": true,
+        "why": "벡터 공간의 공리.",
+        "visual": "다항식을 계수의 목록으로 적으면 미분이 행렬이 된다.",
+        "skip": "시리즈 16장이라 앞 장을 전제함. 다시 쓸 때 목표 1 엄밀(공리) 뒤에(26.11.18)"
+      },
+      {
+        "id": "XkY2DOUCWMU",
+        "title": "Matrix multiplication as composition | Chapter 4, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 10,
+        "ko": true,
+        "why": "행렬 곱이 왜 그 꼴인지.",
+        "visual": "변환 두 개를 이어서 할 때 기저 벡터가 어디로 가는지 따라가면 곱의 각 열이 나온다."
+      }
+    ],
+    "f-linmap": [
+      {
+        "id": "kYB8IZa5AuE",
+        "title": "Linear transformations and matrices | Chapter 3, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 11,
+        "ko": false,
+        "why": "선형 사상을 행렬로.",
+        "visual": "격자선이 평행하고 같은 간격으로 남고 원점이 그대로인 움직임이 선형 변환이다. 기저 벡터 둘이 간 곳이 행렬의 열이다."
+      },
+      {
+        "id": "uQhTuRlWMxw",
+        "title": "Inverse matrices, column space and null space | Chapter 7, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 12,
+        "ko": true,
+        "why": "핵과 상, 차원 정리.",
+        "visual": "변환이 공간을 눌러 버리면 되돌릴 수 없다. 닿는 곳 전체가 상, 원점으로 눌리는 벡터 전체가 핵이다."
+      },
+      {
+        "id": "P2LTAUO1TdA",
+        "title": "Change of basis | Chapter 13, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 13,
+        "ko": true,
+        "why": "기저를 바꿀 때 행렬이 바뀌는 법.",
+        "visual": "같은 화살표를 두 격자로 읽는다. 옮기고, 변환하고, 돌아오는 세 걸음이 A⁻¹MA다."
+      }
+    ],
+    "f-inner": [
+      {
+        "id": "Ip3X9LOh2dk",
+        "title": "The determinant | Chapter 6, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 10,
+        "ko": true,
+        "why": "행렬식의 뜻.",
+        "visual": "단위 정사각형이 변환 뒤 차지하는 넓이의 배율이 행렬식이다. 뒤집히면 음수, 눌리면 0."
+      },
+      {
+        "id": "LyGKycYT2v0",
+        "title": "Dot products and duality | Chapter 9, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 14,
+        "ko": true,
+        "why": "스칼라곱과 직교, 정사영.",
+        "visual": "스칼라곱을 한 직선 위로의 정사영으로 읽는다. 수직이면 그림자가 0이다."
+      },
+      {
+        "id": "jBsC34PxzoM",
+        "title": "Cramer's rule, explained geometrically | Chapter 12, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 12,
+        "ko": true,
+        "why": "크라메르 공식.",
+        "visual": "좌표를 기저 벡터와 만드는 평행사변형의 넓이로 적으면 좌표가 두 행렬식의 비로 나온다."
+      }
+    ],
+    "f-eigen": [
+      {
+        "id": "PFDu9oVAE-g",
+        "title": "Eigenvectors and eigenvalues | Chapter 14, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 17,
+        "ko": true,
+        "why": "고윳값·고유벡터와 대각화.",
+        "visual": "변환을 걸 때 제 직선을 벗어나지 않고 늘거나 줄기만 하는 벡터를 찾는다. 그 벡터들을 기저로 잡으면 행렬이 대각이 된다."
+      },
+      {
+        "id": "e50Bj7jn9IQ",
+        "title": "A quick trick for computing eigenvalues | Chapter 15, Essence of linear algebra",
+        "series": "Essence of linear algebra",
+        "minutes": 13,
+        "ko": true,
+        "why": "2×2 행렬의 고윳값을 빨리.",
+        "visual": "두 고윳값의 평균은 대각합의 반, 곱은 행렬식이다. 평균을 가운데 두고 양쪽으로 같은 거리의 두 점을 찾는다."
+      }
+    ],
+    "f-partial": [
+      {
+        "id": "IHZwWFHWa-w",
+        "title": "Gradient descent, how neural networks learn | Deep Learning Chapter 2",
+        "series": "Neural networks",
+        "minutes": 21,
+        "ko": true,
+        "why": "기울기 벡터가 가장 가파른 방향(신경망 부분은 범위 밖).",
+        "visual": "두 변수 함수의 곡면에 공을 놓고 내리막 방향으로 한 걸음씩 굴린다."
+      },
+      {
+        "id": "ly4S0oi3Yz8",
+        "title": "But what is a partial differential equation? | DE2",
+        "series": "Differential equations",
+        "minutes": 18,
+        "ko": true,
+        "why": "편도함수의 뜻.",
+        "visual": "막대의 온도를 위치와 시간의 곡면으로 그리고 한 방향으로만 썬 단면의 기울기를 편도함수로 읽는다."
+      }
+    ],
+    "f-multint": [
+      {
+        "id": "cy8r7WSuT1I",
+        "title": "Why π is in the normal distribution (beyond integral tricks)",
+        "series": "Probability",
+        "minutes": 25,
+        "ko": true,
+        "why": "극좌표 이중 적분의 대표 예.",
+        "visual": "종 모양 곡면 아래 부피를 얇은 원통 껍질로 썬다. 껍질 둘레 2πr에서 π가 나온다."
+      }
+    ],
+    "f-vcalc": [
+      {
+        "id": "rB83DpBJQsE",
+        "title": "Divergence and curl: The language of Maxwell's equations, fluid flow, and more",
+        "series": "단독",
+        "minutes": 16,
+        "ko": true,
+        "why": "발산·회전의 뜻.",
+        "visual": "벡터장을 유체의 흐름으로 보고, 솟거나 빨려 드는 정도가 발산, 작은 바람개비가 도는 정도가 회전이다."
+      }
+    ],
+    "f-fourier": [
+      {
+        "id": "r6sGWTCMz2k",
+        "title": "But what is a Fourier series? From heat flow to drawing with circles | DE4",
+        "series": "Differential equations",
+        "minutes": 25,
+        "ko": true,
+        "why": "주기 함수의 푸리에 급수.",
+        "visual": "서로 다른 정수 빠르기로 도는 화살표들을 이으면 끝점이 닫힌 그림을 그린다. 계단 함수도 사인파를 더해 다가간다."
+      },
+      {
+        "id": "ToIXSwZ1pJU",
+        "title": "Solving the heat equation | DE3",
+        "series": "Differential equations",
+        "minutes": 14,
+        "ko": true,
+        "why": "변수 분리로 편미분방정식 풀기.",
+        "visual": "사인 모양 온도 분포는 모양을 지킨 채 낮아지고 진동수가 높을수록 빨리 사라진다."
+      },
+      {
+        "id": "spUNpyF58BY",
+        "title": "But what is the Fourier Transform? A visual introduction.",
+        "series": "단독",
+        "minutes": 20,
+        "ko": true,
+        "why": "신호를 진동수 성분으로 나누기.",
+        "visual": "신호 그래프를 원 둘레에 감고 감는 빠르기를 바꾼다. 빠르기가 신호의 진동수와 맞으면 무게중심이 튄다."
+      }
+    ],
+    "p-momentum": [
+      {
+        "id": "6dTyOl1fmDo",
+        "title": "Why colliding blocks compute pi",
+        "series": "단독",
+        "minutes": 26,
+        "ko": false,
+        "why": "탄성 충돌에서 운동량·운동 에너지 보존.",
+        "visual": "속도를 √질량으로 맞춘 평면에서 에너지 보존은 원, 운동량 보존은 직선이다. 충돌 한 번이 원 위의 한 걸음이다."
+      },
+      {
+        "id": "HEfHFsfGXjs",
+        "title": "The most unexpected answer to a counting puzzle",
+        "series": "단독",
+        "minutes": 5,
+        "ko": true,
+        "why": "위 영상의 문제 제시.",
+        "visual": "질량비가 100배씩 커지는 두 블록과 벽의 충돌 횟수를 센다."
+      }
+    ],
+    "p-gravity": [
+      {
+        "id": "xdIjYBtnvZU",
+        "title": "Feynman's Lost Lecture (ft. 3Blue1Brown)",
+        "series": "minutephysics 협업",
+        "minutes": 22,
+        "ko": true,
+        "why": "케플러 법칙을 역제곱 중력과 각운동량 보존으로.",
+        "visual": "궤도를 같은 각으로 썰면 속도 벡터의 끝점이 원을 그리고, 그 원에서 궤도가 타원임이 나온다."
+      }
+    ],
+    "p-osc": [
+      {
+        "id": "-j8PzkZ70Lg",
+        "title": "The Physics of Euler's Formula | Laplace Transform Prelude",
+        "series": "Laplace transform",
+        "minutes": 28,
+        "ko": true,
+        "why": "단진동과 감쇠 진동.",
+        "visual": "용수철 운동을 복소평면에서 도는 벡터의 그림자로 본다. 감쇠가 있으면 나선으로 감긴다."
+      },
+      {
+        "id": "p_di4Zn4wz4",
+        "title": "Differential equations, a tourist's guide | DE1",
+        "series": "Differential equations",
+        "minutes": 27,
+        "ko": false,
+        "why": "진자의 운동과 에너지 전환, 감쇠.",
+        "visual": "진자의 (각, 각속도) 평면에서 마찰이 없으면 닫힌 고리, 있으면 안쪽으로 감기는 나선이다."
+      },
+      {
+        "id": "FE-hM1kRK4Y",
+        "title": "Why Laplace transforms are so useful",
+        "series": "Laplace transform",
+        "minutes": 23,
+        "ko": true,
+        "why": "강제 진동과 공명.",
+        "visual": "미는 진동수가 고유 진동수에 가까워지면 진폭이 부풀다 줄고, 같아지면 계속 자란다.",
+        "skip": "강제 진동을 라플라스 변환과 극으로 푸는데, 라플라스 변환은 지도의 어느 단원에도 없음. 공명은 PhET 시뮬레이션으로(26.11.18)"
+      }
+    ],
+    "p-wave": [
+      {
+        "id": "spUNpyF58BY",
+        "title": "But what is the Fourier Transform? A visual introduction.",
+        "series": "단독",
+        "minutes": 20,
+        "ko": true,
+        "why": "중첩 원리, 소리의 높낮이와 진동수.",
+        "visual": "순음 두 개를 더한 그래프에서 감기 그림으로 원래 진동수 둘을 도로 찾는다."
+      }
+    ],
+    "p-electric": [
+      {
+        "id": "rB83DpBJQsE",
+        "title": "Divergence and curl: The language of Maxwell's equations, fluid flow, and more",
+        "series": "단독",
+        "minutes": 16,
+        "ko": true,
+        "why": "전기장을 벡터장으로, 가우스 법칙의 그림.",
+        "visual": "양전하는 화살표가 솟아나는 샘, 음전하는 빨려 드는 구멍. 자기장에는 샘이 없고 고리만 있다."
+      }
+    ],
+    "p-heat": [
+      {
+        "id": "ly4S0oi3Yz8",
+        "title": "But what is a partial differential equation? | DE2",
+        "series": "Differential equations",
+        "minutes": 18,
+        "ko": true,
+        "why": "열전도.",
+        "visual": "막대의 각 점이 양옆 이웃의 평균 쪽으로 끌려간다. 뾰족한 곳이 먼저 무뎌진다."
+      }
+    ],
+    "p-light": [
+      {
+        "id": "aXRTczANuIs",
+        "title": "How wiggling charges give rise to light",
+        "series": "Optics",
+        "minutes": 22,
+        "ko": false,
+        "why": "전자기파, 편광·산란.",
+        "visual": "흔들리는 전하가 주변 전하에 늦게 닿는 힘을 준다. 전하들을 줄지어 세우면 힘이 한 방향으로 모여 빛줄기가 된다."
+      },
+      {
+        "id": "KTzGBJPuJwM",
+        "title": "But why would light \"slow down\"? | Visualizing Feynman's lecture on the refractive index",
+        "series": "Optics",
+        "minutes": 29,
+        "ko": true,
+        "why": "굴절과 분산.",
+        "visual": "물질을 얇은 층으로 보고 층마다 위상을 조금씩 뒤로 민다. 층이 촘촘해지면 파장이 짧아진 것처럼 보인다."
+      },
+      {
+        "id": "EmKQsSDlaa4",
+        "title": "How are holograms possible?",
+        "series": "Optics",
+        "minutes": 46,
+        "ko": true,
+        "why": "간섭·회절.",
+        "visual": "물체에서 온 파와 기준 파가 만드는 줄무늬에 기준 파를 다시 비추면 원래 파면이 되살아난다."
+      }
+    ],
+    "p-quantum": [
+      {
+        "id": "MzRCDLre1b4",
+        "title": "Some light quantum mechanics (with minutephysics)",
+        "series": "단독",
+        "minutes": 22,
+        "ko": true,
+        "why": "광자와 E=hf, 파동과 입자.",
+        "visual": "에너지가 hf의 정수 배로만 온다는 조건을 넣으면 편광 필터를 지날 '에너지 비율'이 광자 하나에서는 '지날 확률'이 된다."
+      },
+      {
+        "id": "MBnnXbOM5S4",
+        "title": "The more general uncertainty principle, regarding Fourier transforms",
+        "series": "단독",
+        "minutes": 18,
+        "ko": true,
+        "why": "불확정성 원리와 물질파.",
+        "visual": "짧게 끊긴 파동은 진동수 봉우리가 넓고, 오래 이어진 파동은 좁다."
+      }
+    ],
+    "p-qm": [
+      {
+        "id": "RQWpF2Gb-gU",
+        "title": "But what is quantum computing? (Grover's Algorithm)",
+        "series": "단독",
+        "minutes": 37,
+        "ko": true,
+        "why": "중첩·측정·보른 규칙(상태 벡터로).",
+        "visual": "상태를 길이 1인 벡터로 놓고 성분의 제곱이 측정 확률이다. 연산은 벡터를 돌리거나 뒤집는 일이다."
+      },
+      {
+        "id": "MBnnXbOM5S4",
+        "title": "The more general uncertainty principle, regarding Fourier transforms",
+        "series": "단독",
+        "minutes": 18,
+        "ko": true,
+        "why": "파동함수와 위치-운동량 불확정성.",
+        "visual": "파동 묶음을 좁히면 그 푸리에 변환이 넓어진다.",
+        "skip": "불확정성 원리를 처음 세우는 p-quantum 3절 직관에 넣음. p-qm은 영점 에너지에서 도구로 한 문장 쓸 뿐(26.11.18)"
+      },
+      {
+        "id": "MzRCDLre1b4",
+        "title": "Some light quantum mechanics (with minutephysics)",
+        "series": "단독",
+        "minutes": 22,
+        "ko": true,
+        "why": "중첩과 측정의 가장 쉬운 예(편광).",
+        "visual": "비스듬한 편광을 두 기저 상태의 합으로 적고, 기저를 돌려 잡으면 같은 상태가 다른 합으로 적힌다."
+      }
+    ],
+    "p-statmech": [
+      {
+        "id": "itRV2jEtV8Q",
+        "title": "Simulating and understanding phase change | Guest video by Vilas Winstein",
+        "series": "객원",
+        "minutes": 41,
+        "ko": false,
+        "why": "미시 상태와 볼츠만 분포, 온도.",
+        "visual": "격자 칸에 분자를 놓고 상태 확률이 e^(-E/kT)에 비례한다는 규칙 하나로 온도를 올리면 뭉친 덩어리가 흩어진다."
+      }
+    ],
+    "b-ecology": [
+      {
+        "id": "Kas0tIxDvrg",
+        "title": "Exponential growth and epidemics",
+        "series": "단독",
+        "minutes": 9,
+        "ko": true,
+        "why": "개체군의 지수 성장과 로지스틱 성장.",
+        "visual": "지수 곡선과 S자 곡선을 겹쳐 그린다. 초반에는 둘을 가를 수 없다."
+      }
+    ],
+    "e-sky": [
+      {
+        "id": "YdOXS_9_P4U",
+        "title": "Terence Tao on the cosmic distance ladder",
+        "series": "Cosmic distance ladder",
+        "minutes": 29,
+        "ko": false,
+        "why": "달의 위상·월식·일식을 기하로 읽어 크기와 거리를 잰다.",
+        "visual": "월식 때 지구 그림자의 둥근 가장자리로 크기 비를, 반달일 때 직각삼각형으로 해까지 거리를 잰다.",
+        "skip": "영어(한국어 자막 없음) 29분, 위상·일식의 기하로 달·태양의 거리까지 재는 데로 가 이 단원 범위를 넘음. e-solar 쪽 판단에 맡김(26.11.18)"
+      }
+    ],
+    "e-solar": [
+      {
+        "id": "YdOXS_9_P4U",
+        "title": "Terence Tao on the cosmic distance ladder",
+        "series": "Cosmic distance ladder",
+        "minutes": 29,
+        "ko": false,
+        "why": "케플러가 궤도를 알아낸 방법.",
+        "visual": "화성이 제자리로 돌아오는 주기마다 방향을 기록해 움직이는 지구에서 삼각 측량한다."
+      }
+    ],
+    "e-star": [
+      {
+        "id": "hFMaT9oRbs4",
+        "title": "Terence Tao continuing history's cleverest cosmological measurements",
+        "series": "Cosmic distance ladder",
+        "minutes": 26,
+        "ko": false,
+        "why": "연주 시차와 겉보기 밝기로 별의 거리.",
+        "visual": "지구 궤도 양 끝에서 본 방향 차이로 길쭉한 삼각형을 그린다. 한 단의 결과가 다음 단의 자가 된다."
+      }
+    ],
+    "e-galaxy": [
+      {
+        "id": "hFMaT9oRbs4",
+        "title": "Terence Tao continuing history's cleverest cosmological measurements",
+        "series": "Cosmic distance ladder",
+        "minutes": 26,
+        "ko": false,
+        "why": "표준 촛불과 허블-르메트르 법칙.",
+        "visual": "주기가 참 밝기를 알려 주는 별로 거리를 구하고, 거리와 적색 편이를 한 그래프에 찍으면 직선이다."
+      }
+    ]
+  }
 }

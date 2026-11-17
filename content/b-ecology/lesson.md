@@ -60,6 +60,18 @@
 
 자원이 무한하면 개체수는 일정 시간 $T$마다 2배가 되어($N=N_0\cdot2^{t/T}$, [[f-sci|#]]) J자형 **이론적 생장 곡선**(理論的生長曲線, exponential growth curve)을 그린다. 실제로는 먹이·공간 부족, 노폐물, 천적처럼 생장을 억제하는 **환경 저항**(環境抵抗, environmental resistance)이 개체수와 함께 커져 S자형 **실제 생장 곡선**(實際生長曲線, logistic growth curve)이 되고, 개체수는 그 환경이 품을 수 있는 최대인 **환경 수용력**(環境收容力, carrying capacity)에 머문다.
 
+아래 영상은 감염병 환자 수로 J자형과 S자형을 견준다.
+
+```link
+url https://www.youtube.com/watch?v=Kas0tIxDvrg
+title Exponential growth and epidemics
+kind 영상
+who 3Blue1Brown
+min 9
+note 한국어 자막
+why 새 환자 수가 지금 환자 수에 비례하는 동안은 같은 배수로 늘어 로그 눈금에서 직선이 되고, 감염될 사람이 줄어들면 S자 곡선이 된다. 하루 새 환자 수가 전날과 같아지는 때가 늘어나는 빠르기가 가장 큰 때이고, 그 전까지는 두 곡선을 가르기 어렵다.
+```
+
 | 상호 작용 | 두 종 | 예 |
 |---|---|---|
 | **종간 경쟁**(種間競爭, interspecific competition) | −/− | 짚신벌레 두 종 |
@@ -99,7 +111,7 @@ S자형은 로지스틱 모형 $\frac{dN}{dt}=rN\frac{K-N}{K}$($K$: 환경 수�
 
 ## 연결
 
-생산자는 [[b-photo]]의 광합성, 각 단계는 [[b-respiration]]의 호흡을 하고, 에너지가 위로 갈수록 주는 것은 [[p-energy]]의 에너지 보존이다. 로지스틱 식은 [[f-rate]], 자연선택은 [[b-evolution|#]], 세균은 [[b-micro|#]], 기후 변화는 [[e-climate|#]]이다.
+생산자는 [[b-photo]]의 광합성, 각 단계는 [[b-respiration]]의 호흡을 하고, 에너지가 위로 갈수록 주는 것은 [[p-energy]]의 에너지 보존이다. 로지스틱 식은 [[f-ode]], 자연선택은 [[b-evolution|#]], 세균은 [[b-micro|#]], 기후 변화는 [[e-climate|#]]이다.
 
 ## 요약
 

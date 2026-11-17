@@ -54,6 +54,7 @@ $$\vec A=A_x\hat\imath+A_y\hat\jmath+A_z\hat k,\qquad \hat u=\frac{\vec A}{|\vec
 $$(x-a)^2+(y-b)^2+(z-c)^2=r^2$$
 
 전개된 식은 문자마다 완전제곱식([[f-algebra|#]])으로 묶어 이 꼴로 고친다. 등호를 $<$로 바꾸면 구의 안쪽, $\le$면 겉면까지, $>$면 바깥쪽이다.
+
 #### 점검
 **Q.** 점 $P(1,2,3)$에서 $Q(3,5,9)$로 가는 벡터의 성분과 두 점 사이의 거리는?
 **A.** $\overrightarrow{PQ}=(2,3,6)$이고 거리는 그 크기 $\sqrt{4+9+36}=7$이다.
@@ -89,6 +90,18 @@ cap 실선은 삼각형법이고, 점선까지 그리면 평행사변형이 되�
 ```
 
 실수배 $c\vec A$는 크기가 $|c|A$이고 $c>0$이면 같은 방향, $c<0$이면 반대 방향이다. **음벡터**(negative vector) $-\vec A$는 $\vec A$와 크기가 같고 방향이 반대인 벡터이며, $\vec A-\vec B=\vec A+(-\vec B)$다. 두 꼬리를 모으면 $\vec A-\vec B$는 $\vec B$의 머리에서 $\vec A$의 머리로 가는 화살표여서, $\overrightarrow{PQ}$는 $Q$의 위치벡터에서 $P$의 위치벡터를 뺀 것이다. 선분 $PQ$의 중점은 좌표마다 평균을 낸 점, 곧 두 위치벡터 합의 절반이다.
+
+화살표와 성분이 같은 벡터의 두 표현이고, 덧셈은 꼬리 잇기, 실수배는 늘이기와 뒤집기라는 것을 영상으로 한 번 더 보고 넘어가자.
+
+```link
+url https://www.youtube.com/watch?v=fNk_zzaMoSs
+title Vectors | Chapter 1, Essence of linear algebra
+kind 영상
+who 3Blue1Brown
+min 10
+note 한국어 자막
+why 화살표와 수의 목록(성분)을 나란히 놓고, 합과 실수배를 두 표현으로 함께 계산한다. 영상은 화살표의 꼬리를 늘 원점에 두고 그리지만, 옮겨도 같은 벡터라는 것은 1절과 같다.
+```
 
 **분해**(分解, resolution)는 벡터 하나를 좌표축 방향 벡터들의 합으로 나누는 것이다. 평면에서 $+x$축에서 시계 반대 방향으로 잰 각을 $\theta$라 하면 다음과 같다.
 
@@ -161,11 +174,24 @@ text 4.1 2.45 c0 | A·B = 4 × A cos θ = {12*cos(th*pi/180)}
 cap $\vec A$의 크기는 3, $\vec B$의 크기는 4이다. θ를 키우면 정사영이 짧아져 90°에서 0이 되고, 둔각에서는 $\vec B$와 반대쪽을 향해 스칼라 성분 $A\cos\theta$와 스칼라곱이 음수가 된다. 스칼라곱은 그림자 길이 $A\cos\theta$에 $\vec B$의 크기 4를 곱한 값이다.
 ```
 
+스칼라곱을 그림자 길이와 다른 벡터의 길이의 곱으로 읽는 생각을 영상으로 한 번 더 보고 넘어가자.
+
+```link
+url https://www.youtube.com/watch?v=LyGKycYT2v0
+title Dot products and duality | Chapter 9, Essence of linear algebra
+kind 영상
+who 3Blue1Brown
+min 14
+note 한국어 자막
+why 앞부분에서 성분끼리 곱해 더한 값이 '한 벡터를 다른 벡터의 직선 위로 내린 그림자 길이 × 그 벡터의 길이'와 같고, 어느 쪽 그림자로 재도 값이 같다는 것을 보인다. 그 까닭을 행렬과 선형 변환으로 보이는 뒷부분(쌍대성)은 지금 건너뛰어도 된다.
+```
+
 **변위**(變位, displacement)는 처음 위치에서 나중 위치로 그은 벡터 $\Delta\vec r=\vec r_2-\vec r_1$이고 SI 단위는 m다. 변위의 크기는 지나간 길의 길이보다 크지 않다. 속도는 속력에 운동 방향의 단위벡터를 곱한 벡터이고(자세히는 [[p-motion|#]]), 힘도 벡터라서 여러 힘은 합성하며, 가만히 있는 물체가 받는 힘의 합은 영벡터다(자세히는 [[p-force|#]]). 일정한 힘 $\vec F$를 받으며 곧게 $\vec d$만큼 옮겨질 때 힘이 한 일은 $W=\vec F\cdot\vec d$이다(자세히는 [[p-energy|#]]).
 
 #### 엄밀
 
 두 식이 같은 까닭은 코사인 법칙이다. 변이 $\vec A$, $\vec B$, $\vec A-\vec B$인 삼각형에서 $|\vec A-\vec B|^2=A^2+B^2-2AB\cos\theta$인데, 좌변을 성분으로 전개하면 $A^2+B^2-2(A_xB_x+A_yB_y+A_zB_z)$이다. 스칼라곱은 교환법칙 $\vec A\cdot\vec B=\vec B\cdot\vec A$, 분배법칙 $\vec A\cdot(\vec B+\vec C)=\vec A\cdot\vec B+\vec A\cdot\vec C$, $(c\vec A)\cdot\vec B=c(\vec A\cdot\vec B)$를 따르고 $\vec A\cdot\vec A=|\vec A|^2$이다.
+
 영벡터는 각을 정할 수 없지만 스칼라곱이 0이므로 모든 벡터에 수직이라고 약속한다. $|\cos\theta|\le1$이므로 $|\vec A\cdot\vec B|\le|\vec A||\vec B|$이다. $\vec A$에서 정사영을 뺀 나머지는 $\vec B$에 수직이어서, 어떤 벡터든 $\vec B$에 평행한 벡터와 수직인 벡터의 합으로 쓸 수 있다. 벡터가 세 축과 이루는 각의 코사인(방향 코사인)은 $A_x/A$, $A_y/A$, $A_z/A$이고 제곱의 합이 1이다. $W=\vec F\cdot\vec d$는 힘이 일정하고 경로가 직선일 때의 식이다. 결과가 벡터인 벡터곱은 [[f-space|#]]에 있다.
 
 #### 점검

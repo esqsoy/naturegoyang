@@ -116,6 +116,34 @@ def check_img(body, where, errs):
             errs.append(f'{where}: url이 sources/images.json의 source와 다르다')
 
 
+LINK_KINDS = {'영상', '글', '시뮬레이션', '자료'}
+VIDEOS = os.path.join(REPO, 'sources', 'videos-3b1b.json')
+
+
+def check_link(body, where, errs):
+    """```link 블록(앱 18판): 설명 흐름 안의 영상·글·시뮬레이션 링크 카드. 새 창으로 연다."""
+    o = {}
+    for l in body.split('\n'):
+        m = re.match(r'^(\w+)\s+(.*)$', l.strip())
+        if m:
+            o[m.group(1)] = m.group(2).strip()
+    for k in ('url', 'title', 'kind', 'why'):
+        if not o.get(k):
+            errs.append(f'{where}: {k} 줄이 없다')
+    if o.get('url') and not re.match(r'^https://[^\s"<>]+$', o['url']):
+        errs.append(f'{where}: url은 https://…')
+    if o.get('kind') and o['kind'] not in LINK_KINDS:
+        errs.append(f'{where}: kind는 {"·".join(sorted(LINK_KINDS))} 가운데 하나')
+    if o.get('min') and not re.match(r'^\d+$', o['min']):
+        errs.append(f'{where}: min은 분(정수)')
+    yt = re.search(r'youtube\.com/watch\?v=([\w-]{11})|youtu\.be/([\w-]{11})', o.get('url', ''))
+    if yt and os.path.exists(VIDEOS):
+        vid = yt.group(1) or yt.group(2)
+        cat = {v['id'] for vs in json.load(open(VIDEOS, encoding='utf-8'))['units'].values() for v in vs}
+        if vid not in cat:
+            errs.append(f'{where}: YouTube {vid}가 sources/videos-3b1b.json 목록에 없다(목록에 먼저 더한다)')
+
+
 def check_expr(e, names, fns=frozenset()):
     """앱 gExpr()와 같은 문법: 수, 이름, + - * / ^, 괄호, 함수(인자는 쉼표)."""
     depth = 0
@@ -144,14 +172,17 @@ def check_graphs(md, errs):
     for m in re.finditer(r'^```(\w*)\n([\s\S]*?)^```', md, re.M):
         kind, body = m.group(1), m.group(2)
         at = md[:m.start()].count('\n') + 1
-        if kind not in ('graph', 'img'):
-            errs.append(f'{at}줄: ```{kind} 블록은 앱이 그리지 않는다(graph, img만)')
+        if kind not in ('graph', 'img', 'link'):
+            errs.append(f'{at}줄: ```{kind} 블록은 앱이 그리지 않는다(graph, img, link만)')
             continue
         lines = body.split('\n')
         if any(not l.strip() for l in lines[:-1]):
             errs.append(f'{at}줄 그림: 빈 줄을 두지 않는다(장 나누기가 그림을 자른다)')
         if kind == 'img':
             check_img(body, f'{at}줄 사진', errs)
+            continue
+        if kind == 'link':
+            check_link(body, f'{at}줄 링크', errs)
             continue
         names = {'x', 't'}
         for l in lines:
@@ -224,6 +255,9 @@ def plain_len(s):
 
 def check_lesson(md, n, rel, num, errs, warns, info):
     lines = md.replace('\r', '').split('\n')
+    for k, l in enumerate(lines):  # 셸 here-doc이 \t·\a·\v를 제어 문자로 바꾼 일이 있었다(26.11.18, $\tfrac$ → TAB)
+        if re.search(r'[\x00-\x08\x09\x0b-\x1f\x7f]', l):
+            errs.append(f'{k + 1}줄: 제어 문자(TAB 등)가 있다. 수식의 \\t·\\a·\\v가 바뀐 것인지 본다')
     h2 = [(i, l[3:].strip()) for i, l in enumerate(lines) if re.match(r'^## ', l)]
     names = [t for _, t in h2]
     if names != SECTIONS:

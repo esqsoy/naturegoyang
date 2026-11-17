@@ -54,11 +54,46 @@ $n=0$이면 $\psi=0$, 곧 입자가 없어 뺀다. 폭 $L$ 안에서는 $\Delta 
 
 은 원자 빔을 위아래로 세기가 다른 자기장에 통과시키면, 제각각 기운 작은 자석이라면 고르게 퍼질 텐데 두 갈래로만 갈린다. 위 갈래를 같은 장치에 다시 넣으면 모두 위로 간다. 옆 방향 장치에서 한 갈래만 골라 넣으면 다시 반반이다. 측정은 있던 값을 엿보기가 아니라 상태를 바꾸는 상호작용이다.
 
+빛의 편광에서도 측정이 상태를 바꾸는 것을 아래 영상이 편광판 세 장으로 보인다.
+
+```link
+url https://www.youtube.com/watch?v=MzRCDLre1b4
+title Some light quantum mechanics (with minutephysics)
+kind 영상
+who 3Blue1Brown
+min 22
+note 한국어 자막
+why 직각으로 겹쳐 빛을 다 막던 두 편광판 사이에 45° 기운 편광판을 끼우면 오히려 빛이 지난다. 가운데 편광판을 지난 광자는 45° 편광 상태가 되고, 그 상태는 가로·세로 두 상태의 중첩이라 마지막 편광판을 $\frac12$의 확률로 지난다. 같은 상태를 가로·세로의 합으로도, ±45°의 합으로도 적을 수 있어 어느 두 방향으로 나눠 적을지는 고르기 나름이라는 것도 나온다. 슈테른·게를라흐 장치를 위아래, 옆, 다시 위아래로 이은 위의 실험과 같은 구조다.
+```
+
 #### 통상
 
 전자가 공간 속 운동과 별개로 본래 지닌 각운동량이 **스핀**(spin)이다. 어느 축으로 재도 성분은 $+\hbar/2$(업, ↑)나 $-\hbar/2$(다운, ↓)뿐이고, [[c-periodic|#]]의 $m_s=\pm\frac12$가 이것이다. 1922년 **슈테른·게를라흐 실험**(Stern-Gerlach實驗, Stern–Gerlach experiment)의 두 갈래는 은 원자의 홀전자 하나의 스핀 때문이다.
 
+직관의 실험을 직접 해 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/quantum-measurement/latest/quantum-measurement_ko.html
+title 양자 측정
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판, '슈테른-겔라흐'로 적음
+why '스핀' 화면 위의 목록에서 '실험 4 [SGz, SGz]'를 고르면 첫 장치에서 위로 간 원자는 다음 위아래 장치에서도 모두 위로 간다. '실험 3 [SGz, SGx]'에서는 위로 간 원자가 옆 방향 장치에서 반반으로 갈리고, '실험 5 [SGx, SGz]'에서는 옆으로 갈린 원자가 위아래 장치에서 다시 반반이 된다. '광자' 화면에서는 편광으로 같은 일을 한다.
+```
+
 가능한 상태들을 복소수 계수로 더한 것도 가능한 상태라는 것이 **중첩 원리**(重疊原理, superposition principle)다. $a|\uparrow\rangle+b|\downarrow\rangle$($|a|^2+|b|^2=1$)을 재면 보른 규칙대로 ↑가 확률 $|a|^2$, ↓가 $|b|^2$로 나오고, 잰 직후 상태는 나온 결과의 상태가 된다. 이것이 **파동 함수의 붕괴**(波動函數의 崩壞, wave function collapse)다. [[f-linalg|#]]의 말로 측정값은 그 양을 나타내는 행렬의 고윳값, 붕괴한 상태는 그 고유벡터다.
+
+상태를 길이 1인 벡터로 보는 그림은 아래 영상의 앞부분이 보인다.
+
+```link
+url https://www.youtube.com/watch?v=RQWpF2Gb-gU
+title But what is quantum computing? (Grover's Algorithm)
+kind 영상
+who 3Blue1Brown
+min 37
+note 한국어 자막
+why 37분짜리라 앞의 세 장('Misconceptions', 'The state vector', 'Qubits', 약 16분)을 보면 된다. 양자 컴퓨터가 모든 답을 한꺼번에 시험한다는 흔한 설명이 왜 틀렸는지에서 시작해, 상태를 길이 1인 벡터로 놓고 성분 크기의 제곱을 그 결과가 나올 확률로 읽는다. 측정하면 상태가 나온 결과의 축으로 떨어진다. $|a|^2+|b|^2=1$은 그 벡터의 길이가 1이라는 뜻이다(성분이 실수면 피타고라스 정리). 뒤의 그로버 알고리즘은 넘어가도 된다.
+```
 
 #### 엄밀
 

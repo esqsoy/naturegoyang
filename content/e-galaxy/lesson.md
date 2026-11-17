@@ -48,6 +48,18 @@ $$v=H_0d$$
 
 **허블 상수**(Hubble常數, Hubble constant) $H_0$는 약 70 km/s/Mpc(1 Mpc ≈ 326만 광년)다. 팽창 빠르기가 늘 같았다면 모든 은하는 $1/H_0$ 전에 한데 있었다. 이 허블 시간 약 140억 년이 우주 나이(약 138억 년)의 어림값이다.
 
+이 법칙에 쓴 먼 은하까지의 거리를 잰 방법과 허블의 그래프는 아래 영상의 뒷부분이 보인다.
+
+```link
+url https://www.youtube.com/watch?v=hFMaT9oRbs4
+title Terence Tao continuing history's cleverest cosmological measurements
+kind 영상
+who 3Blue1Brown
+min 26
+note 영어, 한국어 자막 없음
+why 'Nearby Galaxies'부터 끝까지(뒤쪽 약 7분)를 보면 된다. 밝기가 일정한 주기로 오르내리는 아주 밝은 별인 세페이드 변광성은 주기가 길수록 참 밝기가 커서(리비트), 주기를 재면 참 밝기를 알고 겉보기 밝기와 견주어 그 별이 든 은하까지 거리를 얻는다. 허블은 이렇게 잰 거리와 스펙트럼선의 적색 편이를 한 그래프에 찍어 직선을 얻었다. 마지막 장('Lingering mysteries')은 아직 풀리지 않은 물음들을 짚는다.
+```
+
 #### 엄밀
 
 우리에게 $\vec v=H_0\vec r$이면 은하 A에서 본 B의 속도도 $H_0(\vec r_B-\vec r_A)$다. 우주론적 적색 편이는 빛이 오는 동안 파장이 공간과 함께 늘어난 것이고 $1+z$는 그동안 거리가 늘어난 배수다. 그래서 $v\approx cz$는 $z\ll1$에서만 맞고 먼 은하의 후퇴 속도는 $c$를 넘기도 한다(공간 속 운동이 아니어서 [[p-relativity|#]]과 모순 없음). $H_0$는 우주 배경 복사로 약 67, 세페이드 변광성·Ia형 초신성의 거리로 약 73이 나와 '허블 긴장'이라 한다.

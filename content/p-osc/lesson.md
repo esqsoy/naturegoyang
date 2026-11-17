@@ -24,6 +24,17 @@ $$T=2\pi\sqrt{m/k},\qquad T=2\pi\sqrt{l/g}$$
 
 주기가 진폭과 상관없는 성질이 **등시성**(等時性, isochronism)이다.
 
+단진자의 주기가 무엇에 달렸는지 직접 재 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_ko.html
+title 진자 실험
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판, 퍼텐셜 에너지를 '위치 에너지'로 적음
+why 길이, 질량, 처음 각을 하나씩 바꿔 가며 '주기 시계'나 초시계로 주기를 재면, 질량은 주기와 상관없고 처음 각을 아주 크게 하면 $T=2\pi\sqrt{l/g}$보다 길어진다. '에너지' 화면에서는 2절의 에너지 주고받기와, '마찰'을 올리면 열에너지로 빠지는 몫도 본다.
+```
+
 #### 엄밀
 
 [[f-rate|#]]에 없던 cos의 도함수는 원에서 얻는다. 점 $(A\cos u, A\sin u)$($u=\omega t+\varphi$)가 원을 돌 때 속도는 크기 $A\omega$로 반지름에 수직이라 $x$ 성분이 $-A\omega\sin u$, $y$ 성분이 $A\omega\cos u$다. [[f-linalg|#]]의 $e^{i\omega t}$를 미분해도 같다. 곧 $(\cos u)'=-\sin u$, $(\sin u)'=\cos u$($u$는 rad)이고, 합성함수의 미분으로 다음을 얻는다.
@@ -31,6 +42,18 @@ $$T=2\pi\sqrt{m/k},\qquad T=2\pi\sqrt{l/g}$$
 $$v=-A\omega\sin u,\quad a=-A\omega^2\cos u=-\omega^2x$$
 
 그래서 $\omega^2=k/m$이면 위 식이 $ma=-kx$, 곧 2계 미분방정식 $\frac{d^2x}{dt^2}=-\frac kmx$의 해이고, $A$와 $\varphi$로 어떤 초기 조건에도 맞춘다. 단진자 식은 근사라 진폭 30°에서는 주기가 약 1.7% 길어진다.
+
+도는 점의 그림자로 단진동을 보는 생각과 $e^{i\omega t}$의 관계를 움직이는 그림으로 보려면 아래 영상을 본다.
+
+```link
+url https://www.youtube.com/watch?v=-j8PzkZ70Lg
+title The Physics of Euler's Formula | Laplace Transform Prelude
+kind 영상
+who 3Blue1Brown
+min 28
+note 한국어 자막
+why 장 'Euler's formula explained dynamically'(1:51~)에서 $e^{it}$가 원을 도는 점임을 보고, 'The harmonic oscillator'(9:27~21:08)에서 용수철 운동을 도는 화살표의 그림자로 풀며 마찰이 있으면 화살표가 나선으로 감겨 진폭이 줄어드는 것(3절 감쇠 진동)을 본다. 끝의 라플라스 변환 이야기는 지나가도 된다.
+```
 
 #### 점검
 **Q.** 용수철 진자의 진폭을 2배로 하면 주기는? 추의 질량을 4배로 하면?
@@ -58,6 +81,17 @@ $x=A/2$이면 탄성 퍼텐셜 에너지가 $\frac12k(A/2)^2=\frac14E$라 운동
 
 안정한 평형 위치 근처의 퍼텐셜 에너지 곡선은 바닥을 확대하면 포물선 $\frac12kx^2$에 가깝다. 그래서 그네든 다리든 분자 속 원자든 작게 흔들리면 단진동이다.
 
+진자의 각과 각속도를 한 평면에 함께 그려 에너지 보존과 작은 각 근사를 다시 보려면 아래 영상을 본다.
+
+```link
+url https://www.youtube.com/watch?v=p_di4Zn4wz4
+title Differential equations, a tourist's guide | DE1
+kind 영상
+who 3Blue1Brown
+min 27
+why 각을 가로축, 각속도를 세로축으로 한 평면에서 마찰이 없으면 진자의 상태가 닫힌 고리를 되풀이해 돌고, 마찰이 있으면 안쪽으로 감겨 평형 위치에 다가가며, 작은 각에서 $\sin\theta\approx\theta$로 단진동 식이 되는 것도 나온다. 6:27의 위 식은 $L/g$가 아니라 $g/L$이 맞다(영상 설명란의 정정).
+```
+
 #### 점검
 **Q.** 진폭 $A$인 용수철 진자에서 $E_k=E_p$인 위치는?
 **A.** $\frac12kx^2=\frac14kA^2$에서 $x=\pm A/\sqrt2\approx\pm0.71A$다.
@@ -77,6 +111,17 @@ $x=A/2$이면 탄성 퍼텐셜 에너지가 $\frac12k(A/2)^2=\frac14E$라 운동
 $$f_n=\frac{nv}{2L}\quad(n=1,2,3,\cdots)$$
 
 $n=1$이 **기본 진동**(基本振動, fundamental), $n\ge2$가 **배진동**(倍振動, harmonic)이고, 그 진동수가 모두 줄의 고유 진동수다.
+
+줄 한쪽 끝을 흔들어 정상파가 생기는 진동수를 찾아보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_ko.html
+title 줄의 파동
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판
+why '진동'과 '고정된 끝'을 고르고 '감폭'을 작게 둔 채 진동수를 천천히 바꾸면, 몇몇 진동수에서만 마디와 배가 제자리에 선 큰 정상파가 생긴다(공명). 그 진동수들이 가장 낮은 것의 정수배인지 본다.
+```
 
 #### 엄밀
 

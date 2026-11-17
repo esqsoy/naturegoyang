@@ -34,6 +34,18 @@ $E_k=hf-W$는 광자 하나가 전자 하나에 에너지를 모두 넘길 때�
 
 [[p-light|#]]의 이중 슬릿에 전자를 하나씩 쏘면 스크린에는 한 번에 한 점만 찍힌다. 점이 수천 개 쌓이면 빛과 같은 줄무늬가 드러난다. 하나씩 보냈으니 전자끼리 부딪친 결과가 아니다. 전자 하나하나가 파동처럼 두 슬릿을 함께 지나 간섭하고, 스크린에서는 알갱이로 한 점에 나타난다. 어디 찍힐지는 미리 모르고 밝은 무늬 자리일수록 자주 찍힌다. 광자를 하나씩 보내도 같다.
 
+전자가 한 점씩 찍히며 무늬가 쌓이는 실제 실험은 아래 영상에서 본다.
+
+```link
+url https://www.hitachi.com/rd/research/materials/quantum/doubleslit/
+title Double-slit experiment
+kind 영상
+who 히타치(Hitachi)
+min 1
+note 영어 해설
+why 전자 현미경 안에서 전자를 1초에 10개쯤만 내보내, 장치 안에 전자가 많아야 하나뿐이게 한 실험이다. 두 슬릿 대신 아주 가는 실 양쪽으로 전자가 지나간다. 쪽의 'Video clip 1'을 누르면 처음에 아무 데나 찍히던 점들이 20분 동안 쌓여 줄무늬가 되는 것을 1분 남짓으로 줄여 본다.
+```
+
 #### 통상
 
 빛이 간섭·회절에서는 파동성을, 광전 효과에서는 입자성을 보이는 것이 **빛의 이중성**(빛의 二重性, wave–particle duality of light)이다. 드브로이(1924)는 입자도 파동성을 지닌다고 보았다. 이 파동이 **물질파**(物質波, matter wave, 드브로이 파)이고, 운동량 $p=mv$([[p-momentum|#]])인 입자의 **드브로이 파장**(de Broglie波長, de Broglie wavelength)은 다음과 같다.
@@ -44,7 +56,21 @@ $$\lambda=\frac{h}{p}=\frac{h}{mv}$$
 
 #### 엄밀
 
-물질파의 세기(진폭의 제곱)는 그 자리에서 입자가 발견될 확률에 비례한다. 이것이 **확률 해석**(確率解釋, probability interpretation)이다. 어느 슬릿을 지나는지 재면 무늬가 사라진다. 일상 물체는 운동량이 커서 파장이 어떤 틈보다도 작다(예제 2). $\lambda=h/p$는 광자의 $p=h/\lambda$를 물질로 넓힌 것이고, 아주 빠르면 $p=\gamma mv$([[p-relativity|#]])로 쓴다. 둘을 한 틀로 쓰는 파동 함수는 [[p-qm|#]]이다.
+물질파의 세기(진폭의 제곱)는 그 자리에서 입자가 발견될 확률에 비례한다. 이것이 **확률 해석**(確率解釋, probability interpretation)이다.
+
+빛에서도 같다는 것, 곧 편광판을 지나는 빛 에너지의 몫이 광자 하나에서는 그 광자가 지날 확률이 된다는 것을 아래 영상이 보인다.
+
+```link
+url https://www.youtube.com/watch?v=MzRCDLre1b4
+title Some light quantum mechanics (with minutephysics)
+kind 영상
+who 3Blue1Brown
+min 22
+note 한국어 자막
+why 편광을 화살표(벡터)로 그리면 편광판은 제 방향 성분만 통과시키고, 지나는 에너지는 그 성분의 제곱에 비례한다. 에너지가 $hf$ 덩어리로만 오면 광자 하나는 쪼개져 일부만 지날 수 없으니, 그 몫이 광자 하나가 통째로 지날 확률이 된다. 진폭의 제곱이 확률이라는 위의 확률 해석과 같은 생각이다. 뒤의 세 편광판 실험은 [[p-qm|#]]에서 다시 본다.
+```
+
+어느 슬릿을 지나는지 재면 무늬가 사라진다. 일상 물체는 운동량이 커서 파장이 어떤 틈보다도 작다(예제 2). $\lambda=h/p$는 광자의 $p=h/\lambda$를 물질로 넓힌 것이고, 아주 빠르면 $p=\gamma mv$([[p-relativity|#]])로 쓴다. 둘을 한 틀로 쓰는 파동 함수는 [[p-qm|#]]이다.
 
 #### 점검
 **Q.** 같은 속력으로 움직이는 전자와 양성자 중 드브로이 파장이 짧은 것은?
@@ -56,13 +82,38 @@ $$\lambda=\frac{h}{p}=\frac{h}{mv}$$
 
 [[c-atom|#]]의 수소 방전관 빛은 무지개 띠가 아니라 선 몇 줄이었다. 전자의 에너지가 띄엄띄엄한 몇 값뿐이면, 높은 준위에서 낮은 준위로 내려오며 내는 광자도 그 차이만큼의 몇 가지뿐이다. 거꾸로 원자가 흡수하는 빛도 준위 차이에 맞는 파장뿐이다. 또 전자가 파동이면 위치를 한 점으로 정할 수 없다. 좁은 곳에 가둘수록 여러 파장, 곧 여러 운동량이 섞여야 한다.
 
+좁게 가둘수록 여러 파장이 섞여야 하는 까닭은 아래 영상이 소리와 레이더의 예부터 차례로 보인다.
+
+```link
+url https://www.youtube.com/watch?v=MBnnXbOM5S4
+title The more general uncertainty principle, regarding Fourier transforms
+kind 영상
+who 3Blue1Brown
+min 18
+note 한국어 자막
+why 짧게 끊긴 소리는 여러 진동수가 섞여야 만들어지고, 오래 이어지는 소리라야 진동수 하나로 또렷하다. 같은 맞바꿈이 레이더 펄스에서는 거리와 속도 사이에 생기고, 물질파에서는 $p=h/\lambda$를 거쳐 위치와 운동량 사이의 불확정성 원리가 된다.
+```
+
 #### 통상
 
 전자가 한 에너지 준위에서 다른 준위로 옮겨 가는 것이 **전이**(轉移, transition)다. 준위 $E_i$에서 낮은 $E_f$로 전이하면 광자 $hf=E_i-E_f$를 내고, 같은 광자를 흡수하면 거꾸로 오른다. 원자가 내는 선 스펙트럼이 **방출 스펙트럼**(放出spectrum, emission spectrum), 흰빛에서 빠진 검은 선이 흡수 스펙트럼([[b-photo|#]])이다. 보어 모형에서 수소의 준위는 주 양자수 $n$([[c-periodic|#]])으로 정해진다.
 
 $$E_n=-\frac{13.6\ \mathrm{eV}}{n^2}\quad(n=1,2,3,\dots)$$
 
-$n=1$이 바닥상태, $n\ge2$가 들뜬상태, 13.6 eV(1312 kJ/mol)가 이온화 에너지다([[c-periodic|#]]). 끝 준위가 1, 2, 3이면 **라이먼 계열**(Lyman系列, Lyman series, 자외선), **발머 계열**(Balmer系列, Balmer series, 가시광선), **파셴 계열**(Paschen系列, Paschen series, 적외선)이다. **불확정성 원리**(不確定性原理, uncertainty principle)는 위치와 운동량을 동시에 정확히 정할 수 없다는 것으로 $\Delta x\,\Delta p\ge\hbar/2$($\hbar=h/2\pi$)다.
+$n=1$이 바닥상태, $n\ge2$가 들뜬상태, 13.6 eV(1312 kJ/mol)가 이온화 에너지다([[c-periodic|#]]). 끝 준위가 1, 2, 3이면 **라이먼 계열**(Lyman系列, Lyman series, 자외선), **발머 계열**(Balmer系列, Balmer series, 가시광선), **파셴 계열**(Paschen系列, Paschen series, 적외선)이다.
+
+수소 원자에 빛을 비추며 전이와 방출 스펙트럼을 직접 보려면 아래 시뮬레이션을 쓴다.
+
+```link
+url https://phet.colorado.edu/sims/html/models-of-the-hydrogen-atom/latest/models-of-the-hydrogen-atom_ko.html
+title 수소 원자 모형
+kind 시뮬레이션
+who PhET(콜로라도 대학교)
+note 한국어판, 전이 표 단추를 '트랜지스터'로 잘못 옮김
+why '에너지 준위' 화면에서 원자 모형을 '보어'로 두고 빛을 켜면, 전자가 준위 차이에 맞는 에너지의 광자를 흡수해 높은 준위로 올랐다가 내려오며 광자를 낸다. '전자 에너지 준위'를 펼쳐 그 전이를, '분광계'에서 나온 광자의 파장이 몇 줄에만 쌓이는 것을 본다.
+```
+
+**불확정성 원리**(不確定性原理, uncertainty principle)는 위치와 운동량을 동시에 정확히 정할 수 없다는 것으로 $\Delta x\,\Delta p\ge\hbar/2$($\hbar=h/2\pi$)다.
 
 #### 엄밀
 
