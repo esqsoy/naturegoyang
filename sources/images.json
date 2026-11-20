@@ -251,6 +251,29 @@
       "changes": "위키미디어 축소판(1920px)에서 받음, 가로 1200px로 줄임",
       "retrieved": "2026-11-18",
       "fetch_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Temperature-dependent-diffusion.jpg/1920px-Temperature-dependent-diffusion.jpg"
+    },
+    "img/e-sphere-blue-marble.jpg": {
+      "unit": "e-sphere",
+      "title": "View of the Earth seen by the Apollo 17 crew traveling toward the moon (as17-148-22727)",
+      "author": "NASA (Apollo 17 crew)",
+      "license": "public domain",
+      "license_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "source": "https://images.nasa.gov/details/as17-148-22727",
+      "file_url": "https://images-assets.nasa.gov/image/as17-148-22727/as17-148-22727~orig.jpg",
+      "fetch_url": "https://images-assets.nasa.gov/image/as17-148-22727/as17-148-22727~large.jpg",
+      "changes": "NASA 큰 판(1920px)에서 받아 가로 1200px로 줄임",
+      "retrieved": "2026-11-21"
+    },
+    "img/e-sphere-pinatubo.jpg": {
+      "unit": "e-sphere",
+      "title": "The June 12, 1991 eruption column from Mount Pinatubo taken from the east side of Clark Air Base",
+      "author": "Dave Harlow, USGS",
+      "license": "public domain",
+      "license_url": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+      "source": "https://www.usgs.gov/media/images/june-12-1991-eruption-column-mount-pinatubo-taken-th",
+      "file_url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/vhp_img157.jpg",
+      "changes": "가로 1200px로 줄임",
+      "retrieved": "2026-11-21"
     }
   }
 }
