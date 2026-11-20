@@ -35,6 +35,7 @@
 | 19 | 18판과 같은 앱. 사진 파일 `img/b-life-onion.jpg`를 더함. |
 | 20 | 15~21번 교재 문제의 목표(`sources/problem-objs.json` → `tools/problems.py`, 1,995문제). 학습 목표 표기: 극값 "오목" → "볼록", 뉴턴 법칙 "작용 반작용·자유 물체도·수직 항력", 연쇄 법칙 "합성함수". 따라쓰기에서 ∫를 int로 받음, 그림 라벨의 값이 수가 아니면 라벨을 숨김(−∞로 찍히던 것). |
 | 21 | 원자 구조 문제 목표와 이월(맥머리 2장 55문제를 c-bond 42·c-mole 7·c-periodic 4·c-particle 2로, `sources/problems-mcmurry8.json`), 지구계 사진 2장(`img/e-sphere-*.jpg`, NASA·USGS 서버에서 받음). |
+| 22 | 질문챗 아래 '고칠 점으로 남기기'(영신 26.11.21 "응, 붙여 줘"): 적은 글을 앱 저장소 `fixes/<자동 id>`에 남긴다(`u` 단원 id, `no`·`title`, `page`·`of`·`sec`·`at` 읽던 쪽과 첫머리 160자, `text`, `q`·`a` 바로 앞 질문챗 한 쌍, `state` open/done/kept, `reply`, `ts`). 단원을 열 때 그 단원 것을 읽어 질문하기 칸 아래에 상태·답과 함께 보인다. 기능 선언은 그대로(sample, db, user). Artifact 판 번호도 22. |
 
 판 번호는 Artifact 쪽 판 번호와 같다.
 

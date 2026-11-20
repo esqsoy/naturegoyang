@@ -281,6 +281,14 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .msg.ai{border:1px solid var(--line-2)}
 .msg.ai.md{font-family:var(--font-ui); font-size:14px; line-height:1.65}
 .chat-form{display:grid; gap:8px}
+.chat-btns{display:flex; gap:8px; flex-wrap:wrap}
+.chat-btns .btn{flex:1 1 auto}
+.fix-list{display:grid; gap:10px; margin-top:14px; padding-top:12px; border-top:1px solid var(--line-2)}
+.fix-h{margin:0; font:600 12px/1.3 var(--font-ui); color:var(--ink-3)}
+.fix-i{font-size:13px; line-height:1.55; color:var(--ink)}
+.fix-i .mono{margin-left:6px; color:var(--ink-3); font-size:11.5px}
+.fix-i p{margin:4px 0 0; white-space:pre-wrap}
+.fix-i .fix-r{color:var(--ink-2); border-left:2px solid var(--line); padding-left:8px}
 
 /* reading */
 .md{font-family:var(--font-read); font-size:17px; line-height:1.9; color:var(--ink); counter-reset:sec; overflow-wrap:break-word}
@@ -1728,7 +1736,8 @@ function lessonStep(sv,n){
     <article class="lesson" id="lesson-pane">${lessonPane(sv,n)}</article>
     <aside class="study-side">
       <section class="side-card"><h3>질문하기</h3><div id="chat-log" class="chat-log">${chatLog(sv)}</div>
-        <form id="chat-form" class="chat-form"><label class="sr" for="chat-input">질문</label><textarea id="chat-input" rows="2" placeholder="설명에서 막힌 부분을 물어봐"></textarea><button type="submit" class="btn sm">보내기</button></form></section>
+        <form id="chat-form" class="chat-form"><label class="sr" for="chat-input">질문</label><textarea id="chat-input" rows="2" placeholder="막힌 부분을 물어보거나, 고칠 점을 적어 남겨"></textarea><div class="chat-btns"><button type="submit" class="btn sm">보내기</button><button type="button" class="btn sm ghost" data-act="fix-note">고칠 점으로 남기기</button></div></form>
+        <div id="fix-notes">${fixHTML(sv)}</div></section>
     </aside></div>`;
 }
 function lessonPane(sv,n){
@@ -2205,6 +2214,7 @@ async function openStudy(id, mode, want){
   if(!known(id)&&rec(id)?.s!=='learning'){ ensure(id).s='learning'; save('progress'); }
   render(); window.scrollTo(0,0);
   await READY; if(UI.study!==sv) return;
+  loadFixes(sv);
   goStep(sv,step);
 }
 async function loadLesson(sv, regen){
@@ -2427,6 +2437,42 @@ async function sendChat(text){
     a.content=r.text;
   }catch(e){ a.content=e.text||''; a.err=sampleErr(e); }
   a.pending=false; sv.chatBusy=false; paintChat();
+}
+/* 고칠 점(영신 26.11.21 "응, 붙여 줘"): 읽다가 적은 수정·제안을 공유 저장소 fixes/에 남긴다. 단원·쪽·그 쪽 첫머리, 바로 앞
+   질문챗 한 쌍을 같이 적는다. Claude가 작업을 시작할 때 읽고, 고친 뒤 state('done' 고침, 'kept' 그대로 둠)와 reply를 적는다. */
+function fixHere(sv){
+  const R=sv.reader, L=sv.lesson;
+  if(!R||!L.md) return {page:0, of:0, sec:'', at:''};
+  const ch=readChunks(sv), N=ch.length;
+  if(R.whole) return {page:0, of:N, sec:'전체 보기', at:''};
+  const c=ch[Math.min(R.i,N-1)]||{};
+  const at=c.type==='book'?`교재 문제 목표 ${c.o}`:String(c.body||c.q||'').replace(/```[\s\S]*?```/g,' [그림] ').replace(/[#*>`|]/g,'').replace(/\s+/g,' ').trim().slice(0,160);
+  return {page:R.i+1, of:N, sec:[c.sec,c.sub].filter(Boolean).join(' · '), at};
+}
+async function loadFixes(sv){
+  if(!ENV.db||sv.fixes) return;
+  sv.fixes=[];
+  try{ const s=await withTimeout(ENV.db.collection('fixes').where('u','==',sv.id).get(),8000); sv.fixes=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.ts||0)-(b.ts||0)); }catch(e){}
+  paintFixes();
+}
+const FIX_STATE={open:'남김', done:'고침', kept:'그대로'};
+function fixHTML(sv){
+  const L=sv.fixes||[];
+  if(!L.length) return '';
+  return `<div class="fix-list"><p class="fix-h">이 단원에 남긴 고칠 점 ${L.length}</p>${L.map(f=>`<div class="fix-i"><span class="pill ${f.state==='done'?'good':''}">${FIX_STATE[f.state]||'남김'}</span>${f.page?`<span class="mono">${f.page}쪽</span>`:''}<p>${esc(f.text)}</p>${f.reply?`<p class="fix-r">${esc(f.reply)}</p>`:''}</div>`).join('')}</div>`;
+}
+function paintFixes(){ const el=$('#fix-notes'); if(el&&UI.study) el.innerHTML=fixHTML(UI.study); }
+async function sendFix(){
+  const sv=UI.study, t=$('#chat-input'); if(!sv||!t||sv.fixBusy) return;
+  const text=t.value.trim();
+  if(!text){ toast('고칠 점을 먼저 적어 줘.'); t.focus(); return; }
+  if(!ENV.db){ toast('저장소에 연결되지 않아서 남길 수 없어.'); return; }
+  const n=NODE[sv.id], rv=[...sv.chat].reverse(), q=rv.find(m=>m.role==='user'), a=rv.find(m=>m.role==='assistant'&&m.content&&!m.err);
+  const doc={u:sv.id, no:n.no, title:n.t, ...fixHere(sv), text:text.slice(0,2000), q:q?String(q.content).slice(0,1000):'', a:a?String(a.content).slice(0,2000):'', state:'open', reply:'', ts:Date.now()};
+  sv.fixBusy=true;
+  try{ const ref=await ENV.db.collection('fixes').add(doc); t.value=''; (sv.fixes ||= []).push({id:ref.id,...doc}); paintFixes(); toast('남겼어. 다음 작업 때 고칠게.'); }
+  catch(e){ toast(e?.code==='quota_exceeded'?'저장 공간이 가득 차서 남기지 못했어.':'고칠 점을 남기지 못했어. 연결을 확인해 줘.'); }
+  finally{ sv.fixBusy=false; }
 }
 async function runIdea(k){
   if(!ENV.sample){ toast(NOSAMPLE); return; }
@@ -2849,6 +2895,7 @@ document.addEventListener('click',e=>{
     case 'rd-again': if(sv?.reader) rdAgain(); break;
     case 'rd-go': if(sv?.reader){ const R=sv.reader, j=+el.dataset.i; if(R.free||j<=R.max){ R.i=j; R.toc=false; R.revealed=false; R.typed=''; paintLesson(); scrollToReader(); } } break;
     case 'rd-toc': if(sv?.reader){ sv.reader.toc=!sv.reader.toc; paintLesson(); } break;
+    case 'fix-note': sendFix(); break;
     case 'rd-whole': if(sv?.reader){ sv.reader.whole=!sv.reader.whole; paintLesson(); scrollToReader(); } break;
     case 'cg': gradeCard(+el.dataset.g); break;
     case 'card-edit': UI.cedit={u:el.dataset.u, id:el.dataset.c, list:!!el.dataset.list}; render(); { const f=$('#ce-a'); if(f) f.focus(); } break;

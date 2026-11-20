@@ -32,6 +32,7 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 - **지도(`N(...)` 줄)를 바꾸면** `python3 -I tools/curriculum.py`로 CURRICULUM.md를 다시 뽑는다. 단원을 더하거나 빼는 것은 영신 의견을 먼저 받는다.
 - **큰 일은 서브에이전트 팀원과 나눠 한다(영신 26.11.14: "작업할때 이솝을 파트너로 협업해줘 모든 자원을 총동원해서 마스터피스를 만들어보자").** 조사·초안은 나누고, 합치고 정하고 검산하는 것은 Claude가 한다.
   - 영신의 검수 댓글은 검수 페이지 Artifact에 달린다. 고친 것은 check.md와 WORK_LOG에 적는다.
+  - **시작할 때 앱의 고칠 점도 읽는다(26.11.21).** 앱 질문챗 옆 '고칠 점으로 남기기'로 남긴 것은 앱 저장소 `fixes/`에 있다. ArtifactData `list`(앱 주소, `fixes`)로 읽고, `state`가 `open`인 것을 고친 뒤 `update`로 `state`(`done` 고침, `kept` 그대로 둠)와 `reply`(무엇을 고쳤는지·왜 그대로 두는지 한 줄과 날짜)를 적는다. 영신 앱에 그대로 보인다. 고친 것은 검수 댓글처럼 check.md·WORK_LOG에 적는다.
 - 그림은 설명 안 ` ```graph ` 블록으로 쓴다(content/README, PRINCIPLES 2-2-2). 식으로 못 그리는 실물은 자유 이용 그림을 ` ```img ` 블록으로(장부 `sources/images.json`, `tools/images.py fetch`·`credits`·`check`, 파일 `app/img/`는 앱을 올릴 때 `files`로 같이 올린다). 영상·글·시뮬레이션은 설명의 그 자리에 ` ```link ` 블록으로 녹인다(18판, 옆 칸 영상 목록은 없앴다). 단원을 쓸 때 `python3 -I tools/videos.py block <id>`로 그 단원의 3B1B 짝을 보고 맞는 것만 넣고, `tools/videos.py`로 넣은 것·뺀 것을 확인한다. 교재 문제의 목표(`sources/problem-objs.json`)를 바꾸면 `tools/problems.py`.
 - 앱 원본은 `app/naturegoyang.html` 한 파일이다. 단원 데이터(`N(...)` 줄), 생성 지시(프롬프트), 화면이 모두 들어 있다.
 - 고친 뒤에는 claude.ai Artifact에 **같은 주소**로 다시 올린다(DEPLOYMENT). 새 주소로 올리면 영신의 기록이 이어지지 않는다.
