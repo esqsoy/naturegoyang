@@ -1986,6 +1986,40 @@ function withBooks(u, chunks){
   return out;
 }
 const readChunks=sv=>withBooks(sv.id, chunkLesson(sv.lesson.md));
+/* 예제를 그 목표 자리로(26.11.26, 26.11.26 플레이테스트 "예제가 단원 끝에 몰려 목표별 교재 문제를 예제보다 먼저 푼다").
+   설명의 '## 예제'에서 제목 줄 끝에 {목표 k}가 붙은 예제는 목표 k 절의 끝(점검 뒤)으로 옮겨 읽는다. 그래서 목표 k의 교재 문제 장이
+   그 예제 뒤에 온다(설명 → 점검 → 예제 → 교재 문제). 태그가 없는 예제는 예전처럼 '## 예제'에 남는다. 저장소의 글은 그대로이고 읽을 때만 옮긴다. */
+const EX_HEAD=/^\*\*예제\s*\d+/, EX_TAG=/\s*\{목표\s*([1-9])\}\s*$/;
+function placeExamples(src){
+  const lines=String(src||'').replace(/\r/g,'').split('\n');
+  const exAt=lines.findIndex(l=>/^##\s+예제\s*$/.test(l.trim()));
+  if(exAt<0||!lines.some(l=>EX_HEAD.test(l.trim())&&EX_TAG.test(l))) return src;
+  let exEnd=lines.findIndex((l,i)=>i>exAt&&/^##\s/.test(l)); if(exEnd<0) exEnd=lines.length;
+  // 예제 절을 예제 덩어리로 나눈다
+  const keep=[], moved={}; let blk=null, k=0;
+  const flush=()=>{ if(!blk) return; if(k) (moved[k] ||= []).push(blk); else keep.push(...blk); blk=null; k=0; };
+  for(let i=exAt+1;i<exEnd;i++){ const l=lines[i];
+    if(EX_HEAD.test(l.trim())){ flush(); const m=l.match(EX_TAG); k=m?+m[1]:0; blk=[m?l.replace(EX_TAG,''):l]; continue; }
+    if(blk) blk.push(l); else keep.push(l); }
+  flush();
+  // 원리 절의 목표(### 제목의 앞 번호, 없으면 차례)마다 끝 줄을 찾는다
+  const prAt=lines.findIndex(l=>/^##\s+원리/.test(l.trim())); if(prAt<0) return src;
+  let prEnd=lines.findIndex((l,i)=>i>prAt&&/^##\s/.test(l)); if(prEnd<0) prEnd=lines.length;
+  const ends={}; let cur=0, ord=0;
+  for(let i=prAt+1;i<prEnd;i++){ const m=lines[i].match(/^###\s+(.*)$/); if(m){ ord++; if(cur) ends[cur]=i; cur=+(m[1].match(/^(\d)\s*[.)]/)?.[1]||ord); } }
+  if(cur) ends[cur]=prEnd;
+  const ins={}; // 줄 번호 앞에 넣을 줄
+  for(const [kk,bs] of Object.entries(moved)){ const at=ends[kk]; if(at==null){ keep.push(...bs.flat()); continue; }
+    for(const b of bs){ while(b.length&&!b[b.length-1].trim()) b.pop(); (ins[at] ||= []).push('','#### 예제','',...b,''); } }
+  const out=[], hasKeep=keep.some(l=>l.trim());
+  for(let i=0;i<lines.length;i++){
+    if(ins[i]) out.push(...ins[i]);
+    if(i===exAt){ if(hasKeep){ out.push(lines[i],...keep); } i=exEnd-1; continue; }
+    out.push(lines[i]);
+  }
+  if(ins[lines.length]) out.push(...ins[lines.length]);
+  return out.join('\n');
+}
 function objBookHTML(sv, c, isNew){
   const u=sv.id, n=NODE[u], s=bookStats(u,c.o), L=gateList(u).filter(p=>p.o===c.o), mixN=mixList(u).filter(p=>p.o===c.o).length, tried=s.total-s.fresh;
   const pct=x=>`${s.total?Math.round(x/s.total*1000)/10:0}%`;
@@ -2446,7 +2480,7 @@ async function loadLesson(sv, regen){
     try{ cached=await getLesson(id); }
     catch(e){ if(UI.study!==sv) return; sv.lesson={md:'',state:'error',err:e.message||LOADFAIL.message,reload:true}; paintLesson(); return; }
     if(UI.study!==sv) return;
-    if(cached){ sv.lesson={md:cached,state:'done'}; paintLesson(); afterLesson(sv); return; }
+    if(cached){ sv.lesson={md:placeExamples(cached),state:'done'}; paintLesson(); afterLesson(sv); return; }
   }
   if(!ENV.sample){ sv.lesson={md:'',state:'nosample'}; paintLesson(); return; }
   const ctl=new AbortController(), L=sv.lesson={md:'',state:'writing',t0:Date.now(),ctl};
@@ -2454,7 +2488,7 @@ async function loadLesson(sv, regen){
   try{
     const r=await ENV.sample(lessonPrompt(id),{signal:ctl.signal, cache:false, onText:({text})=>{
       L.md=text; if(L.state!=='streaming'){ L.state='streaming'; paintLesson(); } else paintLessonBody(); }});
-    L.md=r.text; L.state='done'; L.truncated=r.truncated;
+    L.md=placeExamples(r.text); L.state='done'; L.truncated=r.truncated;
     if(!r.truncated) putLesson(id,r.text,regen);
     if(UI.study===sv){ paintLesson(); afterLesson(sv); }
   }catch(e){

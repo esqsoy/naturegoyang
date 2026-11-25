@@ -463,6 +463,15 @@ def check_unit(uid, ctx):
             errs.append(f'cards.json JSON 오류: {e}')
     else:
         errs.append('cards.json 없음')
+    # 예제 제목 끝의 {목표 k}: 앱이 그 예제를 목표 k 절 끝으로 옮겨 읽는다(26.11.26). k는 이 단원의 목표 번호여야 한다.
+    if os.path.exists(lp):
+        nobj = len(by[uid]['obj'])
+        for ln, line in enumerate(open(lp, encoding='utf-8').read().split('\n'), 1):
+            m = re.match(r'^\*\*예제\s*\d+[^\n]*\*\*\s*\{목표\s*(\d+)\}\s*$', line.strip())
+            if m and not 1 <= int(m.group(1)) <= nobj:
+                errs.append(f'{ln}줄: 예제의 {{목표 {m.group(1)}}}가 목표 수({nobj})를 넘는다')
+            elif re.search(r'\{목표\s*\d+\}', line) and not m:
+                errs.append(f'{ln}줄: {{목표 k}}는 예제 제목 줄(**예제 n. …**) 끝에만 쓴다')
     qp = os.path.join(d, 'quiz.json')
     if os.path.exists(qp):
         try:
