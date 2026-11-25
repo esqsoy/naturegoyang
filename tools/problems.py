@@ -131,9 +131,41 @@ def apply_objs(probs, warn):
     return probs
 
 
+def apply_moves(probs, warn):
+    """problems-*.json의 "moves": [{"sec", "from", "to", "unit", "o", "why"}] — 그 번호를 맡던 단원에서 빼고 unit으로 옮긴다.
+    토마스 목록은 절 단위라 한 문제를 옮길 장치가 없었다(HANDOFF '문제 목표 정하기에서 나온 빈 곳'). 목표(o)는 옮겨 간 단원의 것이다."""
+    for p in sorted(glob.glob(os.path.join(REPO, 'sources', 'problems-*.json'))):
+        d = json.load(open(p, encoding='utf-8'))
+        b = d.get('book')
+        for mv in d.get('moves', []):
+            sec, ma, mz, to, o = mv['sec'], int(mv['from']), int(mv['to']), mv['unit'], int(mv.get('o', 0))
+            moved = None
+            for u, rows in probs.items():
+                out = []
+                for r in rows:
+                    if r[0] != b or r[1] != sec or r[3] < ma or r[2] > mz:
+                        out.append(r)
+                        continue
+                    if r[2] > ma or r[3] < mz:
+                        warn.append(f'{b}|{sec} {ma}-{mz}: 한 줄 안에 다 들지 않는다({u} {r[2]}-{r[3]})')
+                    moved = moved or r
+                    for lo, hi in ((r[2], ma - 1), (mz + 1, r[3])):
+                        if lo <= hi:
+                            out.append([r[0], r[1], lo, hi] + r[4:])
+                probs[u] = out
+            if not moved:
+                warn.append(f'{b}|{sec} {ma}-{mz}: 옮길 번호를 맡은 단원이 없다')
+                continue
+            nr = [b, sec, ma, mz, moved[4], moved[5], 0]
+            if o:
+                nr.append(o)
+            probs.setdefault(to, []).append(nr)
+    return probs
+
+
 def main():
     warn = []
-    probs = apply_objs(build(), warn)
+    probs = apply_moves(apply_objs(build(), warn), warn)
     for w in warn:
         print('경고:', w, file=sys.stderr)
     src = open(APP, encoding='utf-8', newline='').read()
