@@ -295,6 +295,26 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .fix-i .mono{margin-left:6px; color:var(--ink-3); font-size:11.5px}
 .fix-i p{margin:4px 0 0; white-space:pre-wrap}
 .fix-i .fix-r{color:var(--ink-2); border-left:2px solid var(--line); padding-left:8px}
+.unote{margin-top:14px; padding-top:12px; border-top:1px solid var(--line-2)}
+.unote summary{font:600 12px/1.3 var(--font-ui); color:var(--ink-3)}
+.unote .md{font-size:14px; line-height:1.7; margin-top:8px}
+.unote .md h2,.unote .md h3{font:700 14px/1.4 var(--font-ui); margin:1em 0 .4em; padding:0; border:0}
+.unote .md h2::before{content:none}
+.unotes{display:grid; gap:14px; margin-bottom:22px}
+.unotes .md{font-size:calc(15.5px * var(--fs)); line-height:1.8}
+.cp{margin:24px 0 6px; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+.cp-h{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline; margin:0 0 6px; font-size:14px}
+.cp-h .muted{font-size:13px}
+.cp-row{display:grid; grid-template-columns:34px minmax(0,1fr); gap:10px; padding:9px 0; border-top:1px solid var(--line-2)}
+.cp-k{font:600 11.5px/2 var(--font-ui); color:var(--ink-3)}
+.cp .cp-a{font-size:calc(15.5px * var(--fs)); line-height:1.75}
+.cp .cp-a > :last-child{margin-bottom:0}
+.cp .cp-a .cp-q{color:var(--ink-2); margin:0 0 .25em}
+.cp .copy-form{margin-top:10px; border-color:var(--line)}
+.cp .copy-form.ok{border-color:var(--good)}
+.cp .copy-lead .md{display:inline}
+.cp-hint{margin:0; font-size:13px}
+.cp-hint code{font:13px var(--font-mono); background:var(--surface-2); padding:.05em .35em; border-radius:4px}
 
 /* reading */
 .md{font-family:var(--font-read); font-size:calc(17px * var(--fs)); line-height:1.9; color:var(--ink); counter-reset:sec; overflow-wrap:break-word}
@@ -825,7 +845,7 @@ const cleanKey=s=>{ const k=deTex(String(s||'')); return k.length<=150?k:''; };
 // symbols that are hard to type count the same as their keyboard spelling
 const SYM_ASCII=[[/[→⟶⇒]/g,'->'],[/[⇌↔⇔]/g,'<->'],[/≤/g,'<='],[/≥/g,'>='],[/≈/g,'~='],[/≠/g,'!='],[/±/g,'+-'],[/√/g,'sqrt'],[/∞/g,'inf'],[/ħ/g,'hbar'],[/∫/g,'int']];
 function typeKey(s){
-  let x=String(s||'').normalize('NFKC');
+  let x=String(s||'').normalize('NFKC').replace(/⁄/g,'/');
   for(const [re,to] of SYM_ASCII) x=x.replace(re,to);
   return x.replace(/[Ͱ-Ͽ]/g,c=>GREEK_NAME[c]||c)
     .replace(/[−–—]/g,'-').replace(/[×*]/g,'x')
@@ -1893,8 +1913,8 @@ function lessonStep(sv,n){
     <article class="lesson" id="lesson-pane">${lessonPane(sv,n)}</article>
     <aside class="study-side">
       <section class="side-card"><h3>질문하기</h3><div id="chat-log" class="chat-log">${chatLog(sv)}</div>
-        <form id="chat-form" class="chat-form"><label class="sr" for="chat-input">질문</label><textarea id="chat-input" rows="2" placeholder="막힌 부분을 물어보거나, 고칠 점을 적어 남겨"></textarea><div class="chat-btns"><button type="submit" class="btn sm">보내기</button><button type="button" class="btn sm ghost" data-act="fix-note">고칠 점으로 남기기</button></div></form>
-        <div id="fix-notes">${fixHTML(sv)}</div></section>
+        <form id="chat-form" class="chat-form"><label class="sr" for="chat-input">질문</label><textarea id="chat-input" rows="2" placeholder="막힌 부분을 물어보거나, 메모를 적어 남겨"></textarea><div class="chat-btns"><button type="submit" class="btn sm">보내기</button><button type="button" class="btn sm ghost" data-act="fix-note">메모로 남기기</button></div></form>
+        <div id="fix-notes">${fixHTML(sv)}</div><div id="unit-note">${unoteHTML(sv.id)}</div></section>
     </aside></div>`;
 }
 function lessonPane(sv,n){
@@ -1911,8 +1931,9 @@ function lessonPane(sv,n){
 let lessonRAF=0;
 function paintLesson(){
   const el=$('#lesson-pane'); if(!(el&&UI.view==='study'&&UI.study?.step==='lesson')) return;
-  const focusTyped=document.activeElement?.id==='chk-typed';
+  const focusTyped=document.activeElement?.id==='chk-typed', focusCp=document.activeElement?.id==='cp-in';
   el.innerHTML=lessonPane(UI.study,NODE[UI.study.id]);
+  if(focusCp){ const t=$('#cp-in'); if(t){ t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); } }
   if(focusTyped){ const t=$('#chk-typed'); if(t){ t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); } }
 }
 function paintLessonBody(){ if(lessonRAF) return; lessonRAF=requestAnimationFrame(()=>{ lessonRAF=0; paintLesson(); }); }
@@ -2069,6 +2090,56 @@ function ensureReader(sv){
   if(!sv.reader){ const r=rec(sv.id)||{}, free=!!(r.rd||r.lv||known(sv.id)), p=free?0:(r.pos||0); sv.reader={i:p, max:p, free, shown:{}, passed:{}, revealed:false, typed:'', whole:false}; }
   return sv.reader;
 }
+/* 읽는 장의 따라 쓰기(26.11.26 영신 고칠 점 "실수, 유리수와 그 영어 명칭 같은 것, 그리고 정의나 공식같은건 따라쓸수 있게 만드는건 어때? 보카고양 참조해줘.",
+   답 "처음부터 쓰자 그러면 내용을 무조건 읽게 하는 효과도 있거든. 그리고 공식은 컴퓨터로 입력할 수 있는 형태를 제시하고, 치고나면 입력식이 아니라 조판식? 으로 변환하게 하면 될것같아").
+   카드마다 그 카드를 처음 펼치는 장을 찾는다. 용어 카드는 굵게 쓴 그 용어가 처음 나오는 장, 나머지는 카드 글과 글자 짝(두 글자씩)이 가장 많이
+   겹치는 장(가장 높은 값의 85% 이상인 첫 장, 핵심 질문·요약 장은 뺀다). 그 장 아래에서 카드를 하나씩 보며 친다. 용어는 한글과 영어 이름,
+   나머지는 카드의 입력 꼴(공식은 키보드로 칠 수 있는 꼴). 맞게 치면 그 줄이 조판된 카드 답으로 바뀐다. 처음 읽는 장은 다 쳐야 '다음'이 켜진다.
+   친 카드는 진도 cp에 남는다. 보카고양의 따라쓰기(틀린 표제어를 끝까지 친다)를 처음 만날 때로 옮긴 것이다. */
+function cpMap(sv){
+  const items=liveItems(sv.id), key=sv.lesson.md.length+'|'+items.map(c=>c.id).join(',');
+  if(sv.cpm?.key===key) return sv.cpm.m;
+  const ch=readChunks(sv), m={};
+  const plain=x=>deTex(String(x||'').replace(/```[\s\S]*?```/g,' ')).replace(/[^가-힣A-Za-z0-9]/g,'').toLowerCase();
+  const bi=x=>{ const B=new Set(); for(let i=0;i<x.length-1;i++) B.add(x.slice(i,i+2)); return B; };
+  const cand=ch.map(c=>c.type==='text'&&!/^(요약|핵심 질문)/.test(c.sec||'')?bi(plain(c.body)):null);
+  for(const c of items){
+    let at=-1, pos=1e9;
+    if(c.k==='용어'){ at=ch.findIndex((x,j)=>cand[j]&&String(x.body).includes(`**${c.q}**`)); if(at>=0) pos=String(ch[at].body).indexOf(`**${c.q}**`); }
+    if(at<0){
+      const T=bi(plain(`${c.a} ${c.t||''} ${c.q}`)); if(!T.size) continue;
+      const sc=cand.map(B=>{ if(!B) return 0; let h=0; for(const g of T) if(B.has(g)) h++; return h/T.size; });
+      const best=Math.max(...sc); if(!(best>0)) continue;
+      at=sc.findIndex(v=>v>=best*0.85);
+    }
+    (m[at] ||= []).push({c, pos});
+  }
+  for(const k in m) m[k]=m[k].sort((a,b)=>a.pos-b.pos).map(x=>x.c); // 용어는 나오는 순서로 먼저, 나머지는 카드 순서로
+  sv.cpm={key, m}; return m;
+}
+const cpDone=(u,cid)=>!!rec(u)?.cp?.[cid];
+const cpLeft=(sv,i)=>(cpMap(sv)[i]||[]).filter(c=>!cpDone(sv.id,c.id));
+const cpKey=c=>c.k==='용어'?[c.q, answerKey(c.a)].filter(Boolean).join(' '):cardKey(c);
+const cpOk=(v,c)=>sameKey(v,cpKey(c))||(c.k!=='용어'&&cardKeyOk(v,c));
+// 치기 어려운 글자는 키보드 꼴로 쳐도 같다(typeKey). 그 짝을 따라 쓸 글 아래에 보인다.
+function typeHint(key){
+  const k=String(key||''), m=new Map();
+  for(const ch of k){ const n=ch.normalize('NFKC'); if(/[\u0370-\u03ff]/.test(n)&&GREEK_NAME[n]) m.set(ch,GREEK_NAME[n]); }
+  for(const [re,to] of SYM_ASCII){ const x=k.match(new RegExp(re.source)); if(x) m.set(x[0],to); }
+  if(k.includes('×')) m.set('×','x');
+  if(/[½⅓¼]/.test(k)) for(const ch of k.match(/[½⅓¼]/g)) m.set(ch,ch.normalize('NFKC').replace(/\u2044/g,'/'));
+  return m.size?`<p class="hint cp-hint">${[...m].map(([a,b])=>`${esc(a)} → <code>${esc(b)}</code>`).join(' · ')}로 쳐도 돼.</p>`:'';
+}
+function cpHTML(sv, i, need){
+  const L=cpMap(sv)[i]; if(!L?.length) return '';
+  const done=L.filter(c=>cpDone(sv.id,c.id)), cur=L.find(c=>!cpDone(sv.id,c.id)), R=sv.reader;
+  const row=c=>`<div class="cp-row"><span class="cp-k">${esc(c.k)}</span><div class="md cp-a">${c.k==='용어'?`<p><b>${esc(c.q)}</b> ${inl(c.a)}</p>`:`<p class="cp-q">${inl(c.q)}</p>${md(c.a)}`}</div></div>`;
+  const draft=R&&R.cpFor===cur?.id?R.cpDraft||'':'';
+  return `<section class="cp" aria-label="따라 쓰기"><p class="cp-h"><b>따라 쓰기</b><span class="mono">${done.length} / ${L.length}</span>${cur?`<span class="muted">${need?'이 장의 카드를 보며 하나씩 쳐. 다 쳐야 다음 장이 켜져.':'다시 읽는 장이라 안 쳐도 돼.'}</span>`:''}</p>
+    ${done.map(row).join('')}
+    ${cur?`<form class="copy-form cp-form" id="cp-form" data-cid="${cur.id}" data-key="${esc(cpKey(cur))}"><p class="copy-lead">${cur.k==='용어'?`용어 <b>${esc(cur.q)}</b> ${inl(cur.a)} · 한자는 보기만 하고 한글과 영어를 쳐`:`${esc(cur.k)} · ${inl(cur.q)}`}</p><p class="copy-key">${esc(cpKey(cur))}</p>${typeHint(cpKey(cur))}<label class="sr" for="cp-in">따라 쓰기</label><input id="cp-in" class="copy-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="여기에 그대로 써" value="${esc(draft)}"><div class="row"><button type="submit" class="btn primary">확인 <kbd>Enter</kbd></button></div></form>`:''}
+  </section>`;
+}
 function readerHTML(sv){
   const L=sv.lesson, R=sv.reader, chunks=readChunks(sv), N=chunks.length;
   const streaming=L.state==='streaming'||L.state==='writing';
@@ -2080,9 +2151,10 @@ function readerHTML(sv){
   const wait=isNew&&complete&&c.type==='text'?Math.max(0,dw-el):0;
   const checkOk=c.type!=='check'||R.passed[R.i]||!isNew;
   const bookOk=c.type!=='book'||!isNew||!bookStats(sv.id,c.o).fresh;
-  const canNext=complete&&wait<=0&&checkOk&&bookOk, last=R.i===N-1&&!streaming;
+  const cpReady=c.type!=='text'||!isNew||!cpLeft(sv,R.i).length;
+  const canNext=complete&&wait<=0&&checkOk&&bookOk&&cpReady, last=R.i===N-1&&!streaming;
   clearTimeout(rdTimer);
-  if(wait>0) rdTimer=setTimeout(()=>{ if(UI.study===sv&&sv.step==='lesson'&&sv.reader===R) paintLesson(); }, wait*1000+80);
+  if(wait>0) rdTimer=setTimeout(()=>{ if(UI.study===sv&&sv.step==='lesson'&&sv.reader===R&&document.activeElement?.id!=='cp-in') paintLesson(); }, wait*1000+80);
   const reach=j=>R.free||j<=R.max;
   const segs=chunks.map((x,j)=>`<button type="button" class="seg ${j<R.i?'done':j===R.i?'cur':reach(j)?'seen':''}${x.type==='check'?' chk':x.type==='book'?' bk':''}${x.type==='check'&&R.passed[j]||x.type==='book'&&!bookStats(sv.id,x.o).fresh?' ok':''}" data-act="rd-go" data-i="${j}" title="${j+1}장${x.type==='check'?' · 점검':x.type==='book'?` · 교재 문제(목표 ${x.o})`:''}"${reach(j)&&j!==R.i?'':' disabled'}><span class="sr">${j+1}장으로</span></button>`).join('')+(streaming?'<i class="more"></i>':'');
   let body;
@@ -2096,7 +2168,7 @@ function readerHTML(sv){
   } else {
     /* 학습 목표는 옆 칸 대신 그 절의 첫 장 제목 아래에 녹인다(26.11.18 영신 "학습목표는 녹이고"). */
     const ok=c.sec==='원리'&&c.sub&&(R.i===0||chunks[R.i-1].sub!==c.sub)?objOfChunk(chunks)(c):0, ot=ok&&NODE[sv.id]?.obj[ok-1];
-    body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}${ot?`<p class="rd-obj"><b>목표 ${ok}</b>${esc(ot)}</p>`:''}<div class="md${c.sec==='요약'?' sum':''}">${md(c.body)}</div>${R.i===0&&NODE[sv.id]?previewHTML(NODE[sv.id],L.md):''}`;
+    body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}${ot?`<p class="rd-obj"><b>목표 ${ok}</b>${esc(ot)}</p>`:''}<div class="md${c.sec==='요약'?' sum':''}">${md(c.body)}</div>${R.i===0&&NODE[sv.id]?previewHTML(NODE[sv.id],L.md):''}${complete?cpHTML(sv,R.i,isNew):''}`;
   }
   const label=!complete?'쓰는 중…':last?'암기로 →':'다음 →';
   const fill=wait>0&&!matchMedia('(prefers-reduced-motion: reduce)').matches?`<span class="rd-fill" style="animation-duration:${dw}s;animation-delay:-${el.toFixed(2)}s"></span>`:'';
@@ -2417,10 +2489,13 @@ function ideaInner(I){
 function paintIdea(){ const el=$('#idea-out'); if(el&&UI.idea) el.innerHTML=ideaInner(UI.idea); }
 function notesView(){
   const items=S.mistakes.items;
+  if(UNOTES==null&&ENV.db) loadUNotes().then(()=>{ if(UI.view==='notes') render(); });
+  const un=Object.entries(UNOTES||{}).filter(([id])=>NODE[id]).sort((a,b)=>NODE[a[0]].no-NODE[b[0]].no);
+  const unHTML=un.length?`<div class="unotes">${un.map(([id,x])=>`<section class="card"><div class="ng-h">${chip(NODE[id])}<span class="muted">내 노트</span></div><div class="md">${md(x.md)}</div></section>`).join('')}</div>`:'';
   const head=`<header class="pagehead"><div><p class="eyebrow">틀린 문제 ${items.length}개</p><h1>오답 노트</h1><p class="lede">확인 문제와 응용 복습에서 틀린 문제가 단원별로 모여. 이어하기가 다음 날, 3일, 7일 뒤에 다시 보여 주고, 세 번 이어 맞히면 졸업이야. 같은 단원에서 실수가 반복되면 그 단원 설명과 카드를 다시 봐.</p></div></header>`;
-  if(!items.length) return head+`<div class="card"><p style="margin:0">아직 틀린 문제가 없어. 틀린 문제는 정답·해설과 함께 여기에 쌓여.</p></div>`;
+  if(!items.length) return head+unHTML+`<div class="card"><p style="margin:0">아직 틀린 문제가 없어. 틀린 문제는 정답·해설과 함께 여기에 쌓여.</p></div>`;
   const groups=new Map(); items.forEach(m=>{ if(!NODE[m.n]) return; if(!groups.has(m.n)) groups.set(m.n,[]); groups.get(m.n).push(m); });
-  return head+`<div class="notes">${[...groups].map(([id,list])=>`<section class="card"><div class="ng-h">${chip(NODE[id])}<span class="muted">${list.length}문제</span>${st(id)!=='locked'?`<button type="button" class="btn sm" data-act="learn" data-id="${id}">단원 다시 보기</button>`:''}</div>
+  return head+unHTML+`<div class="notes">${[...groups].map(([id,list])=>`<section class="card"><div class="ng-h">${chip(NODE[id])}<span class="muted">${list.length}문제</span>${st(id)!=='locked'?`<button type="button" class="btn sm" data-act="learn" data-id="${id}">단원 다시 보기</button>`:''}</div>
     ${list.map(m=>`<div class="mis"><div class="md">${md(m.q)}</div><dl><dt>내 답</dt><dd class="bad">${inl(m.a)}</dd><dt>정답</dt><dd class="good">${inl(m.c)}</dd></dl>${m.why?`<details><summary>해설</summary><div class="md">${md(m.why)}</div></details>`:''}<div class="mis-f"><span class="mono muted">${fmtDate(m.t)} · ${m.ok?'졸업':'다시 보기 '+fmtRel(dnumTime(misDay(m)))}</span><button type="button" class="btn ghost sm" data-act="mis-del" data-k="${m.id}">해결했어</button></div></div>`).join('')}</section>`).join('')}</div>`;
 }
 function prefsView(){
@@ -2530,6 +2605,7 @@ async function loadCards(sv, bg, force){
   }
   if(C.state==='ready'){ checkCardsDone(id); if(rec(id)?.cd) prefetchQuiz(sv); }
   if(UI.study===sv&&sv.step==='cards'){ render(); focusCard(); }
+  else if(UI.study===sv&&sv.step==='lesson'&&C.state==='ready'&&document.activeElement?.id!=='cp-in') paintLesson();
 }
 // Cards without a key (t) — the pre-made, reviewed ones in content/ — use a key taken from the answer (answerKey).
 // The app does not ask the model for keys: that would write unreviewed text into the reviewed cards/<id> docs.
@@ -2736,7 +2812,10 @@ async function sendChat(text){
   }catch(e){ a.content=e.text||''; a.err=sampleErr(e); }
   a.pending=false; sv.chatBusy=false; paintChat();
 }
-/* 고칠 점(영신 26.11.21 "응, 붙여 줘"): 읽다가 적은 수정·제안을 공유 저장소 fixes/에 남긴다. 단원·쪽·그 쪽 첫머리, 바로 앞
+/* 메모(26.11.26 영신 "고칠점으로 남기기를 메모로 바꾼다음에 제안은 고치고 메모는 노트로 정리해주는 방식은 어떨까?", "메모 하나, 췍 때 정리"):
+   적은 것은 그대로 fixes/에 쌓인다. 영신이 "췍"이라고 하면 Claude가 읽어, 고칠 제안은 고치고(done·kept) 나머지는 그 단원 노트
+   notes/<단원 id>(md)로 정리한다(noted). 단원 노트는 옆 칸과 오답 노트 화면에 보인다.
+   고칠 점(영신 26.11.21 "응, 붙여 줘"): 읽다가 적은 수정·제안을 공유 저장소 fixes/에 남긴다. 단원·쪽·그 쪽 첫머리, 바로 앞
    질문챗 한 쌍을 같이 적는다. Claude가 작업을 시작할 때 읽고, 고친 뒤 state('done' 고침, 'kept' 그대로 둠)와 reply를 적는다. */
 function fixHere(sv){
   const R=sv.reader, L=sv.lesson;
@@ -2752,24 +2831,32 @@ async function loadFixes(sv){
   sv.fixes=[];
   try{ const s=await withTimeout(ENV.db.collection('fixes').where('u','==',sv.id).get(),8000); sv.fixes=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.ts||0)-(b.ts||0)); }catch(e){}
   paintFixes();
+  await loadUNotes(); const el=$('#unit-note'); if(el&&UI.study===sv) el.innerHTML=unoteHTML(sv.id);
 }
-const FIX_STATE={open:'남김', done:'고침', kept:'그대로'};
+const FIX_STATE={open:'메모', done:'고침', kept:'그대로', noted:'노트로'};
+let UNOTES=null; // 단원 노트 notes/<단원 id> = {u, md, at}: 영신의 메모를 "췍" 때 Claude가 정리한 것
+async function loadUNotes(force){
+  if(!ENV.db||(UNOTES&&!force)) return UNOTES||{};
+  try{ const s=await withTimeout(ENV.db.collection('notes').get(),8000); const o={}; s.docs.forEach(d=>{ const x=d.data(); if(x&&typeof x.md==='string'&&x.md.trim()) o[d.id]=x; }); UNOTES=o; }catch(e){ UNOTES=UNOTES||{}; }
+  return UNOTES;
+}
+function unoteHTML(id){ const x=UNOTES?.[id]; if(!x) return ''; return `<details class="unote" open><summary>내 노트${x.at?` · ${new Date(x.at).toLocaleDateString('ko-KR')} 정리`:''}</summary><div class="md">${md(x.md)}</div></details>`; }
 function fixHTML(sv){
   const L=sv.fixes||[];
   if(!L.length) return '';
-  return `<div class="fix-list"><p class="fix-h">이 단원에 남긴 고칠 점 ${L.length}</p>${L.map(f=>`<div class="fix-i"><span class="pill ${f.state==='done'?'good':''}">${FIX_STATE[f.state]||'남김'}</span>${f.page?`<span class="mono">${f.page}쪽</span>`:''}<p>${esc(f.text)}</p>${f.reply?`<p class="fix-r">${esc(f.reply)}</p>`:''}</div>`).join('')}</div>`;
+  return `<div class="fix-list"><p class="fix-h">이 단원의 메모 ${L.length}</p>${L.map(f=>`<div class="fix-i"><span class="pill ${f.state==='done'?'good':''}">${FIX_STATE[f.state]||'남김'}</span>${f.page?`<span class="mono">${f.page}쪽</span>`:''}<p>${esc(f.text)}</p>${f.reply?`<p class="fix-r">${esc(f.reply)}</p>`:''}</div>`).join('')}</div>`;
 }
 function paintFixes(){ const el=$('#fix-notes'); if(el&&UI.study) el.innerHTML=fixHTML(UI.study); }
 async function sendFix(){
   const sv=UI.study, t=$('#chat-input'); if(!sv||!t||sv.fixBusy) return;
   const text=t.value.trim();
-  if(!text){ toast('고칠 점을 먼저 적어 줘.'); t.focus(); return; }
+  if(!text){ toast('메모를 먼저 적어 줘.'); t.focus(); return; }
   if(!ENV.db){ toast('저장소에 연결되지 않아서 남길 수 없어.'); return; }
   const n=NODE[sv.id], rv=[...sv.chat].reverse(), q=rv.find(m=>m.role==='user'), a=rv.find(m=>m.role==='assistant'&&m.content&&!m.err);
   const doc={u:sv.id, no:n.no, title:n.t, ...fixHere(sv), text:text.slice(0,2000), q:q?String(q.content).slice(0,1000):'', a:a?String(a.content).slice(0,2000):'', state:'open', reply:'', ts:Date.now()};
   sv.fixBusy=true;
-  try{ const ref=await ENV.db.collection('fixes').add(doc); t.value=''; (sv.fixes ||= []).push({id:ref.id,...doc}); paintFixes(); toast('남겼어. 다음 작업 때 고칠게.'); }
-  catch(e){ toast(e?.code==='quota_exceeded'?'저장 공간이 가득 차서 남기지 못했어.':'고칠 점을 남기지 못했어. 연결을 확인해 줘.'); }
+  try{ const ref=await ENV.db.collection('fixes').add(doc); t.value=''; (sv.fixes ||= []).push({id:ref.id,...doc}); paintFixes(); toast('메모했어. 췍 하면 고칠 건 고치고, 나머지는 이 단원 노트로 정리할게.'); }
+  catch(e){ toast(e?.code==='quota_exceeded'?'저장 공간이 가득 차서 남기지 못했어.':'메모를 남기지 못했어. 연결을 확인해 줘.'); }
   finally{ sv.fixBusy=false; }
 }
 async function runIdea(k){
@@ -3347,6 +3434,14 @@ document.addEventListener('submit',e=>{
   if(f.id==='chk-form'){ const R=UI.study?.reader; if(R){ R.typed=$('#chk-typed')?.value.trim()||''; R.revealed=true; paintLesson(); } return; }
   if(f.id==='reveal-form'){ if(UI.cs){ UI.cs.typed=$('#card-typed')?.value.trim()||''; UI.cs.revealed=true; render(); } return; }
   if(f.id==='card-copy-form'){ cardCopy($('#card-copy')?.value||''); return; }
+  if(f.id==='cp-form'){
+    const sv=UI.study, R=sv?.reader, c=sv&&liveItems(sv.id).find(x=>x.id===f.dataset.cid); if(!c||!R) return;
+    const v=$('#cp-in')?.value||'';
+    if(!cpOk(v,c)){ copyMiss(f,v,cpKey(c)); return; }
+    const r=ensure(sv.id); (r.cp ||= {})[c.id]=1; save('progress'); R.cpDraft=''; R.cpFor='';
+    paintLesson(); requestAnimationFrame(()=>{ const t=$('#cp-in'); if(t) t.focus({preventScroll:true}); else { const b=$('.rd-next'); if(b&&!b.disabled) b.focus({preventScroll:true}); } });
+    return;
+  }
   if(f.id==='card-recall-form'){ cardRecall($('#card-recall')?.value||'',false); return; }
   if(f.id==='copy-form'){
     const ns=f.dataset.ns, box=ns==='q'?UI.study?.quiz:UI.review; if(!box?.items) return;
@@ -3418,6 +3513,7 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('input',e=>{
   if(e.target.id==='chk-typed'&&UI.study?.reader) UI.study.reader.typed=e.target.value;
+  if(e.target.id==='cp-in'&&UI.study?.reader){ const R=UI.study.reader; R.cpDraft=e.target.value; R.cpFor=e.target.form?.dataset.cid; }
   { const P=UI.study?.bk?.P, f={'bk-ans':'ans','bk-work':'work','bk-text':'text','bk-hl':'hintLine'}[e.target.id]; if(P&&f) P[f]=e.target.value; }
   if(e.target.id==='bk-calc-in'&&UI.calc) UI.calc.draft=e.target.value;
   if(e.target.classList?.contains('copy-in')){ const f=e.target.form; if(f) f.classList.toggle('ok',sameKey(e.target.value,f.dataset.key)); }
