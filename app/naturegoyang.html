@@ -933,19 +933,21 @@ function nextAction(){
   const gt=mixGateTier(); if(gt&&!ORDER.some(n=>rec(n.id)?.s==='shaky')) return {kind:'mix', count:tierMixLeft(gt), all:true};
   const mq=mixQuotaLeft(); if(mq>0){ const p=mixPool(false).count; if(p) return {kind:'mix', count:Math.min(mq,p)}; }
   const l=lineUnit();
+  if(l&&l.how==='new'&&l.n.tier>1&&!(S.stats.tiers||[]).includes(l.n.tier-1)) return {kind:'tiermap', t:l.n.tier-1}; // 단계를 마친 날 주기율표를 한 번
   if(l&&l.how==='new'){ const k=ideaDue(); if(k) return {kind:'idea', k}; } // 큰 개념 잇기는 단원을 마치고 새 단원을 열기 직전에만
   return l?{kind:'unit', unit:l.n, how:l.how}:{kind:'done'};
 }
 const phaseName=id=>{ const r=rec(id)||{}; return r.qp&&!bookDone(id)?'교재':r.cd?'확인':(r.rd||r.lv)?'암기':'설명'; };
-function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='book'?`다시 풀 교재 문제 ${a.count}개`:a.kind==='mix'?`섞어 풀기 ${a.count}문제`:a.kind==='mistakes'?`오답 다시 보기 ${a.count}문제`:a.kind==='idea'?`큰 개념 잇기 · ${IDEAS[a.k].name}`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
+function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='book'?`다시 풀 교재 문제 ${a.count}개`:a.kind==='mix'?`섞어 풀기 ${a.count}문제`:a.kind==='mistakes'?`오답 다시 보기 ${a.count}문제`:a.kind==='idea'?`큰 개념 잇기 · ${IDEAS[a.k].name}`:a.kind==='tiermap'?`${a.t}단계 돌아보기 · 주기율표`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
 function runNext(){
-  UI.ideaFlow=null;
+  UI.ideaFlow=null; UI.tierFlow=null;
   const a=nextAction();
   if(a.kind==='cards') startCardReview();
   else if(a.kind==='review') startReview();
   else if(a.kind==='book') openStudy(a.u,'learn','book');
   else if(a.kind==='mistakes') startMisReview();
   else if(a.kind==='idea'){ go('ideas'); UI.ideaFlow=a.k; runIdea(a.k); }
+  else if(a.kind==='tiermap'){ (S.stats.tiers ||= []).push(a.t); save('stats'); UI.sel=null; UI.filter='all'; UI.tierFlow=a.t; go('map'); }
   else if(a.kind==='mix') openMix();
   else if(a.kind==='unit') openStudy(a.unit.id,'learn');
   else { go('today'); toast(`${TOTAL}개 단원을 모두 숙달했어.`); }
@@ -1718,9 +1720,10 @@ function todayView(){
   else if(a.kind==='mix'){ nt=`섞어 풀기 ${a.count}문제`; sub=a.all?'이 단계의 짝꿍 문제가 남아 있어. 다 풀어야 다음 단계가 열려.':'숙달한 단원들의 짝꿍 문제를 섞어서 풀어. 오늘 몫이야.'; }
   else if(a.kind==='mistakes'){ nt=`오답 다시 보기 ${a.count}문제`; sub='전에 틀린 문제를 다시 떠올려. 세 번 이어 맞히면 졸업이야.'; }
   else if(a.kind==='idea'){ nt=`큰 개념 잇기 · ${IDEAS[a.k].name}`; sub='숙달한 단원들이 이 원리로 어떻게 이어지는지 정리를 읽고 다음 단원으로 가.'; }
+  else if(a.kind==='tiermap'){ nt=`${a.t}단계 끝 · 주기율표 돌아보기`; sub=`${TIERS[a.t].label}의 단원을 모두 숙달했어. 채운 지도를 한 번 보고 다음 단계${TIERS[a.t+1]?`(${TIERS[a.t+1].label})`:''}로 가.`; }
   else if(a.kind==='unit'){ const n=a.unit; nt=`${n.no}번 · ${n.t}`; sub=a.how==='repair'?'응용 복습에서 흔들린 단원이야. 확인 문제를 다시 100점으로 통과해야 해.':a.how==='resume'?`${phaseName(n.id)} 단계부터 이어서 해.`:n.q; }
   else { nt='모든 단원 숙달'; sub='남은 건 복습뿐이야.'; }
-  const after=(a.kind==='cards'||a.kind==='review'||a.kind==='book'||a.kind==='mix'||a.kind==='mistakes'||a.kind==='idea')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
+  const after=(a.kind==='cards'||a.kind==='review'||a.kind==='book'||a.kind==='mix'||a.kind==='mistakes'||a.kind==='idea'||a.kind==='tiermap')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
   const curNo=L?L.n.no:TOTAL, start=Math.max(0,Math.min(curNo-3,TOTAL-9));
   const hero=`<article class="card hero">
     <div class="step-h"><h2>이어하기</h2><span class="pill ${mins>=goal?'good':''}" id="today-min">오늘 ${fmtMin(mins)} / ${fmtMin(goal)}</span></div>
@@ -1773,6 +1776,13 @@ function activityCard(){
     <div class="legend-s"><span><i class="sw a-k"></i>카드</span><span><i class="sw a-q"></i>문제</span><span class="mono" style="color:var(--good)">숫자 = 새로 숙달</span></div></section>`;
 }
 
+/* 단계 끝 돌아보기(26.11.26): 한 단계를 다 숙달하고 다음 단계 첫 단원을 열기 전에, 이어하기가 주기율표를 한 번 펼친다. */
+function tierDoneNote(t){
+  const c=counts(n=>n.tier===t), nx=TIERS[t+1];
+  return `<article class="card hero" style="margin-bottom:18px"><p class="eyebrow" style="margin-bottom:4px">${t}단계 끝</p><p class="next-t">${esc(TIERS[t].label)} ${c.total}단원을 모두 숙달했어</p>
+    <p class="next-s">${esc(TIERS[t].desc)}. 아래 지도에서 ${t}단계 줄이 다 채워졌어.${nx?` 다음은 ${esc(nx.label)}: ${esc(nx.desc)}.`:''}</p>
+    <div class="row"><button type="button" class="btn primary" data-act="next">이어하기 →</button></div></article>`;
+}
 function mapView(){
   if(!UI.filterTouched&&window.innerWidth<760&&UI.filter==='all') UI.filter=(S.profile&&candidates()[0]?.d)||'F';
   const doms=UI.filter==='all'?DKEYS:[UI.filter], a=counts();
@@ -1788,6 +1798,7 @@ function mapView(){
   const ready=NODES.filter(n=>st(n.id)==='ready').length;
   return `<header class="pagehead"><div><p class="eyebrow">${TOTAL}개 단원 · 5개 영역 · 4단계</p><h1>단원 주기율표</h1>
     <p class="lede">세로는 단계, 가로는 영역이야. 타일 번호가 이어하기 순서야. 한 단계의 단원을 모두 100점으로 통과해야 다음 단계가 열리고, 단계 안에서도 선수 단원을 먼저 숙달해야 해. 타일을 누르면 선수 단원은 점선, 다음에 열리는 단원은 실선으로 이어져.</p></div></header>
+  ${UI.tierFlow?tierDoneNote(UI.tierFlow):''}
   <div class="map-tools">${filt}${legend}</div>
   <div class="pt-wrap" id="pt-wrap"><svg class="pt-links" id="pt-links" aria-hidden="true"></svg>${g}</div>
   <p class="hint mono">단단함 ${a.solid} · 숙달 ${a.mastered+a.shaky} · 학습 중 ${a.learning} · 지금 학습 가능 ${ready}</p>`;
@@ -3166,7 +3177,7 @@ document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]'); if(!el||el.disabled) return;
   const act=el.dataset.act, id=el.dataset.id, sv=UI.study, rv=UI.review;
   switch(act){
-    case 'nav': UI.sel=null; go(el.dataset.view); break;
+    case 'nav': UI.sel=null; UI.tierFlow=null; UI.ideaFlow=null; go(el.dataset.view); break;
     case 'sel': select(id); break;
     case 'close': select(null); break;
     case 'filter': UI.filter=el.dataset.d; UI.filterTouched=true; render(); break;
