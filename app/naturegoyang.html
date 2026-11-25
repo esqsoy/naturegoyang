@@ -2407,6 +2407,12 @@ function render(){
   if(UI.view==='map') requestAnimationFrame(drawLinks);
 }
 function focusCard(){ requestAnimationFrame(()=>{ const t=$('#card-copy')||$('#card-recall')||$('#card-typed'); if(t) t.focus({preventScroll:true}); }); }
+function copyMiss(f, typed, key){
+  const a=typeKey(typed), b=typeKey(key); let i=0; while(i<a.length&&i<b.length&&a[i]===b[i]) i++;
+  const msg=!a?'아직 비어 있어.':i>=a.length?`아직 덜 썼어. '${b.slice(i,i+8)}'부터 이어 써.`:`${i+1}번째 글자부터 달라. 써야 할 것 '${b.slice(i,i+6)}', 쓴 것 '${a.slice(i,i+6)}'.`;
+  let el=f.querySelector('.copy-miss'); if(!el){ el=document.createElement('p'); el.className='copy-miss hint'; el.setAttribute('role','status'); f.appendChild(el); }
+  el.textContent=msg+' 띄어쓰기와 문장부호는 따지지 않아.';
+}
 function focusCopy(){ requestAnimationFrame(()=>{ const t=$('.copy-in'); if(t) t.focus({preventScroll:true}); }); }
 function go(v){
   if(!ROUTES.includes(v)) v='today';
@@ -2561,7 +2567,7 @@ function afterCard(cs,u){
 function cardCopy(val){
   const cs=UI.cs; if(!cs?.copy||!cs.queue.length) return;
   const it=cs.queue[0], c=cardOf(it.u,it.id); if(!c) return;
-  if(!cardKeyOk(val,c)){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+  if(!cardKeyOk(val,c)){ const f=$('#card-copy')?.form; if(f) copyMiss(f,val,c.t||answerKey(c.a)); else toast('아직 달라. 보이는 그대로 써 봐.'); return; }
   const cur=cs.queue.shift(), g=cs.copy.g;
   (cs.recall ||= {})[cur.u+'/'+cur.id]=true;
   cs.queue.splice(Math.min(g===1?3:5,cs.queue.length),0,cur);
@@ -2887,7 +2893,30 @@ function calcHTML(){
 /* answers: same text (keeping brackets, which decide open or closed intervals) or the same number */
 const ansNorm=s=>deTex(String(s||'')).normalize('NFKC').replace(/[−–—]/g,'-').replace(/\s+/g,'').replace(/∞|무한대|infinity|inf/gi,'∞').replace(/≤|=</g,'<=').replace(/≥|=>/g,'>=').toLowerCase();
 const strictNum=s=>{ const t=String(s).trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/,/g,'').replace(/[×x*]10\^?\(?(-?\d+)\)?/i,'e$1'); return /^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(t)?parseFloat(t):NaN; };
-function bkSame(a,b){ const x=ansNorm(a), y=ansNorm(b); if(x&&x===y) return true; const p=strictNum(a), q=strictNum(b); return !isNaN(p)&&!isNaN(q)&&Math.abs(p-q)<=Math.max(Math.abs(q)*0.005,1e-12); }
+/* 한 변수의 구간·부등식을 같은 꼴로: [a,b], (a,∞), a≤x≤b, x>a, x≤−a 또는 x≥a, ∪로 이은 것. 못 읽으면 null.
+   '-2 ≤ t ≤ 4'와 '[-2, 4]'처럼 표기만 다른 책 답을 모델 판정 없이 같다고 본다(26.11.26 플레이테스트). */
+function ivSet(s){
+  let x=String(s||'').normalize('NFKC').replace(/[−–—]/g,'-').replace(/\\le(q)?/g,'≤').replace(/\\ge(q)?/g,'≥').replace(/<=/g,'≤').replace(/>=/g,'≥')
+    .replace(/\\infty|infinity|inf/gi,'∞').replace(/\\cup|∪| or |또는|,\s*(?=[a-z]\s*[<>≤≥])/gi,'|').replace(/\$/g,'').replace(/\s+/g,'');
+  const num=t=>{ if(/^\+?∞$/.test(t)) return Infinity; if(t==='-∞') return -Infinity; const m=t.match(/^(-?\d+(?:\.\d+)?)(?:\/(\d+(?:\.\d+)?))?$/); return m?(m[2]?+m[1]/+m[2]:+m[1]):NaN; };
+  const parts=x.split('|').filter(Boolean); if(!parts.length) return null;
+  const out=[];
+  for(const q of parts){
+    let m=q.match(/^([\[(])([^,]+),([^\])]+)([\])])$/);
+    if(m){ const lo=num(m[2]), hi=num(m[3]); if(isNaN(lo)||isNaN(hi)) return null; out.push([lo,m[1]==='[',hi,m[4]===']']); continue; }
+    m=q.match(/^([^<>≤≥]+)([<≤])[a-z]([<≤])([^<>≤≥]+)$/);
+    if(m){ const lo=num(m[1]), hi=num(m[4]); if(isNaN(lo)||isNaN(hi)) return null; out.push([lo,m[2]==='≤',hi,m[3]==='≤']); continue; }
+    m=q.match(/^([^<>≤≥]+)([>≥])[a-z]([>≥])([^<>≤≥]+)$/);
+    if(m){ const hi=num(m[1]), lo=num(m[4]); if(isNaN(lo)||isNaN(hi)) return null; out.push([lo,m[3]==='≥',hi,m[2]==='≥']); continue; }
+    m=q.match(/^[a-z]([<>≤≥])([^<>≤≥]+)$/) || (q.match(/^([^<>≤≥]+)([<>≤≥])[a-z]$/)&&[null,{'<':'>','>':'<','≤':'≥','≥':'≤'}[q.match(/([<>≤≥])/)[1]],q.split(/[<>≤≥]/)[0]]);
+    if(m){ const v=num(m[2]); if(isNaN(v)) return null; const op=m[1];
+      out.push(op==='<'?[-Infinity,false,v,false]:op==='≤'?[-Infinity,false,v,true]:op==='>'?[v,false,Infinity,false]:[v,true,Infinity,false]); continue; }
+    return null;
+  }
+  return JSON.stringify(out.map(r=>[r[0],r[0]!==-Infinity&&r[1],r[2],r[2]!==Infinity&&r[3]]).sort((a,b)=>a[0]-b[0]||a[2]-b[2]));
+}
+function bkSame(a,b){ const x=ansNorm(a), y=ansNorm(b); if(x&&x===y) return true;
+  const ia=ivSet(a), ib=ivSet(b); if(ia&&ia===ib) return true; const p=strictNum(a), q=strictNum(b); return !isNaN(p)&&!isNaN(q)&&Math.abs(p-q)<=Math.max(Math.abs(q)*0.005,1e-12); }
 
 /* a bundle of five: today's re-solves first (at most two), then new problems in book order.
    o: only that objective's problems (opened from the lesson). Without o, new problems wait for 암기; re-solves never wait. */
@@ -3275,7 +3304,7 @@ document.addEventListener('submit',e=>{
   if(f.id==='copy-form'){
     const ns=f.dataset.ns, box=ns==='q'?UI.study?.quiz:UI.review; if(!box?.items) return;
     const it=box.items[box.i], r=box.res[box.i]; if(!needCopy(it,r)) return;
-    if(!sameKey(f.querySelector('.copy-in')?.value||'',itemKey(it))){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+    if(!sameKey(f.querySelector('.copy-in')?.value||'',itemKey(it))){ copyMiss(f,f.querySelector('.copy-in')?.value||'',itemKey(it)); return; }
     r.copied=true; render(); requestAnimationFrame(()=>$(`[data-act="${ns}-next"]`)?.focus({preventScroll:true}));
     return;
   }
@@ -3283,7 +3312,7 @@ document.addEventListener('submit',e=>{
   if(f.id==='bk-calc-form'){ const v=$('#bk-calc-in')?.value||''; if(UI.calc) UI.calc.draft=''; calcRun(v); return; }
   if(f.id==='bk-copy-form'){
     const P=UI.study?.bk?.P; if(!P) return;
-    if(!sameKey(f.querySelector('.copy-in')?.value||'',f.dataset.key)){ toast('아직 달라. 보이는 그대로 써 봐.'); return; }
+    if(!sameKey(f.querySelector('.copy-in')?.value||'',f.dataset.key)){ copyMiss(f,f.querySelector('.copy-in')?.value||'',f.dataset.key); return; }
     P.copied=true; render(); requestAnimationFrame(()=>$('[data-act="bk-next"]')?.focus({preventScroll:true})); return;
   }
   if(f.id==='bk-appeal-form'){
