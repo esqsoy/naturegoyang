@@ -618,7 +618,7 @@ function N(id,sym,d,tier,t,s,q,pre,ideas,obj){ NODES.push({id,sym,d,tier,t,s,q,p
 
 N('f-algebra','Al','F',1,'수와 식','수와 식','식을 세우고 푸는 규칙은 어디서 올까?',[],['SC'],['실수의 연산 법칙과 지수 법칙, 과학적 표기법으로 계산한다','일차·이차방정식(근의 공식)과 연립방정식을 푼다','부등식과 절댓값을 풀어 구간으로 나타낸다']);
 N('f-measure','Mu','F',1,'측정과 단위','측정·단위','자연을 어떻게 숫자로 기록할까?',['f-algebra'],['SC'],['SI 기본 단위 7개와 접두어, 유도 단위(부피·밀도·에너지)와 온도 눈금을 정확히 쓴다','단위 환산·차원 분석·어림으로 식과 답을 점검한다','유효숫자와 불확실도를 다루고 정확도와 정밀도를 구분한다']);
-N('f-method','Sm','F',1,'과학적 탐구','탐구 방법','과학은 무엇을 근거로 "안다"고 말할까?',[],['SC'],['가설·예측·실험·결론으로 이어지는 탐구 과정과 정성·정량 관찰을 설명한다','독립·종속·통제 변인을 구분해 실험을 설계한다','상관과 인과, 가설·법칙·이론·모형의 차이를 설명하고, 규모에 따라 성질이 달라지는 까닭(표면적 대 부피 비)을 계산으로 보인다']);
+N('f-method','Sm','F',1,'과학적 탐구','탐구 방법','과학은 무엇을 근거로 "안다"고 말할까?',[],['SC'],['가설·예측·실험·결론으로 이어지는 탐구 과정과 정성·정량 관찰을 설명한다','조작·종속·통제 변인을 구분해 실험을 설계한다','상관과 인과, 가설·법칙·이론·모형의 차이를 설명하고, 규모에 따라 성질이 달라지는 까닭(표면적 대 부피 비)을 계산으로 보인다']);
 N('f-ratio','Pr','F',1,'비례와 그래프','비례·그래프','두 양은 어떤 규칙으로 함께 변할까?',['f-measure'],['SC'],['좌표평면에서 정비례·반비례·제곱 비례와 원·포물선을 식과 그래프로 나타내고 두 점 사이의 거리를 구한다','기울기로 직선의 방정식을 세우고 평행·수직을 가리며, 기울기와 넓이의 물리적 의미를 읽는다','데이터 그래프에서 경향과 이상값을 해석한다']);
 N('f-func','Fn','F',1,'함수와 그래프','함수','한 양이 다른 양을 정한다는 것을 어떻게 적을까?',['f-ratio'],['SC'],['함수와 정의역·치역을 정의하고 그래프로 나타낸다','함수를 합성하고 그래프를 옮기고 늘인다','짝함수·홀함수, 증가·감소, 다항·유리·거듭제곱 함수의 꼴을 구분한다']);
 N('f-sci','Ex','F',1,'지수·로그와 규모','지수·로그','원자에서 은하까지, 엄청난 크기 차이를 어떻게 다룰까?',['f-func'],['SC'],['지수함수와 로그를 정의하고 로그 법칙으로 계산한다','로그 척도(pH, 데시벨, 지진 규모)를 해석한다','크기를 어림하는 페르미 추정을 한다']);
@@ -771,9 +771,9 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const DAY=864e5;
 const dayStart=(t=Date.now())=>{const d=new Date(t); d.setHours(0,0,0,0); return d.getTime();};
 const dayKey=(t=Date.now())=>{const d=new Date(t); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
-const D0=dayStart(0);
-const dnum=(t=Date.now())=>Math.round((dayStart(t)-D0)/DAY);
-const dnumTime=n=>dayStart(D0+n*DAY+12*3600e3);
+// 날짜 번호: 그 기기 달력의 날짜를 1970-01-01부터 센 수. 시간대와 상관없이 같은 날짜는 같은 번호다(한국에서는 예전 값과 같다).
+const dnum=(t=Date.now())=>{ const d=new Date(t); return Math.round(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/DAY); };
+const dnumTime=n=>{ const d=new Date(n*DAY); return new Date(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()).getTime(); };
 const fmtDate=t=>new Date(t).toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'});
 function fmtRel(t){ const d=Math.round((dayStart(t)-dayStart())/DAY); if(d<=0) return '오늘'; if(d===1) return '내일'; return `${d}일 뒤 · ${fmtDate(t)}`; }
 const fmtNum=v=>{const a=Math.abs(v); return (a!==0&&(a>=1e6||a<1e-3))? v.toExponential(3) : String(+Number(v).toPrecision(6));};
@@ -871,7 +871,8 @@ const known=id=>{ const s=rec(id)?.s; return s==='mastered'||s==='shaky'; };
 const cst=u=>(S.cards.u[u] ||= {});
 const cardEntries=u=>Object.entries(S.cards.u[u]||{});
 function isSolid(id){ if(rec(id)?.s!=='mastered') return false; const e=cardEntries(id); return e.length>0&&e.every(([,v])=>v[0]>=SOLID_DAYS); }
-function tierOpen(t){ return t<=1||NODES.every(n=>n.tier!==t-1||known(n.id)); }
+// 다음 단계는 아래 단계의 단원을 모두 숙달하고, 그 단계의 섞어 풀 문제까지 모두 혼자 풀어야 열린다(교재 문제 '전부')
+function tierOpen(t){ return t<=1||(NODES.every(n=>n.tier!==t-1||known(n.id))&&tierMixLeft(t-1)===0); }
 function st(id){
   const s=rec(id)?.s;
   if(s==='mastered') return isSolid(id)?'solid':'mastered';
@@ -921,21 +922,34 @@ function nextAction(){
   const c=dueCards().length; if(c) return {kind:'cards', count:c};
   const u=dueList().length; if(u) return {kind:'review', count:u};
   const b=bookDueAll(); if(b.length) return {kind:'book', count:b.length, u:b[0].u};
+  const gt=mixGateTier(); if(gt&&!ORDER.some(n=>rec(n.id)?.s==='shaky')) return {kind:'mix', count:tierMixLeft(gt), all:true};
+  const mq=mixQuotaLeft(); if(mq>0){ const p=mixPool(false).count; if(p) return {kind:'mix', count:Math.min(mq,p)}; }
   const l=lineUnit(); return l?{kind:'unit', unit:l.n, how:l.how}:{kind:'done'};
 }
 const phaseName=id=>{ const r=rec(id)||{}; return r.qp&&!bookDone(id)?'교재':r.cd?'확인':(r.rd||r.lv)?'암기':'설명'; };
-function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='book'?`다시 풀 교재 문제 ${a.count}개`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
+function nextLabel(){ const a=nextAction(); return a.kind==='cards'?`카드 복습 ${a.count}장`:a.kind==='review'?`응용 복습 ${a.count}개`:a.kind==='book'?`다시 풀 교재 문제 ${a.count}개`:a.kind==='mix'?`섞어 풀기 ${a.count}문제`:a.kind==='unit'?`${a.unit.no}번 · ${a.unit.t}${a.how==='repair'?' 다시 확인':''}`:'남은 단원 없음'; }
 function runNext(){
   const a=nextAction();
   if(a.kind==='cards') startCardReview();
   else if(a.kind==='review') startReview();
   else if(a.kind==='book') openStudy(a.u,'learn','book');
+  else if(a.kind==='mix') openMix();
   else if(a.kind==='unit') openStudy(a.unit.id,'learn');
   else { go('today'); toast(`${TOTAL}개 단원을 모두 숙달했어.`); }
 }
 function bump(k,v=1){ const d=(S.stats.days[dayKey()] ||= {}); d[k]=(d[k]||0)+v; }
+/* 공부 시간(분): 공부 화면(설명·카드·확인·교재, 카드 복습, 응용 복습)이 보이고 3분 안에 손을 댔을 때만 15초씩 센다.
+   단원 하나가 며칠~몇 주라 '오늘 숙달 n개'는 거의 늘 0이었다. 하루 목표를 시간으로 바꾼 까닭(26.11.25). */
+const ACT={last:Date.now(), sec:0};
+for(const t of ['pointerdown','keydown','wheel','touchstart','input']) addEventListener(t,()=>{ ACT.last=Date.now(); },{passive:true, capture:true});
+setInterval(()=>{
+  if(!ENV.live||!S.profile||document.visibilityState!=='visible'||Date.now()-ACT.last>180e3) return;
+  if(!['study','cards','review'].includes(UI.view)) return;
+  ACT.sec+=15; if(ACT.sec<60) return;
+  ACT.sec-=60; bump('m'); save('stats');
+},15000);
 function streak(){
-  const has=t=>{const d=S.stats.days[dayKey(t)]; return d&&(d.n||d.r||d.q||d.k);};
+  const has=t=>{const d=S.stats.days[dayKey(t)]; return d&&(d.n||d.r||d.q||d.k||d.m);};
   let t=dayStart(), n=0;
   if(!has(t)) t-=DAY;
   while(has(t)){ n++; t-=DAY; }
@@ -949,7 +963,7 @@ function applyCheck(id, score, missed){
   const wasKnown=known(id), passed=score>=PASS-1e-9;
   // a unit with textbook problems is mastered only when they are all solved alone too (PRINCIPLES 2-5)
   if(passed){ r.qp=1; r.miss=[]; if(wasKnown||bookDone(id)) grantMastery(id); else r.s='learning'; }
-  else { if(known(id)){ r.s='shaky'; r.nx=dayStart()+DAY; } else r.s='learning'; r.miss=missed; }
+  else { if(known(id)){ r.s='shaky'; r.nx=dayStart()+DAY; } else { r.s='learning'; r.qp=0; } r.miss=missed; } // 다시 친 확인에서 떨어지면 예전 통과도 지운다
   const unlocked=NODES.filter(n=>lockedBefore.has(n.id)&&st(n.id)==='ready').map(n=>n.id);
   save('progress'); save('stats');
   return {passed, mastered:known(id), unlocked};
@@ -960,65 +974,156 @@ function onReview(id, correct, sure){
   r.rp=(r.rp||0)+1;
   if(sure){ r.ez=Math.min(3,(r.ez||2.5)+0.05); r.iv=Math.max((r.iv||1)+1,Math.round((r.iv||1)*r.ez)); }
   else { r.ez=Math.max(1.3,(r.ez||2.5)-0.15); r.iv=Math.max(1,Math.round((r.iv||1)*1.2)); }
-  r.s='mastered'; r.nx=dayStart()+r.iv*DAY;
+  if(r.s!=='shaky') r.s='mastered'; r.nx=dayStart()+r.iv*DAY; // 흔들림은 응용 복습 하나로 풀리지 않고 확인 100점으로만 풀린다(3절)
+}
+/* 카드 간격: FSRS-5(기본 매개변수, 다음 복습 때 떠올릴 확률 90 %에 맞춤, 26.11.25). 예전 SM-2 꼴은 '알았어'에도 쉬움 계수가
+   오르지 않아 간격이 줄기만 했고, 늦게 한 복습을 셈하지 못했다(팀원 검토). FSRS는 카드마다 안정도 S(이만큼 지나면 떠올릴 확률 90 %)와
+   어려움 D(1~10)를 두고, 실제로 지난 날 수에서 떠올릴 확률을 계산해 다음 간격을 정한다(Ye 외 2022, 오픈소스 FSRS 벤치마크).
+   기록: [간격, D, 다음 날, 이어 맞힌 수, 잊은 수, S, 마지막 날]. 예전 5칸 기록도 읽는다. 1 몰랐어=Again, 2 헷갈렸어=Hard, 3 알았어=Good. */
+const FW=[0.40255,1.18385,3.173,15.69105,7.1949,0.5345,1.4604,0.0046,1.54575,0.1192,1.01925,1.9395,0.11,0.29605,2.2698,0.2315,2.9898,0.51655,0.6621];
+const F_DECAY=-0.5, F_FACTOR=19/81, F_RET=0.9;
+const fClampD=d=>Math.min(10,Math.max(1,d));
+const fD0=g=>fClampD(FW[4]-Math.exp(FW[5]*(g-1))+1);
+const fIvl=S=>Math.min(3650,Math.max(1,Math.round(S/F_FACTOR*(Math.pow(F_RET,1/F_DECAY)-1))));
+const fFuzz=iv=>{ if(iv<3) return iv; const f=Math.max(1,Math.round(iv*0.05)); return iv+Math.round((Math.random()*2-1)*f); }; // 같은 날 몰리지 않게
+function fsrsNext(S,D,t,g){
+  const R=Math.pow(1+F_FACTOR*Math.max(0,t)/S,F_DECAY);
+  const S2=g===1? Math.min(S, FW[11]*Math.pow(D,-FW[12])*(Math.pow(S+1,FW[13])-1)*Math.exp(FW[14]*(1-R)))
+                 : S*(1+Math.exp(FW[8])*(11-D)*Math.pow(S,-FW[9])*(Math.exp(FW[10]*(1-R))-1)*(g===2?FW[15]:1));
+  const D1=D+(-FW[6]*(g-3))*(10-D)/9;
+  return {S:Math.max(0.1,S2), D:fClampD(FW[7]*fD0(4)+(1-FW[7])*D1)};
+}
+// 처음 외울 때: 그 회차에서 받은 가장 낮은 채점으로 시작한다(처음에 '알았어'면 3일, 몇 번 만에 떠올렸으면 1일)
+function cardFirst(g0){
+  const S=g0===3?FW[2]:g0===2?FW[1]:FW[0]*Math.exp(FW[17]*FW[18]), D=fD0(g0), iv=fIvl(S), t=dnum();
+  return [iv,+D.toFixed(2),t+iv,1,0,+S.toFixed(2),t];
 }
 function applyCardReview(m,id,g){
-  let [iv,ez,,rp,lp]=m[id]||[1,2.5,dnum(),0,0];
-  if(g===1){ lp++; ez=Math.max(1.3,ez-0.2); iv=1; rp=0; }
-  else if(g===2){ ez=Math.max(1.3,ez-0.15); iv=Math.max(1,Math.round(iv*1.2)); rp++; }
-  else { iv=Math.max(iv+1,Math.round(iv*ez)); rp++; }
-  m[id]=[iv,+ez.toFixed(2),dnum()+iv,rp,lp];
+  const v=m[id]||cardFirst(3), t0=dnum();
+  let [iv,D,due,rp,lp,S,last]=v;
+  if(v.length<6||!(S>0)){ S=Math.max(0.5,iv||1); D=5; last=(due||t0)-(iv||1); } // 예전 SM-2 기록
+  const nx=fsrsNext(S,D,t0-(last??t0),g);
+  if(g===1){ lp=(lp||0)+1; rp=0; } else rp=(rp||0)+1;
+  iv=fFuzz(fIvl(nx.S));
+  m[id]=[iv,+nx.D.toFixed(2),t0+iv,rp,lp,+nx.S.toFixed(2),t0];
 }
 function logMistake(nid, q, a, c, why){
   S.mistakes.items.unshift({id:Math.random().toString(36).slice(2,10), n:nid, q:String(q).slice(0,500), a:String(a??'').slice(0,400), c:String(c??'').slice(0,500), why:String(why??'').slice(0,700), t:Date.now()});
   if(S.mistakes.items.length>100) S.mistakes.items.length=100;
+  // a document holds at most 256 KiB and Korean takes 3 bytes a letter: drop the oldest past ~200 KB
+  while(S.mistakes.items.length>1&&new TextEncoder().encode(JSON.stringify(S.mistakes)).length>200000) S.mistakes.items.pop();
   save('mistakes');
 }
 
 /* ============ persistence ============ */
 const DOCS=['profile','progress','cards','stats','mistakes','book1','book2','book3','book4']; // bookN: textbook problem records by tier
-const W={busy:{}, again:{}};
+const W={busy:{}, again:{}, dirty:{}, loadedAt:0};
 const docRef=name=>ENV.db.doc(`data/users/${ENV.uid}/${name}`);
 async function save(name){
+  if(/^book/.test(name)) MIXC=null;
   if(!ENV.live) return;
+  W.dirty[name]=true;
   if(W.busy[name]){ W.again[name]=true; return; }
   W.busy[name]=true;
   try{
-    do{ W.again[name]=false; await docRef(name).set(JSON.parse(JSON.stringify(S[name]??{}))); }while(W.again[name]);
+    do{ W.again[name]=false; W.dirty[name]=false; await docRef(name).set(/^book\d$/.test(name)?packBook(S[name]):JSON.parse(JSON.stringify(S[name]??{}))); }while(W.again[name]);
   }catch(e){
-    toast(e?.code==='quota_exceeded'?'저장 공간이 가득 찼어. 오답 노트를 좀 정리해 줘.':'진행 상황을 저장하지 못했어. 연결을 확인해 줘.');
+    W.dirty[name]=true;
+    // 끊김 같은 일시적 실패는 몇 초 뒤 다시 쓴다(db 계약: unavailable은 한 번 더). 크기·권한 문제는 다시 써도 안 된다.
+    if(!['quota_exceeded','invalid_argument','revoked','not_granted'].includes(e?.code)) setTimeout(()=>{ if(W.dirty[name]&&!W.busy[name]) save(name); },3000+Math.random()*4000);
+    toast(e?.code==='quota_exceeded'?'저장 공간이 가득 찼어. 오답 노트를 좀 정리해 줘.':'진행 상황을 저장하지 못했어. 잠시 뒤 다시 저장해 볼게.');
   }finally{ W.busy[name]=false; }
 }
+addEventListener('beforeunload',e=>{ if(Object.values(W.dirty).some(Boolean)){ e.preventDefault(); e.returnValue=''; } });
+/* 두 기기(맥·PC)나 두 탭에서 열어 두면, 오래된 쪽이 새 기록을 통째로 덮을 수 있다. 화면으로 돌아올 때(30초 넘게 지났고
+   저장할 것이 없을 때) 기록을 다시 읽는다. 카드·교재·진도 코드는 매번 S에서 새로 찾으므로 중간에 바꿔도 된다. */
+async function reloadDocs(){
+  if(!ENV.live||Object.values(W.busy).some(Boolean)||Object.values(W.dirty).some(Boolean)) return;
+  try{
+    const snaps=await withTimeout(Promise.all(DOCS.map(n=>docRef(n).get())),10000);
+    if(Object.values(W.busy).some(Boolean)||Object.values(W.dirty).some(Boolean)) return;
+    snaps.forEach((s,i)=>{ S[DOCS[i]]=s.exists?JSON.parse(JSON.stringify(s.data())):null; });
+    normalize(); W.loadedAt=Date.now();
+    if(!UI.cs&&!(UI.study&&(UI.study.quiz?.state==='ready'||UI.study.bk))) render();
+  }catch(e){}
+}
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible'&&Date.now()-W.loadedAt>30e3) reloadDocs(); });
+/* 교재 기록은 단계마다 한 문서라 문제가 수천 개면 문서 한도(256 KiB)를 넘는다(2·3단계 약 6천 문제).
+   저장할 때만 한 문제를 "상태|횟수|시각(초, 36진)|힌트|다시 풀 날" 한 줄로 줄이고(약 25바이트), 읽을 때 되푼다. 예전 꼴도 읽는다. */
+const BK_CODE={solo:'o',self:'f',help:'h',wrong:'w',hold:'d',void:'v'}, BK_DECODE=Object.fromEntries(Object.entries(BK_CODE).map(([k,v])=>[v,k]));
+function packBook(d){
+  const u={};
+  for(const [unit,m] of Object.entries(d?.u||{})){ const o=u[unit]={};
+    for(const [k,e] of Object.entries(m||{})){ if(!e) continue; o[k]=[BK_CODE[e.s]||'w', e.n||0, e.t?Math.round(e.t/1000).toString(36):'', e.h||'', e.d||''].join('|'); } }
+  return {v:2, u};
+}
+function unpackBook(d){
+  if(!d||typeof d.u!=='object') return {u:{}};
+  const u={};
+  for(const [unit,m] of Object.entries(d.u)){ const o=u[unit]={};
+    for(const [k,e] of Object.entries(m||{})){
+      if(typeof e!=='string'){ if(e&&typeof e==='object') o[k]=e; continue; }
+      const [s,n,t,h,dd]=e.split('|'), x={s:BK_DECODE[s]||'wrong', n:+n||0};
+      if(t) x.t=parseInt(t,36)*1000; if(h) x.h=+h; if(dd) x.d=+dd; o[k]=x; } }
+  return {u};
+}
 function normalize(){
+  MIXC=null;
   if(!S.profile||!S.profile.started) S.profile=null;
+  for(const t of [1,2,3,4]){ const d=S['book'+t]; if(d&&d.v===2) S['book'+t]=unpackBook(d); }
   if(!S.progress||typeof S.progress.nodes!=='object') S.progress={nodes:{}};
   if(!S.cards||typeof S.cards.u!=='object') S.cards={u:{}};
   if(!S.stats||typeof S.stats.days!=='object') S.stats={days:{}};
   if(!S.mistakes||!Array.isArray(S.mistakes.items)) S.mistakes={items:[]};
   for(const t of [1,2,3,4]){ const d=S['book'+t]; if(!d||typeof d.u!=='object') S['book'+t]={u:{}}; }
-  for(const [id,r] of Object.entries(S.progress.nodes)){ if(!NODE[id]||r.s==='credited') delete S.progress.nodes[id]; }
+  // 모르는 단원 id의 기록은 지우지 않는다(지도를 고치다 생긴 오타 하나로 기록이 사라지지 않게). 읽는 코드는 모두 NODES를 거친다.
+  for(const [id,r] of Object.entries(S.progress.nodes)){ if(r?.s==='credited') delete S.progress.nodes[id]; }
+  // 지도를 고쳐 단원의 단계가 바뀌면 교재 기록을 새 단계 문서로 옮긴다(나중 기록이 이긴다)
+  for(const t of [1,2,3,4]){ for(const [u,m] of Object.entries(S['book'+t].u)){ const nt=NODE[u]?.tier; if(!nt||nt===t) continue;
+    const dst=(S['book'+nt].u[u] ||= {}); for(const [k,e] of Object.entries(m)) if(!dst[k]||(e.t||0)>(dst[k].t||0)) dst[k]=e;
+    delete S['book'+t].u[u]; W.moved=true; } }
 }
 const LESSONS={}, CARDS={};
 const LESSON_VERS=['v3','v2']; // v3 is also where the pre-made, reviewed lessons are uploaded (content/)
 const STORED=new Set(); // 'lessons/<id>' and 'cards/<id>' that came from the store: reviewed content, never regenerated from the app
 const lessonCached=id=>{ for(const v of LESSON_VERS){ const m=LESSONS[`${id}--${v}`]; if(m) return m; } return null; };
+/* 읽기가 실패(끊김·8초 넘김)한 것과 '저장소에 없음'을 가른다. 예전에는 실패도 '없음'으로 보아 그 자리에서 새로 만들고
+   검수한 lessons/·cards/를 덮을 수 있었다(26.11.25 검토). 실패면 던지고, 모든 판을 다 읽고 없을 때만 null이다. */
+const LOADFAIL={code:'unavailable', message:'저장소에서 불러오지 못했어. 연결을 확인하고 다시 불러와 줘.'};
 async function getLesson(id){
   if(lessonCached(id)) return lessonCached(id);
-  if(ENV.db){ for(const v of LESSON_VERS){ try{ const s=await withTimeout(ENV.db.doc(`lessons/${id}--${v}`).get(),8000); const d=s.exists?s.data():null; if(d&&typeof d.md==='string'&&d.md.length>200){ LESSONS[`${id}--${v}`]=d.md; STORED.add(`lessons/${id}`); return d.md; } }catch(e){} } }
+  if(!ENV.db) return null;
+  let failed=false;
+  for(const v of LESSON_VERS){
+    try{ const s=await withTimeout(ENV.db.doc(`lessons/${id}--${v}`).get(),8000); const d=s.exists?s.data():null; if(d&&typeof d.md==='string'&&d.md.length>200){ LESSONS[`${id}--${v}`]=d.md; STORED.add(`lessons/${id}`); return d.md; } }
+    catch(e){ failed=true; }
+  }
+  if(failed) throw LOADFAIL;
   return null;
 }
-async function putLesson(id, md){
+// 그 자리에서 만든 설명은 아직 아무것도 없을 때만 쓴다(다시 쓰기 regen은 자기가 만든 것을 덮는다)
+async function putLesson(id, md, regen){
   const key=`${id}--${LESSON_VERS[0]}`; LESSONS[key]=md;
-  if(ENV.db){ try{ await ENV.db.doc('lessons/'+key).set({md, node:id, at:Date.now()}); }catch(e){} }
+  if(!ENV.db) return;
+  try{ const ref=ENV.db.doc('lessons/'+key); if(!regen){ const s=await withTimeout(ref.get(),8000); if(s.exists) return; } await ref.set({md, node:id, at:Date.now()}); }catch(e){}
 }
+const CARD_META={}; // 저장소 문서의 다른 칸(src 등)을 앱이 고쳐 쓸 때도 남긴다
 async function getCards(u){
   if(CARDS[u]) return CARDS[u];
-  if(ENV.db){ try{ const s=await withTimeout(ENV.db.doc('cards/'+u).get(),8000); const d=s.exists?s.data():null; if(d&&Array.isArray(d.items)&&d.items.length){ CARDS[u]=JSON.parse(JSON.stringify(d.items)); STORED.add(`cards/${u}`); return CARDS[u]; } }catch(e){} }
+  if(!ENV.db) return null;
+  let s;
+  try{ s=await withTimeout(ENV.db.doc('cards/'+u).get(),8000); }catch(e){ throw LOADFAIL; }
+  const d=s.exists?s.data():null;
+  if(d&&Array.isArray(d.items)&&d.items.length){ const {items,...meta}=JSON.parse(JSON.stringify(d)); CARD_META[u]=meta; CARDS[u]=items; STORED.add(`cards/${u}`); return CARDS[u]; }
   return null;
 }
-async function putCards(u){
+async function putCards(u, fresh){
   if(!ENV.db) return;
-  try{ await ENV.db.doc('cards/'+u).set({items:CARDS[u], node:u, at:Date.now()}); }catch(e){ toast('카드를 저장하지 못했어. 연결을 확인해 줘.'); }
+  try{
+    const ref=ENV.db.doc('cards/'+u);
+    if(fresh){ const s=await withTimeout(ref.get(),8000); if(s.exists){ const d=s.data(); if(Array.isArray(d?.items)&&d.items.length){ CARDS[u]=JSON.parse(JSON.stringify(d.items)); STORED.add(`cards/${u}`); return; } } }
+    await ref.set({...(CARD_META[u]||{}), items:CARDS[u], node:u, at:Date.now()});
+  }catch(e){ toast('카드를 저장하지 못했어. 연결을 확인해 줘.'); }
 }
 const liveItems=u=>(CARDS[u]||[]).filter(c=>!c.x);
 const cardOf=(u,id)=>(CARDS[u]||[]).find(c=>c.id===id&&!c.x);
@@ -1044,10 +1149,11 @@ async function boot(){
     try{
       const snaps=await withTimeout(Promise.all(DOCS.map(n=>docRef(n).get())),10000);
       snaps.forEach((s,i)=>{ if(s.exists) S[DOCS[i]]=JSON.parse(JSON.stringify(s.data())); });
-      ENV.live=true;
+      ENV.live=true; W.loadedAt=Date.now();
     }catch(e){ ENV.note='timeout'; }
   } else ENV.note='nodb';
   normalize(); ENV.loading=false; render();
+  if(W.moved&&ENV.live){ W.moved=false; [1,2,3,4].forEach(t=>save('book'+t)); }
 }
 
 /* ============ markdown + math ============ */
@@ -1498,15 +1604,20 @@ function normItem(x, nobj){
   if(x.type==='mcq'&&Array.isArray(x.choices)&&x.choices.length>=2&&x.choices.length<=6&&Number.isInteger(+x.answer)&&+x.answer>=0&&+x.answer<x.choices.length)
     return {type:'mcq', obj, level, q:x.q, choices:x.choices.map(String), answer:+x.answer, why:String(x.why||''), key};
   if(x.type==='num'&&x.answer!==''&&x.answer!=null&&isFinite(+x.answer))
-    return {type:'num', obj, level, q:x.q, answer:+x.answer, tol:Math.min(0.2,Math.max(0.005,+x.tol||0.02)), unit:String(x.unit||''), why:String(x.why||''), key};
+    return {type:'num', obj, level, q:x.q, answer:+x.answer, tol:Math.min(0.2,Math.max(0.001,+x.tol||0.02)), unit:String(x.unit||''), why:String(x.why||''), key};
   if(x.type==='short')
     return {type:'short', obj, level, q:x.q, rubric:Array.isArray(x.rubric)?x.rubric.map(String):[], model:String(x.model||''), key};
   return null;
 }
 const asArray=a=>Array.isArray(a)?a:(a?.items||a?.questions||a?.cards||[]);
+// 수 하나만 받는다. "1/2", "10^5"처럼 앞자리만 읽히면 틀림이 되던 것을 '다시 써 줘'로 돌린다(26.11.25 검토). 분수 a/b는 계산해 받는다.
 function parseNum(s){
-  s=String(s).trim().replace(/\s+/g,'').replace(/−/g,'-').replace(/,/g,'').replace(/[×x*]10\^?\(?(-?\d+)\)?/i,'e$1');
-  const v=parseFloat(s); return isFinite(v)?v:NaN;
+  s=String(s).normalize('NFKC').trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/,/g,'').replace(/[×x*]10\^?\(?([-+]?\d+)\)?/i,'e$1').replace(/^\+/,'');
+  const num='[-]?(?:\\d+\\.?\\d*|\\.\\d+)(?:e[-+]?\\d+)?';
+  let m=s.match(new RegExp(`^(${num})\\/(${num})$`,'i')); if(m){ const v=parseFloat(m[1])/parseFloat(m[2]); return isFinite(v)?v:NaN; }
+  m=s.match(new RegExp(`^(${num})([a-zA-Zµμ°%/²³·.\\-^0-9()]*)$`,'i')); if(!m) return NaN;
+  if(m[2]&&/^[\d.^\/(]/.test(m[2])) return NaN;
+  const v=parseFloat(m[1]); return isFinite(v)?v:NaN;
 }
 
 /* ============ components ============ */
@@ -1529,7 +1640,9 @@ function opts(name, list, cur){
   return `<div class="opts">${list.map(([v,l])=>`<label class="opt" for="${name}-${v}"><input type="radio" id="${name}-${v}" name="${name}" value="${v}"${String(cur)===String(v)?' checked':''}><span class="opt-b"><b>${l}</b></span></label>`).join('')}</div>`;
 }
 const FOCUS_OPTS=[['all','고르게'],['P','물리'],['C','화학'],['B','생명과학'],['E','지구·우주']];
-const DAILY_OPTS=[['1','하루 1개'],['2','하루 2개'],['3','하루 3개']];
+const GOAL_OPTS=[['30','30분'],['60','1시간'],['90','1시간 30분'],['120','2시간'],['180','3시간']];
+const goalMin=()=>+(S.profile?.goal)||60;
+const fmtMin=m=>m>=60?`${Math.floor(m/60)}시간${m%60?` ${m%60}분`:''}`:`${m}분`;
 function phaseOf(id){
   const r=rec(id)||{}, learnedN=cardEntries(id).length, total=CARDS[id]?liveItems(id).length:null;
   return {lesson:!!(r.rd||r.lv), cards:!!r.cd, cardsTxt: total!=null?`${learnedN}/${total}`:(learnedN?`${learnedN}장`:'')};
@@ -1562,12 +1675,13 @@ function onboardView(){
       <li><b>설명</b><span>단원마다 핵심 질문 하나에 답해. 원리는 직관·통상·엄밀 세 층으로 같이 설명하고, 같은 말이면 하나로 합쳐.</span></li>
       <li><b>암기</b><span>정의·기호·단위·법칙·상수를 카드로 외워. 모든 카드를 한 번씩 확실히 떠올려야 다음으로 넘어가. 틀린 카드는 따라 쓰고, 다시 나오면 보지 않고 써.</span></li>
       <li><b>확인</b><span>8문제를 모두 맞혀야 숙달이야. 틀린 문제는 핵심을 따라 써야 넘어가고, 하나라도 틀리면 새 문제 8개로 다시 풀어. 문제가 잘못됐다 싶으면 채점에서 뺄 수 있어.</span></li>
+      <li><b>교재</b><span>그 단원에 붙은 교과서 연습문제를 모두 혼자 풀어야 숙달이야. 목표를 읽은 바로 뒤에 그 목표의 문제를 풀고, 틀리거나 도움 받은 문제는 하루 뒤 도움 없이 다시 풀어.</span></li>
       <li><b>복습</b><span>카드와 응용 문제가 간격을 넓혀 가며 다시 나와. 모든 카드 간격이 3주를 넘으면 그 단원은 단단함이 돼.</span></li>
     </ol>
   </div>
   <form class="card" id="ob-form">
     <fieldset><legend>집중할 분야</legend>${opts('focus',FOCUS_OPTS,'all')}<p class="hint">어느 쪽을 골라도 필요한 기초 단원은 같이 추천해.</p></fieldset>
-    <fieldset><legend>하루 새 단원</legend>${opts('daily',DAILY_OPTS,'1')}<p class="hint">단원 하나에 설명·암기·확인까지 보통 40분~1시간 걸려.</p></fieldset>
+    <fieldset><legend>하루 공부 목표</legend>${opts('goal',GOAL_OPTS,'60')}<p class="hint">단원 하나는 교재 문제까지 며칠에서 몇 주가 걸려. 그래서 하루 목표는 단원 수가 아니라 시간으로 잡아. 화면이 보이고 손을 대고 있는 동안만 세.</p></fieldset>
     <button type="submit" class="btn primary">1단계부터 시작</button>
     <p class="hint">시작하면 '이어하기' 하나로 1번부터 ${TOTAL}번까지 순서대로 가. 순서를 바꾸고 싶으면 열린 단원 중에서 골라서 할 수도 있어. 인정이나 건너뛰기는 없고, 이미 아는 단원은 설명만 건너뛰고 암기와 확인으로 통과하면 돼.</p>
   </form></section>`;
@@ -1577,19 +1691,20 @@ function todayView(){
   if(ENV.loading) return busy('학습 기록을 불러오는 중');
   if(!S.profile) return onboardView();
   const dueU=dueList(), dueC=dueCards(), a=nextAction(), L=lineUnit();
-  const td=S.stats.days[dayKey()]||{}, daily=S.profile.daily||1, newDone=td.n||0, sk=streak(), ct=currentTier(), doneN=counts().done;
-  const lede=a.kind==='done'?`${TOTAL}개 단원을 모두 숙달했어. 이제 복습으로 전부 단단하게 만들자.`:'이어하기만 누르면 카드 복습 → 응용 복습 → 흔들린 단원 → 다음 단원 순서로 계속 이어져.';
+  const td=S.stats.days[dayKey()]||{}, goal=goalMin(), mins=td.m||0, sk=streak(), ct=currentTier(), doneN=counts().done;
+  const lede=a.kind==='done'?`${TOTAL}개 단원을 모두 숙달했어. 이제 복습으로 전부 단단하게 만들자.`:'이어하기만 누르면 카드 복습 → 응용 복습 → 다시 풀 문제 → 섞어 풀기 → 흔들린 단원 → 다음 단원 순서로 계속 이어져.';
   let nt, sub;
   if(a.kind==='cards'){ nt=`카드 복습 ${a.count}장`; sub='기억이 흐려지기 전에 복습부터 끝내.'; }
   else if(a.kind==='review'){ nt=`응용 복습 ${a.count}개`; sub='숙달한 단원을 다른 각도에서 다시 확인해.'; }
   else if(a.kind==='book'){ nt=`다시 풀 교재 문제 ${a.count}개`; sub='틀렸거나 도움을 받은 문제야. 이번엔 도움 없이, 풀이까지 내서 풀어.'; }
+  else if(a.kind==='mix'){ nt=`섞어 풀기 ${a.count}문제`; sub=a.all?'이 단계의 짝꿍 문제가 남아 있어. 다 풀어야 다음 단계가 열려.':'숙달한 단원들의 짝꿍 문제를 섞어서 풀어. 오늘 몫이야.'; }
   else if(a.kind==='unit'){ const n=a.unit; nt=`${n.no}번 · ${n.t}`; sub=a.how==='repair'?'응용 복습에서 흔들린 단원이야. 확인 문제를 다시 100점으로 통과해야 해.':a.how==='resume'?`${phaseName(n.id)} 단계부터 이어서 해.`:n.q; }
   else { nt='모든 단원 숙달'; sub='남은 건 복습뿐이야.'; }
-  const after=(a.kind==='cards'||a.kind==='review'||a.kind==='book')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
+  const after=(a.kind==='cards'||a.kind==='review'||a.kind==='book'||a.kind==='mix')&&L?`<p class="hint">그다음은 ${L.n.no}번 · ${esc(L.n.t)}${L.how==='repair'?' 다시 확인':''}.</p>`:'';
   const curNo=L?L.n.no:TOTAL, start=Math.max(0,Math.min(curNo-3,TOTAL-9));
   const hero=`<article class="card hero">
-    <div class="step-h"><h2>이어하기</h2><span class="pill ${newDone>=daily?'good':''}">오늘 숙달 ${newDone}/${daily}</span></div>
-    <p class="eyebrow" style="margin-bottom:4px">다음</p><p class="next-t">${esc(nt)}</p><p class="next-s">${esc(sub)}</p>${after}
+    <div class="step-h"><h2>이어하기</h2><span class="pill ${mins>=goal?'good':''}" id="today-min">오늘 ${fmtMin(mins)} / ${fmtMin(goal)}</span></div>
+    <p class="eyebrow" style="margin-bottom:4px">다음</p><p class="next-t">${esc(nt)}</p><p class="next-s">${esc(sub)}</p>${a.kind==='unit'&&unitProg(a.unit.id)?`<p class="hint">${esc(unitProg(a.unit.id))}</p>`:''}${after}
     <div class="row">${a.kind!=='done'?'<button type="button" class="btn primary" data-act="next">이어하기 →</button>':''}${a.kind==='unit'&&a.how==='new'?`<button type="button" class="btn ghost" data-act="test" data-id="${a.unit.id}">설명 건너뛰고 암기부터</button>`:''}</div>
     <div class="strip" aria-label="학습 순서">${ORDER.slice(start,start+9).map(n=>tile(n,L&&n.no===curNo?' sel':'')).join('')}</div>
     <div class="lprog"><span class="dbar"><i class="s" style="width:${(doneN/TOTAL*100).toFixed(2)}%"></i></span><span class="mono">${doneN} / ${TOTAL} 숙달</span></div>
@@ -1630,10 +1745,10 @@ function tierCard(ct){
     <p class="hint">아래 단계를 단단하게 만들수록 위 단계가 쉬워져. 단단함은 그 단원 카드의 복습 간격이 모두 3주를 넘은 상태야.</p></section>`;
 }
 function activityCard(){
-  const days=[]; for(let i=13;i>=0;i--){ const t=dayStart()-i*DAY, d=S.stats.days[dayKey(t)]||{}; days.push({t, n:d.n||0, q:(d.q||0)+(d.r||0), k:d.k||0}); }
-  const max=Math.max(10,...days.map(d=>d.q+d.k));
-  return `<section class="card side"><h3>최근 14일</h3>
-    <div class="act">${days.map(d=>`<div class="act-col" title="${esc(`${fmtDate(d.t)} · 카드 ${d.k} · 문제 ${d.q} · 새로 숙달 ${d.n}`)}"><i class="a-q" style="height:${d.q/max*100}%"></i><i class="a-k" style="height:${d.k/max*100}%"></i>${d.n?`<b class="a-n">${d.n}</b>`:''}</div>`).join('')}</div>
+  const days=[]; for(let i=13;i>=0;i--){ const t=dayStart()-i*DAY, d=S.stats.days[dayKey(t)]||{}; days.push({t, n:d.n||0, q:(d.q||0)+(d.r||0), k:d.k||0, m:d.m||0}); }
+  const max=Math.max(10,...days.map(d=>d.q+d.k)), tm=days.reduce((a,d)=>a+d.m,0), met=days.filter(d=>d.m>=goalMin()).length;
+  return `<section class="card side"><h3>최근 14일</h3><p class="muted" style="margin:0 0 10px;font-size:13px">공부 ${fmtMin(tm)} · 목표 채운 날 ${met}일</p>
+    <div class="act">${days.map(d=>`<div class="act-col" title="${esc(`${fmtDate(d.t)} · 공부 ${fmtMin(d.m)} · 카드 ${d.k} · 문제 ${d.q} · 새로 숙달 ${d.n}`)}"><i class="a-q" style="height:${d.q/max*100}%"></i><i class="a-k" style="height:${d.k/max*100}%"></i>${d.n?`<b class="a-n">${d.n}</b>`:''}</div>`).join('')}</div>
     <div class="act-x"><span>${new Date(days[0].t).getMonth()+1}/${new Date(days[0].t).getDate()}</span><span>오늘</span></div>
     <div class="legend-s"><span><i class="sw a-k"></i>카드</span><span><i class="sw a-q"></i>문제</span><span class="mono" style="color:var(--good)">숫자 = 새로 숙달</span></div></section>`;
 }
@@ -1722,7 +1837,10 @@ function stepsFor(sv){
   return all.filter(([k])=>k!=='lesson'||sv.mode==='learn');
 }
 function studyView(){
-  const sv=UI.study, n=NODE[sv.id], r=rec(sv.id)||{};
+  const sv=UI.study;
+  if(sv.mode==='mix') return `<div class="study-top"><button type="button" class="btn ghost sm" data-act="back">← ${backLabel()}</button></div>
+  <header class="study-head"><div><p class="eyebrow">교재 문제 · 숙달한 단원들</p><h1>섞어 풀기</h1><p class="study-q">숙달 문제의 짝꿍(대개 짝수 번)을 단원과 절을 섞어 풀어. 같은 꼴을 몰아 풀 때보다 오래 남아.</p></div></header>`+bookStep(sv,null);
+  const n=NODE[sv.id], r=rec(sv.id)||{};
   const steps=stepsFor(sv), ci=steps.findIndex(x=>x[0]===sv.step);
   const doneOf=k=>k==='lesson'?(sv.lesson?.state==='done'):k==='cards'?!!r.cd:k==='quiz'?!!(sv.result||r.qp):k==='book'?bookDone(sv.id):false;
   const head=`<div class="study-top"><button type="button" class="btn ghost sm" data-act="back">← ${backLabel()}</button></div>
@@ -1745,7 +1863,7 @@ function lessonPane(sv,n){
   if(L.state==='loading'||L.state==='idle') top=busy('설명을 불러오는 중');
   else if(L.state==='writing') top=busy('Claude가 설명을 쓰는 중',L.t0,'stop-lesson','처음 여는 단원은 1~2분쯤 걸려. 첫 장이 써지면 바로 읽을 수 있어.');
   else if(L.state==='nosample') return `<div class="note">${NOSAMPLE}</div><div class="md"><h2>학습 목표</h2><ol>${n.obj.map(o=>`<li>${esc(o)}</li>`).join('')}</ol></div>`;
-  else if(L.state==='error') top=`<div class="note bad">${esc(L.err)}${ENV.sample?' <button type="button" class="btn sm" data-act="regen">다시 쓰기</button>':''}</div>`;
+  else if(L.state==='error') top=`<div class="note bad">${esc(L.err)}${L.reload?' <button type="button" class="btn sm" data-act="reload-lesson">다시 불러오기</button>':ENV.sample&&!STORED.has(`lessons/${sv.id}`)?' <button type="button" class="btn sm" data-act="regen">다시 쓰기</button>':''}</div>`;
   if(!L.md) return top;
   if(L.truncated) top+='<p class="note">설명이 길어서 중간에 끊겼어. 다시 쓰기를 누르면 새로 써.</p>';
   ensureReader(sv);
@@ -1828,7 +1946,7 @@ function objOfChunk(chunks){
 }
 function withBooks(u, chunks){
   if(!NODE[u]||!hasObj(u)) return chunks;
-  const L=probList(u), of=objOfChunk(chunks), last={}; let K=0, ex=-1, mis=-1;
+  const L=gateList(u), of=objOfChunk(chunks), last={}; let K=0, ex=-1, mis=-1;
   chunks.forEach((c,j)=>{ const k=of(c); if(k){ last[k]=j; K=Math.max(K,k); } if(/오개념/.test(c.sec)) mis=j; else if(/^예제/.test(c.sec)) ex=j; });
   const tail=mis>=0?mis:ex>=0?ex:K?last[K]:-1, at={};
   for(const k of [1,2,3]){ if(!L.some(p=>p.o===k)) continue; const j=k<K&&last[k]!=null?last[k]:tail; if(j>=0) (at[j] ||= []).push(k); }
@@ -1838,13 +1956,14 @@ function withBooks(u, chunks){
 }
 const readChunks=sv=>withBooks(sv.id, chunkLesson(sv.lesson.md));
 function objBookHTML(sv, c, isNew){
-  const u=sv.id, n=NODE[u], s=bookStats(u,c.o), L=probList(u).filter(p=>p.o===c.o), tried=s.total-s.fresh;
+  const u=sv.id, n=NODE[u], s=bookStats(u,c.o), L=gateList(u).filter(p=>p.o===c.o), mixN=mixList(u).filter(p=>p.o===c.o).length, tried=s.total-s.fresh;
   const pct=x=>`${s.total?Math.round(x/s.total*1000)/10:0}%`;
   const state=!s.fresh?`<p class="bk-ok">이 목표의 문제를 모두 한 번씩 풀었어.${s.due?` 오늘 다시 풀 문제 ${s.due}개는 교재 문제에서 이어 풀 수 있어.`:''}${isNew?' 다음 장으로 넘어가.':''}</p>`
-    :`<p class="hint">이 목표의 문제를 모두 한 번씩 풀어야 다음 장이 열려. 틀리거나 도움 받은 문제는 하루 뒤 다시 나오고, 단원 숙달에는 모두 '혼자 풂'이 필요해.</p>`;
+    :`<p class="hint">이 목표의 문제를 모두 한 번씩 풀어야 다음 장이 열려. 틀리거나 도움 받은 문제는 하루 뒤 다시 나오고, 단원 숙달에는 이 문제들이 모두 '혼자 풂'이어야 해.</p>`;
   const go=s.fresh||s.due?`<div class="row"><button type="button" class="btn primary" data-act="bk-obj" data-o="${c.o}">${s.fresh===s.total?'문제 풀기':s.fresh?`이어 풀기 · 안 푼 문제 ${s.fresh}개`:`다시 풀 문제 ${s.due}개 풀기`}</button></div>`:'';
   return `<div class="rd-book"><p class="eyebrow">교재 문제 · 목표 ${c.o}</p><h3 class="rd-sub">${esc(n?.obj?.[c.o-1]||'')}</h3>
-    <p class="muted">${esc(probRanges(L))} · ${s.total}문제</p>
+    <p class="muted">${esc(probRanges(L))} · ${s.total}문제${mixN?` · 짝꿍 ${mixN}문제는 숙달 뒤 섞어 풀기로`:''}</p>
+    <p class="hint">풀기 전에 책의 이 절 본문 예제를 한 번 읽어 봐. 연습문제는 그 예제를 바탕으로 만들어졌어.</p>
     <div class="bk-bar"><div class="bk-bar-h"><span>한 번씩 푼 문제 <b class="mono">${tried} / ${s.total}</b></span><span class="muted">혼자 풂 ${s.solo}</span></div><span class="dbar"><i class="s" style="width:${pct(s.solo)}"></i><i class="l" style="width:${pct(tried-s.solo)}"></i></span></div>
     ${state}${go}</div>`;
 }
@@ -1869,8 +1988,8 @@ function recapHTML(chunks, grp){
 }
 function previewHTML(n, src){
   const terms=lessonTerms(src);
-  const L=probList(n.id), per=k=>L.filter(p=>p.o===k).length;
-  const bk=L.length?`<p class="eyebrow">교재 문제 ${L.length}개</p><p class="muted pv-bk">${hasObj(n.id)?[1,2,3].map(k=>per(k)?`목표 ${k} 끝에 ${per(k)}개`:'').filter(Boolean).join(' · ')+(per(0)?` · 암기 뒤 ${per(0)}개`:''):'암기를 끝낸 뒤에 풀어.'}</p>`:'';
+  const L=gateList(n.id), mixN=mixList(n.id).length, per=k=>L.filter(p=>p.o===k).length;
+  const bk=L.length?`<p class="eyebrow">숙달할 교재 문제 ${L.length}개</p><p class="muted pv-bk">${hasObj(n.id)?[1,2,3].map(k=>per(k)?`목표 ${k} 끝에 ${per(k)}개`:'').filter(Boolean).join(' · ')+(per(0)?` · 암기 뒤 ${per(0)}개`:''):'암기를 끝낸 뒤에 풀어.'}${mixN?`${hasObj(n.id)?'.':''} 짝꿍 ${mixN}문제는 숙달한 뒤 섞어 풀기로 나와.`:''}</p>`:'';
   return `<div class="preview"><div class="pv-obj"><p class="eyebrow">이 단원의 학습 목표</p><ol>${n.obj.map(o=>`<li>${esc(o)}</li>`).join('')}</ol></div>${bk}${terms.length?`<p class="eyebrow">이번에 만날 용어 ${terms.length}개</p><p class="term-chips">${terms.map(t=>`<span class="tchip">${inl(t)}</span>`).join('')}</p>`:''}</div>`;
 }
 function ensureReader(sv){
@@ -1936,7 +2055,19 @@ function wholeHTML(sv){
   <div class="lesson-foot"><button type="button" class="btn primary" data-act="step" data-step="cards">암기로 →</button></div>`;
 }
 function scrollToReader(){ const el=$('#reader'); if(!el) return; const top=el.getBoundingClientRect().top; if(top<70||top>window.innerHeight*0.4) window.scrollTo({top:Math.max(0,top+window.scrollY-80)}); }
-function savePos(sv){ const r=ensure(sv.id); if(!sv.reader.free&&(r.pos||0)!==sv.reader.max){ r.pos=sv.reader.max; save('progress'); } }
+function savePos(sv){ const r=ensure(sv.id); if(sv.reader.free) return;
+  const pn=sv.lesson?.state==='done'?readChunks(sv).length:(r.pn||0);
+  if((r.pos||0)!==sv.reader.max||(r.pn||0)!==pn){ r.pos=sv.reader.max; if(pn) r.pn=pn; save('progress'); } }
+/* 긴 단원에서도 나아가는 게 보이게: 오늘 화면의 '다음' 단원에 단계별 진행을 한 줄로 */
+function unitProg(id){
+  const r=rec(id)||{}, b=bookStats(id), out=[];
+  if(r.rd||r.lv) out.push('설명 다 읽음'); else if(r.pos!=null) out.push(`설명 ${r.pos+1}${r.pn?` / ${r.pn}`:''}쪽`);
+  const c=cardEntries(id).length, ct=CARDS[id]?liveItems(id).length:0;
+  if(c||r.rd||r.lv) out.push(r.cd?'카드 다 떠올림':`카드 ${c}${ct?` / ${ct}`:''}장`);
+  if(r.qp) out.push('확인 100점');
+  if(b.total) out.push(`교재 혼자 풂 ${b.solo} / ${b.total}`);
+  return out.join(' · ');
+}
 function rdNext(){
   const sv=UI.study, R=sv?.reader; if(!R) return;
   const L=sv.lesson, N=readChunks(sv).length, streaming=L.state==='streaming'||L.state==='writing';
@@ -1992,7 +2123,7 @@ function cardsStep(sv,n){
   const C=sv.cards;
   if(!C||C.state==='loading') return `<div class="cards-wrap">${busy('암기 카드를 만드는 중',C?.t0,'stop-cards','가장 유능한 모델이 생각하고 써서 1~2분쯤 걸려.')}</div>`;
   if(C.state==='nosample') return `<div class="cards-wrap"><div class="note">${NOSAMPLE}</div></div>`;
-  if(C.state==='error') return `<div class="cards-wrap"><div class="note bad">${esc(C.err)}</div><div class="row"><button type="button" class="btn primary" data-act="retry-cards">카드 다시 만들기</button></div></div>`;
+  if(C.state==='error') return `<div class="cards-wrap"><div class="note bad">${esc(C.err)}</div><div class="row"><button type="button" class="btn primary" data-act="retry-cards">${C.reload?'다시 불러오기':'카드 다시 만들기'}</button></div></div>`;
   const items=liveItems(n.id), m=S.cards.u[n.id]||{}, learned=items.filter(c=>m[c.id]).length;
   if(learned<items.length) startLearnSession(n.id);
   const cs=UI.cs&&UI.cs.mode==='learn'&&UI.cs.unit===n.id?UI.cs:null;
@@ -2001,14 +2132,15 @@ function cardsStep(sv,n){
   const body=learned>=items.length
     ? `<div class="card"><p class="eyebrow">암기 완료</p><h2 style="font:700 20px/1.35 var(--font-ui);margin:0 0 8px">카드 ${items.length}장을 모두 떠올렸어</h2><p class="muted" style="margin:0">이 카드들은 내일부터 간격을 넓혀 가며 복습에 나와. 이제 확인 문제로 숙달을 가리자.</p><div class="row"><button type="button" class="btn primary" data-act="step" data-step="quiz">확인 문제 풀기 →</button></div></div>`
     : cardBox(cs);
-  return `<div class="cards-wrap">${prog}${body}${cardList(n.id)}</div>`;
+  return `<div class="cards-wrap">${prog}${body}${cardList(n.id, !!(cs&&cs.queue?.length&&!cs.revealed))}</div>`;
 }
-function cardList(u){
+// hide: 떠올리는 중(답 보기 전·보지 않고 쓰기)에는 목록의 답을 가린다(PRINCIPLES 2-3과 같은 까닭)
+function cardList(u, hide){
   const items=liveItems(u), m=S.cards.u[u]||{};
   return `<details class="clist"${UI.cedit?.u===u&&UI.cedit?.list?' open':''}><summary>암기 목록 ${items.length}장 · 고치거나 뺄 수 있어</summary><ol>${items.map(c=>{
     if(UI.cedit?.u===u&&UI.cedit?.id===c.id&&UI.cedit?.list) return `<li><span class="cl-k">${esc(c.k)}</span><div class="cl-e">${cardEditForm(u,c)}</div></li>`;
     const v=m[c.id];
-    return `<li><span class="cl-k">${esc(c.k)}</span><div class="cl-q">${inl(c.q)}</div><span class="cl-s">${v?`간격 ${v[0]}일`:'아직'}</span><div class="cl-a">${inl(c.a)}</div><div class="cl-a"><button type="button" class="linkbtn" data-act="card-edit" data-u="${u}" data-c="${c.id}" data-list="1">고치기</button></div></li>`;
+    return `<li><span class="cl-k">${esc(c.k)}</span><div class="cl-q">${inl(c.q)}</div><span class="cl-s">${v?`간격 ${v[0]}일`:'아직'}</span>${hide?'<div class="cl-a muted">(지금 카드를 넘긴 뒤에 보여)</div>':`<div class="cl-a">${inl(c.a)}</div><div class="cl-a"><button type="button" class="linkbtn" data-act="card-edit" data-u="${u}" data-c="${c.id}" data-list="1">고치기</button></div>`}</li>`;
   }).join('')}</ol>${!cardEntries(u).length&&ENV.sample&&!STORED.has(`cards/${u}`)?'<div class="row"><button type="button" class="btn sm" data-act="regen-cards">카드 전체 다시 만들기</button></div>':''}</details>`;
 }
 function cardEditForm(u,c){
@@ -2174,7 +2306,7 @@ function prefsView(){
   const p=S.profile;
   return head+`<div class="prefs">
     <section class="card"><h2>집중할 분야</h2><p>오늘 화면의 새 단원 추천 순서가 바뀌어. 집중 분야에 필요한 다른 분야의 기초 단원도 같이 추천해.</p>${opts('pf-focus',FOCUS_OPTS,p.focus||'all')}</section>
-    <section class="card"><h2>하루 새 단원</h2>${opts('pf-daily',DAILY_OPTS,p.daily||1)}</section>
+    <section class="card"><h2>하루 공부 목표</h2>${opts('pf-goal',GOAL_OPTS,String(goalMin()))}<p class="hint">설명·카드·확인·교재·복습 화면이 보이고 3분 안에 손을 댄 동안만 센다.</p></section>
     <section class="card"><h2>숙달 기준</h2><p style="margin:0">카드를 모두 한 번씩 확실히 떠올리고, 확인 문제 8개를 모두 맞혀야(100점) 숙달이야. 한 단계의 단원을 모두 숙달해야 다음 단계가 열려. 카드 간격이 모두 ${SOLID_DAYS}일을 넘으면 단단함. 이 기준은 바꿀 수 없게 해 뒀어.</p></section>
     <section class="card"><h2>저장</h2><p style="margin:0">${ENV.live?'학습 기록은 이 계정에 저장되고, 다른 기기에서 열어도 이어져.':'지금은 학습 기록이 저장되지 않아. claude.ai에 로그인한 상태로 열어 줘.'}</p></section>
     <section class="card"><h2>처음부터 다시</h2><p>진도, 카드 기록, 복습 일정, 오답 노트, 시작 설정을 모두 지워. 만들어 둔 설명과 카드 내용은 남아.</p>
@@ -2223,7 +2355,9 @@ async function loadLesson(sv, regen){
   if(regen){ sv.reader=null; const r=rec(id); if(r&&!r.rd&&r.pos){ r.pos=0; save('progress'); } }
   paintLesson();
   if(!regen){
-    const cached=await getLesson(id);
+    let cached;
+    try{ cached=await getLesson(id); }
+    catch(e){ if(UI.study!==sv) return; sv.lesson={md:'',state:'error',err:e.message||LOADFAIL.message,reload:true}; paintLesson(); return; }
     if(UI.study!==sv) return;
     if(cached){ sv.lesson={md:cached,state:'done'}; paintLesson(); afterLesson(sv); return; }
   }
@@ -2234,7 +2368,7 @@ async function loadLesson(sv, regen){
     const r=await ENV.sample(lessonPrompt(id),{signal:ctl.signal, cache:false, onText:({text})=>{
       L.md=text; if(L.state!=='streaming'){ L.state='streaming'; paintLesson(); } else paintLessonBody(); }});
     L.md=r.text; L.state='done'; L.truncated=r.truncated;
-    if(!r.truncated) putLesson(id,r.text);
+    if(!r.truncated) putLesson(id,r.text,regen);
     if(UI.study===sv){ paintLesson(); afterLesson(sv); }
   }catch(e){
     L.md=e.text||L.md; L.state='error'; L.err=sampleErr(e);
@@ -2246,19 +2380,21 @@ async function loadCards(sv, bg, force){
   if(sv.cards&&(sv.cards.state==='loading'||sv.cards.state==='ready')){ if(!bg) render(); return; }
   const id=sv.id, C=sv.cards={state:'loading', t0:Date.now()};
   if(!bg) render();
-  const cached=force?null:await getCards(id);
+  let cached=null, failed=false;
+  if(!force){ try{ cached=await getCards(id); }catch(e){ failed=true; } }
   if(sv.cards!==C) return;
-  if(cached){ C.state='ready'; }
+  if(failed){ C.state='error'; C.err=LOADFAIL.message; C.reload=true; }
+  else if(cached){ C.state='ready'; }
   else if(!ENV.sample){ C.state='nosample'; }
   else{
     const ctl=new AbortController(); C.ctl=ctl;
     try{
-      const lesson=sv.lesson?.md||lessonCached(id)||await getLesson(id)||'';
+      const lesson=sv.lesson?.md||lessonCached(id)||await getLesson(id).catch(()=>'')||'';
       const arr=asArray(await ENV.sample.json(cardsPrompt(id,lesson),{signal:ctl.signal, cache:false}));
       const items=arr.filter(x=>x&&typeof x.q==='string'&&typeof x.a==='string'&&x.q.trim()&&x.a.trim()).slice(0,30)
         .map((x,i)=>({id:'c'+String(i+1).padStart(2,'0'), k:KINDS.includes(x.kind)?x.kind:'사실', q:x.q.trim(), a:x.a.trim(), ...(cleanKey(x.t)?{t:cleanKey(x.t)}:{}), h:String(x.hint||'').trim()}));
       if(items.length<5) throw {code:'invalid_json'};
-      CARDS[id]=items; putCards(id); C.state='ready';
+      CARDS[id]=items; await putCards(id,!force); C.state='ready';
     }catch(e){ C.state='error'; C.err=sampleErr(e); }
   }
   if(C.state==='ready'){ checkCardsDone(id); if(rec(id)?.cd) prefetchQuiz(sv); }
@@ -2277,16 +2413,40 @@ function checkCardsDone(u){
   if(items.every(c=>m[c.id])){ const r=ensure(u); if(!r.cd){ r.cd=1; save('progress'); } return true; }
   return false;
 }
+/* 확인 문제 은행(26.11.25 영신 "미리 만들어 검산"): quiz/<id>에 검산한 문제(단원당 30여 개)가 있으면 회차마다
+   def 2·app 3·calc 2·explain 1을 뽑는다. 지난 두 회차에 낸 문제는 피하고, 지난번 약했던 목표와 덜 나온 목표를 먼저 고르고,
+   객관식 보기 순서는 섞는다. 은행이 없거나 읽지 못하면 예전처럼 그 자리에서 만든다. */
+const QUIZ_BANK={};
+async function getQuizBank(u){
+  if(u in QUIZ_BANK) return QUIZ_BANK[u];
+  if(!ENV.db) return null;
+  try{ const s=await withTimeout(ENV.db.doc('quiz/'+u).get(),8000); const d=s.exists?s.data():null; return (QUIZ_BANK[u]=Array.isArray(d?.items)?d.items.filter(x=>x&&!x.x):null); }
+  catch(e){ return null; }
+}
+function drawQuiz(u, bank){
+  const r=rec(u)||{}, recent=new Set(r.qu||[]), miss=new Set(r.miss||[]), nobj=NODE[u].obj.length, rnd=new Map(bank.map(x=>[x.id,Math.random()]));
+  const out=[], used=new Set(), objN={};
+  const cost=x=>(recent.has(x.id)?10:0)-(miss.has(x.obj)?3:0)+(objN[x.obj]||0)*2+rnd.get(x.id);
+  for(const [s,n] of [['def',2],['app',3],['calc',2],['explain',1]]) for(let k=0;k<n;k++){
+    const c=bank.filter(x=>x.slot===s&&!used.has(x.id)).sort((a,b)=>cost(a)-cost(b))[0]; if(!c) break;
+    used.add(c.id); objN[c.obj]=(objN[c.obj]||0)+1; out.push(c); }
+  return out.map(x=>{ const it=normItem(x,nobj); if(!it) return null; it.bid=x.id;
+    if(it.type==='mcq'){ const ch=it.choices, ord=ch.map((_,i)=>[i,Math.random()]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]); it.choices=ord.map(i=>ch[i]); it.answer=ord.indexOf(it.answer); }
+    return it; }).filter(Boolean);
+}
 function prefetchQuiz(sv){ if(ENV.sample&&!sv.quiz&&rec(sv.id)?.cd) genQuiz(sv,true); }
 async function genQuiz(sv, bg){
   if(sv.quiz&&(sv.quiz.state==='loading'||sv.quiz.state==='ready')){ if(!bg) render(); return; }
   if(!ENV.sample){ sv.quiz={state:'nosample'}; if(!bg) render(); return; }
   const Q=sv.quiz={state:'loading',t0:Date.now()};
   if(!bg) render();
-  if(!CARDS[sv.id]) await getCards(sv.id);
+  if(!CARDS[sv.id]) await getCards(sv.id).catch(()=>null);
   const ctl=new AbortController(); Q.ctl=ctl;
   try{
-    const items=asArray(await ENV.sample.json(quizPrompt(sv),{signal:ctl.signal, cache:false})).map(x=>normItem(x,NODE[sv.id].obj.length)).filter(Boolean).slice(0,10);
+    let items=null;
+    const bank=await getQuizBank(sv.id);
+    if(bank&&bank.length>=12){ items=drawQuiz(sv.id,bank); if(items.length>=6){ const r=ensure(sv.id); r.qu=[...items.map(x=>x.bid),...(r.qu||[])].slice(0,16); save('progress'); Q.bank=true; } else items=null; }
+    if(!items) items=asArray(await ENV.sample.json(quizPrompt(sv),{signal:ctl.signal, cache:false})).map(x=>normItem(x,NODE[sv.id].obj.length)).filter(Boolean).slice(0,10);
     if(items.length<6) throw {code:'invalid_json'};
     Object.assign(Q,{state:'ready', items, i:0, res:[]});
   }catch(e){ Object.assign(Q,{state:'error', err:sampleErr(e)}); }
@@ -2296,8 +2456,8 @@ function gradeCard(g){
   const cs=UI.cs; if(!cs||!cs.revealed||cs.copy||!cs.queue.length) return;
   const it=cs.queue[0], key=it.u+'/'+it.id, m=cst(it.u);
   if(cs.mode==='learn'){
-    if(g===3){ cs.queue.shift(); const first=!cs.tried[key]; m[it.id]=[first?2:1,2.5,dnum()+(first?2:1),1,0]; }
-    else cs.tried[key]=true;
+    if(g===3){ cs.queue.shift(); m[it.id]=cardFirst(cs.tried[key]||3); }
+    else cs.tried[key]=Math.min(cs.tried[key]||3,g);
     bump('k');
   } else {
     if(!(key in cs.graded)){ cs.graded[key]=g; cs.counts[g]++; cs.done++; applyCardReview(m,it.id,g); bump('k'); }
@@ -2332,7 +2492,7 @@ function cardRecall(val, giveUp){
   if(!giveUp&&!val.trim()){ toast('기억나는 만큼 써 봐. 모르면 \'모르겠어\'를 눌러.'); return; }
   if(!giveUp&&cardKeyOk(val,c)){
     delete cs.recall[key]; cs.queue.shift();
-    if(cs.mode==='learn'){ cst(it.u)[it.id]=[1,2.5,dnum()+1,1,0]; bump('k'); }
+    if(cs.mode==='learn'){ cst(it.u)[it.id]=cardFirst(cs.tried?.[key]||1); bump('k'); }
     toast('맞았어.'); afterCard(cs,it.u); return;
   }
   cs.copy={g:1, typed:giveUp?'':val, recall:true}; render(); focusCard();
@@ -2343,9 +2503,16 @@ async function startCardReview(){
   render(); window.scrollTo(0,0);
   await READY;
   const due=dueCards(), units=[...new Set(due.map(d=>d.u))];
-  await Promise.all(units.map(u=>getCards(u)));
-  const by={};
-  due.forEach(d=>{ if(cardOf(d.u,d.id)) (by[d.u] ||= []).push({u:d.u,id:d.id}); else if(CARDS[d.u]) delete cst(d.u)[d.id]; });
+  const failed=new Set();
+  await Promise.all(units.map(u=>getCards(u).catch(()=>{ failed.add(u); })));
+  const by={}; let changed=false;
+  due.forEach(d=>{
+    if(cardOf(d.u,d.id)) (by[d.u] ||= []).push({u:d.u,id:d.id});
+    else if(CARDS[d.u]){ delete cst(d.u)[d.id]; changed=true; }        // 빠진 카드의 기록은 지운다
+    else { const v=cst(d.u)[d.id]; if(Array.isArray(v)){ v[2]=dnum()+1; changed=true; } } // 불러오지 못한 단원은 내일로(이어하기가 빈 복습에 갇히지 않게)
+  });
+  if(changed) save('cards');
+  if(failed.size) toast('일부 단원의 카드를 불러오지 못해 내일로 미뤘어.');
   const qs=Object.values(by), out=[];
   while(qs.some(q=>q.length)) qs.forEach(q=>{ if(q.length) out.push(q.shift()); });
   cs.queue=out.slice(0,80); cs.total=cs.queue.length; cs.state='ready';
@@ -2515,8 +2682,46 @@ const PL={};
 function probList(u){
   if(PL[u]) return PL[u];
   const out=[];
-  for(const [b,sec,a,z,ans,label,skip,o] of (PROBS[u]||[])) for(let i=a;i<=z;i++){ if(skip&&i>=skip[0]&&i<=skip[1]) continue; out.push({b,sec,i,ans,label,o:o||0,k:`${b}|${sec}|${i}`}); }
+  for(const [b,sec,a,z,ans,label,skip,o] of (PROBS[u]||[])) for(let i=a;i<=z;i++){ if(skip&&i>=skip[0]&&i<=skip[1]) continue; out.push({b,sec,i,ans,label,o:o||0,k:`${b}|${sec}|${i}`, g:ans==='even'?i%2===0:i%2===1}); }
   return (PL[u]=out);
+}
+/* 홀수 숙달·짝수 섞어 풀기(영신 26.11.25 "홀수 숙달, 짝수는 섞어 복습"): 책 뒤에 답이 있는 쪽 번호(대개 홀수, 짝수만 답이 있는 책은 짝수)가
+   숙달 문제(g)이고, 나머지는 숙달한 단원들에서 섞여 매일 나온다. 둘은 보통 같은 꼴의 쌍둥이라, 단원을 넘을 때 모든 꼴을 한 번은 혼자 푼다.
+   '전부'는 그대로다: 단계를 닫으려면(다음 단계가 열리려면) 그 단계의 섞어 풀 문제까지 모두 혼자 풀어야 한다. */
+const gateList=u=>probList(u).filter(p=>p.g), mixList=u=>probList(u).filter(p=>!p.g);
+let MIXC=null; // 단계별 남은 섞어 풀 문제 수(그리기마다 다시 세지 않게)
+function tierMixLeft(t){
+  if(!MIXC){ MIXC={}; for(const n of NODES){ if(!hasBook(n.id)) continue; const m=bget(n.id); let c=0; for(const p of mixList(n.id)) if(!pdone(m[p.k])) c++; MIXC[n.tier]=(MIXC[n.tier]||0)+c; } }
+  return MIXC[t]||0;
+}
+const hashStr=s=>{ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; };
+// 오늘 섞어 풀 몫: 어제 처음 푼 숙달 문제 수만큼(쌓이는 만큼 줄인다), 적어도 5, 많아야 30
+function mixQuotaLeft(){ const y=S.stats.days[dayKey(dayStart()-DAY)]||{}, t=S.stats.days[dayKey()]||{}; return Math.max(0,Math.min(30,Math.max(5,y.gq||0))-(t.mq||0)); }
+// 섞어 풀 수 있는 문제: 숙달한 단원(오늘 숙달한 것은 내일부터, 간격을 두려고)의 짝꿍 문제. all: 단계 끝이라 몫 없이 다 연다
+function mixPool(all){
+  const t=dnum(), due=[], fresh={};
+  for(const n of ORDER){ const u=n.id; if(!known(u)||!hasBook(u)) continue; if(!all&&(rec(u).ma||0)>=dayStart()) continue;
+    const m=bget(u); for(const p of mixList(u)){ const e=m[p.k], ck=u+'::'+p.k;
+      if(!e) (fresh[u+'|'+p.b+'|'+p.sec] ||= []).push(ck); else if(!pdone(e)&&(e.d||0)<=t) due.push(ck); } }
+  return {due, fresh, count:due.length+Object.values(fresh).reduce((a,g)=>a+g.length,0)};
+}
+// 다섯 문제 묶음: 다시 풀 것 둘까지, 그다음 새 문제를 단원·절마다 앞 번호 하나씩, 날마다 다른 순서로 섞는다(같은 꼴을 몰아 풀지 않게)
+function mixBundle(all){
+  const P=mixPool(all), n=all?5:Math.min(5,mixQuotaLeft()); if(n<=0) return [];
+  const q=P.due.slice(0,Math.min(2,n)), day=String(dnum());
+  const gs=Object.keys(P.fresh).sort((a,b)=>hashStr(a+day)-hashStr(b+day)).map(g=>P.fresh[g].slice());
+  while(q.length<n&&gs.some(g=>g.length)) for(const g of gs){ if(q.length>=n) break; if(g.length) q.push(g.shift()); } // 묶음마다 돌아가며 하나씩
+  for(const k of P.due.slice(2)){ if(q.length>=n) break; q.push(k); }
+  return q;
+}
+// 다음 단계가 섞어 풀 문제 때문에만 잠겨 있으면 몫 없이 연다
+function mixGateTier(){ const l=ORDER.find(n=>!known(n.id)); return l&&l.tier>1&&NODES.every(n=>n.tier!==l.tier-1||known(n.id))&&tierMixLeft(l.tier-1)>0?l.tier-1:0; }
+function openMix(){
+  const all=!!mixGateTier(), q=mixBundle(all);
+  if(!q.length){ toast('지금 섞어 풀 문제가 없어.'); go('today'); return; }
+  UI.sel=null; enter('study');
+  UI.study={id:'mix', mode:'mix', step:'book', all, lesson:{md:'',state:'idle'}, cards:null, quiz:null, result:null, chat:[], chatBusy:false, bk:{u:null, mix:true, o:0, q, i:0, out:{}, Ps:{}, P:null}};
+  render(); window.scrollTo(0,0);
 }
 const hasObj=u=>probList(u).some(p=>p.o);
 // "토마스 A.1절 1~12번 · 서웨이 1장 문제 50번": the numbers of a problem list, grouped by book and group name
@@ -2534,13 +2739,14 @@ const bset=u=>{ const d=(S[bookDoc(u)] ||= {u:{}}); d.u ||= {}; return (d.u[u] |
 const pdone=e=>!!e&&(e.s==='solo'||e.s==='void');
 function bookStats(u,o){
   const m=bget(u), t=dnum(), c={total:0, solo:0, due:0, wait:0, hold:0, fresh:0};
-  for(const p of probList(u)){ if(o&&p.o!==o) continue; c.total++; const e=m[p.k]; if(!e) c.fresh++; else if(pdone(e)) c.solo++; else if(e.s==='hold') c.hold++; else if((e.d||0)<=t) c.due++; else c.wait++; }
+  for(const p of gateList(u)){ if(o&&p.o!==o) continue; c.total++; const e=m[p.k]; if(!e) c.fresh++; else if(pdone(e)) c.solo++; else if((e.d||0)<=t) c.due++; else if(e.s==='hold') c.hold++; else c.wait++; }
   return c;
 }
 const bookDone=u=>{ if(!hasBook(u)) return true; const c=bookStats(u); return c.solo===c.total; };
+// 이어하기의 '다시 풀 교재 문제': 숙달 문제만(섞어 풀 문제의 다시 풀기는 섞어 풀기가 맡는다). 목록에 없는 기록 열쇠는 보지 않는다.
 function bookDueAll(){
   const t=dnum(), out=[];
-  for(const n of ORDER){ if(!hasBook(n.id)) continue; for(const [k,e] of Object.entries(bget(n.id))) if(e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=t) out.push({u:n.id,k}); }
+  for(const n of ORDER){ if(!hasBook(n.id)) continue; const m=bget(n.id); for(const p of gateList(n.id)){ const e=m[p.k]; if(e&&!pdone(e)&&(e.d||0)<=t) out.push({u:n.id,k:p.k}); } }
   return out;
 }
 function grantMastery(id){
@@ -2602,8 +2808,8 @@ function bkSame(a,b){ const x=ansNorm(a), y=ansNorm(b); if(x&&x===y) return true
 /* a bundle of five: today's re-solves first (at most two), then new problems in book order.
    o: only that objective's problems (opened from the lesson). Without o, new problems wait for 암기; re-solves never wait. */
 function bkBundle(u,o){
-  const m=bget(u), t=dnum(), L=o?probList(u).filter(p=>p.o===o):probList(u), open=!!o||!!rec(u)?.cd;
-  const due=L.filter(p=>{ const e=m[p.k]; return e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=t; }), fresh=open?L.filter(p=>!m[p.k]):[];
+  const m=bget(u), t=dnum(), L=o?gateList(u).filter(p=>p.o===o):gateList(u), open=!!o||!!rec(u)?.cd;
+  const due=L.filter(p=>{ const e=m[p.k]; return e&&!pdone(e)&&(e.d||0)<=t; }), fresh=open?L.filter(p=>!m[p.k]):[];
   const q=due.slice(0,2); for(const p of fresh){ if(q.length>=5) break; q.push(p); } for(const p of due.slice(2)){ if(q.length>=5) break; q.push(p); }
   return q.map(p=>p.k);
 }
@@ -2617,12 +2823,14 @@ function backToLesson(sv){
   const R=sv.reader, c=R&&sv.lesson.md?readChunks(sv)[R.i]:null;
   if(c?.type==='book'&&c.o===o&&R.i>=R.max&&!bookStats(sv.id,o).fresh) rdNext();
 }
+// 묶음의 열쇠는 단원 묶음이면 문제 열쇠, 섞어 풀기면 '단원::문제 열쇠'. P는 자기 단원(u)과 묶음(B)을 지녀서,
+// 판정을 기다리는 사이 다른 단원을 열어도 결과가 제 단원에 적힌다(26.11.25 검토).
 function bkCur(B){
-  const k=B.q[B.i]; if(!k) return null;
-  if(!B.Ps[k]){ const e=bget(B.u)[k], p=probOf(B.u,k);
-    B.Ps[k]={k, p, base:e?{...e}:null, redo:!!e&&!pdone(e)&&e.s!=='hold'&&(e.d||0)<=dnum(), imgs:[], wimgs:[], text:'', ans:'', work:'',
+  const ck=B.q[B.i]; if(!ck) return null;
+  if(!B.Ps[ck]){ const [u,k]=ck.includes('::')?ck.split('::'):[B.u,ck], e=bget(u)[k], p=probOf(u,k);
+    B.Ps[ck]={ck, u, k, B, p, base:e?{...e}:null, redo:!!e&&!pdone(e)&&(e.d||0)<=dnum(), imgs:[], wimgs:[], text:'', ans:'', work:'',
       mode:p.ans==='all'||(p.ans==='odd'&&p.i%2)||(p.ans==='even'&&!(p.i%2))?'book':'claude', tries:0, hints:0, phase:'edit'}; }
-  return (B.P=B.Ps[k]);
+  return (B.P=B.Ps[ck]);
 }
 // offered where the book may print the answer; 'some' (blue numbers, selected answers) leaves it to 영신
 const canBook=P=>P.p.ans==='all'||P.p.ans==='some'||(P.p.ans==='odd'&&P.p.i%2===1)||(P.p.ans==='even'&&P.p.i%2===0);
@@ -2699,7 +2907,9 @@ JSON 하나만: {"concept":"1단계: 어느 개념·법칙의 문제인지 이�
 const bkBusy=P=>['solving','judging','checking'].includes(P.phase)||P.hinting;
 async function bkSubmit(){
   const sv=UI.study, B=sv?.bk, P=B&&bkCur(B); if(!P||bkBusy(P)||P.phase!=='edit') return;
-  if(!P.imgs.length&&!P.text.trim()){ toast('문제 사진을 올리거나 문제를 글로 적어 줘.'); return; }
+  // 책 뒤 답과 맞춰 볼 때는 문제를 몰라도 견줄 수 있다(문제 사진은 Claude가 풀거나 힌트를 줄 때만 꼭 필요하다)
+  const byBook=P.mode==='book'&&canBook(P);
+  if(!byBook&&!P.imgs.length&&!P.text.trim()){ toast('문제 사진을 올리거나 문제를 글로 적어 줘.'); return; }
   if(!P.ans.trim()){ toast('답을 적어 줘.'); $('#bk-ans')?.focus(); return; }
   if(P.redo&&!P.work.trim()&&!P.wimgs.length){ toast('다시 풀기는 풀이도 같이 내야 해. 풀이를 적거나 찍어 줘.'); $('#bk-work')?.focus(); return; }
   P.tries++; P.err=''; P.verdict=null;
@@ -2711,7 +2921,7 @@ async function bkSubmit(){
 async function bkSolve(P){
   const ctl=new AbortController(); P.ctl=ctl; P.phase='solving'; P.t0=Date.now(); render();
   try{
-    const x=await ENV.sample.json(solvePrompt(UI.study.id,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+    const x=await ENV.sample.json(solvePrompt(P.u,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
     if(!x||typeof x.answer!=='string'||!x.answer.trim()) throw {code:'invalid_json'};
     P.solve={read:String(x.read||''), answer:String(x.answer), steps:Array.isArray(x.steps)?x.steps.map(String).slice(0,14):[], key:cleanKey(x.key), conf:+x.confidence||0};
     P.phase='confirm';
@@ -2719,7 +2929,7 @@ async function bkSolve(P){
   if(UI.study?.bk?.P===P) render();
 }
 async function bkJudge(P, reason){
-  const u=UI.study.id;
+  const u=P.u;
   // two answers found apart that agree need no second call, unless the first solver was unsure
   if(!reason&&P.solve.conf>=0.8&&bkSame(P.ans,P.solve.answer)) return bkOutcome(P,'correct','네 답이 Claude가 따로 푼 답과 같아.');
   const ctl=new AbortController(); P.ctl=ctl; P.phase='judging'; P.t0=Date.now(); render();
@@ -2740,25 +2950,27 @@ async function bkBookCompare(bookAns){
   // a different spelling of the same answer? Claude only decides whether the two are the same
   const ctl=new AbortController(); P.ctl=ctl; P.phase='checking'; P.t0=Date.now(); render();
   try{
-    const x=await ENV.sample.json(equivPrompt(sv.id,P,bookAns),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+    const x=await ENV.sample.json(equivPrompt(P.u,P,bookAns),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
     const v=x?.same==='yes'?'correct':x?.same==='no'?'wrong':'hold';
     bkOutcome(P,v,String(x?.why||'')||(v==='wrong'?'책 답과 달라.':''));
   }catch(e){ P.phase='bookans'; P.err=sampleErr(e); render(); }
 }
 // the one-line rule: only a first submission without help counts at once; anything else comes back a day later
 function bkOutcome(P, v, why, gap){
-  const sv=UI.study, u=sv.id, m=bset(u), e={...(m[P.k]||{})};
+  const u=P.u, m=bset(u), e={...(m[P.k]||{})};
   e.n=(e.n||0)+1; e.t=Date.now(); if(P.hints) e.h=Math.max(e.h||0,P.hints);
   if(v==='correct') e.s=P.hints?'help':(P.tries===1&&(!P.base||P.redo))?'solo':'self';
   else e.s=v==='hold'?'hold':'wrong';
-  if(e.s==='solo'||e.s==='hold') delete e.d; else e.d=dnum()+1;
-  m[P.k]=e; save(bookDoc(u)); bump('q');
+  // 보류도 내일 다시 나온다(예전에는 다시 나올 길이 없어 숙달이 영영 막혔다, 26.11.25 검토)
+  if(e.s==='solo') delete e.d; else e.d=dnum()+1;
+  m[P.k]=e; save(bookDoc(u)); bump('q'); MIXC=null;
+  if(P.p.g){ if(e.n===1) bump('gq'); } else bump('mq');
   const key=P.solve?.key||P.hint?.key||'';
   P.phase='done'; P.appeal=false; P.verdict={v, s:e.s, why, gap}; P.copyKey=(e.s==='self'||e.s==='help')&&typeKey(key)?key:''; P.copied=!P.copyKey;
-  sv.bk.out[P.k]=e.s;
+  P.B.out[P.ck]=e.s;
   if(gap) bkGap(u,P.k,gap);
-  if(e.s==='solo') checkBookMastery(u);
-  render(); if(P.copyKey) focusCopy();
+  if(e.s==='solo'&&P.p.g) checkBookMastery(u);
+  if(UI.study?.bk===P.B){ render(); if(P.copyKey) focusCopy(); }
 }
 // 빠진 계단: the same objective of a prerequisite named on two different problems marks that unit shaky (이어하기 takes it first)
 function bkGap(u,k,g){
@@ -2767,7 +2979,7 @@ function bkGap(u,k,g){
   if(hits.size>=2&&known(g.unit)&&rec(g.unit).s!=='shaky'){ const q=ensure(g.unit); q.s='shaky'; q.nx=dayStart(); toast(`${NODE[g.unit].no}번 ${NODE[g.unit].t}을 흔들림으로 표시했어. 이어하기가 먼저 데려가.`); }
   save('progress');
 }
-function bkHelpMark(P){ const u=UI.study.id, m=bset(u), e={...(m[P.k]||{})}; if(e.s==='solo') return; e.s='help'; e.h=Math.max(e.h||0,P.hints); e.t=Date.now(); e.d=dnum()+1; m[P.k]=e; save(bookDoc(u)); }
+function bkHelpMark(P){ const u=P.u, m=bset(u), e={...(m[P.k]||{})}; if(e.s==='solo') return; e.s='help'; e.h=Math.max(e.h||0,P.hints); e.t=Date.now(); e.d=dnum()+1; m[P.k]=e; save(bookDoc(u)); }
 async function bkHint(){
   const sv=UI.study, P=sv?.bk?.P; if(!P||bkBusy(P)) return;
   if(!P.hint){
@@ -2777,7 +2989,7 @@ async function bkHint(){
     if(!ENV.sample){ toast(NOSAMPLE); return; }
     const ctl=new AbortController(); P.ctl=ctl; P.hinting=true; P.t0=Date.now(); render();
     try{
-      const x=await ENV.sample.json(hintPrompt(sv.id,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
+      const x=await ENV.sample.json(hintPrompt(P.u,P),{images:P.imgs.map(i=>i.blob), signal:ctl.signal, cache:false});
       if(!x||!x.concept) throw {code:'invalid_json'};
       P.hint={concept:String(x.concept), plan:String(x.plan||''), steps:Array.isArray(x.steps)?x.steps.map(String).slice(0,14):[], answer:String(x.answer||''), key:cleanKey(x.key)};
       P.hints=1; P.hintAt=Date.now(); bkHelpMark(P);
@@ -2793,12 +3005,13 @@ function bkNext(){
   const B=UI.study?.bk, P=B?.P; if(!P||bkBusy(P)) return;
   if(P.phase!=='done'){ toast('채점하거나 미루기를 눌러. 건너뛰기는 없어.'); return; }
   if(!P.copied){ toast('먼저 핵심을 따라 써.'); focusCopy(); return; }
-  [...P.imgs,...P.wimgs].forEach(x=>URL.revokeObjectURL(x.url)); delete B.Ps[P.k];
+  [...P.imgs,...P.wimgs].forEach(x=>URL.revokeObjectURL(x.url)); delete B.Ps[P.ck];
   B.i++; B.P=null; render(); window.scrollTo(0,0);
 }
 function bkLater(){ const B=UI.study?.bk; if(!B?.P||B.P.phase!=='edit'||bkBusy(B.P)||B.q.length-B.i<2) return; const k=B.q.splice(B.i,1)[0]; B.q.push(k); B.P=null; render(); }
 
 function bookStep(sv,n){
+  if(sv.mode==='mix') return mixStep(sv);
   const u=sv.id, r=rec(u)||{}, O=sv.bk?.o||0;
   if(!r.cd&&!O&&!bookStats(u).due&&!sv.bk?.q?.length) return `<div class="quiz-wrap"><div class="note">${hasObj(u)?'목표마다 교재 문제는 설명을 읽다가 그 목표 끝에서 풀어. 나머지는 암기를 끝낸 뒤에 열려.':'암기를 먼저 끝내야 교재 문제를 풀 수 있어.'}</div><div class="row"><button type="button" class="btn primary" data-act="step" data-step="${(r.rd||r.lv)?'cards':'lesson'}">${(r.rd||r.lv)?'암기로 가기':'설명으로 가기'}</button></div></div>`;
   if(ENV.imgOK===undefined) bkProbeImages();
@@ -2815,11 +3028,15 @@ function bookStep(sv,n){
     const readLbl=O&&!c.fresh?'설명 이어 읽기 →':'설명으로 돌아가기';
     return `<div class="quiz-wrap">${bar}<div class="card bk-end">${msg}<div class="row">${O&&!c.fresh?`<button type="button" class="btn primary" data-act="bk-read">${readLbl}</button>`:''}${more?`<button type="button" class="btn${O&&!c.fresh?'':' primary'}" data-act="bk-more">한 묶음 더</button>`:''}${!O&&all&&!r.qp?'<button type="button" class="btn primary" data-act="step" data-step="quiz">확인 문제로</button>':''}${readBtn&&!(O&&!c.fresh)?`<button type="button" class="btn" data-act="bk-read">${readLbl}</button>`:''}<button type="button" class="btn ghost" data-act="nav" data-view="today">오늘로</button></div></div>${rule}</div>`;
   }
-  const P=bkCur(B), e=bget(u)[k], imgOK=ENV.imgOK!==false, busyNow=bkBusy(P), locked=P.phase!=='edit';
+  return bkPanel(sv,B,bar,rule);
+}
+// 문제 한 개의 화면(단원 교재 단계와 섞어 풀기가 같이 쓴다)
+function bkPanel(sv,B,bar,rule){
+  const P=bkCur(B), e=bget(P.u)[P.k], imgOK=ENV.imgOK!==false, busyNow=bkBusy(P), locked=P.phase!=='edit', pn=NODE[P.u];
   const dots=`<ol class="qdots" aria-hidden="true">${B.q.map((x,i)=>{ const s=B.out[x]; return `<li class="${s==='solo'?'good':s==='self'||s==='help'?'mid':s==='wrong'?'bad':s==='hold'?'void':i===B.i?'cur':''}"></li>`; }).join('')}</ol>`;
-  const head=`${dots}<div class="qmeta"><span class="mono">묶음 ${B.i+1} / ${B.q.length}</span><span class="pill${P.redo?' warn':''}">${P.redo?'다시 풀기':'새 문제'}</span>${e?`<span class="muted">기록: ${BK_LABEL[e.s]||''}</span>`:''}</div><h2 class="bk-title">${esc(probName(P.p))}</h2>`;
+  const head=`${dots}<div class="qmeta"><span class="mono">묶음 ${B.i+1} / ${B.q.length}</span><span class="pill${P.redo?' warn':''}">${P.redo?'다시 풀기':'새 문제'}</span>${e?`<span class="muted">기록: ${BK_LABEL[e.s]||''}</span>`:''}</div>${B.mix?`<p class="muted bk-obj">${pn.no}번 ${esc(pn.t)}${P.p.o?` · 목표 ${P.p.o} ${esc(pn.obj[P.p.o-1]||'')}`:''}</p>`:''}<h2 class="bk-title">${esc(probName(P.p))}</h2>`;
   const thumbs=(L,w)=>L.map((x,i)=>`<span class="bk-ph"><img src="${x.url}" alt="${w?'풀이':'문제'} 사진 ${i+1}"><button type="button" class="bk-x" data-act="bk-img-del" data-w="${w}" data-i="${i}" aria-label="사진 빼기"${locked?' disabled':''}>×</button></span>`).join('');
-  const prob=`<div class="bk-field"><p class="label">1. 문제</p><p class="muted">책에서 이 문제를 펴고 이 문제만 나오게 찍어 올려. 문제 글은 저장하지 않고 이 화면에서만 써.${imgOK?'':' 이 화면에서는 사진을 보낼 수 없어서 문제를 글로 적어야 해.'}</p>
+  const prob=`<div class="bk-field"><p class="label">1. 문제</p><p class="muted">책에서 이 문제를 펴고 이 문제만 나오게 찍어 올려. 문제 글은 저장하지 않고 이 화면에서만 써.${canBook(P)?' 책 뒤 답과 맞춰 볼 때는 안 올려도 돼(답 표기가 달라 Claude가 같은 답인지 볼 때 문제가 있으면 더 정확해).':''}${imgOK?'':' 이 화면에서는 사진을 보낼 수 없어서 문제를 글로 적어야 해.'}</p>
     ${imgOK?`<div class="bk-photos">${thumbs(P.imgs,0)}${!locked&&P.imgs.length<3?'<label class="btn sm">사진 올리기<input type="file" id="bk-img" accept="image/*" capture="environment" hidden></label>':''}</div>`:''}
     <details class="bk-txt"${P.text||!imgOK?' open':''}><summary>문제를 글로 적기${imgOK?' (사진 대신)':''}</summary><textarea id="bk-text" rows="3" placeholder="문제를 옮겨 적어(x^2, sqrt( ), <= 처럼)"${locked?' disabled':''}>${esc(P.text)}</textarea></details></div>`;
   const ans=`<div class="bk-field"><label class="label" for="bk-ans">2. 내 답</label><textarea id="bk-ans" rows="2" placeholder="최종 답 (예: (-3, 5], x < -1 또는 x > 2, 12.5 m/s)"${locked?' disabled':''}>${esc(P.ans)}</textarea></div>`;
@@ -2835,7 +3052,7 @@ function bookStep(sv,n){
   else if(P.phase==='bookans') stage=`<form id="bk-book-form" class="note bk-field"><p class="muted">네 답은 잠갔어: <b>${esc(P.ans)}</b></p><label class="label" for="bk-bookans">책 뒤의 답을 그대로 적어</label><input id="bk-bookans" autocomplete="off" spellcheck="false"><div class="row"><button type="submit" class="btn primary">견주기</button><button type="button" class="btn ghost" data-act="bk-to-claude">책 답이 없어 → Claude에게</button></div></form>`;
   else if(P.phase==='done'){
     const V=P.verdict, cls=V.v==='correct'?'good':V.v==='wrong'?'bad':'warn';
-    const what={solo:'혼자 풂으로 셌어.', self:'맞혔지만 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', help:'도움을 받았으니 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', wrong:'고쳐서 다시 낼 수 있어. 고쳐 맞히면 스스로 고침이고 내일 다시 풀어. 넘어가면 내일 다시 나와.', hold:'보류는 숙달을 막아. 사진을 또렷이 다시 찍어 재판정하거나, 책 답과 맞춰 보거나, 작업 세션에서 확인해.'}[V.s]||'';
+    const what={solo:'혼자 풂으로 셌어.', self:'맞혔지만 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', help:'도움을 받았으니 바로 세지 않아. 내일 도움 없이 풀이까지 내서 다시 풀어.', wrong:'고쳐서 다시 낼 수 있어. 고쳐 맞히면 스스로 고침이고 내일 다시 풀어. 넘어가면 내일 다시 나와.', hold:'보류는 숙달을 막아. 내일 다시 나오니 그때 도움 없이 풀이까지 내서 풀어. 지금 사진을 또렷이 다시 찍어 재판정하거나 책 답과 맞춰 봐도 돼.'}[V.s]||'';
     stage=`<div class="note bk-verdict ${cls}"><p class="eyebrow">${V.v==='correct'?'맞음':V.v==='wrong'?'틀림':'판정 보류'} · ${BK_LABEL[V.s]}</p>${V.why?`<p>${inl(V.why)}</p>`:''}<p class="muted">${what}</p>
       ${V.gap?`<p>빠진 계단일 수 있어: ${chip(NODE[V.gap.unit])} 목표 ${V.gap.o+1}. ${esc(V.gap.why)} <button type="button" class="btn sm" data-act="learn" data-id="${V.gap.unit}">거기로 가기</button></p>`:''}
       ${V.v==='correct'&&P.solve?.steps?.length?`<details><summary>Claude의 풀이 보기</summary><ol class="md">${P.solve.steps.map(s=>`<li>${inl(s)}</li>`).join('')}</ol></details>`:''}
@@ -2851,7 +3068,16 @@ function bookStep(sv,n){
       ${P.hints<3?`<label class="label" for="bk-hl">다음 힌트를 열려면 지금까지 한 것을 한 줄 적어</label><input id="bk-hl" autocomplete="off" value="${esc(P.hintLine||'')}">`:''}</div>`; }
   const err=P.err?`<div class="note bad">${esc(P.err)}</div>`:'';
   const btns=`<div class="row bk-btns"><button type="button" class="btn primary" data-act="${P.phase==='done'?'bk-next':'bk-go'}"${busyNow||['confirm','bookans'].includes(P.phase)||(P.phase==='done'&&!P.copied)?' disabled':''}>${P.phase==='done'?'다음 문제 →':'채점'}</button><button type="button" class="btn" data-act="bk-hint"${busyNow||P.hints>=3||(P.phase==='done'&&P.verdict?.v!=='wrong')?' disabled':''}>힌트 ${P.hints}/3</button><button type="button" class="btn ghost" data-act="bk-calc" aria-pressed="${!!UI.calc?.open}">계산기</button><button type="button" class="btn ghost" data-act="bk-later"${P.phase==='edit'&&!busyNow&&B.q.length-B.i>1?'':' disabled'}>미루기</button></div>`;
-  return `<div class="quiz-wrap">${bar}<div class="qcard bk" style="--dc:var(${DOM[n.d].c})">${head}${prob}${ans}${work}${mode}${err}${stage}${hintH}${btns}</div>${calcHTML()}${rule}</div>`;
+  return `<div class="quiz-wrap">${bar}<div class="qcard bk" style="--dc:var(${DOM[pn.d].c})">${head}${prob}${ans}${work}${mode}${err}${stage}${hintH}${btns}</div>${calcHTML()}${rule}</div>`;
+}
+// 섞어 풀기: 숙달한 단원들의 짝꿍 문제를 섞어 다섯 문제씩
+function mixStep(sv){
+  const B=sv.bk, P=mixPool(sv.all), left=sv.all?P.count:Math.min(P.count,mixQuotaLeft()), done=(S.stats.days[dayKey()]||{}).mq||0;
+  const bar=`<div class="bk-bar"><div class="bk-bar-h"><span>오늘 섞어 푼 문제 <b class="mono">${done}</b>${sv.all?'':` / 오늘 몫 ${done+left}`}</span><span class="muted">남은 섞어 풀 문제 ${P.count}</span></div></div>`;
+  const rule=`<p class="hint">숙달한 단원들의 짝꿍 문제(숙달 문제의 쌍둥이, 대개 짝수 번)를 단원·절을 섞어서 풀어. 몰아 풀 때보다 오래 남아. 판정 규칙은 교재 문제와 같고, ${sv.all?'이 단계의 섞어 풀 문제를 다 풀어야 다음 단계가 열려.':'단계를 닫으려면 그 단계의 섞어 풀 문제까지 모두 혼자 풀어야 해.'}</p>`;
+  if(B.q[B.i]) return bkPanel(sv,B,bar,rule);
+  const more=sv.all?P.count>0:left>0&&P.count>0, solo=Object.values(B.out).filter(s=>s==='solo').length;
+  return `<div class="quiz-wrap">${bar}<div class="card bk-end"><p class="eyebrow">묶음 끝</p><h2>${B.q.length}문제를 섞어 풀었어</h2><p class="muted">이번 묶음에서 혼자 푼 문제 ${solo}개.${more?'':' 오늘 몫은 여기까지야.'}</p><div class="row">${more?'<button type="button" class="btn primary" data-act="bk-more">한 묶음 더</button>':''}<button type="button" class="btn${more?'':' primary'}" data-act="next">이어하기 →</button><button type="button" class="btn ghost" data-act="nav" data-view="today">오늘로</button></div></div>${rule}</div>`;
 }
 
 function dropCard(u, cid){
@@ -2875,7 +3101,8 @@ document.addEventListener('click',e=>{
     case 'test': openStudy(id,'test'); break;
     case 'back': UI.sel=null; go(UI.prev); break;
     case 'step': if(sv) goStep(sv,el.dataset.step); break;
-    case 'regen': if(sv) loadLesson(sv,true); break;
+    case 'regen': if(sv&&!STORED.has(`lessons/${sv.id}`)) loadLesson(sv,true); break;
+    case 'reload-lesson': if(sv) loadLesson(sv,false); break;
     case 'stop-lesson': sv?.lesson?.ctl?.abort(); break;
     case 'stop-cards': sv?.cards?.ctl?.abort(); break;
     case 'stop-quiz': sv?.quiz?.ctl?.abort(); break;
@@ -2907,7 +3134,9 @@ document.addEventListener('click',e=>{
       r.choice=r.pick; r.score=r.choice===it.answer?1:0; r.done=true;
       if(!r.score) logMistake(sv.id,it.q,`${MARKS[r.choice]} ${it.choices[r.choice]}`,`${MARKS[it.answer]} ${it.choices[it.answer]}`,it.why);
       render(); if(!r.score) focusCopy(); break; }
-    case 'q-void': { const q=sv.quiz, r=q.res[q.i]; if(!r) break; r.void=true; const qt=String(q.items[q.i].q).slice(0,500); S.mistakes.items=S.mistakes.items.filter(m=>!(m.n===sv.id&&m.q===qt)); save('mistakes'); render(); toast('이 문제는 채점에서 뺐어.'); break; }
+    case 'q-void': { const q=sv.quiz, r=q.res[q.i]; if(!r) break; r.void=true;
+      // 은행 문제를 빼면 고칠 점으로 남겨 Claude가 은행을 고치게 한다
+      { const it=q.items[q.i]; if(it.bid&&ENV.db) ENV.db.collection('fixes').add({u:sv.id, no:NODE[sv.id].no, title:NODE[sv.id].t, page:0, of:0, sec:'확인 문제 은행', at:it.bid, text:`확인 문제 ${it.bid}를 채점에서 뺐어. 문제나 정답을 확인해 줘.`, q:String(it.q).slice(0,1000), a:String(r.val??r.choice??'').slice(0,500), state:'open', reply:'', ts:Date.now()}).catch(()=>{}); } const qt=String(q.items[q.i].q).slice(0,500); S.mistakes.items=S.mistakes.items.filter(m=>!(m.n===sv.id&&m.q===qt)); save('mistakes'); render(); toast('이 문제는 채점에서 뺐어.'); break; }
     case 'q-next': { const q=sv.quiz; if(needCopy(q.items[q.i],q.res[q.i])){ toast('먼저 핵심을 따라 써.'); focusCopy(); break; } if(q.i>=q.items.length-1) finishQuiz(); else { q.i++; render(); } break; }
     case 'bk-go': bkSubmit(); break;
     case 'bk-read-ok': { const P=sv?.bk?.P; if(P?.solve&&P.phase==='confirm'){ P.readOk=true; bkJudge(P); } break; }
@@ -2916,7 +3145,8 @@ document.addEventListener('click',e=>{
     case 'bk-again': { const P=sv?.bk?.P; if(P?.phase==='done'&&P.verdict?.v==='wrong'){ P.phase='edit'; P.verdict=null; P.appeal=false; render(); requestAnimationFrame(()=>$('#bk-ans')?.focus()); } break; }
     case 'bk-appeal': { const P=sv?.bk?.P; if(P?.phase==='done'){ P.appeal=!P.appeal; render(); if(P.appeal) requestAnimationFrame(()=>$('#bk-why')?.focus()); } break; }
     case 'bk-next': bkNext(); break;
-    case 'bk-more': if(sv){ sv.bk=bkStart(sv.id,sv.bk?.o); render(); window.scrollTo(0,0); } break;
+    case 'bk-more': if(sv?.mode==='mix'){ const q=mixBundle(sv.all); if(!q.length){ toast('지금 섞어 풀 문제가 없어.'); break; } sv.bk={u:null, mix:true, o:0, q, i:0, out:{}, Ps:{}, P:null}; render(); window.scrollTo(0,0); }
+      else if(sv){ sv.bk=bkStart(sv.id,sv.bk?.o); render(); window.scrollTo(0,0); } break;
     case 'bk-obj': openObjBook(sv,+el.dataset.o); break;
     case 'bk-read': backToLesson(sv); break;
     case 'g-play': gPlay(el.dataset.g, el.dataset.gv); break;
@@ -2946,7 +3176,7 @@ document.addEventListener('submit',e=>{
   const f=e.target; e.preventDefault();
   if(f.id==='ob-form'){
     const fd=new FormData(f);
-    S.profile={focus:fd.get('focus')||'all', daily:+(fd.get('daily')||1), started:Date.now()};
+    S.profile={focus:fd.get('focus')||'all', goal:+(fd.get('goal')||60), started:Date.now()};
     save('profile'); render(); window.scrollTo(0,0);
     return;
   }
@@ -2993,7 +3223,8 @@ document.addEventListener('submit',e=>{
       render(); if(!r.score) focusCopy();
     } else {
       const it=UI.review.items[UI.review.i];
-      reviewAnswer(Math.abs(v-it.answer)<=Math.max(Math.abs(it.answer)*it.tol,1e-12), e.submitter?.value==='1', raw);
+      // Enter로 낸 것(submitter 없음)은 '확신하고 제출'로 치지 않는다
+      reviewAnswer(Math.abs(v-it.answer)<=Math.max(Math.abs(it.answer)*it.tol,1e-12), !!e.submitter&&e.submitter.value==='1', raw);
     }
   }
 });
@@ -3003,18 +3234,20 @@ document.addEventListener('change',e=>{
   if(t.name==='bk-mode'){ const P=UI.study?.bk?.P; if(P) P.mode=t.value; return; }
   if(!S.profile||t.type!=='radio') return;
   if(t.name==='pf-focus'){ S.profile.focus=t.value; save('profile'); }
-  else if(t.name==='pf-daily'){ S.profile.daily=+t.value; save('profile'); }
+  else if(t.name==='pf-goal'){ S.profile.goal=+t.value; delete S.profile.daily; save('profile'); }
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&UI.sel){ select(null); return; }
+  if(e.isComposing||e.keyCode===229) return; // 한글 조합 중의 Enter는 글자를 끝내는 키다
   if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='chat-input'){ e.preventDefault(); $('#chat-form').requestSubmit(); return; }
   const inField=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
   const rdOn=UI.view==='study'&&UI.study?.step==='lesson'&&UI.study.reader&&!UI.study.reader.whole;
   if(rdOn&&!inField&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
     if(e.key==='ArrowLeft'){ e.preventDefault(); rdPrev(); return; }
-    if(e.key==='ArrowRight'||((e.key===' '||e.key==='Enter')&&e.target.tagName!=='BUTTON')){ e.preventDefault(); const b=$('.rd-next'); if(b&&!b.disabled) rdNext(); return; }
+    if(e.key==='ArrowRight'||((e.key===' '||e.key==='Enter')&&!/^(BUTTON|A|SUMMARY)$/.test(e.target.tagName))){ e.preventDefault(); const b=$('.rd-next'); if(b&&!b.disabled) rdNext(); return; }
   }
-  const cardOn=UI.cs&&UI.cs.queue?.length&&!UI.cedit&&((UI.view==='cards')||(UI.view==='study'&&UI.study?.step==='cards'));
+  // 1·2·3은 지금 화면에 보이는 카드에만(다른 단원·복습의 숨은 카드를 채점하지 않게)
+  const cs=UI.cs, cardOn=cs&&cs.queue?.length&&!UI.cedit&&((UI.view==='cards'&&cs.mode==='review')||(UI.view==='study'&&UI.study?.step==='cards'&&cs.mode==='learn'&&cs.unit===UI.study.id));
   if(!cardOn||e.metaKey||e.ctrlKey||e.altKey) return;
   if(!UI.cs.revealed){ if(!inField&&e.target.tagName!=='BUTTON'&&$('#reveal-form')&&(e.key===' '||e.key==='Enter')){ e.preventDefault(); $('#reveal-form').requestSubmit(); } return; }
   if(!inField&&['1','2','3'].includes(e.key)){ e.preventDefault(); gradeCard(+e.key); }

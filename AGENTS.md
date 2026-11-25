@@ -15,7 +15,7 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 ## 바꾸지 않는 것 (바꾸려면 영신에게 먼저 묻는다)
 
 - 빠진 계단 없이: 단원이 쓰는 도구는 반드시 앞 단원에서 얻고, 길은 하나뿐이다(따로 도는 트랙 없음)(PRINCIPLES 0, 1).
-- 숙달은 확인 문제 100점, 카드 전부 떠올리기, 그 단원 교재 문제 전부(PRINCIPLES 2-3, 2-4, 2-5. 교재 문제는 26.11.13 결정, 설계 중).
+- 숙달은 확인 문제 100점, 카드 전부 떠올리기, 그 단원 교재의 숙달 문제(책 답이 있는 쪽 번호) 전부. 짝꿍 문제는 섞어 풀기로 모두 풀어야 다음 단계가 열린다(PRINCIPLES 2-3, 2-4, 2-5. 26.11.13 결정, 26.11.25 영신 "홀수 숙달, 짝수는 섞어 복습").
 - 단계 잠금과 인정·건너뛰기 없음, 이어하기와 골라서 하기(PRINCIPLES 3).
 - 설명은 직관·통상·엄밀을 같이, 한 장씩 읽기, 버튼 자리 고정(PRINCIPLES 2-1, 2-2).
 - 뒤 단원 개념도 써서 정확하게(순서 통제 없음), 용어 한글(漢字, English), 정의 완결·한정어 보존(PRINCIPLES 2-1, 2-1-1).
@@ -25,7 +25,7 @@ AGENTS.md → [PRINCIPLES](PRINCIPLES.md)(결정과 그 이유) → [HANDOFF](HA
 ## 일하는 법
 
 - **시작할 때 `git pull`.** 맥미니와 Windows PC 두 곳에서 일한다. 받지 않고 작업하면 다른 쪽 결정과 어긋난다(26.11.13).
-- **설명·카드는 미리 만들어 검수한다(PRINCIPLES 5, 26.11.09).** 원본은 `content/<단원 id>/`(lesson.md, cards.json, check.md), 형식은 [content/README](content/README.md). 순서: 초안 → 교과서 대조(`tools/unit-sources.py <id> --text`) → `python3 -I tools/content-check.py <id>` 오류 0 → `--upload <id> --out <폴더>`로 만든 JSON을 ArtifactData `batch`로 `lessons/<id>--v3`, `cards/<id>`에 올림(덮어쓸 때는 받은 판을 `if_version`으로) → 검수 페이지 다시 올림(`tools/review-page.py`) → DEPLOYMENT에 판 번호.
+- **설명·카드는 미리 만들어 검수한다(PRINCIPLES 5, 26.11.09).** 원본은 `content/<단원 id>/`(lesson.md, cards.json, check.md, 확인 문제 은행 quiz.json), 형식은 [content/README](content/README.md). 순서: 초안 → 교과서 대조(`tools/unit-sources.py <id> --text`) → `python3 -I tools/content-check.py <id>` 오류 0 → `--upload <id> --out <폴더>`로 만든 JSON을 ArtifactData `batch`로 `lessons/<id>--v3`, `cards/<id>`, `quiz/<id>`에 올림(덮어쓸 때는 받은 판을 `if_version`으로) → 검수 페이지 다시 올림(`tools/review-page.py`) → DEPLOYMENT에 판 번호.
   - 영신이 그 단원에 닿기 전에 올린다. 앱은 저장소에 설명·카드가 없을 때만 그 자리에서 만든다.
   - 카드 id는 기록 열쇠다. 올린 카드의 id·뜻은 바꾸지 않고, 새 카드는 끝 번호 뒤에, 뺄 카드는 `"x": true`.
   - 다른 단원은 번호를 글로 적지 않고 `[[id|#]]`(앱이 지금 번호를 보인다)나 `[[id]]`로 가리킨다. 지도를 바꾸면 번호가 바뀐다(26.11.14, content/README).

@@ -370,6 +370,77 @@ def check_cards(cards, terms, errs, warns, info):
         warns.append(f'굵게 병기한 용어 가운데 용어 카드가 없는 것: {miss}')
 
 
+QUIZ_SLOTS = {'def': 2, 'app': 3, 'calc': 2, 'explain': 1}  # 앱이 한 회차에 뽑는 수
+
+
+def check_quiz(items, nobj, errs, warns, info):
+    """확인 문제 은행(quiz.json, 26.11.25 영신 '미리 만들어 검산'): 앱 확인 문제와 같은 꼴에 id·slot을 더한 배열."""
+    if not isinstance(items, list) or not items:
+        errs.append('quiz.json은 비어 있지 않은 배열이어야 한다')
+        return
+    ids, slots, objs = set(), {}, {}
+    for i, x in enumerate(items):
+        w = f'quiz {x.get("id", i)}'
+        if not isinstance(x, dict):
+            errs.append(f'{w}: 객체가 아니다')
+            continue
+        if not re.fullmatch(r'q\d{2,3}', str(x.get('id', ''))):
+            errs.append(f'{w}: id는 q01 꼴')
+        if x.get('id') in ids:
+            errs.append(f'{w}: id가 겹친다')
+        ids.add(x.get('id'))
+        if x.get('x'):
+            continue
+        s = x.get('slot')
+        if s not in QUIZ_SLOTS:
+            errs.append(f'{w}: slot은 {"/".join(QUIZ_SLOTS)}')
+        slots[s] = slots.get(s, 0) + 1
+        o = x.get('obj')
+        if not isinstance(o, int) or not 0 <= o < nobj:
+            errs.append(f'{w}: obj는 0~{nobj - 1}')
+        else:
+            objs[o] = objs.get(o, 0) + 1
+        if not str(x.get('q', '')).strip():
+            errs.append(f'{w}: q가 비었다')
+        t = x.get('type')
+        if t == 'mcq':
+            ch = x.get('choices')
+            if not isinstance(ch, list) or not 2 <= len(ch) <= 6 or not all(str(c).strip() for c in ch):
+                errs.append(f'{w}: choices는 2~6개')
+            elif not isinstance(x.get('answer'), int) or not 0 <= x['answer'] < len(ch):
+                errs.append(f'{w}: answer는 choices 번호(0부터)')
+            elif len(set(map(str, ch))) != len(ch):
+                errs.append(f'{w}: 보기가 겹친다')
+            if any(re.search(r'위의 모두|모두 옳|모두 틀|①|②|보기 [가-힣0-9]', str(c)) for c in (ch or [])):
+                errs.append(f'{w}: 앱이 보기 순서를 섞으므로 자리에 기대는 보기는 쓰지 않는다')
+        elif t == 'num':
+            a = x.get('answer')
+            if not isinstance(a, (int, float)) or isinstance(a, bool):
+                errs.append(f'{w}: num의 answer는 수')
+            tol = x.get('tol', 0.02)
+            if not isinstance(tol, (int, float)) or not 0.001 <= tol <= 0.2:
+                errs.append(f'{w}: tol은 0.001~0.2')
+        elif t == 'short':
+            if not isinstance(x.get('rubric'), list) or len(x['rubric']) < 2:
+                errs.append(f'{w}: short는 채점 요소(rubric)가 둘 이상')
+            if not str(x.get('model', '')).strip():
+                errs.append(f'{w}: short는 모범 답안(model)')
+        else:
+            errs.append(f'{w}: type은 mcq/num/short')
+        k = str(x.get('key', ''))
+        if not k.strip():
+            warns.append(f'{w}: key(따라 쓸 핵심)가 없다')
+        elif '$' in k or '\\' in k or len(k) > 120:
+            warns.append(f'{w}: key는 평문 한 줄(LaTeX 없이, 120자 안)')
+    for s, need in QUIZ_SLOTS.items():
+        if slots.get(s, 0) < need * 3:
+            warns.append(f'quiz slot {s} {slots.get(s, 0)}개 (회차마다 {need}개씩 뽑으려면 {need * 3}개 이상)')
+    for o in range(nobj):
+        if objs.get(o, 0) < 6:
+            warns.append(f'quiz 목표 {o + 1}이 {objs.get(o, 0)}문제')
+    info.append(f'확인 문제 은행 {sum(slots.values())}개')
+
+
 def check_unit(uid, ctx):
     nodes, by, unlocks, num = ctx
     errs, warns, info = [], [], []
@@ -392,6 +463,12 @@ def check_unit(uid, ctx):
             errs.append(f'cards.json JSON 오류: {e}')
     else:
         errs.append('cards.json 없음')
+    qp = os.path.join(d, 'quiz.json')
+    if os.path.exists(qp):
+        try:
+            check_quiz(json.load(open(qp, encoding='utf-8')), len(by[uid]['obj']), errs, warns, info)
+        except json.JSONDecodeError as e:
+            errs.append(f'quiz.json JSON 오류: {e}')
     kp = os.path.join(d, 'check.md')
     if not os.path.exists(kp) or not re.search(r'^상태:', open(kp, encoding='utf-8').read(), re.M):
         errs.append('check.md에 "상태:" 줄이 없다')
@@ -436,6 +513,11 @@ def main():
         json.dump({'md': md, 'node': o.upload, 'at': now, 'src': 'content'}, open(lp, 'w', encoding='utf-8'), ensure_ascii=False)
         json.dump({'items': items, 'node': o.upload, 'at': now, 'src': 'content'}, open(cp, 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'→ {lp}\n→ {cp}')
+        qs = os.path.join(d, 'quiz.json')
+        if os.path.exists(qs):  # 확인 문제 은행 → quiz/<id>
+            qo = os.path.join(o.out, f'{o.upload}.quiz.json')
+            json.dump({'items': json.load(open(qs, encoding='utf-8')), 'node': o.upload, 'at': now, 'src': 'content'}, open(qo, 'w', encoding='utf-8'), ensure_ascii=False)
+            print(f'→ {qo}')
         return 0
     ids = sorted((x for x in os.listdir(CONTENT) if os.path.isdir(os.path.join(CONTENT, x))), key=lambda x: num.get(x, 999)) if o.all else [o.unit]
     if not ids or ids == [None]:
