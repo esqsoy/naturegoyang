@@ -62,8 +62,14 @@ kbd{font:500 10.5px/1 var(--font-mono); padding:2px 4px; border:1px solid curren
 .banner{background:color-mix(in srgb,var(--warn) 13%,var(--surface)); border-bottom:1px solid color-mix(in srgb,var(--warn) 35%,var(--surface)); font-size:13.5px; color:var(--ink)}
 .banner-in{max-width:1440px; margin:0 auto; padding-block:9px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-main{max-width:1240px; margin:0 auto; padding-block:28px 72px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+:root{--fs:1; --rw0:74ch; --read-w:calc(var(--rw0) * var(--fs))}
+@media (min-width:1500px){ :root:not([data-fs]),:root[data-fs="auto"]{--fs:1.12} }
+@media (min-width:1800px){ :root:not([data-fs]),:root[data-fs="auto"]{--fs:1.25} }
+:root[data-fs="l"]{--fs:1.12}
+:root[data-fs="xl"]{--fs:1.25}
+main{max-width:calc(1240px * var(--fs)); margin:0 auto; padding-block:28px 72px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
 main.view-map{max-width:1480px}
+main.view-study{max-width:calc(var(--read-w) + 378px)}
 
 /* type */
 h1{font:700 clamp(25px,3vw,33px)/1.25 var(--font-ui); letter-spacing:-.015em; margin:0}
@@ -256,7 +262,7 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .study-top{margin-bottom:14px}
 .study-head{display:grid; grid-template-columns:auto minmax(0,1fr); gap:22px; align-items:center; margin-bottom:28px}
 @media (max-width:560px){ .study-head{grid-template-columns:minmax(0,1fr)} }
-.study-q{font:600 clamp(17px,2.1vw,21px)/1.55 var(--font-read); color:var(--ink-2); margin:8px 0 0}
+.study-q{font:600 calc(clamp(17px,2.1vw,21px) * var(--fs))/1.55 var(--font-read); color:var(--ink-2); margin:8px 0 0}
 .stepper{display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:16px 0 0; font-size:13px}
 .stepper li{display:flex; align-items:center; gap:6px}
 .stepper li + li::before{content:""; width:18px; height:1px; background:var(--line); margin-right:2px}
@@ -268,7 +274,7 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .stepper .done button{color:var(--good)}
 .study-grid{display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:36px; align-items:start}
 @media (max-width:980px){ .study-grid{grid-template-columns:minmax(0,1fr)} }
-.lesson{min-width:0; max-width:74ch}
+.lesson{min-width:0; max-width:var(--read-w)}
 .study-side{display:grid; gap:14px; position:sticky; top:84px}
 @media (max-width:980px){ .study-side{position:static} }
 .side-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px}
@@ -291,14 +297,14 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .fix-i .fix-r{color:var(--ink-2); border-left:2px solid var(--line); padding-left:8px}
 
 /* reading */
-.md{font-family:var(--font-read); font-size:17px; line-height:1.9; color:var(--ink); counter-reset:sec; overflow-wrap:break-word}
-@media (max-width:600px){ .md{font-size:16px} }
+.md{font-family:var(--font-read); font-size:calc(17px * var(--fs)); line-height:1.9; color:var(--ink); counter-reset:sec; overflow-wrap:break-word}
+@media (max-width:600px){ .md{font-size:calc(16px * var(--fs))} }
 .md > :first-child{margin-top:0}
-.md h2{font:700 20px/1.35 var(--font-ui); margin:2.2em 0 .7em; padding-top:1em; border-top:1px solid var(--line); display:flex; gap:12px; align-items:baseline}
+.md h2{font:700 calc(20px * var(--fs))/1.35 var(--font-ui); margin:2.2em 0 .7em; padding-top:1em; border-top:1px solid var(--line); display:flex; gap:12px; align-items:baseline}
 .md h2::before{counter-increment:sec; content:counter(sec,decimal-leading-zero); font:500 12px/1 var(--font-mono); color:var(--dc,var(--ink-3))}
 .md h2:first-child{border-top:0; padding-top:0}
-.md h3{font:700 17.5px/1.45 var(--font-ui); margin:1.8em 0 .7em}
-.md h4{font:600 15px/1.45 var(--font-ui); margin:1.3em 0 .4em}
+.md h3{font:700 calc(17.5px * var(--fs))/1.45 var(--font-ui); margin:1.8em 0 .7em}
+.md h4{font:600 calc(15px * var(--fs))/1.45 var(--font-ui); margin:1.3em 0 .4em}
 .md p{margin:0 0 1em}
 .md ul,.md ol{padding-left:1.3em; margin:0 0 1em}
 .md li{margin:.35em 0}
@@ -308,7 +314,7 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .md code{font:.86em var(--font-mono); background:var(--surface-2); padding:.1em .35em; border-radius:4px}
 .md .math-block{overflow-x:auto; margin:1.1em 0; padding:.4em 0}
 .md .tbl{overflow-x:auto; margin:1em 0 1.4em}
-.md table{border-collapse:collapse; font:14px/1.55 var(--font-ui); min-width:60%}
+.md table{border-collapse:collapse; font:calc(14px * var(--fs))/1.55 var(--font-ui); min-width:60%}
 .md th,.md td{border-bottom:1px solid var(--line); padding:8px 12px 8px 0; text-align:left; vertical-align:top}
 .md th{font-weight:700; border-bottom-color:var(--ink-3)}
 /* emphasis grammar (PRINCIPLES 2-2-1): bold = a term being defined; its gloss is quiet; formulas boxed; 오해 → 사실 */
@@ -417,14 +423,14 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .toc-n{font-size:12px; color:var(--ink-3)}
 .toc-s{font-size:12px; color:var(--ink-3)}
 .rd-body{flex:1}
-.rd-sub{font:700 17.5px/1.45 var(--font-ui); margin:0 0 14px}
-.rd-check .cb-q{font-size:19px; margin:10px 0 18px}
+.rd-sub{font:700 calc(17.5px * var(--fs))/1.45 var(--font-ui); margin:0 0 14px}
+.rd-check .cb-q{font-size:calc(19px * var(--fs)); margin:10px 0 18px}
 .reader{padding-bottom:22px}
 .reader-spacer{height:84px}
 .rd-navbar{position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--surface); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom,0px); box-shadow:var(--shadow)}
-.rd-navin{max-width:1240px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:36px}
+.rd-navin{max-width:calc(var(--read-w) + 378px); margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:36px}
 @media (max-width:980px){ .rd-navin{grid-template-columns:minmax(0,1fr)} }
-.rd-nav{max-width:74ch; display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.rd-nav{max-width:var(--read-w); display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
 .rd-prev{width:124px}
 .rd-next{position:relative; overflow:hidden; width:176px}
 .rd-next:disabled{opacity:.55}
@@ -434,15 +440,15 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 @media (max-width:560px){ .study-head .tile.lg{display:none} .study-head{margin-bottom:18px} }
 
 /* memory cards */
-.cards-wrap{max-width:780px}
+.cards-wrap{max-width:calc(780px * var(--fs))}
 .cprog{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:center; font-size:13.5px; margin-bottom:14px}
 .cprog .dbar .s{background:var(--good)}
 .cardbox{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; min-height:260px; display:flex; flex-direction:column}
 @media (max-width:560px){ .cardbox{padding:18px} }
 .cb-meta{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:12.5px; color:var(--ink-3)}
 .cb-meta .cb-count{margin-left:auto}
-.cb-q{font-size:20px; line-height:1.7; margin:18px 0 20px; font-weight:600}
-.cb-a{font-size:18px; line-height:1.75; padding-top:16px; border-top:1px dashed var(--line)}
+.cb-q{font-size:calc(20px * var(--fs)); line-height:1.7; margin:18px 0 20px; font-weight:600}
+.cb-a{font-size:calc(18px * var(--fs)); line-height:1.75; padding-top:16px; border-top:1px dashed var(--line)}
 .cb-h{font-size:13.5px; color:var(--ink-2); margin:6px 0 0}
 .cb-typed{font-size:13.5px; color:var(--ink-3); margin:10px 0 0}
 .grades{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:20px}
@@ -487,7 +493,7 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .calc-form input{flex:1; min-width:0; font:15px/1.5 var(--font-mono); padding:8px 10px; border:1.5px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink)}
 .bk-end{display:grid; gap:8px}
 .copy-lead{margin:0; font-size:13.5px; color:var(--ink-2)}
-.copy-key{margin:0; font:600 17px/1.6 var(--font-ui); color:var(--ink); word-break:keep-all; overflow-wrap:anywhere}
+.copy-key{margin:0; font:600 calc(17px * var(--fs))/1.6 var(--font-ui); color:var(--ink); word-break:keep-all; overflow-wrap:anywhere}
 .copy-form input{font-size:16px}
 .copy-form .row{margin:0}
 .clist{margin-top:22px}
@@ -503,7 +509,7 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .cedit label{font:600 12px var(--font-ui); color:var(--ink-3)}
 
 /* quiz */
-.quiz-wrap{max-width:780px}
+.quiz-wrap{max-width:calc(780px * var(--fs))}
 .qcard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px}
 @media (max-width:560px){ .qcard{padding:18px} }
 .qdots{display:flex; gap:5px; list-style:none; padding:0; margin:0 0 16px}
@@ -514,9 +520,9 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .qdots li.bad{background:var(--bad)}
 .qdots li.void{background:repeating-linear-gradient(90deg,var(--ink-3) 0 3px,transparent 3px 6px)}
 .qmeta{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:12.5px; color:var(--ink-3)}
-.qstem{margin:14px 0 18px; font-size:17.5px; line-height:1.8}
+.qstem{margin:14px 0 18px; font-size:calc(17.5px * var(--fs)); line-height:1.8}
 .choices{display:grid; gap:8px}
-.choice{display:grid; grid-template-columns:26px minmax(0,1fr); gap:8px; align-items:start; text-align:left; padding:12px 14px; border:1.5px solid var(--line); border-radius:9px; background:var(--surface); font:400 15.5px/1.6 var(--font-ui); color:var(--ink); cursor:pointer}
+.choice{display:grid; grid-template-columns:26px minmax(0,1fr); gap:8px; align-items:start; text-align:left; padding:12px 14px; border:1.5px solid var(--line); border-radius:9px; background:var(--surface); font:400 calc(15.5px * var(--fs))/1.6 var(--font-ui); color:var(--ink); cursor:pointer}
 .choice:hover:not(:disabled){border-color:var(--ink-3)}
 .choice .mk{font:500 17px/1.45 var(--font-ui); color:var(--ink-3)}
 .choice[aria-pressed="true"]{border-color:var(--ink); background:var(--surface-2)}
@@ -531,7 +537,7 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .unit{font:500 15px/1 var(--font-mono); color:var(--ink-2); white-space:nowrap}
 .fb{margin-top:18px; padding:16px 18px; border-radius:10px; background:var(--surface-2); border:1px solid var(--line-2)}
 .fb-h{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-size:14.5px; margin-bottom:8px}
-.fb .md{font-size:15.5px; line-height:1.8}
+.fb .md{font-size:calc(15.5px * var(--fs)); line-height:1.8}
 .fb-next{margin-top:6px; font-size:13.5px; color:var(--ink-2)}
 .fb .row{justify-content:space-between}
 .rubric{list-style:none; padding:0; margin:10px 0; display:grid; gap:6px; font-size:14px}
@@ -540,7 +546,7 @@ math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math; font-s
 .rubric li.miss{border-left-color:var(--bad)}
 details{margin-top:10px}
 summary{cursor:pointer; font-weight:600; font-size:14px; color:var(--ink-2)}
-.res{max-width:780px}
+.res{max-width:calc(780px * var(--fs))}
 .res-score{font:600 64px/1 var(--font-mono); letter-spacing:-.03em; margin:4px 0 6px}
 .res-score small{font-size:20px; color:var(--ink-3); margin-left:4px}
 .res h2{font:700 22px/1.35 var(--font-ui); margin:0 0 8px}
@@ -564,7 +570,7 @@ summary{cursor:pointer; font-weight:600; font-size:14px; color:var(--ink-2)}
 .ng-h{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:6px}
 .ng-h .btn{margin-left:auto}
 .mis{padding:14px 0; border-top:1px solid var(--line-2)}
-.mis .md{font-size:15.5px; line-height:1.75}
+.mis .md{font-size:calc(15.5px * var(--fs)); line-height:1.75}
 .mis dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; margin:8px 0 0; font-size:14px}
 .mis dt{color:var(--ink-3)}
 .mis dd{margin:0}
@@ -1659,6 +1665,8 @@ function busy(label, t0, stop, hint){
 function opts(name, list, cur){
   return `<div class="opts">${list.map(([v,l])=>`<label class="opt" for="${name}-${v}"><input type="radio" id="${name}-${v}" name="${name}" value="${v}"${String(cur)===String(v)?' checked':''}><span class="opt-b"><b>${l}</b></span></label>`).join('')}</div>`;
 }
+const FS_OPTS=[['auto','화면에 맞춤'],['m','보통'],['l','크게'],['xl','아주 크게']];
+const applyFs=()=>{ document.documentElement.dataset.fs=S.profile?.fs||'auto'; };
 const FOCUS_OPTS=[['all','고르게'],['P','물리'],['C','화학'],['B','생명과학'],['E','지구·우주']];
 const GOAL_OPTS=[['30','30분'],['60','1시간'],['90','1시간 30분'],['120','2시간'],['180','3시간']];
 const goalMin=()=>+(S.profile?.goal)||60;
@@ -2422,6 +2430,7 @@ function prefsView(){
   return head+`<div class="prefs">
     <section class="card"><h2>집중할 분야</h2><p>오늘 화면의 새 단원 추천 순서가 바뀌어. 집중 분야에 필요한 다른 분야의 기초 단원도 같이 추천해.</p>${opts('pf-focus',FOCUS_OPTS,p.focus||'all')}</section>
     <section class="card"><h2>하루 공부 목표</h2>${opts('pf-goal',GOAL_OPTS,String(goalMin()))}<p class="hint">설명·카드·확인·교재·복습 화면이 보이고 3분 안에 손을 댄 동안만 센다.</p></section>
+    <section class="card"><h2>글자 크기</h2>${opts('pf-fs',FS_OPTS,p.fs||'auto')}<p class="hint">설명·카드·문제의 글자와 읽는 폭이 같이 바뀌어. 화면에 맞춤은 넓은 창(전체 화면)에서만 키우고, 크게·아주 크게는 어느 창에서나 키워.</p></section>
     <section class="card"><h2>숙달 기준</h2><p style="margin:0">카드를 모두 한 번씩 확실히 떠올리고, 확인 문제 8개를 모두 맞혀야(100점) 숙달이야. 한 단계의 단원을 모두 숙달해야 다음 단계가 열려. 카드 간격이 모두 ${SOLID_DAYS}일을 넘으면 단단함. 이 기준은 바꿀 수 없게 해 뒀어.</p></section>
     <section class="card"><h2>저장</h2><p style="margin:0">${ENV.live?'학습 기록은 이 계정에 저장되고, 다른 기기에서 열어도 이어져.':'지금은 학습 기록이 저장되지 않아. claude.ai에 로그인한 상태로 열어 줘.'}</p></section>
     <section class="card"><h2>처음부터 다시</h2><p>진도, 카드 기록, 복습 일정, 오답 노트, 시작 설정을 모두 지워. 만들어 둔 설명과 카드 내용은 남아.</p>
@@ -2432,6 +2441,7 @@ function prefsView(){
 const ROUTES=['today','map','ideas','notes','prefs'];
 const VIEWS={today:todayView, map:mapView, ideas:ideasView, notes:notesView, prefs:prefsView, study:studyView, review:reviewView, cards:cardsView, mreview:mreviewView};
 function render(){
+  applyFs();
   $('#nav').innerHTML=navHTML();
   $('#banner').innerHTML=bannerHTML();
   const main=$('#main');
@@ -3388,6 +3398,7 @@ document.addEventListener('change',e=>{
   if(!S.profile||t.type!=='radio') return;
   if(t.name==='pf-focus'){ S.profile.focus=t.value; save('profile'); }
   else if(t.name==='pf-goal'){ S.profile.goal=+t.value; delete S.profile.daily; save('profile'); }
+  else if(t.name==='pf-fs'){ S.profile.fs=t.value; save('profile'); applyFs(); }
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&UI.sel){ select(null); return; }
