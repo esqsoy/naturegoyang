@@ -50,10 +50,11 @@ def hours(nodes, probs):
         for row in probs.get(n['id'], []):
             b, a, z, ans = row[0], row[2], row[3], row[4]
             skip = row[6] if len(row) > 6 else 0
+            blue = {int(x) for x in ans[2:].split(',')} if str(ans).startswith('b:') else None  # 책 답이 있는 번호(26.11.26)
             for i in range(a, z + 1):
                 if skip and skip[0] <= i <= skip[1]:
                     continue
-                if (i % 2 == 0) if ans == 'even' else (i % 2 == 1):
+                if (i in blue) if blue is not None else (i % 2 == 0) if ans == 'even' else (i % 2 == 1):
                     mins += BOOK_MIN[b] + PER_PROB_MIN
         out[n['id']] = BASE_H + mins / 60
     return out

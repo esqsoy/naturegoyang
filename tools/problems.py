@@ -54,7 +54,10 @@ def build():
         for g in d['groups']:
             if not g.get('unit') or g.get('exclude'):
                 continue
-            r = [b, g['sec'], int(g['from']), int(g['to']), g.get('ans', 'none'), g.get('label') or g['sec']]
+            ans = g.get('ans', 'none')
+            if g.get('blue'):  # 책 뒤에 답이 있는 번호(Epp 부록 B): 앱이 이 번호를 숙달 문제로 삼는다(26.11.26)
+                ans = 'b:' + ','.join(str(i) for i in sorted(set(int(x) for x in g['blue'])))
+            r = [b, g['sec'], int(g['from']), int(g['to']), ans, g.get('label') or g['sec']]
             if g.get('skip'):
                 r.append(g['skip'])
             rows.setdefault(g['unit'], []).append(r)
