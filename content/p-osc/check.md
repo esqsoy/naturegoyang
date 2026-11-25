@@ -89,3 +89,7 @@
 - **PhET 진자 실험**(pendulum-lab, https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_ko.html) — 1절 통상 끝(등시성 정의 뒤). 길이·질량·처음 각을 바꿔 주기를 재며 오개념 둘('크게 흔들수록 주기가 길다', '무거운 추일수록 천천히')을 직접 확인하고, 큰 각에서 주기가 $2\pi\sqrt{l/g}$보다 길어지는 것(1절 엄밀)도 본다. '에너지' 화면과 '마찰'은 2절과 3절 감쇠로 이어진다.
 - **PhET 줄의 파동**(wave-on-a-string, https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_ko.html) — 3절 통상 끝(기본 진동·배진동 정의 뒤). '진동'·'고정된 끝'에서 진동수를 바꾸면 몇몇 진동수에서만 큰 정상파가 서는 것이 공명과 $f_n=nv/2L$을 함께 보인다. [[p-wave|#]]에도 같은 시뮬레이션을 1절(속력·파장)에 걸었다.
 - 확인: 두 `_ko.html`을 받아 HTTP 200, 제목 '진자 실험'·'줄의 파동', 문자열 표의 한국어(길이, 질량, 마찰, 주기 시계, 초시계, 에너지 / 진동, 고정된 끝, 감폭, 진동수, 장력)를 보고 why를 그 글자대로 썼다. 진자 실험 한국어판이 퍼텐셜 에너지를 '위치 에너지'로 적어 note에 밝혔다. 질량과 용수철(masses-and-springs, 한국어판 있음, '에너지' 화면에 탄성 퍼텐셜 에너지·열에너지)도 2절 후보였으나 단원당 둘로 줄이며 뺐다. 공명(resonance) 시뮬레이션은 HTML5판이 없다(`resonance_ko.html`·`_en.html` 모두 404). 무료, 로그인·광고 없음.
+
+## 26.11.26 옛 가리킴 고침
+
+- 위상과 $e^{i\omega t}$를 옛 '복소수와 행렬'(f-linalg)로 가리켰다. 126단원 지도에서 복소수는 f-complex이고 f-linalg는 '벡터 공간과 행렬'이며 새 순서에서 이 단원 뒤다 → 세 곳을 [[f-complex|#]]로.

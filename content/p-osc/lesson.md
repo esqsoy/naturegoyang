@@ -16,7 +16,7 @@
 
 $$x=A\cos(\omega t+\varphi)$$
 
-$A$는 진폭, $\omega t+\varphi$는 [[f-linalg|#]]의 위상, $\omega=2\pi/T=2\pi f$(rad/s)는 **각진동수**(角振動數, angular frequency)다. $A$와 $\varphi$는 처음 위치와 속도, 곧 **초기 조건**(初期條件, initial condition)이 정한다.
+$A$는 진폭, $\omega t+\varphi$는 [[f-complex|#]]의 위상, $\omega=2\pi/T=2\pi f$(rad/s)는 **각진동수**(角振動數, angular frequency)다. $A$와 $\varphi$는 처음 위치와 속도, 곧 **초기 조건**(初期條件, initial condition)이 정한다.
 
 용수철(상수 $k$)에 질량 $m$을 단 **용수철 진자**(龍鬚鐵振子, mass-spring oscillator)는 $\omega=\sqrt{k/m}$이다. 가벼운 줄(길이 $l$)에 추를 단 **단진자**(單振子, simple pendulum)는 중력의 접선 성분 $-mg\sin\theta$가 복원력이고, 작은 각에서 $\sin\theta\approx\theta=x/l$(rad)이라 $k$ 자리에 $mg/l$이 들어간다.
 
@@ -37,7 +37,7 @@ why 길이, 질량, 처음 각을 하나씩 바꿔 가며 '주기 시계'나 초
 
 #### 엄밀
 
-[[f-rate|#]]에 없던 cos의 도함수는 원에서 얻는다. 점 $(A\cos u, A\sin u)$($u=\omega t+\varphi$)가 원을 돌 때 속도는 크기 $A\omega$로 반지름에 수직이라 $x$ 성분이 $-A\omega\sin u$, $y$ 성분이 $A\omega\cos u$다. [[f-linalg|#]]의 $e^{i\omega t}$를 미분해도 같다. 곧 $(\cos u)'=-\sin u$, $(\sin u)'=\cos u$($u$는 rad)이고, 합성함수의 미분으로 다음을 얻는다.
+[[f-rate|#]]에 없던 cos의 도함수는 원에서 얻는다. 점 $(A\cos u, A\sin u)$($u=\omega t+\varphi$)가 원을 돌 때 속도는 크기 $A\omega$로 반지름에 수직이라 $x$ 성분이 $-A\omega\sin u$, $y$ 성분이 $A\omega\cos u$다. [[f-complex|#]]의 $e^{i\omega t}$를 미분해도 같다. 곧 $(\cos u)'=-\sin u$, $(\sin u)'=\cos u$($u$는 rad)이고, 합성함수의 미분으로 다음을 얻는다.
 
 $$v=-A\omega\sin u,\quad a=-A\omega^2\cos u=-\omega^2x$$
 
@@ -150,7 +150,7 @@ why '진동'과 '고정된 끝'을 고르고 '감폭'을 작게 둔 채 진동�
 
 ## 연결
 
-[[f-rate]]의 미분, [[p-energy]]의 훅 법칙, [[p-wave]]의 중첩·배음과 [[p-gravity|#]] 원운동, [[f-linalg|#]] 위상이 재료다. [[c-bond]]의 결합도 용수철처럼 떨고, 코일과 축전기의 LC 회로도 같은 식으로 공진해 라디오가 방송을 고른다. [[p-qm]]은 원자 크기 단진동인 양자 조화 진동자를 다룬다.
+[[f-rate]]의 미분, [[p-energy]]의 훅 법칙, [[p-wave]]의 중첩·배음과 [[p-gravity|#]] 원운동, [[f-complex|#]]의 위상이 재료다. [[c-bond]]의 결합도 용수철처럼 떨고, 코일과 축전기의 LC 회로도 같은 식으로 공진해 라디오가 방송을 고른다. [[p-qm]]은 원자 크기 단진동인 양자 조화 진동자를 다룬다.
 
 ## 요약
 

@@ -4,7 +4,7 @@
     python3 -I tools/curriculum.py            # CURRICULUM.md를 고쳐 쓴다
     python3 -I tools/curriculum.py --check    # 고쳐 쓸 것이 있으면 1로 끝난다
 
-번호는 앱 number()와 같은 규칙으로 센다: 선수가 모두 놓인 단원 가운데 단계 → 영역 → N(...) 줄 순서가 가장 앞인 것.
+번호는 앱 number()와 같다: 앱의 PATH 줄(tools/order.py)을 쓰고, 그것이 맞지 않으면 선수가 모두 놓인 단원 가운데 단계 → 영역 → N(...) 줄 순서가 가장 앞인 것.
 """
 import ast
 import os
@@ -30,7 +30,25 @@ def load():
     return nodes, dom, tiers, ideas
 
 
+def path_order(nodes):
+    """앱의 `const PATH=[…];`(tools/order.py)가 단원을 다 담고 선수·단계를 지키면 그 순서. 아니면 None."""
+    import json
+    m = re.search(r'^const PATH=(\[.*\]);$', open(APP, encoding='utf-8').read(), re.M)
+    path = json.loads(m.group(1)) if m else []
+    by = {n['id']: n for n in nodes}
+    at = {u: i for i, u in enumerate(path)}
+    if len(path) != len(nodes) or len(at) != len(nodes) or any(u not in by for u in path):
+        return None
+    for i, u in enumerate(path):
+        if any(at.get(p, 1 << 30) >= i for p in by[u]['pre']) or (i and by[path[i - 1]]['tier'] > by[u]['tier']):
+            return None
+    return [by[u] for u in path]
+
+
 def number(nodes):
+    order = path_order(nodes)
+    if order:
+        return {n['id']: k + 1 for k, n in enumerate(order)}, order
     di = {d: i for i, d in enumerate(DKEYS)}
     ix = {n['id']: i for i, n in enumerate(nodes)}
     placed, order = set(), []
