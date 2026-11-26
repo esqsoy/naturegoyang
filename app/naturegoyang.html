@@ -302,17 +302,11 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .unote .md h2::before{content:none}
 .unotes{display:grid; gap:14px; margin-bottom:22px}
 .unotes .md{font-size:calc(15.5px * var(--fs)); line-height:1.8}
-.cp{margin:24px 0 6px; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
-.cp-h{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline; margin:0 0 6px; font-size:14px}
-.cp-h .muted{font-size:13px}
-.cp-row{display:grid; grid-template-columns:34px minmax(0,1fr); gap:10px; padding:9px 0; border-top:1px solid var(--line-2)}
-.cp-k{font:600 11.5px/2 var(--font-ui); color:var(--ink-3)}
-.cp .cp-a{font-size:calc(15.5px * var(--fs)); line-height:1.75}
-.cp .cp-a > :last-child{margin-bottom:0}
-.cp .cp-a .cp-q{color:var(--ink-2); margin:0 0 .25em}
-.cp .copy-form{margin-top:10px; border-color:var(--line)}
-.cp .copy-form.ok{border-color:var(--good)}
-.cp .copy-lead .md{display:inline}
+.md input.cf-in{font:inherit; line-height:1.5; height:1.6em; vertical-align:baseline; color:var(--ink); background:color-mix(in srgb,var(--dc,var(--ink)) 7%,var(--surface)); border:0; border-bottom:2px solid color-mix(in srgb,var(--dc,var(--ink)) 55%,var(--surface)); border-radius:3px 3px 0 0; box-shadow:none; padding:0 .25em; margin:0 .1em; max-width:100%; min-width:4ch}
+.md input.cf-in::placeholder{color:var(--ink-3); opacity:.8}
+.md input.cf-in:focus{outline:none; border-bottom-color:var(--ink); background:color-mix(in srgb,var(--dc,var(--ink)) 13%,var(--surface))}
+.cf-f{margin:1.1em 0; display:grid; gap:4px}
+.md .cf-f input.cf-in{font-family:var(--font-mono); font-size:.92em; height:2.2em; padding:0 .5em; justify-self:start}
 .cp-hint{margin:0; font-size:13px}
 .cp-hint code{font:13px var(--font-mono); background:var(--surface-2); padding:.05em .35em; border-radius:4px}
 
@@ -1931,9 +1925,9 @@ function lessonPane(sv,n){
 let lessonRAF=0;
 function paintLesson(){
   const el=$('#lesson-pane'); if(!(el&&UI.view==='study'&&UI.study?.step==='lesson')) return;
-  const focusTyped=document.activeElement?.id==='chk-typed', focusCp=document.activeElement?.id==='cp-in';
+  const focusTyped=document.activeElement?.id==='chk-typed', focusCf=document.activeElement?.classList?.contains('cf-in')?document.activeElement.dataset.k:null;
   el.innerHTML=lessonPane(UI.study,NODE[UI.study.id]);
-  if(focusCp){ const t=$('#cp-in'); if(t){ t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); } }
+  if(focusCf){ const t=[...document.querySelectorAll('.cf-in')].find(x=>x.dataset.k===focusCf); if(t){ t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); } }
   if(focusTyped){ const t=$('#chk-typed'); if(t){ t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); } }
 }
 function paintLessonBody(){ if(lessonRAF) return; lessonRAF=requestAnimationFrame(()=>{ lessonRAF=0; paintLesson(); }); }
@@ -2090,37 +2084,84 @@ function ensureReader(sv){
   if(!sv.reader){ const r=rec(sv.id)||{}, free=!!(r.rd||r.lv||known(sv.id)), p=free?0:(r.pos||0); sv.reader={i:p, max:p, free, shown:{}, passed:{}, revealed:false, typed:'', whole:false}; }
   return sv.reader;
 }
-/* 읽는 장의 따라 쓰기(26.11.26 영신 고칠 점 "실수, 유리수와 그 영어 명칭 같은 것, 그리고 정의나 공식같은건 따라쓸수 있게 만드는건 어때? 보카고양 참조해줘.",
-   답 "처음부터 쓰자 그러면 내용을 무조건 읽게 하는 효과도 있거든. 그리고 공식은 컴퓨터로 입력할 수 있는 형태를 제시하고, 치고나면 입력식이 아니라 조판식? 으로 변환하게 하면 될것같아").
-   카드마다 그 카드를 처음 펼치는 장을 찾는다. 용어 카드는 굵게 쓴 그 용어가 처음 나오는 장, 나머지는 카드 글과 글자 짝(두 글자씩)이 가장 많이
-   겹치는 장(가장 높은 값의 85% 이상인 첫 장, 핵심 질문·요약 장은 뺀다). 그 장 아래에서 카드를 하나씩 보며 친다. 용어는 한글과 영어 이름,
-   나머지는 카드의 입력 꼴(공식은 키보드로 칠 수 있는 꼴). 맞게 치면 그 줄이 조판된 카드 답으로 바뀐다. 처음 읽는 장은 다 쳐야 '다음'이 켜진다.
-   친 카드는 진도 cp에 남는다. 보카고양의 따라쓰기(틀린 표제어를 끝까지 친다)를 처음 만날 때로 옮긴 것이다. */
-function cpMap(sv){
-  const items=liveItems(sv.id), key=sv.lesson.md.length+'|'+items.map(c=>c.id).join(',');
-  if(sv.cpm?.key===key) return sv.cpm.m;
-  const ch=readChunks(sv), m={};
-  const plain=x=>deTex(String(x||'').replace(/```[\s\S]*?```/g,' ')).replace(/[^가-힣A-Za-z0-9]/g,'').toLowerCase();
-  const bi=x=>{ const B=new Set(); for(let i=0;i<x.length-1;i++) B.add(x.slice(i,i+2)); return B; };
-  const cand=ch.map(c=>c.type==='text'&&!/^(요약|핵심 질문)/.test(c.sec||'')?bi(plain(c.body)):null);
-  for(const c of items){
-    let at=-1, pos=1e9;
-    if(c.k==='용어'){ at=ch.findIndex((x,j)=>cand[j]&&String(x.body).includes(`**${c.q}**`)); if(at>=0) pos=String(ch[at].body).indexOf(`**${c.q}**`); }
-    if(at<0){
-      const T=bi(plain(`${c.a} ${c.t||''} ${c.q}`)); if(!T.size) continue;
-      const sc=cand.map(B=>{ if(!B) return 0; let h=0; for(const g of T) if(B.has(g)) h++; return h/T.size; });
-      const best=Math.max(...sc); if(!(best>0)) continue;
-      at=sc.findIndex(v=>v>=best*0.85);
-    }
-    (m[at] ||= []).push({c, pos});
-  }
-  for(const k in m) m[k]=m[k].sort((a,b)=>a.pos-b.pos).map(x=>x.c); // 용어는 나오는 순서로 먼저, 나머지는 카드 순서로
-  sv.cpm={key, m}; return m;
+/* 본문 따라 쓰기(26.11.27 영신 "중요 단어를 치는건 이런 방식을 말한게 아니었어. 그냥 본문에 따라 쓸 수 있게 하면 됨. 보카고양 보면
+   틀린경우에 따라쓸수 있게 나오잖아? 그때도 가이드로 따라 쓸 수 있게 단어가 뜨고. 우리 설명 카드 내에게 중요 표현은 처음에 따라쓸수
+   있게 되어있고 따라쓰면 그부분이 채워지는 식으로 가면 되는거야". 앞서 26.11.26 "공식은 컴퓨터로 입력할 수 있는 형태를 제시하고,
+   치고나면 입력식이 아니라 조판식? 으로 변환하게").
+   처음 읽는 장에서 중요 표현 — 굵게 정의한 용어(한글과 영어 이름, 한자는 옆에 보이기만)와 따로 줄을 잡은 식(키보드 꼴) — 이 본문
+   그 자리에 흐린 안내 글씨가 든 빈칸으로 나온다. 안내를 따라 치면 그 자리가 본래 글(굵은 용어, 조판한 식)로 채워진다.
+   다 채워야 '다음'이 켜진다. 채운 것은 진도 cf에 남는다. 다시 읽는 장은 채워진 채로 보인다. */
+const CF_TOK=i=>`CFTOKx${i}x`;
+function cfHash(x){ let h=0; for(const ch of String(x)) h=(h*31+ch.codePointAt(0))|0; return (h>>>0).toString(36); }
+function texArg(s,i){ // 중괄호 묶음, 명령 하나, 또는 글자 하나
+  while(s[i]===' ') i++;
+  if(s[i]==='{'){ let d=0, j=i; for(;j<s.length;j++){ if(s[j]==='{') d++; else if(s[j]==='}'){ d--; if(!d) break; } } return [s.slice(i+1,j), j+1]; }
+  if(s[i]==='\\'){ const m=s.slice(i).match(/^\\[A-Za-z]+/); if(m) return [m[0], i+m[0].length]; }
+  return [s[i]||'', i+1];
 }
-const cpDone=(u,cid)=>!!rec(u)?.cp?.[cid];
-const cpLeft=(sv,i)=>(cpMap(sv)[i]||[]).filter(c=>!cpDone(sv.id,c.id));
-const cpKey=c=>c.k==='용어'?[c.q, answerKey(c.a)].filter(Boolean).join(' '):cardKey(c);
-const cpOk=(v,c)=>sameKey(v,cpKey(c))||(c.k!=='용어'&&cardKeyOk(v,c));
+function texKeys(t){ // 분수·제곱근을 키보드 꼴로: \frac ab → (a)/(b), \sqrt[n]{x} → sqrt[n](x)
+  const w=x=>/^(\d+(\.\d+)?|[A-Za-z])$/.test(x)?x:`(${x})`;
+  for(let n=0;n<40;n++){
+    const m=t.match(/\\[dt]?frac(?![A-Za-z])|\\sqrt(?![A-Za-z])/); if(!m) break;
+    const i=m.index; let j=i+m[0].length;
+    if(m[0]==='\\sqrt'){ let deg=''; while(t[j]===' ') j++; if(t[j]==='['){ const e=t.indexOf(']',j); deg=t.slice(j+1,e); j=e+1; } const [x,k]=texArg(t,j); t=t.slice(0,i)+`sqrt${deg?`[${deg}]`:''}(${texKeys(x)})`+t.slice(k); }
+    else{ const [x,k]=texArg(t,j), [y,l]=texArg(t,k); let f=`${w(texKeys(x))}/${w(texKeys(y))}`; if(/[A-Za-z0-9_)]/.test(t[i-1]||'')||/[A-Za-z0-9(\\]/.test(t[l]||'')) f=`(${f})`; t=t.slice(0,i)+f+t.slice(l); }
+  }
+  return t;
+}
+function cfFormula(t){ // 키보드로 칠 수 있는 꼴. 두 글자 넘는 지수·첨자는 괄호로 묶는다
+  let x=texKeys(String(t).replace(/\\(?:left|right)(?![A-Za-z])/g,'').replace(/\\pm(?![A-Za-z])/g,'+-').replace(/\\mp(?![A-Za-z])/g,'-+').replace(/\\(?:cdot|times)(?![A-Za-z])/g,'*').replace(/\\circ(?![A-Za-z])/g,' o '))
+    .replace(/\\(?:iff|Leftrightarrow|Longleftrightarrow)(?![A-Za-z])/g,' <=> ').replace(/\\(?:Rightarrow|implies|Longrightarrow)(?![A-Za-z])/g,' => ')
+    .replace(/([A-Za-z0-9)])\\(log|ln|sin|cos|tan|exp)(?![A-Za-z])/g,'$1 \\$2')
+    .replace(/([\^_])\{([^{}]+)\}/g,(m,o,y)=>y.length>1?`${o}(${y})`:o+y);
+  let g=texPlain(x).replace(/±/g,'+-').replace(/∓/g,'-+').replace(/√/g,'sqrt').replace(/[⇒⟹]/g,'=>').replace(/[⇔⟺]/g,'<=>').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/≠/g,'!=').replace(/≈/g,'~=').replace(/[·⋅]/g,'*').replace(/[×]/g,'*').replace(/−/g,'-')
+    .replace(/[Ͱ-Ͽ]/g,c=>GREEK_NAME[c]?`\u0001${GREEK_NAME[c]}\u0001`:c).replace(/(?<=[A-Za-z0-9])\u0001|\u0001(?=[A-Za-z0-9])/g,' ').replace(/\u0001/g,'').replace(/\s+/g,' ').replace(/\(\s+/g,'(').replace(/\s+\)/g,')').trim();
+  return g&&!/\\[A-Za-z]|[{}]/.test(g)&&g.length<=150?g:'';
+}
+function cfItems(body){
+  const fences=[]; let src=String(body||'').replace(/```[\s\S]*?```/g,m=>{ fences.push(m); return `CFFENCEx${fences.length-1}x`; });
+  const items=[];
+  src=src.replace(/(^|\n)[ \t]*\$\$([\s\S]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{
+    const g=cfFormula(t.trim()); if(!g||!typeKey(g)) return m;
+    const i=items.length; items.push({type:'f', tex:t.trim(), guide:g, k:'f:'+cfHash(t.trim())}); return `${pre}\n\n${CF_TOK(i)}\n\n`; });
+  const seen=new Set();
+  src=src.replace(new RegExp(TERM_RE.source,'g'),(m,term,gl)=>{
+    if(seen.has(term)) return m; seen.add(term);
+    const en=gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[A-Za-z]/.test(x)&&!/[㐀-鿿]/.test(x)).join(' ');
+    const guide=[deTex(term), en].filter(Boolean).join(' ');
+    if(!typeKey(guide)) return m;
+    const i=items.length; items.push({type:'t', src:m, gl, guide, k:'t:'+term}); return CF_TOK(i); });
+  src=src.replace(/CFFENCEx(\d+)x/g,(m,i)=>fences[+i]);
+  return {src, items};
+}
+const cfDone=(u,k)=>!!rec(u)?.cf?.[k];
+const cfLeft=(sv,c)=>cfItems(c.body).items.filter(it=>!cfDone(sv.id,it.k));
+function cfHTML(sv, c, live){
+  const {src, items}=cfItems(c.body); if(!items.length) return md(c.body);
+  const R=sv.reader; let h=md(src);
+  items.forEach((it,i)=>{
+    const tok=CF_TOK(i);
+    let rep;
+    if(!live||cfDone(sv.id,it.k)) rep=it.type==='t'?inl(it.src):`<div class="math-block">${tex(it.tex,true)}</div>`;
+    else{
+      const w=Math.min(64,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
+      const inp=`<input class="cf-in" data-k="${esc(it.k)}" data-key="${esc(it.guide)}" placeholder="${esc(it.guide)}" value="${esc(R?.cfDraft?.[it.k]||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${w}ch" aria-label="따라 쓰기: ${esc(it.guide)}">`;
+      const hj=it.type==='t'?it.gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[㐀-鿿]/.test(x)).join(', '):'';
+      rep=it.type==='t'?`<span class="cf">${inp}</span>${hj?`<span class="gloss">(${esc(hj)})</span>`:''}`:`<div class="cf cf-f">${inp}${typeHint(it.guide)}</div>`;
+    }
+    h=it.type==='f'?h.replace(new RegExp(`<p>\\s*${tok}\\s*</p>`),()=>rep).replace(tok,()=>rep):h.replace(tok,()=>rep);
+  });
+  return h;
+}
+function cfTry(el, enter){
+  const sv=UI.study, R=sv?.reader; if(!R||!el) return;
+  const k=el.dataset.k, key=el.dataset.key;
+  (R.cfDraft ||= {})[k]=el.value;
+  if(!sameKey(el.value,key)){ if(enter){ const a=typeKey(el.value), b=typeKey(key); let i=0; while(i<a.length&&i<b.length&&a[i]===b[i]) i++; toast(!a?'흐린 글씨를 그대로 따라 쳐 봐.':i>=a.length?`아직 덜 썼어. '${b.slice(i,i+8)}'부터 이어 써.`:`${i+1}번째 글자부터 달라. 띄어쓰기와 문장부호는 따지지 않아.`); } return; }
+  const r=ensure(sv.id); (r.cf ||= {})[k]=1; delete R.cfDraft[k]; save('progress');
+  paintLesson();
+  requestAnimationFrame(()=>{ const t=$('.cf-in'); if(t) t.focus({preventScroll:true}); else { const b=$('.rd-next'); if(b&&!b.disabled) b.focus({preventScroll:true}); } });
+}
 // 치기 어려운 글자는 키보드 꼴로 쳐도 같다(typeKey). 그 짝을 따라 쓸 글 아래에 보인다.
 function typeHint(key){
   const k=String(key||''), m=new Map();
@@ -2129,16 +2170,6 @@ function typeHint(key){
   if(k.includes('×')) m.set('×','x');
   if(/[½⅓¼]/.test(k)) for(const ch of k.match(/[½⅓¼]/g)) m.set(ch,ch.normalize('NFKC').replace(/\u2044/g,'/'));
   return m.size?`<p class="hint cp-hint">${[...m].map(([a,b])=>`${esc(a)} → <code>${esc(b)}</code>`).join(' · ')}로 쳐도 돼.</p>`:'';
-}
-function cpHTML(sv, i, need){
-  const L=cpMap(sv)[i]; if(!L?.length) return '';
-  const done=L.filter(c=>cpDone(sv.id,c.id)), cur=L.find(c=>!cpDone(sv.id,c.id)), R=sv.reader;
-  const row=c=>`<div class="cp-row"><span class="cp-k">${esc(c.k)}</span><div class="md cp-a">${c.k==='용어'?`<p><b>${esc(c.q)}</b> ${inl(c.a)}</p>`:`<p class="cp-q">${inl(c.q)}</p>${md(c.a)}`}</div></div>`;
-  const draft=R&&R.cpFor===cur?.id?R.cpDraft||'':'';
-  return `<section class="cp" aria-label="따라 쓰기"><p class="cp-h"><b>따라 쓰기</b><span class="mono">${done.length} / ${L.length}</span>${cur?`<span class="muted">${need?'이 장의 카드를 보며 하나씩 쳐. 다 쳐야 다음 장이 켜져.':'다시 읽는 장이라 안 쳐도 돼.'}</span>`:''}</p>
-    ${done.map(row).join('')}
-    ${cur?`<form class="copy-form cp-form" id="cp-form" data-cid="${cur.id}" data-key="${esc(cpKey(cur))}"><p class="copy-lead">${cur.k==='용어'?`용어 <b>${esc(cur.q)}</b> ${inl(cur.a)} · 한자는 보기만 하고 한글과 영어를 쳐`:`${esc(cur.k)} · ${inl(cur.q)}`}</p><p class="copy-key">${esc(cpKey(cur))}</p>${typeHint(cpKey(cur))}<label class="sr" for="cp-in">따라 쓰기</label><input id="cp-in" class="copy-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="여기에 그대로 써" value="${esc(draft)}"><div class="row"><button type="submit" class="btn primary">확인 <kbd>Enter</kbd></button></div></form>`:''}
-  </section>`;
 }
 function readerHTML(sv){
   const L=sv.lesson, R=sv.reader, chunks=readChunks(sv), N=chunks.length;
@@ -2151,10 +2182,10 @@ function readerHTML(sv){
   const wait=isNew&&complete&&c.type==='text'?Math.max(0,dw-el):0;
   const checkOk=c.type!=='check'||R.passed[R.i]||!isNew;
   const bookOk=c.type!=='book'||!isNew||!bookStats(sv.id,c.o).fresh;
-  const cpReady=c.type!=='text'||!isNew||!cpLeft(sv,R.i).length;
-  const canNext=complete&&wait<=0&&checkOk&&bookOk&&cpReady, last=R.i===N-1&&!streaming;
+  const cfReady=c.type!=='text'||!isNew||!complete||!cfLeft(sv,c).length;
+  const canNext=complete&&wait<=0&&checkOk&&bookOk&&cfReady, last=R.i===N-1&&!streaming;
   clearTimeout(rdTimer);
-  if(wait>0) rdTimer=setTimeout(()=>{ if(UI.study===sv&&sv.step==='lesson'&&sv.reader===R&&document.activeElement?.id!=='cp-in') paintLesson(); }, wait*1000+80);
+  if(wait>0) rdTimer=setTimeout(()=>{ if(UI.study===sv&&sv.step==='lesson'&&sv.reader===R&&!document.activeElement?.classList?.contains('cf-in')) paintLesson(); }, wait*1000+80);
   const reach=j=>R.free||j<=R.max;
   const segs=chunks.map((x,j)=>`<button type="button" class="seg ${j<R.i?'done':j===R.i?'cur':reach(j)?'seen':''}${x.type==='check'?' chk':x.type==='book'?' bk':''}${x.type==='check'&&R.passed[j]||x.type==='book'&&!bookStats(sv.id,x.o).fresh?' ok':''}" data-act="rd-go" data-i="${j}" title="${j+1}장${x.type==='check'?' · 점검':x.type==='book'?` · 교재 문제(목표 ${x.o})`:''}"${reach(j)&&j!==R.i?'':' disabled'}><span class="sr">${j+1}장으로</span></button>`).join('')+(streaming?'<i class="more"></i>':'');
   let body;
@@ -2168,7 +2199,7 @@ function readerHTML(sv){
   } else {
     /* 학습 목표는 옆 칸 대신 그 절의 첫 장 제목 아래에 녹인다(26.11.18 영신 "학습목표는 녹이고"). */
     const ok=c.sec==='원리'&&c.sub&&(R.i===0||chunks[R.i-1].sub!==c.sub)?objOfChunk(chunks)(c):0, ot=ok&&NODE[sv.id]?.obj[ok-1];
-    body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}${ot?`<p class="rd-obj"><b>목표 ${ok}</b>${esc(ot)}</p>`:''}<div class="md${c.sec==='요약'?' sum':''}">${md(c.body)}</div>${R.i===0&&NODE[sv.id]?previewHTML(NODE[sv.id],L.md):''}${complete?cpHTML(sv,R.i,isNew):''}`;
+    body=`${c.sub?`<h3 class="rd-sub">${inl(c.sub)}</h3>`:''}${ot?`<p class="rd-obj"><b>목표 ${ok}</b>${esc(ot)}</p>`:''}<div class="md${c.sec==='요약'?' sum':''}">${cfHTML(sv,c,complete&&isNew)}</div>${R.i===0&&NODE[sv.id]?previewHTML(NODE[sv.id],L.md):''}`;
   }
   const label=!complete?'쓰는 중…':last?'암기로 →':'다음 →';
   const fill=wait>0&&!matchMedia('(prefers-reduced-motion: reduce)').matches?`<span class="rd-fill" style="animation-duration:${dw}s;animation-delay:-${el.toFixed(2)}s"></span>`:'';
@@ -2605,7 +2636,6 @@ async function loadCards(sv, bg, force){
   }
   if(C.state==='ready'){ checkCardsDone(id); if(rec(id)?.cd) prefetchQuiz(sv); }
   if(UI.study===sv&&sv.step==='cards'){ render(); focusCard(); }
-  else if(UI.study===sv&&sv.step==='lesson'&&C.state==='ready'&&document.activeElement?.id!=='cp-in') paintLesson();
 }
 // Cards without a key (t) — the pre-made, reviewed ones in content/ — use a key taken from the answer (answerKey).
 // The app does not ask the model for keys: that would write unreviewed text into the reviewed cards/<id> docs.
@@ -3434,14 +3464,6 @@ document.addEventListener('submit',e=>{
   if(f.id==='chk-form'){ const R=UI.study?.reader; if(R){ R.typed=$('#chk-typed')?.value.trim()||''; R.revealed=true; paintLesson(); } return; }
   if(f.id==='reveal-form'){ if(UI.cs){ UI.cs.typed=$('#card-typed')?.value.trim()||''; UI.cs.revealed=true; render(); } return; }
   if(f.id==='card-copy-form'){ cardCopy($('#card-copy')?.value||''); return; }
-  if(f.id==='cp-form'){
-    const sv=UI.study, R=sv?.reader, c=sv&&liveItems(sv.id).find(x=>x.id===f.dataset.cid); if(!c||!R) return;
-    const v=$('#cp-in')?.value||'';
-    if(!cpOk(v,c)){ copyMiss(f,v,cpKey(c)); return; }
-    const r=ensure(sv.id); (r.cp ||= {})[c.id]=1; save('progress'); R.cpDraft=''; R.cpFor='';
-    paintLesson(); requestAnimationFrame(()=>{ const t=$('#cp-in'); if(t) t.focus({preventScroll:true}); else { const b=$('.rd-next'); if(b&&!b.disabled) b.focus({preventScroll:true}); } });
-    return;
-  }
   if(f.id==='card-recall-form'){ cardRecall($('#card-recall')?.value||'',false); return; }
   if(f.id==='copy-form'){
     const ns=f.dataset.ns, box=ns==='q'?UI.study?.quiz:UI.review; if(!box?.items) return;
@@ -3498,6 +3520,7 @@ document.addEventListener('change',e=>{
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&UI.sel){ select(null); return; }
   if(e.isComposing||e.keyCode===229) return; // 한글 조합 중의 Enter는 글자를 끝내는 키다
+  if(e.key==='Enter'&&e.target.classList?.contains('cf-in')){ e.preventDefault(); cfTry(e.target,true); return; }
   if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='chat-input'){ e.preventDefault(); $('#chat-form').requestSubmit(); return; }
   const inField=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
   const rdOn=UI.view==='study'&&UI.study?.step==='lesson'&&UI.study.reader&&!UI.study.reader.whole;
@@ -3511,9 +3534,10 @@ document.addEventListener('keydown',e=>{
   if(!UI.cs.revealed){ if(!inField&&e.target.tagName!=='BUTTON'&&$('#reveal-form')&&(e.key===' '||e.key==='Enter')){ e.preventDefault(); $('#reveal-form').requestSubmit(); } return; }
   if(!inField&&['1','2','3'].includes(e.key)){ e.preventDefault(); gradeCard(+e.key); }
 });
+document.addEventListener('compositionend',e=>{ if(e.target.classList?.contains('cf-in')) cfTry(e.target,false); });
 document.addEventListener('input',e=>{
   if(e.target.id==='chk-typed'&&UI.study?.reader) UI.study.reader.typed=e.target.value;
-  if(e.target.id==='cp-in'&&UI.study?.reader){ const R=UI.study.reader; R.cpDraft=e.target.value; R.cpFor=e.target.form?.dataset.cid; }
+  if(e.target.classList?.contains('cf-in')){ if(e.isComposing) (UI.study.reader.cfDraft ||= {})[e.target.dataset.k]=e.target.value; else cfTry(e.target,false); }
   { const P=UI.study?.bk?.P, f={'bk-ans':'ans','bk-work':'work','bk-text':'text','bk-hl':'hintLine'}[e.target.id]; if(P&&f) P[f]=e.target.value; }
   if(e.target.id==='bk-calc-in'&&UI.calc) UI.calc.draft=e.target.value;
   if(e.target.classList?.contains('copy-in')){ const f=e.target.form; if(f) f.classList.toggle('ok',sameKey(e.target.value,f.dataset.key)); }
