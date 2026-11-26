@@ -31,8 +31,17 @@ ids_all = set()
 titles = {}
 
 
+CF_RE = re.compile(r'\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\{\{((?:\$[^$\n]+\$|[^$\n{}])*?)\}\}')
+
+
+def cf_strip(s):
+    """따라 쓸 자리 표시 {{…}}의 괄호만 지운다(수식 안의 }}는 그대로)."""
+    return CF_RE.sub(lambda m: m.group(0) if m.group(1) is None else m.group(1), s)
+
+
 def shown(s):
     """화면에 보이는 글: [[id|#]]는 "45번", [[id|이름]]은 이름, [[id]]는 단원 제목."""
+    s = cf_strip(s)
     s = re.sub(r'\[\[([a-z]+-[a-z]+)\|#\]\]', '00번', s)
     s = re.sub(r'\[\[([a-z]+-[a-z]+)\|([^\]]*)\]\]', r'\2', s)
     return re.sub(r'\[\[([a-z]+-[a-z]+)\]\]', lambda m: titles.get(m.group(1), m.group(1)), s)
@@ -263,6 +272,19 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     if names != SECTIONS:
         errs.append(f'큰 제목 순서가 다르다: {names}')
     check_graphs(md, errs)
+    body = FENCE.sub('', md)
+    for k, l in enumerate(body.split('\n')):
+        rest = CF_RE.sub(lambda m: m.group(0) if m.group(1) is None else '', l)
+        if '{{' in rest or '}}' in re.sub(r'\$[^$\n]+\$', '', rest):
+            errs.append(f'{k + 1}줄(그림 밖 기준): 따라 쓸 자리 {{{{ }}}}가 짝이 안 맞거나, 수식 중간에서 열리고 닫힌다')
+        for m in CF_RE.finditer(l):
+            x = m.group(1)
+            if x is None:
+                continue
+            if '**' in x or '[[' in x:
+                errs.append(f'따라 쓸 자리 {{{{{x}}}}}: 굵은 글씨·단원 가리킴을 안에 두지 않는다')
+            if len(shown(x)) > 70:
+                warns.append(f'따라 쓸 자리 {{{{{x[:30]}…}}}}: {len(shown(x))}자 (70자 안으로)')
     nfig = len(re.findall(r'^```graph', md, re.M))
     total = len(shown(FENCE.sub('', md)))
     info.append(f'설명 {total}자' + (f', 그림 {nfig}' if nfig else ''))

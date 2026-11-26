@@ -828,8 +828,11 @@ function texPlain(t){
   return t.replace(/\\([A-Za-z]+)/g,(m,w)=>GREEK[w]??TEXSYM[w]??w)
     .replace(/\\[,;:! ]/g,' ').replace(/\\\\/g,' ').replace(/\\([%#&])/g,'$1').replace(/[{}]/g,'').replace(/([_^])\s+/g,'$1');
 }
+/* 따라 쓸 자리 표시 {{…}}(26.11.27): 처음 읽는 장에서 빈칸이 되고(cfItems), 그 밖에서는 괄호만 지운다. 수식 안의 }}는 건드리지 않게 수식을 먼저 건너뛴다. */
+const CF_RE=/\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\{\{((?:\$[^$\n]+\$|[^$\n{}])*?)\}\}/g;
+const cfStrip=s=>String(s??'').replace(CF_RE,(m,x)=>x===undefined?m:x);
 function deTex(s){
-  return String(s||'')
+  return cfStrip(s)
     .replace(/\$\$?([^$]+)\$\$?/g,(m,t)=>texPlain(t))
     .replace(/\[\[([a-z]-[a-z]+)(?:\|([^\]]+))?\]\]/g,(m,id,l)=>l==='#'?(NODE[id]?`${NODE[id].no}번`:id):l||NODE[id]?.t||id)
     .replace(/\*\*|__|`/g,'').replace(/\s+/g,' ').trim();
@@ -1202,6 +1205,7 @@ function tex(s,d){
   return `<code class="tex">${esc(s)}</code>`;
 }
 function inl(s){
+  s=cfStrip(s);
   s=String(s??''); const keep=[];
   const put=h=>{ keep.push(h); return `\u0001${keep.length-1}\u0002`; };
   s=s.replace(/\$\$([\s\S]+?)\$\$/g,(m,a)=>put(tex(a,true)))
@@ -1237,7 +1241,7 @@ function layerOf(txt){
   return {parts:uniq, cls:uniq.includes('엄밀')?'rig':uniq.includes('통상')?'std':'int'};
 }
 function md(src){
-  const L=String(src??'').replace(/\r/g,'').split('\n'); const out=[];
+  const L=cfStrip(src).replace(/\r/g,'').split('\n'); const out=[];
   let para=[], list=null, quote=[], table=[], layer=false;
   const fp=()=>{ if(para.length){ out.push(`<p>${inl(para.join(' '))}</p>`); para=[]; } };
   // "- **오해:** … → **사실:** …" becomes a two-line item with the fact in front of the eye
@@ -1934,7 +1938,7 @@ function paintLessonBody(){ if(lessonRAF) return; lessonRAF=requestAnimationFram
 
 /* one-screen reader: the lesson is cut into chunks; a new chunk needs reading time, each goal ends with a checkpoint */
 let rdTimer=0;
-function plainLen(s){ return String(s||'').replace(/```[\s\S]*?```/g,'그림'.repeat(30)).replace(/\$\$[\s\S]*?\$\$/g,'수식수식수식').replace(/\$[^$\n]+\$/g,'수식').replace(/[#*>|`\-:]/g,'').replace(/\s+/g,'').length; }
+function plainLen(s){ return cfStrip(s||'').replace(/```[\s\S]*?```/g,'그림'.repeat(30)).replace(/\$\$[\s\S]*?\$\$/g,'수식수식수식').replace(/\$[^$\n]+\$/g,'수식').replace(/[#*>|`\-:]/g,'').replace(/\s+/g,'').length; }
 const dwellOf=c=>c.type!=='text'?0:Math.min(35,Math.max(3,Math.round(plainLen(c.body)/10)));
 const opensMath=l=>(l.startsWith('$$')&&!(l.length>2&&l.endsWith('$$')))||(l.startsWith('\\[')&&!l.endsWith('\\]'));
 function chunkLesson(src){
@@ -2124,10 +2128,15 @@ function cfItems(body){
   src=src.replace(/(^|\n)[ \t]*\$\$([\s\S]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{
     const g=cfFormula(t.trim()); if(!g||!typeKey(g)) return m;
     const i=items.length; items.push({type:'f', tex:t.trim(), guide:g, k:'f:'+cfHash(t.trim())}); return `${pre}\n\n${CF_TOK(i)}\n\n`; });
+  src=src.replace(CF_RE,(m,x)=>{
+    if(x===undefined) return m;
+    const guide=deTex(x.replace(/\$([^$\n]+)\$/g,(mm,t)=>cfFormula(t)||texPlain(t)).replace(/\*\*/g,'')).replace(/≈/g,'~=').replace(/…/g,'...').replace(/²/g,'^2').replace(/³/g,'^3').replace(/±/g,'+-').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/≠/g,'!=').replace(/[→⟶]/g,'->').replace(/−/g,'-').replace(/×/g,'*').replace(/\s+/g,' ').trim();
+    if(!typeKey(guide)) return x;
+    const i=items.length; items.push({type:'p', src:x, guide, k:'p:'+cfHash(x)}); return CF_TOK(i); });
   const seen=new Set();
   src=src.replace(new RegExp(TERM_RE.source,'g'),(m,term,gl)=>{
     if(seen.has(term)) return m; seen.add(term);
-    const en=gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[A-Za-z]/.test(x)&&!/[㐀-鿿]/.test(x)).join(' ');
+    const en=gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[A-Za-z]/.test(x)&&!/[㐀-鿿가-힣]/.test(x)).join(' ');
     const guide=[deTex(term), en].filter(Boolean).join(' ');
     if(!typeKey(guide)) return m;
     const i=items.length; items.push({type:'t', src:m, gl, guide, k:'t:'+term}); return CF_TOK(i); });
@@ -2142,12 +2151,12 @@ function cfHTML(sv, c, live){
   items.forEach((it,i)=>{
     const tok=CF_TOK(i);
     let rep;
-    if(!live||cfDone(sv.id,it.k)) rep=it.type==='t'?inl(it.src):`<div class="math-block">${tex(it.tex,true)}</div>`;
+    if(!live||cfDone(sv.id,it.k)) rep=it.type==='f'?`<div class="math-block">${tex(it.tex,true)}</div>`:inl(it.src);
     else{
-      const w=Math.min(64,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
+      const w=Math.min(96,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
       const inp=`<input class="cf-in" data-k="${esc(it.k)}" data-key="${esc(it.guide)}" placeholder="${esc(it.guide)}" value="${esc(R?.cfDraft?.[it.k]||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${w}ch" aria-label="따라 쓰기: ${esc(it.guide)}">`;
       const hj=it.type==='t'?it.gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[㐀-鿿]/.test(x)).join(', '):'';
-      rep=it.type==='t'?`<span class="cf">${inp}</span>${hj?`<span class="gloss">(${esc(hj)})</span>`:''}`:`<div class="cf cf-f">${inp}${typeHint(it.guide)}</div>`;
+      rep=it.type==='f'?`<div class="cf cf-f">${inp}${typeHint(it.guide)}</div>`:`<span class="cf">${inp}</span>${hj?`<span class="gloss">(${esc(hj)})</span>`:''}`;
     }
     h=it.type==='f'?h.replace(new RegExp(`<p>\\s*${tok}\\s*</p>`),()=>rep).replace(tok,()=>rep):h.replace(tok,()=>rep);
   });

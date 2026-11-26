@@ -55,6 +55,7 @@ def _bold(s):
 
 def md_to_html(md, by, num, target_prefix):
     """설명 마크다운(앱과 같은 꼴)을 HTML로. 큰 덩어리마다 댓글 대상을 단다."""
+    md = cc.cf_strip(md)
     lines = md.replace('\r', '').split('\n')
     out, para, lst, tbl = [], [], None, []
     blk = [0]
