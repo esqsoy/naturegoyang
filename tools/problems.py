@@ -166,9 +166,38 @@ def apply_moves(probs, warn):
     return probs
 
 
+def apply_noans(probs, warn):
+    """problems-*.json의 "noans": [{"sec", "n": [번호, …], "why"}] — 책 뒤 답이 실리는 범위(odd 등) 안인데 답이 없는 번호(증명 문제 등).
+    그 번호를 제 줄로 떼어 ans를 'none'으로 둔다. 앱은 그 문제를 처음부터 'Claude에게 판정'으로 연다
+    (26.11.26 플레이테스트: 책 답 칸이 먼저 떠서 '책 답이 없어'를 한 번 더 눌러야 했다)."""
+    for p in sorted(glob.glob(os.path.join(REPO, 'sources', 'problems-*.json'))):
+        d = json.load(open(p, encoding='utf-8'))
+        b = d.get('book')
+        for na in d.get('noans', []):
+            sec = na['sec']
+            for n in sorted(int(x) for x in na['n']):
+                hit = False
+                for u, rows in probs.items():
+                    out = []
+                    for r in rows:
+                        if r[0] != b or r[1] != sec or not (r[2] <= n <= r[3]):
+                            out.append(r)
+                            continue
+                        hit = True
+                        if r[2] <= n - 1:
+                            out.append([b, sec, r[2], n - 1] + r[4:])
+                        out.append([b, sec, n, n, 'none'] + r[5:])
+                        if n + 1 <= r[3]:
+                            out.append([b, sec, n + 1, r[3]] + r[4:])
+                    probs[u] = out
+                if not hit:
+                    warn.append(f'{b}|{sec} {n}번: 답 없음으로 둘 번호를 맡은 단원이 없다')
+    return probs
+
+
 def main():
     warn = []
-    probs = apply_moves(apply_objs(build(), warn), warn)
+    probs = apply_noans(apply_moves(apply_objs(build(), warn), warn), warn)
     for w in warn:
         print('경고:', w, file=sys.stderr)
     src = open(APP, encoding='utf-8', newline='').read()
