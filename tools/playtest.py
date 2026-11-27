@@ -35,9 +35,14 @@ MOCK = r"""<!doctype html><meta charset="utf-8"><meta name="viewport" content="w
 (function(){
   'use strict';
   const SEED = __SEED__, INIT = __INIT__, RUN = 'nyplay:' + __RUN__;
-  const realNow = Date.now.bind(Date);
   let skew = Number(localStorage.getItem(RUN + ':skew') || 0);
-  Date.now = () => realNow() + skew;
+  // Date.now와 인자 없는 new Date()를 함께 앞당긴다(앱이 날짜를 둘 다로 센다. 26.11.27: Date.now만 앞당겨 하루를 넘겨도 홈 날짜가 그대로였다)
+  const RealDate = Date;
+  class SkewDate extends RealDate {
+    constructor(...a) { if (a.length) super(...a); else super(RealDate.now() + skew); }
+    static now() { return RealDate.now() + skew; }
+  }
+  window.Date = SkewDate;
   window.__skipped = Number(localStorage.getItem(RUN + ':skipped') || 0);
   window.__skip = (s) => { skew += s * 1000; window.__skipped += s; localStorage.setItem(RUN + ':skew', skew); localStorage.setItem(RUN + ':skipped', window.__skipped);
     try { if (typeof render === 'function') { if (UI && UI.study && UI.study.step === 'lesson' && typeof paintLesson === 'function') paintLesson(); else render(); } } catch (e) {} return window.__skipped; };
