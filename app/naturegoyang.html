@@ -295,6 +295,12 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .fix-i .mono{margin-left:6px; color:var(--ink-3); font-size:11.5px}
 .fix-i p{margin:4px 0 0; white-space:pre-wrap}
 .fix-i .fix-r{color:var(--ink-2); border-left:2px solid var(--line); padding-left:8px}
+.qa-i .qa-s{font-size:13px; line-height:1.6; margin-top:4px}
+.qa-i .qa-s p{white-space:normal}
+.qa-o{margin-top:4px}
+.qa-o summary{font:500 12px/1.3 var(--font-ui); color:var(--ink-3); cursor:pointer}
+.qa-o .md{font-size:13px; line-height:1.6; margin-top:6px; max-height:320px; overflow:auto; border-left:2px solid var(--line-2); padding-left:8px}
+.qa-o .qa-q{color:var(--ink-2); white-space:pre-wrap}
 .unote{margin-top:14px; padding-top:12px; border-top:1px solid var(--line-2)}
 .unote summary{font:600 12px/1.3 var(--font-ui); color:var(--ink-3)}
 .unote .md{font-size:14px; line-height:1.7; margin-top:8px}
@@ -2894,6 +2900,7 @@ function reviewAnswer(correct, sure, val){
 async function sendChat(text){
   const sv=UI.study; text=text.trim(); if(!sv||sv.chatBusy||!text) return;
   if(!ENV.sample){ toast(NOSAMPLE); return; }
+  const here=fixHere(sv), prev=sv.chat.filter(t=>t.content&&!t.err).slice(-2).map(t=>(t.role==='user'?'질문: ':'답변: ')+String(t.content).slice(0,600)).join('\n');
   sv.chat.push({role:'user',content:text});
   const a={role:'assistant',content:'',pending:true}; sv.chat.push(a); sv.chatBusy=true; paintChat();
   const n=NODE[sv.id];
@@ -2903,6 +2910,39 @@ async function sendChat(text){
     a.content=r.text;
   }catch(e){ a.content=e.text||''; a.err=sampleErr(e); }
   a.pending=false; sv.chatBusy=false; paintChat();
+  if(!a.err&&a.content) saveQA(sv, here, text, a.content, prev);
+}
+/* 질답 기록(26.11.27, 앱 38판). 영신: "질답내역도 메모처럼 정리되는걸로 하는거 어때? 근데 보통 답변이 길게 나오니까 원본은 데이터로 놓고
+   요약본(질문 1~5줄 요약, 답변 1~5줄 요약 식으로)을 남기는 걸로하면 어떨까 싶어", "이걸 메모에 합쳐도 좋고".
+   질문챗 한 쌍마다 메모와 같은 fixes/에 kind 'qa'로 남긴다. q·a는 원문, qsum·asum은 1~5줄 요약(답이 끝나면 앱이 가벼운 모델로 만든다.
+   못 만들면 췍 때 Claude가 채운다). 메모처럼 state 'open'으로 쌓이고, 췍 때 단원 노트로 정리한다(noted). */
+function qaSumPrompt(n,q,a,prev){
+  return `과학 학습 앱의 질문챗 한 쌍을 학습 노트용으로 요약하라. 단원: ${n.no}번 ${n.t}.
+${prev?`앞선 대화(맥락만 참고):\n${prev}\n\n`:''}질문 원문:
+${q}
+
+답변 원문:
+${a}
+
+규칙:
+- 질문 요약: 학습자가 무엇을 몰랐거나 헷갈렸는지 드러나게 1~5줄.
+- 답변 요약: 답의 핵심(정의·이유·식·예)을 1~5줄. 원문에 없는 내용을 더하지 않고, 한정어·조건을 빼지 않는다.
+- 줄마다 한 문장, 한국어. 수식은 $…$ 꼴로.
+JSON 객체 하나로만 답하라: {"q":"질문 요약(줄은 \\n으로 나눔)","a":"답변 요약(줄은 \\n으로 나눔)"}`;
+}
+async function saveQA(sv, here, q, a, prev){
+  const n=NODE[sv.id]; if(!ENV.db||!n) return;
+  const doc={u:sv.id, no:n.no, title:n.t, ...here, kind:'qa', text:'', q:String(q).slice(0,4000), a:String(a).slice(0,20000), qsum:'', asum:'', state:'open', reply:'', ts:Date.now()};
+  let ref; try{ ref=await ENV.db.collection('fixes').add(doc); }catch(e){ return; }
+  const it={id:ref.id,...doc}; (sv.fixes ||= []).push(it); if(UI.study===sv) paintFixes();
+  if(!ENV.sample) return;
+  try{
+    const o=await ENV.sample.json(qaSumPrompt(n,doc.q,doc.a,prev),{cache:false, modelTier:'quick'});
+    const cut=x=>String(x||'').split('\n').map(l=>l.trim()).filter(Boolean).slice(0,5).join('\n');
+    const qs=cut(o?.q), as=cut(o?.a); if(!qs||!as) return;
+    await ENV.db.doc('fixes/'+ref.id).update({qsum:qs, asum:as});
+    it.qsum=qs; it.asum=as; if(UI.study===sv) paintFixes();
+  }catch(e){}
 }
 /* 메모(26.11.26 영신 "고칠점으로 남기기를 메모로 바꾼다음에 제안은 고치고 메모는 노트로 정리해주는 방식은 어떨까?", "메모 하나, 췍 때 정리"):
    적은 것은 그대로 fixes/에 쌓인다. 영신이 "췍"이라고 하면 Claude가 읽어, 고칠 제안은 고치고(done·kept) 나머지는 그 단원 노트
@@ -2936,7 +2976,13 @@ function unoteHTML(id){ const x=UNOTES?.[id]; if(!x) return ''; return `<details
 function fixHTML(sv){
   const L=sv.fixes||[];
   if(!L.length) return '';
-  return `<div class="fix-list"><p class="fix-h">이 단원의 메모 ${L.length}</p>${L.map(f=>`<div class="fix-i"><span class="pill ${f.state==='done'?'good':''}">${FIX_STATE[f.state]||'남김'}</span>${f.page?`<span class="mono">${f.page}쪽</span>`:''}<p>${esc(f.text)}</p>${f.reply?`<p class="fix-r">${esc(f.reply)}</p>`:''}</div>`).join('')}</div>`;
+  const qa=f=>{ const sum=f.qsum&&f.asum;
+    return `<div class="fix-i qa-i"><span class="pill">질답</span>${f.state==='noted'?' <span class="pill good">노트로</span>':''}${f.page?`<span class="mono">${f.page}쪽</span>`:''}`
+      +(sum?`<div class="md qa-s"><p><b>Q.</b> ${inl(f.qsum).replace(/\n/g,'<br>')}</p><p><b>A.</b> ${inl(f.asum).replace(/\n/g,'<br>')}</p></div>`
+           :`<p>${esc(String(f.q).slice(0,200))}</p><p class="fix-r">요약을 만드는 중이거나 못 만들었어. 췍 때 정리할게.</p>`)
+      +`<details class="qa-o"><summary>원문</summary><div class="md"><p class="qa-q">${esc(f.q)}</p>${md(f.a)}</div></details></div>`; };
+  const nq=L.filter(f=>f.kind==='qa').length;
+  return `<div class="fix-list"><p class="fix-h">이 단원의 메모 ${L.length-nq}${nq?` · 질답 ${nq}`:''}</p>${L.map(f=>f.kind==='qa'?qa(f):`<div class="fix-i"><span class="pill ${f.state==='done'?'good':''}">${FIX_STATE[f.state]||'남김'}</span>${f.page?`<span class="mono">${f.page}쪽</span>`:''}<p>${esc(f.text)}</p>${f.reply?`<p class="fix-r">${esc(f.reply)}</p>`:''}</div>`).join('')}</div>`;
 }
 function paintFixes(){ const el=$('#fix-notes'); if(el&&UI.study) el.innerHTML=fixHTML(UI.study); }
 async function sendFix(){
