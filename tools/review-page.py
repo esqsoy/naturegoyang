@@ -33,12 +33,16 @@ def esc(s):
 def inline(s, by, num):
     """굵게, [[id]], $수식$을 HTML로. 수식은 data-tex로 두고 브라우저에서 KaTeX로 그린다."""
     out, i = [], 0
-    for m in re.finditer(r'\$([^$\n]+)\$|\[\[([a-z]+-[a-z]+)(?:\|([^\]]*))?\]\]', s):
+    for m in re.finditer(r'\^\[((?:[^\[\]]|\[\[[^\]]*\]\])*)\]|\$([^$\n]+)\$|\[\[([a-z]+-[a-z]+)(?:\|([^\]]*))?\]\]', s):
         out.append(_bold(esc(s[i:m.start()])))
-        if m.group(1) is not None:
-            out.append(f'<span class="tex" data-tex="{esc(m.group(1))}">{esc(m.group(1))}</span>')
+        if m.group(1) is not None:  # 각주(26.11.28 새 꼴): 앱은 쪽 아래, 여기서는 그 자리에 작게
+            out.append(f'<span class="fn">각주: {inline(m.group(1), by, num)}</span>')
+            i = m.end()
+            continue
+        if m.group(2) is not None:
+            out.append(f'<span class="tex" data-tex="{esc(m.group(2))}">{esc(m.group(2))}</span>')
         else:
-            x, lab = m.group(2), m.group(3)
+            x, lab = m.group(3), m.group(4)
             t = by[x]['t'] if x in by else x
             if lab == '#':  # [[id|#]]: 앱처럼 지금 번호만 (26.11.14)
                 out.append(f'<span class="xref" title="{esc(t)}">{num.get(x, "?")}번</span>')
@@ -57,7 +61,7 @@ def md_to_html(md, by, num, target_prefix):
     """설명 마크다운(앱과 같은 꼴)을 HTML로. 큰 덩어리마다 댓글 대상을 단다."""
     md = cc.cf_strip(md)
     lines = md.replace('\r', '').split('\n')
-    out, para, lst, tbl = [], [], None, []
+    out, para, lst, tbl, quote = [], [], None, [], []
     blk = [0]
 
     def flush_para():
@@ -81,8 +85,23 @@ def md_to_html(md, by, num, target_prefix):
             out.append(f'<div class="tbl"><table><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table></div>')
             tbl.clear()
 
+    def flush_quote():  # > 정의 줄(26.11.28 새 꼴): 정의 상자
+        if quote:
+            h, pp = [], []
+            for q in quote + ['']:
+                if q.startswith('$$') and q.endswith('$$') and len(q) > 4:
+                    if pp:
+                        h.append('<p>' + inline(' '.join(pp), by, num) + '</p>'); pp = []
+                    h.append(f'<div class="mblock"><span class="tex" data-display="1" data-tex="{esc(q[2:-2].strip())}">{esc(q)}</span></div>')
+                elif q:
+                    pp.append(q)
+                elif pp:
+                    h.append('<p>' + inline(' '.join(pp), by, num) + '</p>'); pp = []
+            out.append('<div class="defbox">' + ''.join(h) + '</div>')
+            quote.clear()
+
     def flush():
-        flush_para(); flush_list(); flush_tbl()
+        flush_para(); flush_list(); flush_tbl(); flush_quote()
 
     open_block = [False]
 
@@ -123,11 +142,27 @@ def md_to_html(md, by, num, target_prefix):
                     start_block('check', t)
                     out.append('<p class="lyh"><span class="ly chk">점검</span></p>')
                 else:
-                    parts = t.split('·')
-                    cls = LAYER_CLS.get(parts[-1], 'std')
-                    start_block('layer l-' + cls, t)
-                    out.append('<p class="lyh">' + '<span class="eq">=</span>'.join(f'<span class="ly">{esc(p)}</span>' for p in parts) + '</p>')
+                    parts = [x.strip() for x in t.split('·')]
+                    if all(x in LAYER_CLS for x in parts):  # 옛 꼴: 층 제목
+                        cls = LAYER_CLS.get(parts[-1], 'std')
+                        start_block('layer l-' + cls, t)
+                        out.append('<p class="lyh">' + '<span class="eq">=</span>'.join(f'<span class="ly">{esc(p)}</span>' for p in parts) + '</p>')
+                    else:  # 새 꼴: 화제 이름(증명 쪽은 '엄밀 ·')
+                        rig = parts[0] == '엄밀' and len(parts) > 1
+                        name = '·'.join(parts[1:]) if rig else t
+                        start_block('layer topic' + (' l-rig' if rig else ''), t)
+                        out.append('<p class="lyh">' + ('<span class="ly rigtag">엄밀</span>' if rig else '') + f'<span class="topic">{inline(name, by, num)}</span></p>')
             continue
+        if re.match(r'^-{3,}$', l):  # 새 꼴: 쪽 나눔
+            flush()
+            out.append('<div class="pgbrk" aria-hidden="true">쪽 나눔</div>')
+            continue
+        if l.startswith('>'):
+            flush_para(); flush_list(); flush_tbl()
+            quote.append(re.sub(r'^>\s?', '', l).strip())
+            continue
+        if quote:
+            flush_quote()
         if l.startswith('$$') and l.endswith('$$') and len(l) > 4:
             flush()
             out.append(f'<div class="mblock"><span class="tex" data-display="1" data-tex="{esc(l[2:-2].strip())}">{esc(l)}</span></div>')
@@ -270,6 +305,12 @@ main{max-width:980px; margin:0 auto; padding-block:24px 80px; padding-left:max(1
 .ly.chk{background:var(--ink); color:var(--surface)}
 .eq{font:500 12px var(--mono); color:var(--ink-3)}
 .mblock{overflow-x:auto; margin:.4em 0 .9em}
+.defbox{margin:.8em 0 1em; padding:.5em .9em; border-left:3px solid var(--ink); border-radius:0 8px 8px 0; background:var(--sunk)}
+.defbox p{margin:.3em 0}
+.topic{font:700 14px/1.4 var(--ui); color:var(--ink)}
+.rigtag{background:var(--ink); color:var(--bg, #fff)}
+.pgbrk{margin:1em 0; border-top:1px dashed var(--line); font:500 11px/1 var(--ui); color:var(--ink-3); padding-top:4px; text-align:right}
+.fn{font-size:.82em; color:var(--ink-3); margin-left:.3em}
 .tbl{overflow-x:auto; margin:.4em 0 .9em}
 table{border-collapse:collapse; font:14px/1.55 var(--ui)}
 th,td{border-bottom:1px solid var(--line); padding:7px 10px 7px 0; text-align:left; vertical-align:top}

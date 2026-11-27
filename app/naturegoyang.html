@@ -335,7 +335,15 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .md ul,.md ol{padding-left:1.3em; margin:0 0 1em}
 .md li{margin:.35em 0}
 .md strong{font-weight:700}
-.md blockquote{margin:1em 0; padding:.1em 1em; border-left:3px solid var(--line); color:var(--ink-2)}
+.md blockquote{margin:1.1em 0; padding:.6em 1em; border-left:3px solid var(--dc,var(--ink)); border-radius:0 8px 8px 0; background:color-mix(in srgb,var(--dc,var(--ink)) 7%,var(--surface)); color:var(--ink)}
+.md blockquote > :first-child{margin-top:0}
+.md blockquote > :last-child{margin-bottom:0}
+.md .fn-ref{font:600 .72em/1 var(--font-ui); color:var(--ink-3); vertical-align:super; margin-left:1px}
+.md .fnotes{margin-top:1.6em; padding-top:.6em; border-top:1px solid var(--line-2); font-size:.86em; line-height:1.6; color:var(--ink-2)}
+.md .fnotes p{margin:.25em 0}
+.md .ly-tag{font:600 11.5px/1 var(--font-ui); letter-spacing:.04em; padding:4px 7px; border-radius:4px; background:var(--ink); color:var(--surface); margin-right:8px; vertical-align:.15em}
+.recap .recap-b{margin:.45em 0}
+.recap .recap-b blockquote{margin:0}
 .md hr{border:0; border-top:1px solid var(--line); margin:2em 0}
 .md code{font:.86em var(--font-mono); background:var(--surface-2); padding:.1em .35em; border-radius:4px}
 .md .math-block{overflow-x:auto; margin:1.1em 0; padding:.4em 0}
@@ -1252,15 +1260,35 @@ function layerOf(txt){
   const uniq=[...new Set(parts)];
   return {parts:uniq, cls:uniq.includes('엄밀')?'rig':uniq.includes('통상')?'std':'int'};
 }
-function md(src){
-  const L=cfStrip(src).replace(/\r/g,'').split('\n'); const out=[];
+/* 각주 ^[…](26.11.28 회의 2, PRINCIPLES 2-0의 8번): 수식·그림 블록 밖의 ^[…]를 떼어 그 쪽 아래 작은 글씨로 모은다. 책에서는 각주가 된다. */
+function fnPull(s, F){
+  return String(s).split(/(```[\s\S]*?```)/).map((part,pi)=>{
+    if(pi%2) return part;
+    let out='', m=false, i=0;
+    while(i<part.length){
+      const ch=part[i];
+      if(ch==='\\'&&part[i+1]==='$'){ out+='\\$'; i+=2; continue; }
+      if(ch==='$'){ m=!m; out+=ch; i++; continue; }
+      if(!m&&ch==='^'&&part[i+1]==='['){
+        let d=0, j=i+1, mm=false;
+        for(;j<part.length;j++){ const c=part[j]; if(c==='\n') break; if(c==='$') mm=!mm; else if(!mm&&c==='[') d++; else if(!mm&&c===']'){ d--; if(!d) break; } }
+        if(j<part.length&&part[j]===']'&&!d){ F.notes.push(part.slice(i+2,j)); out+=`FNREFx${F.notes.length-1}x`; i=j+1; continue; }
+      }
+      out+=ch; i++;
+    }
+    return out;
+  }).join('');
+}
+function md(src, F){
+  const top=!F; F ||= {notes:[]};
+  const L=(top?fnPull(cfStrip(src),F):cfStrip(src)).replace(/\r/g,'').split('\n'); const out=[];
   let para=[], list=null, quote=[], table=[], layer=false;
   const fp=()=>{ if(para.length){ out.push(`<p>${inl(para.join(' '))}</p>`); para=[]; } };
   // "- **오해:** … → **사실:** …" becomes a two-line item with the fact in front of the eye
   const li=x=>{ const m=x.match(/^\*\*오해\s*:?\s*\*\*\s*:?\s*([\s\S]*?)\s*(?:→|->)\s*\*\*사실\s*:?\s*\*\*\s*:?\s*([\s\S]*)$/);
     return m?`<li class="mis"><span class="mis-x"><span class="mis-k">오해</span>${inl(m[1])}</span><span class="mis-o"><span class="mis-k">사실</span>${inl(m[2])}</span></li>`:`<li>${inl(x)}</li>`; };
   const fl=()=>{ if(list){ out.push(list.t==='ol'?`<ol start="${list.start}">`:'<ul>'); out.push(list.items.map(li).join('')); out.push(`</${list.t}>`); list=null; } };
-  const fq=()=>{ if(quote.length){ out.push(`<blockquote>${md(quote.join('\n'))}</blockquote>`); quote=[]; } };
+  const fq=()=>{ if(quote.length){ out.push(`<blockquote>${md(quote.join('\n'),F)}</blockquote>`); quote=[]; } };
   const ft=()=>{ if(table.length){ out.push(tableHTML(table)); table=[]; } };
   const flush=()=>{ fp(); fl(); fq(); ft(); };
   const closeLayer=()=>{ if(layer){ flush(); out.push('</div>'); layer=false; } };
@@ -1282,6 +1310,8 @@ function md(src){
     if((m=l.match(/^(#{1,6})\s+(.*)$/))){
       flush(); closeLayer();
       const txt=m[2].replace(/\s#+$/,'').trim(), lv=Math.min(4,Math.max(2,m[1].length));
+      const rg=lv>=3&&txt.match(/^엄밀\s*·\s*(.+)$/); // 새 꼴: 증명 쪽에만 '엄밀 ·' 꼬리표(PRINCIPLES 2-0의 15번)
+      if(rg){ out.push(`<h${lv}><span class="ly-tag">엄밀</span>${inl(rg[1])}</h${lv}>`); continue; }
       const ly=lv>=3?layerOf(txt):null;
       if(ly){ out.push(`<div class="layer l-${ly.cls}"><p class="ly-h">${ly.parts.map(p=>`<span class="ly">${p}</span>`).join('<span class="ly-eq">=</span>')}</p>`); layer=true; }
       else out.push(`<h${lv}>${inl(txt)}</h${lv}>`);
@@ -1295,7 +1325,13 @@ function md(src){
     if(list&&/^\s{2,}/.test(raw)){ list.items[list.items.length-1]+=' '+l; continue; }
     fl(); fq(); ft(); para.push(l);
   }
-  flush(); closeLayer(); return out.join('');
+  flush(); closeLayer();
+  let h=out.join('');
+  if(top){
+    h=h.replace(/FNREFx(\d+)x/g,(x,i)=>`<sup class="fn-ref">${+i+1}</sup>`);
+    if(F.notes.length) h+=`<div class="fnotes">${F.notes.map((t,i)=>`<p><sup class="fn-ref">${i+1}</sup> ${inl(t)}</p>`).join('')}</div>`;
+  }
+  return h;
 }
 
 /*GRAPH-START*/
@@ -1525,40 +1561,41 @@ ${n.obj.map((o,i)=>`${i+1}. ${o}`).join('\n')}
 [관련된 큰 개념]
 ${n.ideas.map(k=>`- ${IDEAS[k].name}: ${IDEAS[k].line}`).join('\n')}
 
-설명의 층위
-- "원리"에서 각 학습 목표는 아래 세 층으로 설명한다. 각 층은 #### 제목으로 시작한다.
-  #### 직관 — 머릿속에 그림이 그려지는 이해. 일상의 장면이나 비유를 쓰되, 그 비유가 어디까지 맞고 어디서 틀리는지도 밝힌다.
-  #### 통상 — 교과서 수준의 표준 설명. 정확한 정의, 핵심 식, 기호와 단위.
-  #### 엄밀 — 정확한 진술. 전제와 적용 범위, 성립하지 않는 경우, 짧은 유도나 근거, 더 정확한 이론에서 어떻게 고쳐지는지.
-- 두 층 이상이 사실상 같은 내용이면 반복하지 말고 합쳐서 "#### 직관·통상", "#### 통상·엄밀", "#### 직관·통상·엄밀"처럼 하나의 제목으로 쓴다. 억지로 층을 나누지 않는다.
+읽는 사람
+- 초등 산수와 일상어, 앞 단원까지만 아는 어른이다. 문해력은 충분하고 꼼꼼해서 '왜'가 빠지면 넘어가지 못한다.
+- 우선순위는 정확 > 읽힘 > 형식이다. 부딪히면 문장을 더 써서 풀고, 줄여서 맞추지 않는다. 분량 제한은 없다.
 
-뒤 단원의 개념
-- 정확하게 말하려면 학습자가 아직 배우지 않은 뒤 단원의 개념이 필요할 때가 있다. 그 개념을 피하려고 사실을 단순화해 틀리게 말하지 않는다. 뒤 개념을 그대로 쓰되 지금 이해에 필요한 만큼만 한두 문장으로 풀어 주고, 그 개념을 제대로 다루는 단원을 [[id]]로 가리킨다.
-- 근사나 단순화한 모형을 쓸 때는 어디까지 맞는지, 더 정확한 이론에서 어떻게 고쳐지는지 밝히고 그 단원을 [[id]]로 가리킨다.
-- 본문에서 가리킬 수 있는 단원 id: ${NODES.slice().sort(byNo).filter(m=>m.id!==id).map(m=>`${m.id}=${m.t}`).join(', ')}
+정확
+- 확인한 사실만 쓴다. 단순하게 말했으면 어디까지 맞는지 말한다. 비유는 대비가 맞을 때만 쓰고, 실제로 그 셈인 예를 먼저 찾는다.
+- 한정어(빼거나 바꾸면 참인 범위가 달라지는 말: 조건·양·정도·예외)를 지킨다.
+- 정의·성질·약속을 가른다: 그렇게 정한 것인지, 거기서 따라 나오는 것인지 밝힌다.
 
-용어와 정의
-- 용어는 처음 나올 때 **한글**(漢字, English) 꼴로 쓴다. 예: **가속도**(加速度, acceleration), **알짜힘**(net force). 한자어가 아니면 한자를 빼고, 한자는 정확한 표준 자형으로 쓴다.
-- 정의는 짧아도 철저하게 쓴다. 정의 문장 하나만 떼어 읽어도 무엇을 가리키는지, 어떤 조건에서 성립하는지 완결되어야 한다. 그대로 외울 수 있게 한 문장으로 쓰고, 앞뒤 문맥에 기대지 않는다.
-- 한정어를 지킨다. "주로", "대개", "일반적으로", "~일 수 있다", "이상 기체에서", "온도가 일정할 때"처럼 사실이 요구하는 한정어와 조건은 빼지 않는다. 한정어를 빼서 단정하면 틀린 문장이다.
+빠진 계단 없이
+- 셈하거나 추론하는 데 쓰는 말·기호·식·방법은 앞 단원이 가르쳤거나 이 글이 쓰기 전에 가르친다.
+- 정확하게 말하려고 빌리는 뒤 단원의 개념은 필요한 만큼만 풀어 쓰고 [[id|#]]로 가리킨다. 본문에서 가리킬 수 있는 단원 id: ${NODES.slice().sort(byNo).filter(m=>m.id!==id).map(m=>`${m.id}=${m.t}`).join(', ')}
+- 새 말은 쓰기 전에 앞 문장에서 푼다. 괄호는 읽는 법과 짧은 다른 이름에만 쓴다.
 
-형식 규칙
-- 큰 제목은 이 순서 그대로: ## 핵심 질문, ## 원리, ## 예제, ## 흔한 오개념, ## 연결, ## 요약
-- "핵심 질문": 이 질문이 왜 중요한지 2~3문장. 답은 뒤에서 한다.
-- "원리": 학습 목표마다 ### 소제목을 두고, 그 아래에 층 제목(####)을 쓴다.
-- 정의하는 용어는 **굵게** 쓴다.
-- 기호를 처음 쓸 때 뜻과 SI 단위를 밝힌다. 수식은 LaTeX로, 문장 안은 $...$, 따로 보일 때는 한 줄에 $$...$$.
-- "예제": 실제 수치를 넣은 단계별 풀이 1~2개. 정성적인 단원이면 구체적인 상황 분석.
-- "흔한 오개념": 2~3개를 "- **오해:** … → **사실:** …" 형식으로.
-- "연결": 다른 단원을 가리킬 때는 [[id]] 표기를 쓴다. '연결'에서는 아래 목록의 단원을 쓴다(본문에서 뒤 개념을 가리킬 때는 위 전체 목록을 쓴다).
-${related(n).map(m=>`  ${m.id} = ${m.t}`).join('\n')}
-- "요약": 반드시 외워야 할 핵심 4~6개를 글머리표로.
-- 각 학습 목표의 마지막에는 점검 블록을 둔다. 방금 읽은 내용의 핵심(정의나 핵심 관계)을 떠올리게 하는 짧은 질문 하나와 정답을 정확히 이 형식으로 쓴다:
+읽힘
+- 화제 하나씩 쓴다: 그림이나 예 → 이름과 정의 → 까닭과 한계. 화제마다 왜·무엇·어디까지가 다 있게 하되 같은 말은 한 번만 쓴다.
+- 하려는 일을 먼저 말하고 한 단계씩 간다. 이음말(그래서·그런데·즉·다만)과 앞 문장을 받는 말로 흐름을 잇는다.
+- 소리 내어 읽어 한 번에 따라오게, 해라체로 말하듯 쓴다. 영어 문장 틀을 옮긴 번역투를 피한다: 그림·비유와 개념을 'A는 B이다'로 같다고 놓지 말고 동사로 관계를 푼다, 무생물 주어가 사람의 일을 하게 하지 않는다, 화제가 바뀌면 문단을 바꾼다.
+- 그림 없이 글만으로 다 배울 수 있게 쓴다.
+
+형식
+- 큰 제목은 이 순서 그대로: ## 핵심 질문, ## 원리, ## 흔한 오개념, ## 연결, ## 요약
+- "원리": 학습 목표마다 ### 소제목을 두고, 그 안을 화제로 나눈다. 화제마다 "#### 화제 이름"(그 쪽에 무엇이 있는지 말하는 이름. '직관', '통상' 같은 층 이름은 쓰지 않는다). 긴 화제 안에서 생각이 끝나는 자리에는 한 줄 --- 를 둔다.
+- 외울 정의와 식은 > 로 시작하는 줄에 쓴다. 떼어 읽어도 서야 한다(그 말에 무엇이 들고 안 드는지가 그 줄만으로 정해지고, '이', '위의'처럼 밖을 가리키는 말이 없다). 정의하는 용어는 그 줄 안에서 처음 나올 때 **한글**(漢字, English) 꼴로 굵게 쓴다. 한자는 한자어인 부분에만 달고, 한자어가 아니면 **벡터**(vector)처럼 쓴다. 외울 식은 "> $$…$$". 본문이 말로 풀어 가다 그 줄에 닿게 쓰고, 같은 정의를 본문과 > 줄에 두 번 쓰지 않는다. 굵게는 이렇게 정의하는 용어에만 쓴다.
+- 예제(실제 수치를 넣은 단계별 풀이)는 "**예제 n. 제목**"으로 시작해, 그 방법을 가르친 화제 바로 뒤에 둔다.
+- 화제 두셋마다, 그리고 각 목표의 끝에 점검 블록을 둔다. 방금 읽은 핵심을 떠올리게 하는 짧은 질문 하나와 정답을 정확히 이 형식으로 쓴다:
   #### 점검
   **Q.** 질문 한 문장
   **A.** 정답 한두 문장
-- 분량 제한은 없다. 알아듣는 데 필요한 만큼 쓰고, 줄이려고 이음말·풀이·까닭을 빼지 않는다. 같은 말을 되풀이하지도 않는다.
-- 한국어로 막힘없이 읽히게 쓴다. 영어 문장 틀을 옮긴 번역투를 피한다: 비유·그림과 개념을 'A는 B이다'로 같다고 놓지 말고 동사로 관계를 푼다('이 그림을 식으로 옮긴 것이 분배 법칙이다'), 무생물 주어가 사람의 일을 하게 하지 않는다, 이음말(그래서·그런데·즉·다만)과 앞 문장을 받는 말로 흐름을 잇는다, 화제가 바뀌면 문단을 바꾼다.
+- 기호를 처음 쓸 때 뜻과 SI 단위를 밝힌다. 수식은 LaTeX로, 문장 안은 $...$, 따로 보일 때는 한 줄에 $$...$$.
+- 지워도 배우는 데 지장 없는 곁말(어원, 다른 표기, 다른 단원 가리킴)은 문장 끝에 ^[…] 각주로 단다. 알아야 하는 것은 각주로 보내지 않는다.
+- "흔한 오개념": "- **오해:** … → **사실:** …" 형식으로.
+- "연결": 다른 단원을 [[id]]로 가리킨다. '연결'에서는 아래 목록의 단원만 쓴다.
+${related(n).map(m=>`  ${m.id} = ${m.t}`).join('\n')}
+- "요약": 핵심 질문의 답부터, 꼭 외울 것을 글머리표로.
 - 인사말·맺음말·이모지 없이 첫 제목부터 바로 시작한다.`;
 }
 function cardsPrompt(id, lesson){
@@ -1969,6 +2006,7 @@ function chunkLesson(src){
     if(inMath){ cur.body.push(raw); if(l.includes('$$')||l.includes('\\]')) inMath=false; continue; }
     if(inFence){ cur.body.push(raw); if(l.startsWith('```')) inFence=false; continue; }
     if(l.startsWith('```')&&cur?.type!=='check'){ if(!cur) start('text'); inFence=true; cur.body.push(raw); continue; }
+    if(/^-{3,}$/.test(l)&&cur?.type==='text'){ start('text'); continue; } // 새 꼴: 쓰는 사람이 정한 쪽 나눔(PRINCIPLES 2-0의 15번)
     const m=l.match(/^(#{1,6})\s+(.*)$/);
     if(m){
       const lv=m[1].length, txt=m[2].replace(/\s#+$/,'').trim();
@@ -2091,7 +2129,19 @@ function sentences(text){ // prose only: no headings, display math or tables; sp
   const x=prose.slice(st).trim(); if(x) out.push(x);
   return out;
 }
-function recapHTML(chunks, grp){
+function recapHTML(chunks, grp, at){
+  // 새 꼴(> 줄이 있는 설명, PRINCIPLES 2-0의 16번): 바로 앞 점검 뒤부터 이 점검까지의 > 묶음을 다시 보인다
+  const G=chunks.map((x,j)=>({x,j})).filter(o=>o.x.grp===grp);
+  if(at!=null&&G.some(o=>o.x.type==='text'&&/^\s*>/m.test(o.x.body))){
+    let from=-1; for(const o of G) if(o.x.type==='check'&&o.j<at) from=o.j;
+    const blocks=[];
+    for(const o of G){ if(o.j<=from||o.j>=at||o.x.type!=='text') continue;
+      let cur=null;
+      for(const line of o.x.body.split('\n')){ if(/^\s*>/.test(line)) (cur ||= []).push(line.replace(/^\s*>\s?/,'')); else if(cur){ blocks.push(cur.join('\n')); cur=null; } }
+      if(cur) blocks.push(cur.join('\n')); }
+    const bs=[...new Set(blocks.map(b=>b.trim()).filter(Boolean))];
+    return bs.length?`<div class="md recap"><p class="eyebrow">여기까지 외울 것</p>${bs.map(b=>`<div class="recap-b"><blockquote>${md(b)}</blockquote></div>`).join('')}</div>`:'';
+  }
   const bodies=chunks.filter(x=>x.grp===grp&&x.type==='text').map(x=>x.body);
   // 정의 문장을 모두(26.11.27 플레이테스트: 8개에서 잘려 음수·지수·과학적 표기법 정의가 빠졌다). '그래서 …'처럼 앞 문장에 기대는 정의는 앞 문장과 함께
   const ss=bodies.flatMap(sentences), lead=/^(그래서|따라서|그러므로|이때|곧|즉|이것을|이를|이런|이)\s/;
@@ -2158,36 +2208,41 @@ function cfFormula(t){ // 키보드로 칠 수 있는 꼴. 두 글자 넘는 지
     .replace(/[Ͱ-Ͽ]/g,c=>GREEK_NAME[c]?`\u0001${GREEK_NAME[c]}\u0001`:c).replace(/(?<=[A-Za-z0-9])\u0001|\u0001(?=[A-Za-z0-9])/g,' ').replace(/\u0001/g,'').replace(/\s+/g,' ').replace(/\(\s+/g,'(').replace(/\s+\)/g,')').trim();
   return g&&!/\\[A-Za-z]|[{}]/.test(g)&&g.length<=150?g:'';
 }
-function cfItems(body){
+// 새 꼴(설명에 > 줄이 있다, PRINCIPLES 2-0의 16번): 빈칸은 > 줄 안의 굵은 용어·식과 짧은 {{…}}뿐이다. 그냥 줄 식은 빈칸이 아니다.
+const cfNF=sv=>/^\s*>/m.test(sv?.lesson?.md||'');
+function cfItems(body, nf){
   const fences=[]; let src=String(body||'').replace(/```[\s\S]*?```/g,m=>{ fences.push(m); return `CFFENCEx${fences.length-1}x`; });
   const items=[], groups=[];
-  src=src.replace(/(^|\n)[ \t]*\$\$([\s\S]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{
+  const addF=t=>{
     const tt=t.trim(), parts=cfSplit(tt).map(x=>({x, g:cfFormula(x)}));
-    if(!parts.length||parts.some(q=>!q.g||!typeKey(q.g))) return m;
+    if(!parts.length||parts.some(q=>!q.g||!typeKey(q.g))) return null;
     const gi=groups.length, idx=[];
     parts.forEach(q=>{ idx.push(items.length); items.push({type:'f', tex:q.x, guide:q.g, k:'f:'+cfHash(q.x), kw:'f:'+cfHash(tt)}); });
-    groups.push({tex:tt, idx}); return `${pre}\n\n${CF_GTOK(gi)}\n\n`; });
+    groups.push({tex:tt, idx}); return CF_GTOK(gi); };
+  if(nf) src=src.replace(/(^|\n)[ \t]*>[ \t]*\$\$([^\n]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{ const tok=addF(t); return tok?`${pre}>\n> ${tok}\n>`:m; });
+  else src=src.replace(/(^|\n)[ \t]*\$\$([\s\S]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{ const tok=addF(t); return tok?`${pre}\n\n${tok}\n\n`:m; });
   src=src.replace(CF_RE,(m,x)=>{
     if(x===undefined) return m;
     const guide=deTex(x.replace(/\$([^$\n]+)\$/g,(mm,t)=>cfFormula(t)||texPlain(t)).replace(/\*\*/g,'')).replace(/≈/g,'~=').replace(/…/g,'...').replace(/²/g,'^2').replace(/³/g,'^3').replace(/±/g,'+-').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/≠/g,'!=').replace(/[→⟶]/g,'->').replace(/−/g,'-').replace(/×/g,'*').replace(/\s+/g,' ').trim();
     if(!typeKey(guide)||(x.replace(/\$[^$\n]+\$/g,'').match(/[가-힣]/g)||[]).length>CF_PMAX) return x;
     const i=items.length; items.push({type:'p', src:x, guide, k:'p:'+cfHash(x)}); return CF_TOK(i); });
-  const seen=new Set();
-  src=src.replace(new RegExp(TERM_RE.source,'g'),(m,term,gl)=>{
+  const seen=new Set(), termRe=new RegExp(TERM_RE.source,'g');
+  const termFn=(m,term,gl)=>{
     if(seen.has(term)) return m; seen.add(term);
     const en=gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[A-Za-z]/.test(x)&&!/[㐀-鿿가-힣]/.test(x)).join(' ');
     const guide=[deTex(term), en].filter(Boolean).join(' ');
     if(!typeKey(guide)) return m;
-    const i=items.length; items.push({type:'t', src:m, gl, guide, k:'t:'+term}); return CF_TOK(i); });
+    const i=items.length; items.push({type:'t', src:m, gl, guide, k:'t:'+term}); return CF_TOK(i); };
+  src=nf?src.split('\n').map(l=>/^\s*>/.test(l)?l.replace(termRe,termFn):l).join('\n'):src.replace(termRe,termFn);
   src=src.replace(/CFFENCEx(\d+)x/g,(m,i)=>fences[+i]);
   return {src, items, groups};
 }
 const cfDone=(u,k)=>!!rec(u)?.cf?.[k];
 // 한 줄을 통째로 따라 쓴 기록(나누기 전 판)이 있으면 그 줄의 식은 다 쓴 것으로 본다.
 const cfItDone=(u,it)=>cfDone(u,it.k)||(!!it.kw&&cfDone(u,it.kw));
-const cfLeft=(sv,c)=>cfItems(c.body).items.filter(it=>!cfItDone(sv.id,it));
+const cfLeft=(sv,c)=>cfItems(c.body,cfNF(sv)).items.filter(it=>!cfItDone(sv.id,it));
 function cfHTML(sv, c, live){
-  const {src, items, groups}=cfItems(c.body); if(!items.length) return md(c.body);
+  const {src, items, groups}=cfItems(c.body,cfNF(sv)); if(!items.length) return md(c.body);
   const R=sv.reader; let h=md(src);
   const inp=it=>{
     const w=Math.min(96,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
@@ -2264,7 +2319,7 @@ function readerHTML(sv){
     body=`<div class="rd-check"><p class="eyebrow">점검${c.sub?` · ${esc(c.sub)}`:''}</p><div class="cb-q md">${md(c.q)}</div>${
       !R.revealed&&!done
       ?`<form id="chk-form" class="reveal-form"><label class="sr" for="chk-typed">떠올린 답</label><input id="chk-typed" autocomplete="off" placeholder="떠올린 답을 적어 봐 (안 적어도 돼)" value="${esc(R.typed)}"><div><button type="submit" class="btn">답 보기</button></div></form>`
-      :`<div class="cb-a md">${md(c.a)}</div>${R.typed&&!done?`<p class="cb-typed">내가 적은 답: ${esc(R.typed)}</p>`:''}${recapHTML(chunks,c.grp)}${done?'<p class="hint">이미 통과한 점검이야.</p>':'<div class="row"><button type="button" class="btn primary" data-act="rd-ok">맞혔어</button><button type="button" class="btn" data-act="rd-again">틀렸어 · 이 부분 다시 읽기</button></div>'}`}</div>`;
+      :`<div class="cb-a md">${md(c.a)}</div>${R.typed&&!done?`<p class="cb-typed">내가 적은 답: ${esc(R.typed)}</p>`:''}${recapHTML(chunks,c.grp,R.i)}${done?'<p class="hint">이미 통과한 점검이야.</p>':'<div class="row"><button type="button" class="btn primary" data-act="rd-ok">맞혔어</button><button type="button" class="btn" data-act="rd-again">틀렸어 · 이 부분 다시 읽기</button></div>'}`}</div>`;
   } else {
     /* 학습 목표는 옆 칸 대신 그 절의 첫 장 제목 아래에 녹인다(26.11.18 영신 "학습목표는 녹이고"). */
     const ok=c.sec==='원리'&&c.sub&&(R.i===0||chunks[R.i-1].sub!==c.sub)?objOfChunk(chunks)(c):0, ot=ok&&NODE[sv.id]?.obj[ok-1];

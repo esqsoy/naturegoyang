@@ -21,7 +21,35 @@ REPO = os.path.dirname(HERE)
 APP = os.path.join(REPO, 'app', 'naturegoyang.html')
 CONTENT = os.path.join(REPO, 'content')
 
-SECTIONS = ['핵심 질문', '원리', '예제', '흔한 오개념', '연결', '요약']
+SECTIONS = ['핵심 질문', '원리', '예제', '흔한 오개념', '연결', '요약']  # 옛 꼴
+SECTIONS_NEW = ['핵심 질문', '원리', '흔한 오개념', '연결', '요약']  # 새 꼴(26.11.28 PRINCIPLES 2-0): 예제는 목표 안
+QUOTE = re.compile(r'^\s*>', re.M)
+
+
+def is_new(md):
+    """새 꼴: 줄 첫머리에 > 가 하나라도 있다(content/README)."""
+    return bool(QUOTE.search(FENCE.sub('', md)))
+
+
+def fn_check(md, errs):
+    """각주 ^[…] 짝: 수식·그림 블록 밖에서 열고 같은 줄에서 닫는다."""
+    for k, l in enumerate(FENCE.sub(lambda m: '\n' * m.group(0).count('\n'), md).split('\n'), 1):
+        t = re.sub(r'\$[^$\n]+\$', '', l)
+        i = t.find('^[')
+        while i >= 0:
+            d, j = 0, i + 1
+            while j < len(t):
+                if t[j] == '[':
+                    d += 1
+                elif t[j] == ']':
+                    d -= 1
+                    if not d:
+                        break
+                j += 1
+            if j >= len(t):
+                errs.append(f'{k}줄: 각주 ^[ 가 같은 줄에서 닫히지 않는다')
+                break
+            i = t.find('^[', j)
 LAYERS = {'직관', '통상', '엄밀', '직관·통상', '통상·엄밀', '직관·엄밀', '직관·통상·엄밀'}
 KINDS = ['정의', '기호', '법칙', '상수', '분류', '사실', '용어']
 LINK = re.compile(r'\[\[([a-z]+-[a-z]+)(?:\|[^\]]*)?\]\]')
@@ -300,10 +328,19 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     for k, l in enumerate(lines):  # 셸 here-doc이 \t·\a·\v를 제어 문자로 바꾼 일이 있었다(26.11.18, $\tfrac$ → TAB)
         if re.search(r'[\x00-\x08\x09\x0b-\x1f\x7f]', l):
             errs.append(f'{k + 1}줄: 제어 문자(TAB 등)가 있다. 수식의 \\t·\\a·\\v가 바뀐 것인지 본다')
+    new = is_new(md)
     h2 = [(i, l[3:].strip()) for i, l in enumerate(lines) if re.match(r'^## ', l)]
     names = [t for _, t in h2]
-    if names != SECTIONS:
-        errs.append(f'큰 제목 순서가 다르다: {names}')
+    if names != (SECTIONS_NEW if new else SECTIONS):
+        errs.append(f'큰 제목 순서가 다르다: {names}' + (' (새 꼴: 예제는 목표 안)' if new else ''))
+    info.append('새 꼴' if new else '옛 꼴')
+    fn_check(md, errs)
+    if new:
+        for k, l in enumerate(lines, 1):
+            if re.search(r'\{목표\s*\d+\}', l):
+                errs.append(f'{k}줄: 새 꼴에서는 {{목표 k}}를 쓰지 않는다(예제는 그 화제 뒤에)')
+            if not l.lstrip().startswith('>') and TERM1.search(l) and not l.lstrip().startswith('- **오해'):
+                warns.append(f'{k}줄: 굵은 용어가 > 정의 줄 밖에 있다 ({TERM1.search(l).group(1)})')
     check_graphs(md, errs)
     body = FENCE.sub('', md)
     for k, l in enumerate(body.split('\n')):
@@ -324,6 +361,15 @@ def check_lesson(md, n, rel, num, errs, warns, info):
         if re.match(r'^#{2,4} ', l):
             head = f'{k}줄 ' + l.lstrip('#').strip()
             continue
+        if new and not l.lstrip().startswith('>'):
+            for m in CF_RE.finditer(l):
+                if m.group(1) is not None and cf_short(m.group(1)):
+                    cnt[head] = cnt.get(head, 0) + 1
+                elif m.group(1) is not None:
+                    dropped += 1
+            continue
+        if new:
+            l = re.sub(r'^\s*>\s?', '', l)
         fm = FORM1.match(l)
         if fm:
             cnt[head] = cnt.get(head, 0) + len(cf_split(fm.group(1).strip()))
@@ -349,7 +395,7 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     # 원리 블록
     try:
         a = next(i for i, t in h2 if t == '원리')
-        b = next(i for i, t in h2 if t == '예제')
+        b = next(i for i, t in h2 if t == ('흔한 오개념' if new else '예제'))
     except StopIteration:
         return
     body = lines[a + 1:b]
@@ -362,6 +408,22 @@ def check_lesson(md, n, rel, num, errs, warns, info):
         title = blk[0][4:].strip()
         h4 = [(j, l[5:].strip()) for j, l in enumerate(blk) if l.startswith('#### ')]
         lay = [t for _, t in h4 if not t.startswith('점검')]
+        if new:
+            bad = [t for t in lay if t in LAYERS]
+            if bad:
+                errs.append(f'"{title}": 새 꼴의 #### 는 화제 이름이다(층 이름 {bad})')
+            if not any(l.lstrip().startswith('>') for l in blk):
+                warns.append(f'"{title}": 외울 > 줄이 없다')
+            for j, (pos, t) in enumerate(h4):
+                if not t.startswith('점검'):
+                    continue
+                end = h4[j + 1][0] if j + 1 < len(h4) else len(blk)
+                chk = '\n'.join(blk[pos + 1:end])
+                if not re.search(r'^\*\*Q\.\*\*\s*\S', chk, re.M) or not re.search(r'^\*\*A\.\*\*\s*\S', chk, re.M):
+                    errs.append(f'"{title}" 점검: **Q.**/**A.** 줄이 없다')
+            if not h4 or not h4[-1][1].startswith('점검'):
+                errs.append(f'"{title}": 목표의 마지막이 점검이 아니다')
+            continue
         bad = [t for t in lay if t not in LAYERS]
         if bad:
             errs.append(f'"{title}": 층 제목이 규칙 밖이다 {bad}')
@@ -581,11 +643,24 @@ def cf_cards(uid):
     grams = lambda t: {t[i:i + 2] for i in range(len(t) - 1)}
     cg = {k: grams(v) for k, v in ctext.items()}
     n = {'있음': 0, '비슷': 0, '없음': 0}
-    for ln, l in enumerate(md.split('\n'), 1):
-        for m in CF_RE.finditer(l):
-            x = m.group(1)
-            if x is None or cf_short(x):
-                continue
+    if is_new(md):  # 새 꼴: > 묶음 하나가 외울 것 하나
+        blocks, cur = [], None
+        for ln, l in enumerate(md.split('\n'), 1):
+            if l.lstrip().startswith('>'):
+                if cur is None:
+                    cur = [ln, []]
+                cur[1].append(re.sub(r'^\s*>\s?', '', l))
+            elif cur is not None:
+                blocks.append(cur)
+                cur = None
+        if cur is not None:
+            blocks.append(cur)
+        targets = [(ln, ' '.join(b).strip()) for ln, b in blocks if ' '.join(b).strip()]
+    else:
+        targets = [(ln, m.group(1)) for ln, l in enumerate(md.split('\n'), 1) for m in CF_RE.finditer(l)
+                   if m.group(1) is not None and not cf_short(m.group(1))]
+    for ln, x in targets:
+        if True:
             t = cf_norm(x)
             hit = next((k for k, v in ctext.items() if t and t in v), None)
             if hit:
