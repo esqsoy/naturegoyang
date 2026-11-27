@@ -34,6 +34,39 @@ titles = {}
 CF_RE = re.compile(r'\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\{\{((?:\$[^$\n]+\$|[^$\n{}])*?)\}\}')
 
 
+CF_PMAX = 6  # 앱 CF_PMAX와 같게: 표시 가운데 수식 밖 한글이 이만큼 이하인 것만 빈칸(26.11.27 회의)
+TERM1 = re.compile(r'\*\*([^*\n]+)\*\*\(([^)\n]+)\)')
+FORM1 = re.compile(r'^[ \t]*\$\$([\s\S]+?)\$\$[ \t]*$')
+SPLIT_AT = re.compile(r',?\s*\\qquad(?![a-zA-Z])|,\s*\\quad(?![a-zA-Z])')
+
+
+def cf_split(t):
+    """앱 cfSplit과 같게: 줄 식을 바깥 , \\quad·\\qquad에서 식마다 나눈다."""
+    out, d, cur, i = [], 0, '', 0
+    while i < len(t):
+        ch = t[i]
+        if ch == '{':
+            d += 1
+        elif ch == '}':
+            d -= 1
+        if d == 0:
+            m = SPLIT_AT.match(t, i)
+            if m:
+                out.append(cur)
+                cur = ''
+                i = m.end()
+                continue
+        cur += ch
+        i += 1
+    out.append(cur)
+    return [x for x in (re.sub(r',\s*$', '', x.strip()).strip() for x in out) if x]
+
+
+def cf_short(x):
+    """표시 {{x}}가 앱에서 빈칸이 되는가(수식만이거나 수식 밖 한글 CF_PMAX자 이하)."""
+    return len(re.findall('[가-힣]', re.sub(r'\$[^$\n]+\$', '', x))) <= CF_PMAX
+
+
 def cf_strip(s):
     """따라 쓸 자리 표시 {{…}}의 괄호만 지운다(수식 안의 }}는 그대로)."""
     return CF_RE.sub(lambda m: m.group(0) if m.group(1) is None else m.group(1), s)
@@ -285,6 +318,31 @@ def check_lesson(md, n, rel, num, errs, warns, info):
                 errs.append(f'따라 쓸 자리 {{{{{x}}}}}: 굵은 글씨·단원 가리킴을 안에 두지 않는다')
             if len(shown(x)) > 70:
                 warns.append(f'따라 쓸 자리 {{{{{x[:30]}…}}}}: {len(shown(x))}자 (70자 안으로)')
+    # 층(### 또는 ####)마다 앱이 내는 빈칸: 굵은 용어(처음 한 번), 줄 식 조각, 짧은 표시. 어림 8 안(26.11.27 회의)
+    seen, cnt, head, dropped = set(), {}, '', 0
+    for k, l in enumerate(FENCE.sub(lambda m: '\n' * m.group(0).count('\n'), md).split('\n'), 1):
+        if re.match(r'^#{2,4} ', l):
+            head = f'{k}줄 ' + l.lstrip('#').strip()
+            continue
+        fm = FORM1.match(l)
+        if fm:
+            cnt[head] = cnt.get(head, 0) + len(cf_split(fm.group(1).strip()))
+            continue
+        for m in CF_RE.finditer(l):
+            if m.group(1) is not None:
+                if cf_short(m.group(1)):
+                    cnt[head] = cnt.get(head, 0) + 1
+                else:
+                    dropped += 1
+        for m in TERM1.finditer(l):
+            if m.group(1) not in seen:
+                seen.add(m.group(1))
+                cnt[head] = cnt.get(head, 0) + 1
+    for h, c in cnt.items():
+        if c > 8:
+            warns.append(f'{h} 층 빈칸 {c} (어림 8 안. 용어·식이 많은 층이면 둔다)')
+    if dropped:
+        info.append(f'치지 않는 표시 {dropped}(--cf-cards로 카드 대조)')
     nfig = len(re.findall(r'^```graph', md, re.M))
     total = len(shown(FENCE.sub('', md)))
     info.append(f'설명 {total}자' + (f', 그림 {nfig}' if nfig else ''))
@@ -513,6 +571,41 @@ def check_unit(uid, ctx):
     return 1 if errs else 0
 
 
+def cf_norm(x):
+    x = re.sub(r'\$[^$\n]+\$', '', x)
+    return re.sub(r'[^가-힣A-Za-z0-9]', '', x)
+
+
+def cf_cards(uid):
+    """빈칸에서 빠진 표시(수식 밖 한글이 CF_PMAX자 넘는 구)마다 그 글이 카드에 있는지 본다(26.11.27 회의).
+    '있음'은 카드 글에 그대로 들어 있는 것, '비슷'은 두 글자 묶음이 반 넘게 겹치는 카드. 나머지는 이솝이 판정해 check.md에 적는다."""
+    d = os.path.join(CONTENT, uid)
+    md = FENCE.sub('', open(os.path.join(d, 'lesson.md'), encoding='utf-8').read())
+    cards = [c for c in json.load(open(os.path.join(d, 'cards.json'), encoding='utf-8')) if not c.get('x')]
+    ctext = {c['id']: cf_norm(' '.join(str(c.get(f, '')) for f in ('q', 'a', 't', 'h'))) for c in cards}
+    grams = lambda t: {t[i:i + 2] for i in range(len(t) - 1)}
+    cg = {k: grams(v) for k, v in ctext.items()}
+    n = {'있음': 0, '비슷': 0, '없음': 0}
+    for ln, l in enumerate(md.split('\n'), 1):
+        for m in CF_RE.finditer(l):
+            x = m.group(1)
+            if x is None or cf_short(x):
+                continue
+            t = cf_norm(x)
+            hit = next((k for k, v in ctext.items() if t and t in v), None)
+            if hit:
+                kind, ref = '있음', hit
+            else:
+                g = grams(t)
+                best = max(cg, key=lambda k: len(g & cg[k]) / (len(g) or 1)) if cg else None
+                r = len(g & cg[best]) / (len(g) or 1) if best else 0
+                kind, ref = ('비슷', f'{best} {r:.0%}') if r >= 0.5 else ('없음', '')
+            n[kind] += 1
+            print(f'{kind}\t{ln}줄\t{ref}\t{x}')
+    print(f'# {uid}: 있음 {n["있음"]}, 비슷 {n["비슷"]}, 없음 {n["없음"]}')
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('unit', nargs='?')
@@ -520,6 +613,7 @@ def main():
     ap.add_argument('--related', action='store_true')
     ap.add_argument('--upload', metavar='ID')
     ap.add_argument('--out')
+    ap.add_argument('--cf-cards', metavar='ID', help='치지 않는 표시(정의·규칙 구)를 카드와 대조해 목록으로')
     o = ap.parse_args()
     ctx = load_nodes()
     nodes, by, unlocks, num = ctx
@@ -527,6 +621,8 @@ def main():
         for x in related(o.unit, nodes, by, unlocks):
             print(f'{x} = {num.get(x, "?")} {by[x]["t"]}')
         return 0
+    if o.cf_cards:
+        return cf_cards(o.cf_cards)
     if o.upload:
         if not o.out:
             print('--out 폴더를 준다', file=sys.stderr)

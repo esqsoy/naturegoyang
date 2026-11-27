@@ -306,6 +306,9 @@ legend{font:700 14.5px/1.3 var(--font-ui); margin-bottom:10px; padding:0}
 .md input.cf-in::placeholder{color:var(--ink-3); opacity:.8}
 .md input.cf-in:focus{outline:none; border-bottom-color:var(--ink); background:color-mix(in srgb,var(--dc,var(--ink)) 13%,var(--surface))}
 .cf-f{margin:1.1em 0; display:grid; gap:4px}
+.cf-g{margin:1.1em 0; display:flex; flex-wrap:wrap; align-items:center; gap:.4em 1.6em}
+.cf-g>.cf-f{margin:0}
+.md .cf-gd{background:var(--surface-2); border-radius:8px; padding:.3em .8em; overflow-x:auto}
 .md input.cf-in.cf-bad{border-bottom-color:var(--bad); background:color-mix(in srgb,var(--bad) 9%,var(--surface))}
 .md .cf-miss{font:500 12.5px/1.4 var(--font-ui); color:var(--bad); margin-left:.4em; white-space:normal}
 .md .cf-f .cf-miss{margin-left:0}
@@ -2107,7 +2110,21 @@ function ensureReader(sv){
    처음 읽는 장에서 중요 표현 — 굵게 정의한 용어(한글과 영어 이름, 한자는 옆에 보이기만)와 따로 줄을 잡은 식(키보드 꼴) — 이 본문
    그 자리에 흐린 안내 글씨가 든 빈칸으로 나온다. 안내를 따라 치면 그 자리가 본래 글(굵은 용어, 조판한 식)로 채워진다.
    다 채워야 '다음'이 켜진다. 채운 것은 진도 cf에 남는다. 다시 읽는 장은 채워진 채로 보인다. */
-const CF_TOK=i=>`CFTOKx${i}x`;
+const CF_TOK=i=>`CFTOKx${i}x`, CF_GTOK=i=>`CFGTOKx${i}x`;
+// 표시 {{…}} 가운데 빈칸이 되는 것: 수식만이거나 수식 밖 한글이 이만큼 이하(26.11.27 회의: 구·문장은 치지 않는다).
+const CF_PMAX=6;
+// 줄 식 한 줄에 식이 여럿이면(, \quad 또는 \qquad로 나뉜 것) 식마다 칸 하나. 등호로 이은 사슬은 나누지 않는다.
+function cfSplit(t){
+  const out=[]; let d=0, cur='', i=0;
+  while(i<t.length){
+    const ch=t[i];
+    if(ch==='{') d++; else if(ch==='}') d--;
+    if(d===0){ const m=t.slice(i).match(/^,?\s*\\qquad(?![a-zA-Z])|^,\s*\\quad(?![a-zA-Z])/); if(m){ out.push(cur); cur=''; i+=m[0].length; continue; } }
+    cur+=ch; i++;
+  }
+  out.push(cur);
+  return out.map(x=>x.trim().replace(/,\s*$/,'').trim()).filter(Boolean);
+}
 function cfHash(x){ let h=0; for(const ch of String(x)) h=(h*31+ch.codePointAt(0))|0; return (h>>>0).toString(36); }
 function texArg(s,i){ // 중괄호 묶음, 명령 하나, 또는 글자 하나
   while(s[i]===' ') i++;
@@ -2136,14 +2153,17 @@ function cfFormula(t){ // 키보드로 칠 수 있는 꼴. 두 글자 넘는 지
 }
 function cfItems(body){
   const fences=[]; let src=String(body||'').replace(/```[\s\S]*?```/g,m=>{ fences.push(m); return `CFFENCEx${fences.length-1}x`; });
-  const items=[];
+  const items=[], groups=[];
   src=src.replace(/(^|\n)[ \t]*\$\$([\s\S]+?)\$\$[ \t]*(?=\n|$)/g,(m,pre,t)=>{
-    const g=cfFormula(t.trim()); if(!g||!typeKey(g)) return m;
-    const i=items.length; items.push({type:'f', tex:t.trim(), guide:g, k:'f:'+cfHash(t.trim())}); return `${pre}\n\n${CF_TOK(i)}\n\n`; });
+    const tt=t.trim(), parts=cfSplit(tt).map(x=>({x, g:cfFormula(x)}));
+    if(!parts.length||parts.some(q=>!q.g||!typeKey(q.g))) return m;
+    const gi=groups.length, idx=[];
+    parts.forEach(q=>{ idx.push(items.length); items.push({type:'f', tex:q.x, guide:q.g, k:'f:'+cfHash(q.x), kw:'f:'+cfHash(tt)}); });
+    groups.push({tex:tt, idx}); return `${pre}\n\n${CF_GTOK(gi)}\n\n`; });
   src=src.replace(CF_RE,(m,x)=>{
     if(x===undefined) return m;
     const guide=deTex(x.replace(/\$([^$\n]+)\$/g,(mm,t)=>cfFormula(t)||texPlain(t)).replace(/\*\*/g,'')).replace(/≈/g,'~=').replace(/…/g,'...').replace(/²/g,'^2').replace(/³/g,'^3').replace(/±/g,'+-').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/≠/g,'!=').replace(/[→⟶]/g,'->').replace(/−/g,'-').replace(/×/g,'*').replace(/\s+/g,' ').trim();
-    if(!typeKey(guide)) return x;
+    if(!typeKey(guide)||(x.replace(/\$[^$\n]+\$/g,'').match(/[가-힣]/g)||[]).length>CF_PMAX) return x;
     const i=items.length; items.push({type:'p', src:x, guide, k:'p:'+cfHash(x)}); return CF_TOK(i); });
   const seen=new Set();
   src=src.replace(new RegExp(TERM_RE.source,'g'),(m,term,gl)=>{
@@ -2153,24 +2173,35 @@ function cfItems(body){
     if(!typeKey(guide)) return m;
     const i=items.length; items.push({type:'t', src:m, gl, guide, k:'t:'+term}); return CF_TOK(i); });
   src=src.replace(/CFFENCEx(\d+)x/g,(m,i)=>fences[+i]);
-  return {src, items};
+  return {src, items, groups};
 }
 const cfDone=(u,k)=>!!rec(u)?.cf?.[k];
-const cfLeft=(sv,c)=>cfItems(c.body).items.filter(it=>!cfDone(sv.id,it.k));
+// 한 줄을 통째로 따라 쓴 기록(나누기 전 판)이 있으면 그 줄의 식은 다 쓴 것으로 본다.
+const cfItDone=(u,it)=>cfDone(u,it.k)||(!!it.kw&&cfDone(u,it.kw));
+const cfLeft=(sv,c)=>cfItems(c.body).items.filter(it=>!cfItDone(sv.id,it));
 function cfHTML(sv, c, live){
-  const {src, items}=cfItems(c.body); if(!items.length) return md(c.body);
+  const {src, items, groups}=cfItems(c.body); if(!items.length) return md(c.body);
   const R=sv.reader; let h=md(src);
+  const inp=it=>{
+    const w=Math.min(96,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
+    return `<input class="cf-in" data-k="${esc(it.k)}" data-key="${esc(it.guide)}" placeholder="${esc(it.guide)}" value="${esc(R?.cfDraft?.[it.k]||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${w}ch" aria-label="따라 쓰기: ${esc(it.guide)}">`;
+  };
+  groups.forEach((g,gi)=>{
+    const tok=CF_GTOK(gi), its=g.idx.map(i=>items[i]);
+    const rep=(!live||its.every(it=>cfItDone(sv.id,it)))?`<div class="math-block">${tex(g.tex,true)}</div>`
+      :`<div class="cf-g">${its.map(it=>cfItDone(sv.id,it)?`<div class="cf-gd">${tex(it.tex,true)}</div>`:`<div class="cf cf-f">${inp(it)}${typeHint(it.guide)}</div>`).join('')}</div>`;
+    h=h.replace(new RegExp(`<p>\\s*${tok}\\s*</p>`),()=>rep).replace(tok,()=>rep);
+  });
   items.forEach((it,i)=>{
+    if(it.type==='f') return;
     const tok=CF_TOK(i);
     let rep;
-    if(!live||cfDone(sv.id,it.k)) rep=it.type==='f'?`<div class="math-block">${tex(it.tex,true)}</div>`:inl(it.src);
+    if(!live||cfItDone(sv.id,it)) rep=inl(it.src);
     else{
-      const w=Math.min(96,[...it.guide].reduce((n,ch)=>n+(/[ᄀ-ᇿ㄰-㆏가-힯㐀-鿿]/.test(ch)?2:1),0)+2);
-      const inp=`<input class="cf-in" data-k="${esc(it.k)}" data-key="${esc(it.guide)}" placeholder="${esc(it.guide)}" value="${esc(R?.cfDraft?.[it.k]||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${w}ch" aria-label="따라 쓰기: ${esc(it.guide)}">`;
       const hj=it.type==='t'?it.gl.split(/[,，]/).map(x=>x.trim()).filter(x=>/[㐀-鿿]/.test(x)).join(', '):'';
-      rep=it.type==='f'?`<div class="cf cf-f">${inp}${typeHint(it.guide)}</div>`:`<span class="cf">${inp}</span>${hj?`<span class="gloss">(${esc(hj)})</span>`:''}`;
+      rep=`<span class="cf">${inp(it)}</span>${hj?`<span class="gloss">(${esc(hj)})</span>`:''}`;
     }
-    h=it.type==='f'?h.replace(new RegExp(`<p>\\s*${tok}\\s*</p>`),()=>rep).replace(tok,()=>rep):h.replace(tok,()=>rep);
+    h=h.replace(tok,()=>rep);
   });
   return h;
 }
