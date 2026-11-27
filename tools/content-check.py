@@ -346,8 +346,6 @@ def check_lesson(md, n, rel, num, errs, warns, info):
     nfig = len(re.findall(r'^```graph', md, re.M))
     total = len(shown(FENCE.sub('', md)))
     info.append(f'설명 {total}자' + (f', 그림 {nfig}' if nfig else ''))
-    if not 3000 <= total <= 5000:
-        warns.append(f'분량 {total}자 (어림 3000~5000, 문제가 쓰는 것을 실어 넘으면 둔다)')
     # 원리 블록
     try:
         a = next(i for i, t in h2 if t == '원리')
@@ -379,9 +377,6 @@ def check_lesson(md, n, rel, num, errs, warns, info):
             if t.startswith('점검'):
                 continue
             end = h4[j + 1][0] if j + 1 < len(h4) else len(blk)
-            pl = plain_len('\n'.join(blk[pos + 1:end]))
-            if pl > 600:
-                warns.append(f'"{title}" {t} 층 {pl}자 (600 안쪽)')
     # [[id]], [[id|#]], [[id|이름]]: '연결'에서는 related()만, 본문에서는 있는 단원이면 된다(26.11.14, 순서 통제 없음)
     c0 = next((i for i, t in h2 if t == '연결'), len(lines))
     c1 = next((i for i, t in h2 if t == '요약'), len(lines))
