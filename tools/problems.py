@@ -186,7 +186,8 @@ def apply_noans(probs, warn):
                         hit = True
                         if r[2] <= n - 1:
                             out.append([b, sec, r[2], n - 1] + r[4:])
-                        out.append([b, sec, n, n, 'none'] + r[5:])
+                        # 숙달 문제(홀·짝)는 그대로 두고 책 답만 없앤다: 짝수가 숙달인 줄이면 'none:even'
+                        out.append([b, sec, n, n, 'none:even' if r[4] == 'even' else 'none'] + r[5:])
                         if n + 1 <= r[3]:
                             out.append([b, sec, n + 1, r[3]] + r[4:])
                     probs[u] = out

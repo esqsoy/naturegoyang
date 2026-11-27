@@ -54,7 +54,7 @@ def hours(nodes, probs):
             for i in range(a, z + 1):
                 if skip and skip[0] <= i <= skip[1]:
                     continue
-                if (i in blue) if blue is not None else (i % 2 == 0) if ans == 'even' else (i % 2 == 1):
+                if (i in blue) if blue is not None else (i % 2 == 0) if ans in ('even', 'none:even') else (i % 2 == 1):
                     mins += BOOK_MIN[b] + PER_PROB_MIN
         out[n['id']] = BASE_H + mins / 60
     return out
