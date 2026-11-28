@@ -5,6 +5,7 @@
 
 Artifact로 올릴 때: capabilities {"comments": {"composer_only": true}} (댓글 쓰기 창만 연다).
 같은 Artifact 주소에 다시 올린다(HANDOFF·DEPLOYMENT에 주소).
+26.11.28부터 단원 흐름에는 없다(영신은 앱으로 풀며 검수, AGENTS). 따로 한눈에 볼 일이 있을 때만 쓴다.
 """
 import argparse
 import html

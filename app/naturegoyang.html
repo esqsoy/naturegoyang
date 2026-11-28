@@ -2108,9 +2108,11 @@ function placeExamples(src){
 function objBookHTML(sv, c, isNew){
   const u=sv.id, n=NODE[u], s=bookStats(u,c.o), L=gateList(u).filter(p=>p.o===c.o), mixN=mixList(u).filter(p=>p.o===c.o).length, tried=s.total-s.fresh;
   const pct=x=>`${s.total?Math.round(x/s.total*1000)/10:0}%`;
+  const need=Math.min(OBJ_NEED,s.total), gate=objGate(u,c.o);
   const state=!s.fresh?`<p class="bk-ok">이 목표의 문제를 모두 한 번씩 풀었어.${s.due?` 오늘 다시 풀 문제 ${s.due}개는 교재 문제에서 이어 풀 수 있어.`:''}${isNew?' 다음 장으로 넘어가.':''}</p>`
-    :`<p class="hint">이 목표의 문제를 모두 한 번씩 풀어야 다음 장이 열려. 틀리거나 도움 받은 문제는 하루 뒤 다시 나오고, 단원 숙달에는 이 문제들이 모두 '혼자 풂'이어야 해.</p>`;
-  const go=s.fresh||s.due?`<div class="row"><button type="button" class="btn primary" data-act="bk-obj" data-o="${c.o}">${s.fresh===s.total?'문제 풀기':s.fresh?`이어 풀기 · 안 푼 문제 ${s.fresh}개`:`다시 풀 문제 ${s.due}개 풀기`}</button></div>`:'';
+    :gate?`<p class="bk-ok">한 묶음을 풀었어.${isNew?' 다음 장으로 넘어가도 돼.':''} 안 푼 ${s.fresh}문제는 암기를 끝낸 뒤 교재 단계에서 나와. 지금 더 풀어도 돼.</p>`
+    :`<p class="hint">이 목표의 문제를 한 묶음(${need}문제) 풀면 다음 장이 열려.${s.total>need?` 나머지 ${s.total-need}문제는 암기를 끝낸 뒤 교재 단계에서 풀어.`:''} 틀리거나 도움 받은 문제는 하루 뒤 다시 나오고, 단원 숙달에는 이 목표의 문제가 모두 '혼자 풂'이어야 해.</p>`;
+  const go=s.fresh||s.due?`<div class="row"><button type="button" class="btn${gate&&isNew?'':' primary'}" data-act="bk-obj" data-o="${c.o}">${s.fresh===s.total?'문제 풀기':s.fresh?`${gate?'더 풀기':'이어 풀기'} · 안 푼 문제 ${s.fresh}개`:`다시 풀 문제 ${s.due}개 풀기`}</button></div>`:'';
   return `<div class="rd-book"><p class="eyebrow">교재 문제 · 목표 ${c.o}</p><h3 class="rd-sub">${esc(n?.obj?.[c.o-1]||'')}</h3>
     <p class="muted">${esc(probRanges(L))} · ${s.total}문제${mixN?` · 짝꿍 ${mixN}문제는 숙달 뒤 섞어 풀기로`:''}</p>
     <p class="hint">풀기 전에 책의 이 절 본문 예제를 한 번 읽어 봐. 연습문제는 그 예제를 바탕으로 만들어졌어.</p>
@@ -2326,13 +2328,13 @@ function readerHTML(sv){
   const dw=dwellOf(c), el=complete?(Date.now()-R.shown[R.i])/1000:0;
   const wait=isNew&&complete&&c.type==='text'?Math.max(0,dw-el):0;
   const checkOk=c.type!=='check'||R.passed[R.i]||!isNew;
-  const bookOk=c.type!=='book'||!isNew||!bookStats(sv.id,c.o).fresh;
+  const bookOk=c.type!=='book'||!isNew||objGate(sv.id,c.o);
   const cfReady=c.type!=='text'||!isNew||!complete||!cfLeft(sv,c).length;
   const canNext=complete&&wait<=0&&checkOk&&bookOk&&cfReady, last=R.i===N-1&&!streaming;
   clearTimeout(rdTimer);
   if(wait>0) rdTimer=setTimeout(()=>{ if(UI.study===sv&&sv.step==='lesson'&&sv.reader===R&&!document.activeElement?.classList?.contains('cf-in')) paintLesson(); }, wait*1000+80);
   const reach=j=>R.free||j<=R.max;
-  const segs=chunks.map((x,j)=>`<button type="button" class="seg ${j<R.i?'done':j===R.i?'cur':reach(j)?'seen':''}${x.type==='check'?' chk':x.type==='book'?' bk':''}${x.type==='check'&&R.passed[j]||x.type==='book'&&!bookStats(sv.id,x.o).fresh?' ok':''}" data-act="rd-go" data-i="${j}" title="${j+1}장${x.type==='check'?' · 점검':x.type==='book'?` · 교재 문제(목표 ${x.o})`:''}"${reach(j)&&j!==R.i?'':' disabled'}><span class="sr">${j+1}장으로</span></button>`).join('')+(streaming?'<i class="more"></i>':'');
+  const segs=chunks.map((x,j)=>`<button type="button" class="seg ${j<R.i?'done':j===R.i?'cur':reach(j)?'seen':''}${x.type==='check'?' chk':x.type==='book'?' bk':''}${x.type==='check'&&R.passed[j]||x.type==='book'&&objGate(sv.id,x.o)?' ok':''}" data-act="rd-go" data-i="${j}" title="${j+1}장${x.type==='check'?' · 점검':x.type==='book'?` · 교재 문제(목표 ${x.o})`:''}"${reach(j)&&j!==R.i?'':' disabled'}><span class="sr">${j+1}장으로</span></button>`).join('')+(streaming?'<i class="more"></i>':'');
   let body;
   if(c.type==='book') body=objBookHTML(sv,c,isNew);
   else if(c.type==='check'){
@@ -3092,7 +3094,7 @@ async function runIdea(k){
 }
 function goStep(sv, step){
   if(step==='quiz'&&!rec(sv.id)?.cd){ toast('암기를 먼저 끝내야 해.'); return; }
-  if(step==='book'){ if(sv.step==='book') return; if(!rec(sv.id)?.cd&&!bookStats(sv.id).due){ toast(hasObj(sv.id)?'목표마다 교재 문제는 설명을 읽다가 그 목표 끝에서 풀어. 나머지는 암기 뒤에.':'암기를 먼저 끝내야 해.'); return; } sv.bk=null; }
+  if(step==='book'){ if(sv.step==='book') return; if(!rec(sv.id)?.cd&&!bookStats(sv.id).due){ toast(hasObj(sv.id)?'목표마다 교재 문제 한 묶음은 설명을 읽다가 그 목표 끝에서 풀어. 나머지는 암기 뒤에.':'암기를 먼저 끝내야 해.'); return; } sv.bk=null; }
   if(step==='cards'&&sv.mode!=='test'&&!(rec(sv.id)?.rd||rec(sv.id)?.lv||known(sv.id))){ toast('설명을 끝까지 넘겨 읽어야 암기로 갈 수 있어.'); return; }
   sv.step=step; UI.cedit=null;
   if(step==='lesson'&&!sv.lesson.md&&!['writing','streaming','loading'].includes(sv.lesson.state)) loadLesson(sv,false);
@@ -3182,6 +3184,9 @@ function bookStats(u,o){
   return c;
 }
 const bookDone=u=>{ if(!hasBook(u)) return true; const c=bookStats(u); return c.solo===c.total; };
+// 설명 안 목표 문제 장의 문턱: 한 묶음(5문제, 그보다 적으면 전부)을 한 번씩 풀면 다음 장이 열린다(영신 26.11.28 "추천대로"). 나머지는 암기 뒤 교재 단계에서.
+const OBJ_NEED=5;
+function objGate(u,o){ const s=bookStats(u,o); return !s.fresh||s.total-s.fresh>=Math.min(OBJ_NEED,s.total); }
 // 이어하기의 '다시 풀 교재 문제': 숙달 문제만(섞어 풀 문제의 다시 풀기는 섞어 풀기가 맡는다). 목록에 없는 기록 열쇠는 보지 않는다.
 function bookDueAll(){
   const t=dnum(), out=[];
@@ -3291,7 +3296,7 @@ function backToLesson(sv){
   if(!sv.lesson.md&&!['writing','streaming','loading'].includes(sv.lesson.state)) loadLesson(sv,false);
   render(); window.scrollTo(0,0);
   const R=sv.reader, c=R&&sv.lesson.md?readChunks(sv)[R.i]:null;
-  if(c?.type==='book'&&c.o===o&&R.i>=R.max&&!bookStats(sv.id,o).fresh) rdNext();
+  if(c?.type==='book'&&c.o===o&&R.i>=R.max&&objGate(sv.id,o)) rdNext();
 }
 // 묶음의 열쇠는 단원 묶음이면 문제 열쇠, 섞어 풀기면 '단원::문제 열쇠'. P는 자기 단원(u)과 묶음(B)을 지녀서,
 // 판정을 기다리는 사이 다른 단원을 열어도 결과가 제 단원에 적힌다(26.11.25 검토).
@@ -3486,7 +3491,7 @@ function bkLater(){ const B=UI.study?.bk; if(!B?.P||B.P.phase!=='edit'||bkBusy(B
 function bookStep(sv,n){
   if(sv.mode==='mix') return mixStep(sv);
   const u=sv.id, r=rec(u)||{}, O=sv.bk?.o||0;
-  if(!r.cd&&!O&&!bookStats(u).due&&!sv.bk?.q?.length) return `<div class="quiz-wrap"><div class="note">${hasObj(u)?'목표마다 교재 문제는 설명을 읽다가 그 목표 끝에서 풀어. 나머지는 암기를 끝낸 뒤에 열려.':'암기를 먼저 끝내야 교재 문제를 풀 수 있어.'}</div><div class="row"><button type="button" class="btn primary" data-act="step" data-step="${(r.rd||r.lv)?'cards':'lesson'}">${(r.rd||r.lv)?'암기로 가기':'설명으로 가기'}</button></div></div>`;
+  if(!r.cd&&!O&&!bookStats(u).due&&!sv.bk?.q?.length) return `<div class="quiz-wrap"><div class="note">${hasObj(u)?'목표마다 교재 문제 한 묶음은 설명을 읽다가 그 목표 끝에서 풀어. 나머지는 암기를 끝낸 뒤에 열려.':'암기를 먼저 끝내야 교재 문제를 풀 수 있어.'}</div><div class="row"><button type="button" class="btn primary" data-act="step" data-step="${(r.rd||r.lv)?'cards':'lesson'}">${(r.rd||r.lv)?'암기로 가기':'설명으로 가기'}</button></div></div>`;
   if(ENV.imgOK===undefined) bkProbeImages();
   const B=sv.bk||(sv.bk=bkStart(u)), c=bookStats(u,O), pct=x=>`${c.total?Math.round(x/c.total*1000)/10:0}%`;
   const extra=[O&&c.fresh?`안 푼 문제 ${c.fresh}`:'', c.due?`오늘 다시 풀 것 ${c.due}`:'', c.wait?`내일 이후 다시 ${c.wait}`:'', c.hold?`판정 보류 ${c.hold}`:''].filter(Boolean).join(' · ');
@@ -3494,12 +3499,13 @@ function bookStep(sv,n){
   const rule=`<p class="hint">도움 없이 첫 제출에 맞힌 문제만 바로 세. 틀렸다 고친 것과 힌트를 본 것은 하루 뒤 도움 없이, 풀이까지 내서 다시 풀어야 해. ${r.qp?'확인 문제는 통과했어.':'확인 문제(100점)도 통과해야 숙달이야.'}</p>`;
   const k=B.q[B.i];
   if(!k){
-    const all=c.solo===c.total, more=!all&&bkBundle(u,O).length, readBtn=O||!r.rd;
+    const all=c.solo===c.total, more=!all&&bkBundle(u,O).length, readBtn=O||!r.rd, og=O&&objGate(u,O);
     const msg=O&&!c.fresh?`<p class="eyebrow">목표 ${O} 교재 문제</p><h2>이 목표의 문제를 모두 한 번씩 풀었어</h2><p class="muted">${B.q.length?`이번 묶음에서 혼자 푼 문제 ${Object.values(B.out).filter(s=>s==='solo').length}개. `:''}틀리거나 도움 받은 문제는 하루 뒤 다시 나와.</p>`
+      :og?`<p class="eyebrow">목표 ${O} 교재 문제</p><h2>한 묶음을 마쳤어</h2><p class="muted">${B.q.length?`이번 묶음에서 혼자 푼 문제 ${Object.values(B.out).filter(s=>s==='solo').length}개. `:''}설명을 이어 읽어도 돼. 안 푼 ${c.fresh}문제는 암기를 끝낸 뒤 교재 단계에서 나와. 틀리거나 도움 받은 문제는 하루 뒤 다시 나와.</p>`
       :B.q.length?`<p class="eyebrow">묶음 끝</p><h2>${B.q.length}문제를 마쳤어</h2><p class="muted">이번 묶음에서 혼자 푼 문제 ${Object.values(B.out).filter(s=>s==='solo').length}개.</p>`
       :all?`<h2>교재 문제를 모두 혼자 풀었어</h2>`:`<h2>지금 풀 문제가 없어</h2><p class="muted">${c.wait?`다시 풀 ${c.wait}문제는 내일 이후에 열려. `:''}${c.hold?`판정 보류 ${c.hold}문제가 남아 있어.`:''}${!O&&!r.cd&&c.fresh?'아직 안 푼 문제는 암기를 끝낸 뒤에 열려.':''}</p>`;
-    const readLbl=O&&!c.fresh?'설명 이어 읽기 →':O?`문제 장으로 (안 푼 문제 ${c.fresh}개를 다 풀면 설명이 이어져)`:'설명으로 돌아가기';
-    return `<div class="quiz-wrap">${bar}<div class="card bk-end">${msg}<div class="row">${O&&!c.fresh?`<button type="button" class="btn primary" data-act="bk-read">${readLbl}</button>`:''}${more?`<button type="button" class="btn${O&&!c.fresh?'':' primary'}" data-act="bk-more">한 묶음 더</button>`:''}${!O&&all&&!r.qp?'<button type="button" class="btn primary" data-act="step" data-step="quiz">확인 문제로</button>':''}${readBtn&&!(O&&!c.fresh)?`<button type="button" class="btn" data-act="bk-read">${readLbl}</button>`:''}<button type="button" class="btn ghost" data-act="nav" data-view="today">오늘로</button></div></div>${rule}</div>`;
+    const readLbl=og?'설명 이어 읽기 →':O?`문제 장으로 (한 묶음을 마저 풀면 설명이 이어져)`:'설명으로 돌아가기';
+    return `<div class="quiz-wrap">${bar}<div class="card bk-end">${msg}<div class="row">${og?`<button type="button" class="btn primary" data-act="bk-read">${readLbl}</button>`:''}${more?`<button type="button" class="btn${og?'':' primary'}" data-act="bk-more">한 묶음 더</button>`:''}${!O&&all&&!r.qp?'<button type="button" class="btn primary" data-act="step" data-step="quiz">확인 문제로</button>':''}${readBtn&&!og?`<button type="button" class="btn" data-act="bk-read">${readLbl}</button>`:''}<button type="button" class="btn ghost" data-act="nav" data-view="today">오늘로</button></div></div>${rule}</div>`;
   }
   return bkPanel(sv,B,bar,rule);
 }
